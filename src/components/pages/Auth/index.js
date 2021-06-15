@@ -10,15 +10,19 @@ import Hidden from "@material-ui/core/Hidden";
 // import Typography from "@material-ui/core/Typography";
 import { Switch, Route } from "react-router-dom";
 import Login from "../Login";
-// import ForgotPassword from "../ForgotPassword";
+import ForgotPassword from "../ForgotPassword";
 import useStyles from "./styles";
 import { Container } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NewFeatureCard from "../../common/NewFeatureCard";
 import HDLogo from "../../../assets/images/hd-logo.png";
 import tmpImage from "../../../assets/images/tmp.svg";
 
 const Auth = () => {
   const classes = useStyles();
+  const canShowLogoOnMobile = useMediaQuery((theme) =>
+    theme.breakpoints.down("sm")
+  );
 
   const newFeaturesData = [
     {
@@ -89,9 +93,16 @@ const Auth = () => {
         elevation={6}
         square
       >
+        {canShowLogoOnMobile ? (
+          <img
+            src={HDLogo}
+            alt="History Diaries Logo"
+            className={classes.logo}
+          />
+        ) : null}
         <Switch>
           <Route exact path="/login" component={Login} />
-          <Route exact path="/forgot-password" />
+          <Route exact path="/forgot-password" component={ForgotPassword} />
         </Switch>
       </Grid>
     </Grid>

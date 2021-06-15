@@ -7,9 +7,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     [theme.breakpoints.down("sm")]: {
-      marginLeft: "auto",
-      marginRight: "auto",
+      margin: theme.spacing(0, 2, 2, 2),
       padding: theme.spacing(4),
+      backgroundColor: "white",
+      borderRadius: theme.spacing(1),
     },
   },
   title: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  forgotPassword: {
+  forgotPasswordLink: {
     display: "flex",
     justifyContent: "flex-end",
 

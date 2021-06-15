@@ -4,6 +4,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     backgroundColor: theme.palette.primary.main,
+    overflow: "auto",
   },
   board: {
     maxWidth: "600px",
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      backgroundColor: theme.palette.primary.main,
+    },
   },
 }));
 

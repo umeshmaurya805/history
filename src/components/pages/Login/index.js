@@ -5,11 +5,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
-// import Paper from "@material-ui/core/Paper";
-// import Grid from "@material-ui/core/Grid";
 import useStyles from "./style";
 
-const Login = ({ showForgotPasswordScreen }) => {
+const Login = () => {
   const classes = useStyles();
   const [school, setSchool] = useState({email: '', password: ''});
 
@@ -68,7 +66,7 @@ const Login = ({ showForgotPasswordScreen }) => {
         >
           Log in
         </Button>
-        <div className={classes.forgotPassword}>
+        <div className={classes.forgotPasswordLink}>
           <Link to="/forgot-password">{"Did you forget your password?"}</Link>
         </div>
       </form>
