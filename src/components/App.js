@@ -12,6 +12,7 @@ const App = () => {
       <CssBaseline />
       <Switch>
         <PublicRoute exact path="/login" restricted component={Auth} />
+        <PublicRoute exact path="/forgot-password" restricted component={Auth} />
         {/* <PrivateRoute exact path="/" component={Dashboard}/> */}
         <Redirect from="/" to="/dashboard"/>
       </Switch>
