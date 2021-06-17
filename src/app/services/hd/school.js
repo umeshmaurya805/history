@@ -1,6 +1,6 @@
 import { hdApi } from ".";
 
-export const authApi = hdApi.injectEndpoints({
+export const schoolApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
     getProfile: build.query({
       query: () => "schools/me",
@@ -9,4 +9,4 @@ export const authApi = hdApi.injectEndpoints({
   }),
 });
 
-export const { useGetProfileQuery } = authApi;
+export const { useGetProfileQuery } = schoolApi;
