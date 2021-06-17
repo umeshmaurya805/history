@@ -1,22 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import useStyles from "./style";
+import { useForgotPasswordMutation } from "../../../app/services/hd/auth";
+import protectedHandler from "../../../utils/protectedHandler";
+
+const validationSchema = yup.object({
+  email: yup
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
+});
 
 const ForgotPassword = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
+  const history = useHistory();
+  const [forgotPassword] = useForgotPasswordMutation();
 
-  const handleChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log(email);
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: protectedHandler(async (formData) => {
+      const data = await forgotPassword(formData).unwrap();
+      console.log(data);
+      history.push(`/auth/reset-password/${data}`);
+    }),
+  });
 
   return (
     <div className={classes.root}>
@@ -29,24 +44,23 @@ const ForgotPassword = () => {
         className={classes.subTitle}
       >
         Please enter the email address that you used to login, and we will send
-        you a link to reset your password via Email.
+        you an OTP to reset your password.
       </Typography>
-      <form
-        className={classes.form}
-        onChange={handleChange}
-        onSubmit={handleFormSubmit}
-      >
+      <form className={classes.form} onSubmit={formik.handleSubmit}>
         <TextField
+          fullWidth
+          required
+          id="email"
+          name="email"
+          label="Email"
           variant="outlined"
           margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email"
-          name="email"
           autoComplete="email"
           autoFocus
-          value={email}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         />
         <Button
           type="submit"
@@ -58,7 +72,7 @@ const ForgotPassword = () => {
           Reset my Password
         </Button>
         <div className={classes.loginLink}>
-          <Link to="/login">Return to Login</Link>
+          <Link to="/auth/login">Return to Login</Link>
         </div>
       </form>
     </div>
