@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4),
       backgroundColor: "white",
       borderRadius: theme.spacing(1),
+      height: "100%",
     },
   },
   title: {

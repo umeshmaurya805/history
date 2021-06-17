@@ -4,7 +4,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     backgroundColor: theme.palette.primary.main,
-    overflow: "auto",
+    [theme.breakpoints.up("md")]: {
+      overflow: "hidden",
+    }
+  },
+  scrollableBoard: {
+    overflowY: "auto",
   },
   board: {
     maxWidth: "600px",
@@ -12,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(5),
   },
   featureList: {
-    overflowY: "auto",
     maxHeight: "500px",
   },
   logo: {
