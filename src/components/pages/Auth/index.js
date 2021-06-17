@@ -1,16 +1,11 @@
 import React from "react";
-// import Button from "@material-ui/core/Button";
-// import TextField from "@material-ui/core/TextField";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
-// import Typography from "@material-ui/core/Typography";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import Login from "../Login";
 import ForgotPassword from "../ForgotPassword";
+import ResetPassword from "../ResetPassword";
 import useStyles from "./styles";
 import { Container } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -20,6 +15,7 @@ import tmpImage from "../../../assets/images/tmp.svg";
 
 const Auth = () => {
   const classes = useStyles();
+  const { path } = useRouteMatch();
   const canShowLogoOnMobile = useMediaQuery((theme) =>
     theme.breakpoints.down("sm")
   );
@@ -55,7 +51,7 @@ const Auth = () => {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xs={false} md={6} lg={7}>
+      <Grid item xs={false} md={6} lg={7} className={classes.scrollableBoard}>
         <Hidden only={["xs", "sm"]}>
           <Container disableGutters className={classes.board}>
             <img
@@ -65,7 +61,7 @@ const Auth = () => {
             />
             <Container disableGutters className={classes.featureList}>
               {newFeaturesData.map((data, index) => {
-                const style = index === 0 ? null : { marginTop: "40px" };
+                const style = { paddingBottom: "50px" };
 
                 return (
                   <NewFeatureCard
@@ -101,8 +97,18 @@ const Auth = () => {
           />
         ) : null}
         <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/forgot-password" component={ForgotPassword} />
+          <Route exact path={`${path}/login`} component={Login} />
+          <Route
+            exact
+            path={`${path}/forgot-password`}
+            component={ForgotPassword}
+          />
+          <Route
+            exact
+            path={`${path}/reset-password/:resetToken`}
+            component={ResetPassword}
+          />
+          <Redirect to={`${path}/login`} />
         </Switch>
       </Grid>
     </Grid>
