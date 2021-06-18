@@ -3,14 +3,25 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { hdApi } from "./services/hd";
 import logger from "redux-logger";
 
-const middleware = [...getDefaultMiddleware(), logger, hdApi.middleware];
+const middleware = [...getDefaultMiddleware(), hdApi.middleware];
+
+const config =
+  process.env.NODE_ENV === "production"
+    ? {
+        middleware,
+        devTools: false,
+      }
+    : {
+        middleware: [...middleware, logger],
+        devTools: true,
+      };
 
 const store = configureStore({
   reducer: {
     [hdApi.reducerPath]: hdApi.reducer,
   },
-  middleware,
-  devTools: process.env.NODE_ENV !== "production",
+  middleware: config.middleware,
+  devTools: config.devTools,
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
