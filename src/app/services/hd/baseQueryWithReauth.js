@@ -7,7 +7,6 @@ import {
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${process.env.REACT_APP_SERVER_URL}`,
-  credentials: "include",
   prepareHeaders: (headers) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
     const { accessToken } = getSchoolAuth();
