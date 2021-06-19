@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import useStyles from "./style";
+import LoadingButton from "../../common/LoadingButton";
 import { useLoginMutation } from "../../../app/services/hd/auth";
 import { saveSchoolAuth } from "../../../utils/schoolAuth";
 import protectedHandler from "../../../utils/protectedHandler";
@@ -26,13 +26,13 @@ const validationSchema = yup.object({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
-      rememberMe: true,
+      rememberMe: false,
     },
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData) => {
@@ -101,15 +101,16 @@ const Login = () => {
           }
           label="Remember me"
         />
-        <Button
+        <LoadingButton
           fullWidth
           type="submit"
           variant="contained"
           color="primary"
           className={classes.submit}
+          isLoading={isLoading}
         >
           Log in
-        </Button>
+        </LoadingButton>
         <div className={classes.forgotPasswordLink}>
           <Link to="/auth/forgot-password">
             {"Did you forget your password?"}
