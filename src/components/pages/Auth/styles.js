@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
   },
   board: {
-    maxWidth: "600px",
+    maxWidth: "600px !important",
     margin: "auto",
-    padding: theme.spacing(5),
+    padding: `${theme.spacing(5)}px !important`,
   },
   featureList: {
     maxHeight: "500px",
