@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { Link, useHistory } from "react-router-dom";
@@ -8,6 +7,7 @@ import * as yup from "yup";
 import useStyles from "./style";
 import { useForgotPasswordMutation } from "../../../app/services/hd/auth";
 import protectedHandler from "../../../utils/protectedHandler";
+import LoadingButton from "../../common/LoadingButton";
 
 const validationSchema = yup.object({
   email: yup
@@ -19,7 +19,7 @@ const validationSchema = yup.object({
 const ForgotPassword = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [forgotPassword] = useForgotPasswordMutation();
+  const [forgotPassword, {isLoading}] = useForgotPasswordMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -28,15 +28,14 @@ const ForgotPassword = () => {
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData) => {
       const data = await forgotPassword(formData).unwrap();
-      console.log(data);
-      history.push(`/auth/reset-password/${data}`);
+      history.push(`/auth/validate-otp/${data}`);
     }),
   });
 
   return (
     <div className={classes.root}>
       <Typography component="h3" variant="h3" className={classes.title}>
-        Reset Password
+        Forgot Password
       </Typography>
       <Typography
         component="p"
@@ -62,15 +61,16 @@ const ForgotPassword = () => {
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
         />
-        <Button
+        <LoadingButton
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
           className={classes.submit}
+          isLoading={isLoading}
         >
           Reset my Password
-        </Button>
+        </LoadingButton>
         <div className={classes.loginLink}>
           <Link to="/auth/login">Return to Login</Link>
         </div>

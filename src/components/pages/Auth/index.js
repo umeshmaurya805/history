@@ -3,10 +3,11 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
+import useStyles from "./styles";
 import Login from "../Login";
 import ForgotPassword from "../ForgotPassword";
 import ResetPassword from "../ResetPassword";
-import useStyles from "./styles";
+import ValidateOTP from "../ValidateOTP";
 import { Container } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NewFeatureCard from "../../common/NewFeatureCard";
@@ -102,6 +103,11 @@ const Auth = () => {
             exact
             path={`${path}/forgot-password`}
             component={ForgotPassword}
+          />
+          <Route
+            exact
+            path={`${path}/validate-otp/:resetToken`}
+            component={ValidateOTP}
           />
           <Route
             exact
