@@ -10,6 +10,9 @@ import PrivateRoute from "./common/routes/PrivateRoute";
 import "./App.css";
 
 const App = () => {
+  console.log("Developed by Divyansh Singh Thakur");
+  console.log("https://github.com/DivyanshThakur");
+  
   return (
     <Router>
       <CssBaseline />
