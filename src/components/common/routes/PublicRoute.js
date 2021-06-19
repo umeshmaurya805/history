@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { getSchoolAuth } from "../../../utils/schoolAuth";
 
 const PublicRoute = ({ component: Component, restricted = false, ...rest }) => {
-  const { isAuthenticated } = getSchoolAuth();
+  const { accessToken } = getSchoolAuth();
 
   return (
     // restricted = false meaning public route
@@ -11,7 +11,7 @@ const PublicRoute = ({ component: Component, restricted = false, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated && restricted ? (
+        accessToken && restricted ? (
           <Redirect to="/dashboard/home" />
         ) : (
           <Component {...props} />

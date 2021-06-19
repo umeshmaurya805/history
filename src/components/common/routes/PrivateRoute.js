@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { getSchoolAuth } from "../../../utils/schoolAuth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated } = getSchoolAuth();
+  const { accessToken } = getSchoolAuth();
 
   return (
     // Show the component only when the user is logged in
@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/auth/login" />
+        accessToken ? <Component {...props} /> : <Redirect to="/auth/login" />
       }
     />
   );
