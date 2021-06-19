@@ -15,7 +15,6 @@ export const getSchoolAuth = () => {
   const getInitialState = () => ({
     accessToken: null,
     expiresAt: Date.now(),
-    isAuthenticated: false,
   });
 
   if (!data) return getInitialState();
