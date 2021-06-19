@@ -23,18 +23,26 @@ export const authApi = hdApi.injectEndpoints({
       }),
     }),
     validateOtp: build.mutation({
-      query: (body) => ({
-        url: "schools/validate-otp",
-        method: "POST",
-        body,
-      }),
+      query: (data) => {
+        const { resetToken, ...body } = data;
+
+        return {
+          url: `schools/validate-otp/${resetToken}`,
+          method: "POST",
+          body,
+        };
+      },
     }),
     resetPassword: build.mutation({
-      query: (body) => ({
-        url: "schools/reset-password",
-        method: "PUT",
-        body,
-      }),
+      query: (data) => {
+        const { resetToken, ...body } = data;
+
+        return {
+          url: `schools/reset-password/${resetToken}`,
+          method: "PUT",
+          body,
+        };
+      },
     }),
     refreshToken: build.mutation({
       query: () => ({
