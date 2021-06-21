@@ -7,11 +7,7 @@ const protectedHandler =
     try {
       await Promise.resolve(fnReturn);
     } catch (err) {
-      if (err.status === 401) {
-        console.log(err);
-      } else {
-        toast.error(err.data?.message, { toastId: err.data?.message });
-      }
+      toast.error(err.data?.message, { toastId: err.data?.message });
     }
   };
 

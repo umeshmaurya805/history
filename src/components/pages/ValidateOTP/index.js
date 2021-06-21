@@ -45,7 +45,7 @@ const ValidateOTP = () => {
         variant="subtitle1"
         className={classes.subTitle}
       >
-        Please enter the OTP send to your email address. OTP is valid for 15
+        Please enter the OTP send to your email address. OTP is valid for 5
         minutes.
       </Typography>
       <form className={classes.form} onSubmit={formik.handleSubmit}>
