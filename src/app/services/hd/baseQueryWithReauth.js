@@ -6,7 +6,7 @@ import {
 } from "../../../utils/schoolAuth";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${process.env.REACT_APP_SERVER_URL}`,
+  baseUrl: `${process.env.REACT_APP_SERVER_URL}/api`,
   credentials: "include", // Required to use cookies
   prepareHeaders: (headers) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
