@@ -9,8 +9,9 @@ import {
   getContent,
   getFixedScheme,
 } from "@mui-treasury/layout";
-import { TextSidebar } from '@mui-treasury/mockup/sidebars';
+import { TextSidebar } from "@mui-treasury/mockup/sidebars";
 import useStyles from "./style";
+import Home from "./Home";
 
 const DrawerSidebar = getDrawerSidebar(styled);
 const SidebarContent = getSidebarContent(styled);
@@ -34,6 +35,7 @@ const Dashboard = () => {
         <CollapseBtn className={cx(styles.collapseBtn)} />
       </DrawerSidebar>
       <Content className={styles.content}>
+        <Home />
       </Content>
     </Root>
   );
