@@ -1,29 +1,55 @@
-import Button from "@material-ui/core/Button";
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useLogoutMutation } from "../../app/services/hd/auth";
-import { useGetProfileQuery } from "../../app/services/hd/school";
-import protectedHandler from "../../utils/protectedHandler";
-import { removeSchoolAuth } from "../../utils/schoolAuth";
+import styled from "styled-components";
+import cx from "clsx";
+import Toolbar from "@material-ui/core/Toolbar";
+import {
+  Root,
+  getHeader,
+  getDrawerSidebar,
+  getSidebarTrigger,
+  getSidebarContent,
+  getCollapseBtn,
+  getContent,
+  getFooter,
+  getFixedScheme,
+} from "@mui-treasury/layout";
+import {
+  HeaderMockUp,
+  ContentMockUp,
+  FooterMockUp,
+  // NavContentMockUp,
+} from "@mui-treasury/mockup/layout";
+import { TextSidebar } from '@mui-treasury/mockup/sidebars';
+import useStyles from "./style";
+
+const Header = getHeader(styled);
+const DrawerSidebar = getDrawerSidebar(styled);
+const SidebarTrigger = getSidebarTrigger(styled);
+const SidebarContent = getSidebarContent(styled);
+const CollapseBtn = getCollapseBtn(styled);
+const Content = getContent(styled);
+const Footer = getFooter(styled);
+
+const fixedScheme = getFixedScheme();
 
 const Dashboard = () => {
-  const [logout] = useLogoutMutation();
-  const { data, isLoading } = useGetProfileQuery();
-  const history = useHistory();
-
-  const logoutSchool = protectedHandler(async () => {
-    await logout().unwrap();
-    removeSchoolAuth();
-    history.push("/auth/login");
-  });
+  const styles = useStyles();
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={logoutSchool}>
-        Logout
-      </Button>
-      {isLoading ? "Loading" : data.email}
-    </div>
+    <Root scheme={fixedScheme}>
+      <DrawerSidebar
+        sidebarId={"primarySidebar"}
+        PaperProps={{ className: styles.sidebar }}
+      >
+        <SidebarContent>
+          <TextSidebar />
+        </SidebarContent>
+        <CollapseBtn className={cx(styles.collapseBtn)} />
+      </DrawerSidebar>
+      <Content className={styles.content}>
+        {/* <ContentMockUp /> */}
+      </Content>
+    </Root>
   );
 };
 
