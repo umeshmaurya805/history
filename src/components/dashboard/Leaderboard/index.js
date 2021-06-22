@@ -6,7 +6,7 @@ import { useGetProfileQuery } from "../../../app/services/hd/school";
 import protectedHandler from "../../../utils/protectedHandler";
 import { removeSchoolAuth } from "../../../utils/schoolAuth";
 
-const Home = () => {
+const Leaderboard = () => {
   const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
   const { data, isLoading } = useGetProfileQuery();
   const history = useHistory();
@@ -27,10 +27,10 @@ const Home = () => {
       >
         Logout
       </LoadingButton>
-      Home
+      Leaderboard
       {isLoading ? "Loading" : data.email}
     </div>
   );
 };
 
-export default Home;
+export default Leaderboard;
