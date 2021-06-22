@@ -1,9 +1,12 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: "#fff",
+    color: "white",
     borderBottom: "1px solid hsl(210, 32%, 93%)",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
   collapseBtn: {
     color: "#fff",
@@ -18,13 +21,11 @@ const useStyles = makeStyles(() => ({
     },
   },
   sidebar: {
-    backgroundColor: "#2366B5",
+    backgroundColor: theme.palette.primary.main,
     color: "white",
     border: "none",
   },
-  content: {
-    // backgroundColor: "#f9f9f9",
-  },
+  content: {},
 }));
 
 export default useStyles;

@@ -1,43 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-import cx from "clsx";
 import {
-  Root,
   getDrawerSidebar,
   getSidebarContent,
-  getCollapseBtn,
   getContent,
-  getFixedScheme,
+  getHeader,
+  getSidebarTrigger,
 } from "@mui-treasury/layout";
-import { TextSidebar } from "@mui-treasury/mockup/sidebars";
-import useStyles from "./style";
+import Toolbar from "@material-ui/core/Toolbar";
+import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import Home from "./Home";
+import { HeaderMockUp } from "@mui-treasury/mockup/layout";
+import useStyles from "./style";
+import NavSidebar from "./NavSidebar";
+import MyAccount from "./MyAccount";
+import Calendar from "./Calendar";
+import Analytics from "./Analytics";
+import Leaderboard from "./Leaderboard";
 
+const Header = getHeader(styled);
 const DrawerSidebar = getDrawerSidebar(styled);
+const SidebarTrigger = getSidebarTrigger(styled);
 const SidebarContent = getSidebarContent(styled);
-const CollapseBtn = getCollapseBtn(styled);
 const Content = getContent(styled);
-
-const fixedScheme = getFixedScheme();
 
 const Dashboard = () => {
   const styles = useStyles();
+  const { path } = useRouteMatch();
 
   return (
-    <Root scheme={fixedScheme}>
+    <React.Fragment>
+      <Header className={styles.header}>
+        <Toolbar>
+          <SidebarTrigger sidebarId={"primarySidebar"} />
+          <HeaderMockUp />
+        </Toolbar>
+      </Header>
       <DrawerSidebar
         sidebarId={"primarySidebar"}
         PaperProps={{ className: styles.sidebar }}
       >
         <SidebarContent>
-          <TextSidebar />
+          <NavSidebar />
         </SidebarContent>
-        <CollapseBtn className={cx(styles.collapseBtn)} />
       </DrawerSidebar>
       <Content className={styles.content}>
-        <Home />
+        <Switch>
+          <Route exact path={`${path}/home`} component={Home} />
+          <Route exact path={`${path}/calendar`} component={Calendar} />
+          <Route exact path={`${path}/analytics`} component={Analytics} />
+          <Route exact path={`${path}/leaderboard`} component={Leaderboard} />
+          <Route exact path={`${path}/my-account`} component={MyAccount} />
+          <Redirect to={`${path}/home`} />
+        </Switch>
       </Content>
-    </Root>
+    </React.Fragment>
   );
 };
 
