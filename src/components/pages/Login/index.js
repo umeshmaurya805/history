@@ -40,7 +40,7 @@ const Login = () => {
 
       saveSchoolAuth(data);
 
-      history.push("/dashboard/home");
+      history.push("/dashboard");
     }),
   });
 

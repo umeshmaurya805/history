@@ -12,7 +12,7 @@ import { Container } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import NewFeatureCard from "../../common/NewFeatureCard";
 import HDLogo from "../../../assets/images/hd-logo.png";
-import tmpImage from "../../../assets/images/tmp.svg";
+import tmpImage from "../../../assets/svg/tmp.svg";
 
 const Auth = () => {
   const classes = useStyles();
