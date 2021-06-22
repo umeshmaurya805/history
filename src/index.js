@@ -1,17 +1,38 @@
-import { ThemeProvider } from "@material-ui/core";
 import React, { StrictMode } from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
+import Layout, { Root } from "@mui-treasury/layout";
 import App from "./components/App";
 import store from "./app/store";
 import { rootTheme } from "./theme";
 
+const scheme = Layout();
+
+scheme.configureHeader((builder) => {
+  builder.registerConfig("xs", {
+    position: "sticky",
+  });
+});
+
+scheme.configureEdgeSidebar((builder) => {
+  builder
+    .create("primarySidebar", { anchor: "left" })
+    .registerTemporaryConfig("xs", {
+      width: "auto", // 'auto' is only valid for temporary variant
+    })
+    .registerPermanentConfig("md", {
+      width: 256, // px, (%, rem, em is compatible)
+      collapsible: true,
+      collapsedWidth: 64,
+    });
+});
+
 render(
   <StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={rootTheme}>
+      <Root theme={rootTheme} scheme={scheme}>
         <App />
-      </ThemeProvider>
+      </Root>
     </Provider>
   </StrictMode>,
   document.getElementById("root")
