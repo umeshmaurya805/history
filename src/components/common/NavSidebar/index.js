@@ -8,12 +8,17 @@ import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import HDLogo from "../../../assets/images/hd-logo.png";
 import useStyles from "./style";
-import HomeIcon from "../Icons/HomeIcon";
-import CalendarIcon from "../Icons/CalendarIcon";
-import AnalyticsIcon from "../Icons/AnalyticsIcon";
-import LeaderboardIcon from "../Icons/LeaderboardIcon";
-import MyAccountIcon from "../Icons/MyAccountIcon";
-import LogoutIcon from "../Icons/LogoutIcon";
+import HomeIcon from "../../../assets/svg/home-icon.svg";
+import HomeIconSelected from "../../../assets/svg/home-icon-selected.svg";
+import CalendarIcon from "../../../assets/svg/calendar-icon.svg";
+import CalendarIconSelected from "../../../assets/svg/calendar-icon-selected.svg";
+import AnalyticsIcon from "../../../assets/svg/analytics-icon.svg";
+import AnalyticsIconSelected from "../../../assets/svg/analytics-icon-selected.svg";
+import LeaderboardIcon from "../../../assets/svg/leaderboard-icon.svg";
+import LeaderboardIconSelected from "../../../assets/svg/leaderboard-icon-selected.svg";
+import MyAccountIcon from "../../../assets/svg/my-account-icon.svg";
+import MyAccountIconSelected from "../../../assets/svg/my-account-icon-selected.svg";
+import LogoutIcon from "../../../assets/svg/logout-icon.svg";
 import { useLogoutMutation } from "../../../app/services/hd/auth";
 import protectedHandler from "../../../utils/protectedHandler";
 import { removeSchoolAuth } from "../../../utils/schoolAuth";
@@ -26,31 +31,36 @@ const NavList = () => {
     {
       text: "Home",
       Icon: HomeIcon,
+      SelectedIcon: HomeIconSelected,
       url: "/dashboard/home",
     },
     {
       text: "Calendar",
       Icon: CalendarIcon,
+      SelectedIcon: CalendarIconSelected,
       url: "/dashboard/calendar",
     },
     {
       text: "Analytics",
       Icon: AnalyticsIcon,
+      SelectedIcon: AnalyticsIconSelected,
       url: "/dashboard/analytics",
     },
     {
       text: "Leaderboard",
       Icon: LeaderboardIcon,
+      SelectedIcon: LeaderboardIconSelected,
       url: "/dashboard/leaderboard",
     },
     {
       text: "My Account",
       Icon: MyAccountIcon,
+      SelectedIcon: MyAccountIconSelected,
       url: "/dashboard/my-account",
     },
   ];
 
-  return list.map(({ text, Icon, url }, index) => {
+  return list.map(({ text, SelectedIcon, Icon, url }, index) => {
     return (
       <Link to={url} key={index} className={classes.link}>
         <ListItem
@@ -60,7 +70,16 @@ const NavList = () => {
           selected={parentUrl === url}
         >
           <ListItemIcon className={classes.listItemIcon}>
-            <Icon isSelected={parentUrl === url} />
+            <img
+              className={
+                url === "/dashboard/analytics" &&
+                (parentUrl === url
+                  ? classes.analyticsSelected
+                  : classes.analytics)
+              }
+              src={parentUrl === url ? SelectedIcon : Icon}
+              alt=""
+            />
           </ListItemIcon>
           <ListItemText className={classes.listItemText} primary={text} />
         </ListItem>
@@ -94,7 +113,7 @@ const NavSidebar = () => {
       </List>
       <Button
         className={classes.logoutButton}
-        startIcon={<LogoutIcon />}
+        startIcon={<img src={LogoutIcon} alt="" />}
         onClick={logoutSchool}
       >
         Log Out
