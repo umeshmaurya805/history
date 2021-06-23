@@ -7,6 +7,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  logoBox: {
+    height: 116,
+    width: 116,
+    marginBottom: theme.spacing(2.5),
+  },
   logo: {
     height: 116,
     width: 116,
@@ -22,18 +27,20 @@ const useStyles = makeStyles((theme) => ({
   selected: {
     backgroundColor: "white !important",
     borderLeft: "6px solid #F89503",
-    paddingLeft: "59px !important",
+    paddingLeft: "64px !important",
     color: "#4A90E2",
     "& span": {
       fontWeight: "700",
     },
   },
   listItem: {
-    paddingLeft: 65,
+    paddingLeft: 70,
   },
   listItemIcon: {
     minWidth: "unset",
     marginRight: 10,
+    height: 17,
+    width: 17,
   },
   listItemText: {
     flex: "unset",

@@ -3,6 +3,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Box from "@material-ui/core/Box";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import HDLogo from "../../../assets/images/hd-logo.png";
@@ -81,7 +82,9 @@ const NavSidebar = () => {
 
   return (
     <div className={classes.root}>
-      <img className={classes.logo} src={HDLogo} alt="History Diaries Logo" />
+      <Box className={classes.logoBox}>
+        <img className={classes.logo} src={HDLogo} alt="History Diaries Logo" />
+      </Box>
       <List
         className={classes.navList}
         component="nav"
