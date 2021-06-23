@@ -1,4 +1,5 @@
 import React from "react";
+
 import icon from "../../../assets/svg/logout-icon.svg";
 
 const LogoutIcon = () => {
