@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   logo: {
+    height: 116,
     width: 116,
     marginTop: theme.spacing(2.5),
   },
