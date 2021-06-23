@@ -11,4 +11,11 @@ export const rootTheme = createMuiTheme({
   typography: {
     fontFamily: "'Montserrat', sans-serif",
   },
+  overrides: {
+    MuiButton: {
+      root: {
+        textTransform: "none",
+      },
+    },
+  },
 });
