@@ -39,8 +39,12 @@ const useStyles = makeStyles((theme) => ({
   listItemIcon: {
     minWidth: "unset",
     marginRight: 10,
-    height: 17,
-    width: 17,
+    height: 20,
+    width: 20,
+    "& svg": {
+      // height: 20,
+      // width: 20,
+    },
   },
   listItemText: {
     flex: "unset",
@@ -58,16 +62,16 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#F0F0F1",
     },
   },
-  analytics: {
-    padding: "4px 0 3px 2px",
-    borderLeft: "2px solid white",
-    borderBottom: "2px solid white",
-  },
-  analyticsSelected: {
-    padding: "4px 0 3px 2px",
-    borderLeft: "2px solid #4A90E2",
-    borderBottom: "2px solid #4A90E2",
-  },
+  // analytics: {
+  //   padding: "4px 0 3px 2px",
+  //   borderLeft: "2px solid white",
+  //   borderBottom: "2px solid white",
+  // },
+  // analyticsSelected: {
+  //   padding: "4px 0 3px 2px",
+  //   borderLeft: "2px solid #4A90E2",
+  //   borderBottom: "2px solid #4A90E2",
+  // },
 }));
 
 export default useStyles;
