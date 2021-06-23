@@ -69,7 +69,7 @@ const ForgotPassword = () => {
           className={classes.submit}
           isLoading={isLoading}
         >
-          Reset my Password
+          Reset My Password
         </LoadingButton>
         <div className={classes.loginLink}>
           <Link to="/auth/login">Return to Login</Link>

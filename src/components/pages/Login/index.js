@@ -109,7 +109,7 @@ const Login = () => {
           className={classes.submit}
           isLoading={isLoading}
         >
-          Log in
+          Log In
         </LoadingButton>
         <div className={classes.forgotPasswordLink}>
           <Link to="/auth/forgot-password">

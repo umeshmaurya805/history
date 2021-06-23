@@ -6,9 +6,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up("md")]: {
       overflow: "hidden",
-    }
+    },
   },
   scrollableBoard: {
+    display: "flex",
     overflowY: "auto",
   },
   board: {
