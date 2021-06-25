@@ -7,13 +7,14 @@ export const configStyles = withStyles((theme) => ({
   head: {
     color: theme.palette.primary.main,
     fontWeight: 700,
+    fontSize: 14
   },
   body: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#707683",
   },
   footer: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#707683",
     borderTop: "1px solid #EBEFF2",
     "&:first-child": {
@@ -28,14 +29,15 @@ export const configStyles = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: { padding: theme.spacing(0, 0.5) },
   schoolColumn: {
-    color: "#323C47 !important",
+    color: "#5C6269 !important",
     fontWeight: 600,
     fontSize: "15px !important",
   },
+  paginationCell: { border: "none !important" },
   currentSchoolLabel: {
     color: theme.palette.primary.main,
     fontWeight: 700,
-    margin: theme.spacing(3, 0, 1),
+    margin: theme.spacing(0, 0, 1),
   },
   imageBox: {
     display: "flex",

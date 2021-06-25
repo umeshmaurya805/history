@@ -9,7 +9,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableFooter from "@material-ui/core/TableFooter";
 import Layout from "../../common/Layout";
-import useStyles, {configStyles} from "./style";
+import useStyles, { configStyles } from "./style";
 import LeaderboardImage from "../../../assets/svg/leaderboard.svg";
 import { Typography } from "@material-ui/core";
 
@@ -118,6 +118,26 @@ const Leaderboard = () => {
               })}
           </TableBody>
           <TableRow>
+            <TableCell
+              className={classes.paginationCell}
+              colSpan={columns.length}
+            >
+              <TablePagination
+                labelDisplayedRows={({ from, to, count }) =>
+                  `${from} - ${to} of ${
+                    count !== -1 ? count : `more than ${to}`
+                  }`
+                }
+                rowsPerPageOptions={[5]}
+                component="div"
+                count={schoolList.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
             <TableCell colSpan={columns.length}>
               <Typography
                 color="primary"
@@ -148,14 +168,6 @@ const Leaderboard = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5]}
-        component="div"
-        count={schoolList.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-      />
       <Box className={classes.imageBox}>
         <img className={classes.image} src={LeaderboardImage} alt="" />
       </Box>
