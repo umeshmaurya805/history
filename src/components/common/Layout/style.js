@@ -16,7 +16,9 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     border: "none",
   },
-  content: {},
+  content: {
+    padding: theme.spacing(5),
+  },
 }));
 
 export default useStyles;
