@@ -17,13 +17,8 @@ scheme.configureHeader((builder) => {
 scheme.configureEdgeSidebar((builder) => {
   builder
     .create("primarySidebar", { anchor: "left" })
-    .registerTemporaryConfig("xs", {
-      width: "auto", // 'auto' is only valid for temporary variant
-    })
     .registerPermanentConfig("md", {
-      width: 256, // px, (%, rem, em is compatible)
-      collapsible: true,
-      collapsedWidth: 64,
+      width: 256,
     });
 });
 
