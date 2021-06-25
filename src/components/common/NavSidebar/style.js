@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 256,
+    width: 242,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -27,29 +27,26 @@ const useStyles = makeStyles((theme) => ({
   selected: {
     backgroundColor: "white !important",
     borderLeft: "6px solid #F89503",
-    paddingLeft: "64px !important",
+    paddingLeft: "54px !important",
     color: "#4A90E2",
     "& span": {
-      fontWeight: "700",
+      fontWeight: "500",
     },
   },
   listItem: {
-    paddingLeft: 70,
+    paddingLeft: 60,
   },
   listItemIcon: {
     minWidth: "unset",
     marginRight: 10,
     height: 20,
     width: 20,
-    "& svg": {
-      // height: 20,
-      // width: 20,
-    },
   },
   listItemText: {
     flex: "unset",
     "& span": {
       fontFamily: "Roboto !important",
+      fontSize:20,
     },
   },
   logoutButton: {
@@ -62,16 +59,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#F0F0F1",
     },
   },
-  // analytics: {
-  //   padding: "4px 0 3px 2px",
-  //   borderLeft: "2px solid white",
-  //   borderBottom: "2px solid white",
-  // },
-  // analyticsSelected: {
-  //   padding: "4px 0 3px 2px",
-  //   borderLeft: "2px solid #4A90E2",
-  //   borderBottom: "2px solid #4A90E2",
-  // },
 }));
 
 export default useStyles;
