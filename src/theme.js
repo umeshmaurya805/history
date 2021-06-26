@@ -17,5 +17,12 @@ export const rootTheme = createMuiTheme({
         textTransform: "none",
       },
     },
+    MuiTextField: {
+      root: {
+        "& input": {
+          color: "#1D1C3F",
+        },
+      },
+    },
   },
 });
