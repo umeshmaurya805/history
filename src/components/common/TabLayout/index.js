@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { StyledTabs, StyledTab } from "./style";
 
@@ -15,11 +14,7 @@ function TabPanel(props) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -54,17 +49,17 @@ const TabLayout = ({ labels, panels }) => {
         aria-label="Tab Layout"
       >
         {labels.map((title, index) => {
-          return <StyledTab label={title} {...a11yProps(index)} />;
+          return <StyledTab key={index} label={title} {...a11yProps(index)} />;
         })}
       </StyledTabs>
 
-        {panels.map((Panel, index) => {
-          return (
-            <TabPanel value={value} index={index}>
-              <Panel />
-            </TabPanel>
-          );
-        })}
+      {panels.map((Panel, index) => {
+        return (
+          <TabPanel key={index} value={value} index={index}>
+            <Panel />
+          </TabPanel>
+        );
+      })}
     </div>
   );
 };

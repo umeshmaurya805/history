@@ -9,7 +9,8 @@ export const StyledTabs = withStyles({
     justifyContent: "center",
     backgroundColor: "transparent",
     "& > span": {
-      maxWidth: "30%",
+      minWidth: "30%",
+      maxWidth: "40%",
       width: "100%",
       backgroundColor: "#F89503",
     },
