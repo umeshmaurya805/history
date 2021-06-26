@@ -2,18 +2,16 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableFooter from "@material-ui/core/TableFooter";
+import TableCell from "@material-ui/core/TableCell";
 import Layout from "../../common/Layout";
-import useStyles, { configStyles } from "./style";
+import useStyles, { StyledTableCell } from "./style";
 import LeaderboardImage from "../../../assets/svg/leaderboard.svg";
 import { Typography } from "@material-ui/core";
-
-const StyledTableCell = configStyles(TableCell);
 
 const columns = [
   { id: "rank", label: "Rank", fixedWidth: 60 },
@@ -60,11 +58,10 @@ const currentSchool = createData(3, "ABCD Public School", "Delhi", 5, 5, 80);
 
 const Leaderboard = () => {
   const classes = useStyles();
-
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 5;
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
 
@@ -116,39 +113,43 @@ const Leaderboard = () => {
                   </TableRow>
                 );
               })}
+            {schoolList.length > 5 && (
+              <TableRow>
+                <TableCell
+                  className={classes.paginationCell}
+                  colSpan={columns.length}
+                >
+                  <TablePagination
+                    labelDisplayedRows={({ from, to, count }) =>
+                      `${from} - ${to} of ${
+                        count !== -1 ? count : `more than ${to}`
+                      }`
+                    }
+                    rowsPerPageOptions={[5]}
+                    component="div"
+                    count={schoolList.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                  />
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
-          <TableRow>
-            <TableCell
-              className={classes.paginationCell}
-              colSpan={columns.length}
-            >
-              <TablePagination
-                labelDisplayedRows={({ from, to, count }) =>
-                  `${from} - ${to} of ${
-                    count !== -1 ? count : `more than ${to}`
-                  }`
-                }
-                rowsPerPageOptions={[5]}
-                component="div"
-                count={schoolList.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-              />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={columns.length}>
-              <Typography
-                color="primary"
-                className={classes.currentSchoolLabel}
-              >
-                School Position
-              </Typography>
-            </TableCell>
-          </TableRow>
-
           <TableFooter>
+            <TableRow>
+              <TableCell colSpan={columns.length}>
+                <Typography
+                  color="primary"
+                  className={classes.currentSchoolLabel}
+                  style={
+                    schoolList.length <= 5 ? { paddingTop: 25 } : undefined
+                  }
+                >
+                  School Position
+                </Typography>
+              </TableCell>
+            </TableRow>
             <TableRow>
               {columns.map((column) => {
                 const value = currentSchool[column.id];
