@@ -1,11 +1,19 @@
 import React from "react";
-import { useGetProfileQuery } from "../../../app/services/hd/school";
 import Layout from "../../common/Layout";
+import TabLayout from "../../common/TabLayout";
+import AccountSettingsPanel from "./AccountSettingsPanel";
+import CreditPanel from "./CreditPanel";
+import SupportPanel from "./SupportPanel";
 
 const MyAccount = () => {
-  const { data, isLoading } = useGetProfileQuery();
+  const labels = ["Account Settings", "Credit", "Support"];
+  const panels = [AccountSettingsPanel, CreditPanel, SupportPanel];
 
-  return <Layout>My Account - {isLoading ? "Loading" : data.email}</Layout>;
+  return (
+    <Layout>
+      <TabLayout labels={labels} panels={panels} />
+    </Layout>
+  );
 };
 
 export default MyAccount;
