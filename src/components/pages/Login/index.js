@@ -89,6 +89,7 @@ const Login = () => {
           helperText={formik.touched.password && formik.errors.password}
         />
         <FormControlLabel
+          style={{ userSelect: "none" }}
           control={
             <Checkbox
               id="rememberMe"
