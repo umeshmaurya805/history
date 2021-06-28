@@ -33,23 +33,21 @@ const UpdatePassword = ({ handleClose, ...props }) => {
       confirmNewPassword: "",
     },
     validationSchema: validationSchema,
-    onSubmit: protectedHandler(async (formData) => {
+    onSubmit: protectedHandler(async (formData, actions) => {
       console.log(formData);
 
       toast.success("Password Updated", {
         toastId: "UpdatePassword",
       });
+
+      actions.resetForm();
+      handleClose();
     }),
   });
 
-  const handleOnClose = (e) => {
+  const handleOnClose = () => {
     formik.resetForm();
     handleClose();
-  };
-
-  const handleOnSubmit = (e) => {
-    formik.handleSubmit(e);
-    handleOnClose();
   };
 
   return (
@@ -122,7 +120,8 @@ const UpdatePassword = ({ handleClose, ...props }) => {
       </DialogContent>
       <DialogActions>
         <UpdateDialogButton
-          handleOnSubmit={handleOnSubmit}
+          isLoading={false}
+          handleOnSubmit={formik.handleSubmit}
           handleOnClose={handleOnClose}
         />
       </DialogActions>

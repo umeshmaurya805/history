@@ -19,7 +19,11 @@ const UpdateLogo = ({ value, handleClose, ...props }) => {
     handleClose();
   };
 
-  const handleOnSubmit = protectedHandler(async (e) => {
+  const handleOnSubmit = protectedHandler(async () => {
+    if (!file) {
+      return handleClose();
+    }
+
     toast.success("School Logo Updated", {
       toastId: "UpdateLogo",
     });
@@ -63,6 +67,7 @@ const UpdateLogo = ({ value, handleClose, ...props }) => {
       </DialogContent>
       <DialogActions>
         <UpdateDialogButton
+          isLoading={false}
           handleOnSubmit={handleOnSubmit}
           handleOnClose={handleOnClose}
         />

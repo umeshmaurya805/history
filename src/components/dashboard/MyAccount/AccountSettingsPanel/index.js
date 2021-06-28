@@ -9,8 +9,9 @@ import UpdatePassword from "../../../common/UpdatePassword";
 import UpdateContactNumber from "../../../common/UpdateContactNumber";
 import UpdateBoard from "../../../common/UpdateBoard";
 import UpdateAffiliationNumber from "../../../common/UpdateAffiliationNumber";
-import useStyles from "./style";
 import UpdateLogo from "../../../common/UpdateLogo";
+import UpdateCoordinator from "../../../common/UpdateCoordinator";
+import useStyles from "./style";
 
 const EditableInfo = ({ value, onClick }) => {
   const classes = useStyles();
@@ -32,6 +33,13 @@ const EditableInfo = ({ value, onClick }) => {
 
 const AccountSettingsPanel = () => {
   const classes = useStyles();
+
+  const coordinatorDetails = {
+    name: "Elon Musk",
+    designation: "Teacher",
+    contactNumber: "123456789",
+    email: "xyz@gmail.com",
+  };
 
   const initialState = {
     password: false,
@@ -140,20 +148,26 @@ const AccountSettingsPanel = () => {
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>Name</Typography>
-        <Typography className={classes.coordinatorValue}>Elon Musk</Typography>
+        <Typography className={classes.coordinatorValue}>
+          {coordinatorDetails.name}
+        </Typography>
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>Designation</Typography>
-        <Typography className={classes.coordinatorValue}>Teacher</Typography>
+        <Typography className={classes.coordinatorValue}>
+          {coordinatorDetails.designation}
+        </Typography>
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>Contact Number</Typography>
-        <Typography className={classes.coordinatorValue}>123456789</Typography>
+        <Typography className={classes.coordinatorValue}>
+          {coordinatorDetails.contactNumber}
+        </Typography>
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>Email address</Typography>
         <Typography className={classes.coordinatorValue}>
-          xyz@gmail.com
+          {coordinatorDetails.email}
         </Typography>
       </Box>
       <UpdatePassword
@@ -179,9 +193,17 @@ const AccountSettingsPanel = () => {
         handleClose={handleClose}
         aria-labelledby="update-affiliation-number-dialog"
       />
-      <UpdateLogo  open={open.logo}
+      <UpdateLogo
+        open={open.logo}
         handleClose={handleClose}
-        aria-labelledby="update-logo-dialog"/>
+        aria-labelledby="update-logo-dialog"
+      />
+      <UpdateCoordinator
+        open={open.coordinator}
+        values={coordinatorDetails}
+        handleClose={handleClose}
+        aria-labelledby="update-coordinator-dialog"
+      />
     </div>
   );
 };

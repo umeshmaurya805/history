@@ -22,23 +22,25 @@ const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
       affiliationNumber: value,
     },
     validationSchema: validationSchema,
-    onSubmit: protectedHandler(async (formData) => {
+    onSubmit: protectedHandler(async (formData, actions) => {
       console.log(formData);
+
+      if (formData.affiliationNumber === value) {
+        return handleClose();
+      }
 
       toast.success("Affiliation Number Updated", {
         toastId: "UpdateAffiliationNumber",
       });
+
+      actions.resetForm();
+      handleClose();
     }),
   });
 
-  const handleOnClose = (e) => {
+  const handleOnClose = () => {
     formik.resetForm();
     handleClose();
-  };
-
-  const handleOnSubmit = (e) => {
-    formik.handleSubmit(e);
-    handleOnClose();
   };
 
   return (
@@ -64,14 +66,16 @@ const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
               Boolean(formik.errors.affiliationNumber)
             }
             helperText={
-              formik.touched.affiliationNumber && formik.errors.affiliationNumber
+              formik.touched.affiliationNumber &&
+              formik.errors.affiliationNumber
             }
           />
         </form>
       </DialogContent>
       <DialogActions>
         <UpdateDialogButton
-          handleOnSubmit={handleOnSubmit}
+          isLoading={false}
+          handleOnSubmit={formik.handleSubmit}
           handleOnClose={handleOnClose}
         />
       </DialogActions>

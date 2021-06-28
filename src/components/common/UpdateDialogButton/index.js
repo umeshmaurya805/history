@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
+import LoadingIconButton from "../LoadingIconButton";
 import useStyles from "./style";
 
-const UpdateDialogButton = ({ handleOnClose, handleOnSubmit }) => {
+const UpdateDialogButton = ({ isLoading, handleOnClose, handleOnSubmit }) => {
   const classes = useStyles();
 
   return (
@@ -16,16 +17,17 @@ const UpdateDialogButton = ({ handleOnClose, handleOnSubmit }) => {
       >
         Cancel
       </Button>
-      <Button
+      <LoadingIconButton
         type="submit"
         onClick={handleOnSubmit}
         className={classes.saveButton}
-        startIcon={<SaveIcon />}
+        icon={<SaveIcon/>}
         color="primary"
         variant="contained"
+        isLoading={isLoading}
       >
         Save
-      </Button>
+      </LoadingIconButton>
     </div>
   );
 };

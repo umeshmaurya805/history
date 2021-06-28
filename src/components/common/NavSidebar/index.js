@@ -6,20 +6,20 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Box from "@material-ui/core/Box";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 import HDLogo from "../../../assets/images/hd-logo.png";
-import useStyles from "./style";
 import AnalyticsSvg from "../../../assets/AnalyticsSvg";
 import { useLogoutMutation } from "../../../app/services/hd/auth";
 import protectedHandler from "../../../utils/protectedHandler";
 import { removeSchoolAuth } from "../../../utils/schoolAuth";
 import logoutIcon from "../../../assets/svg/logout-icon.svg";
+import LoadingIconButton from "../LoadingIconButton";
 import {
   calendarSvgPath,
   homeSvgPath,
   leaderboardSvgPath,
   myAccountSvgPath,
 } from "../../../assets/svgPath";
+import useStyles from "./style";
 
 const NavList = () => {
   const { url: parentUrl } = useRouteMatch();
@@ -82,7 +82,7 @@ const NavList = () => {
 
 const NavSidebar = () => {
   const classes = useStyles();
-  const [logout] = useLogoutMutation();
+  const [logout, { isLoading }] = useLogoutMutation();
   const history = useHistory();
 
   const logoutSchool = protectedHandler(async () => {
@@ -99,17 +99,19 @@ const NavSidebar = () => {
       <List
         className={classes.navList}
         component="nav"
-        aria-label="main mailbox folders"
+        aria-label="navigation"
       >
         <NavList />
       </List>
-      <Button
+      <LoadingIconButton
         className={classes.logoutButton}
-        startIcon={<img src={logoutIcon} alt="" />}
+        isLoading={isLoading}
+        loaderColor="#2366B5"
+        icon={<img src={logoutIcon} alt="" />}
         onClick={logoutSchool}
       >
         Log Out
-      </Button>
+      </LoadingIconButton>
     </div>
   );
 };
