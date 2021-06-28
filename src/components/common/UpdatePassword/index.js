@@ -1,0 +1,133 @@
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import protectedHandler from "../../../utils/protectedHandler";
+import { toast } from "react-toastify";
+import UpdateDialogButton from "../UpdateDialogButton";
+
+const validationSchema = yup.object({
+  currentPassword: yup
+    .string("Enter your current password")
+    .min(6, "Password should be of minimum 6 characters length")
+    .required("Current password is required"),
+  newPassword: yup
+    .string("Enter your new password")
+    .min(6, "Password should be of minimum 6 characters length")
+    .required("New password is required"),
+  confirmNewPassword: yup
+    .string("Confirm your new password")
+    .min(6, "Password should be of minimum 6 characters length")
+    .required("Confirmation is required"),
+});
+
+const UpdatePassword = ({ handleClose, ...props }) => {
+  const formik = useFormik({
+    initialValues: {
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: protectedHandler(async (formData) => {
+      console.log(formData);
+
+      toast.success("Password Updated", {
+        toastId: "UpdatePassword",
+      });
+    }),
+  });
+
+  const handleOnClose = (e) => {
+    formik.resetForm();
+    handleClose();
+  };
+
+  const handleOnSubmit = (e) => {
+    formik.handleSubmit(e);
+    handleOnClose();
+  };
+
+  return (
+    <Dialog onClose={handleOnClose} {...props}>
+      <DialogTitle id="update-dialog-title" disableTypography>
+        Update Password
+      </DialogTitle>
+      <DialogContent>
+        <form>
+          <TextField
+            fullWidth
+            required
+            autoFocus
+            variant="outlined"
+            margin="normal"
+            id="currentPassword"
+            name="currentPassword"
+            label="Current Password"
+            type="password"
+            autoComplete="current-password"
+            value={formik.values.currentPassword}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.currentPassword &&
+              Boolean(formik.errors.currentPassword)
+            }
+            helperText={
+              formik.touched.currentPassword && formik.errors.currentPassword
+            }
+          />
+          <TextField
+            fullWidth
+            required
+            variant="outlined"
+            margin="normal"
+            id="newPassword"
+            name="newPassword"
+            label="New Password"
+            type="password"
+            autoComplete="new-password"
+            value={formik.values.newPassword}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.newPassword && Boolean(formik.errors.newPassword)
+            }
+            helperText={formik.touched.newPassword && formik.errors.newPassword}
+          />
+          <TextField
+            fullWidth
+            required
+            variant="outlined"
+            margin="normal"
+            id="confirmNewPassword"
+            name="confirmNewPassword"
+            label="Confirm New Password"
+            type="password"
+            autoComplete="new-password"
+            value={formik.values.confirmNewPassword}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirmNewPassword &&
+              Boolean(formik.errors.confirmNewPassword)
+            }
+            helperText={
+              formik.touched.confirmNewPassword &&
+              formik.errors.confirmNewPassword
+            }
+          />
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <UpdateDialogButton
+          handleOnSubmit={handleOnSubmit}
+          handleOnClose={handleOnClose}
+        />
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+export default UpdatePassword;
