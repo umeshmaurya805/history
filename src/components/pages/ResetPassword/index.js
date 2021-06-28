@@ -17,7 +17,7 @@ const validationSchema = yup.object({
   confirmPassword: yup
     .string("Confirm your password")
     .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"),
+    .required("Confirmation is required"),
 });
 
 const ResetPassword = () => {

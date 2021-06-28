@@ -6,11 +6,10 @@ import useStyles from "./style";
 const CreditPanel = () => {
   const classes = useStyles();
   const creditScore = 500;
-  const scoreUpdatedAt = new Date().toLocaleDateString('en-GB');
-  console.log(typeof scoreUpdatedAt, scoreUpdatedAt)
+  const scoreUpdatedAt = new Date().toLocaleDateString("en-GB");
 
   return (
-    <div>
+    <React.Fragment>
       <Typography color="primary" className={classes.creditDetailsLabel}>
         Credit Details
       </Typography>
@@ -23,7 +22,7 @@ const CreditPanel = () => {
       <Typography className={classes.scoreUpdatedAt}>
         Last Updated on - {scoreUpdatedAt}
       </Typography>
-    </div>
+    </React.Fragment>
   );
 };
 

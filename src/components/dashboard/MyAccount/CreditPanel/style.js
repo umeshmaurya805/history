@@ -2,7 +2,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   creditDetailsLabel: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(8),
     fontSize: 18,
     fontWeight: 600,
   },
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   totalCreditsLabel: {
     color: "#383838",
     fontWeight: 600,
+    marginRight: theme.spacing(2),
   },
   creditScore: {
     fontFamily: "'Inter', sans-serif",
