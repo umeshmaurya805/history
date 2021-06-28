@@ -1,0 +1,77 @@
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import protectedHandler from "../../../utils/protectedHandler";
+import UpdateDialogButton from "../UpdateDialogButton";
+
+const validationSchema = yup.object({
+  board: yup
+    .string("Enter board")
+    .required("Board is required"),
+});
+
+const UpdateBoard = ({ value, handleClose, ...props }) => {
+  const formik = useFormik({
+    initialValues: {
+      board: value,
+    },
+    validationSchema: validationSchema,
+    onSubmit: protectedHandler(async (formData) => {
+      console.log(formData);
+
+      toast.success("Board Updated", {
+        toastId: "UpdateBoard",
+      });
+    }),
+  });
+
+  const handleOnClose = (e) => {
+    formik.resetForm();
+    handleClose();
+  };
+
+  const handleOnSubmit = (e) => {
+    formik.handleSubmit(e);
+    handleOnClose();
+  };
+
+  return (
+    <Dialog onClose={handleOnClose} {...props}>
+      <DialogTitle id="update-dialog-title" disableTypography>
+        Update Board
+      </DialogTitle>
+      <DialogContent>
+        <form>
+          <TextField
+            fullWidth
+            required
+            autoFocus
+            variant="outlined"
+            margin="normal"
+            id="board"
+            name="board"
+            label="Board"
+            value={formik.values.board}
+            onChange={formik.handleChange}
+            error={formik.touched.board && Boolean(formik.errors.board)}
+            helperText={formik.touched.board && formik.errors.board}
+          />
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <UpdateDialogButton
+          handleOnSubmit={handleOnSubmit}
+          handleOnClose={handleOnClose}
+        />
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+export default UpdateBoard;
