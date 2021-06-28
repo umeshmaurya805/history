@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core";
 import blue from "@material-ui/core/colors/blue";
 
 export const rootTheme = createMuiTheme({
@@ -22,6 +22,20 @@ export const rootTheme = createMuiTheme({
         "& input": {
           color: "#1D1C3F",
         },
+      },
+    },
+    MuiDialog: {
+      paper: {
+        borderRadius: 8,
+      },
+    },
+    MuiDialogTitle: {
+      root: {
+        fontSize: 18,
+        fontWeight: 700,
+        textAlign: "center",
+        padding: "16px 24px",
+        color: "#383838",
       },
     },
   },
