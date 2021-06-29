@@ -120,6 +120,7 @@ const Leaderboard = () => {
                   colSpan={columns.length}
                 >
                   <TablePagination
+                  className={classes.tablePagination}
                     labelDisplayedRows={({ from, to, count }) =>
                       `${from} - ${to} of ${
                         count !== -1 ? count : `more than ${to}`

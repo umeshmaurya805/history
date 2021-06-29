@@ -24,7 +24,7 @@ const Home = () => {
             <Magazine />
           </Grid>
         </Grid>
-        <FeaturedEvent />
+        {/* <FeaturedEvent /> */}
       </Container>
     </Layout>
   );

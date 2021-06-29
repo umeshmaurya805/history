@@ -82,10 +82,9 @@ const AccountSettingsPanel = () => {
 
   return (
     <div className={classes.root}>
-      <Box className={classes.box}>
-        <Typography className={classes.name}>School name</Typography>
-        <Typography className={classes.value}>ABC Public School</Typography>
-      </Box>
+      <Typography color="primary" className={classes.title}>
+        Account Details
+      </Typography>
       <Box className={classes.box}>
         <Typography className={classes.name}>Email address</Typography>
         <Typography className={classes.value}>abc@gmail.com</Typography>
@@ -100,6 +99,10 @@ const AccountSettingsPanel = () => {
       <Typography color="primary" className={classes.title}>
         School Details
       </Typography>
+      <Box className={classes.box}>
+        <Typography className={classes.name}>School name</Typography>
+        <Typography className={classes.value}>ABC Public School</Typography>
+      </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>School address</Typography>
         <Typography className={classes.value}>abc, abc street</Typography>

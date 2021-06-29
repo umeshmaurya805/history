@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
     border: "1px solid #C4C4C4",
-    paddingLeft: theme.spacing(2.5),
+    paddingLeft: theme.spacing(2),
   },
   name: {
     color: "#383838",

@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
       width: 250,
     },
   },
+  tablePagination: {
+    color: "#5C6269",
+  },
 }));
 
 export default useStyles;

@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
   creditScore: {
     fontFamily: "'Inter', sans-serif",
-    color: "#1D1C3F",
+    fontWeight: 600,
+    color: "#383838",
   },
   scoreUpdatedAt: {
     color: "#929292",
