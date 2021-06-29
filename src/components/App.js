@@ -5,11 +5,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Auth from "./pages/Auth";
 import Dashboard from "./dashboard";
-import PublicRoute from "./common/routes/PublicRoute";
-import PrivateRoute from "./common/routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import "./App.css";
 
 const App = () => {
+  /*** DEVELOPER SIGNATURE ***/
   console.log("Developed by Divyansh Singh Thakur");
   console.log("🔥🔥 https://github.com/DivyanshThakur 🔥🔥");
   
