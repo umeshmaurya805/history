@@ -11,10 +11,15 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    textAlign: "center",
     color: "#7A7878",
-    "&:hover":{
-        backgroundColor: "#E8E8E8",
-    }
+    "&:hover": {
+      backgroundColor: "#E8E8E8",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: 100,
+      width: 200,
+    },
   },
 }));
 
