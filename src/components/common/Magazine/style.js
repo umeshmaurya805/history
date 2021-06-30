@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 255,
-    margin: "auto",
+    border: "none",
   },
   media: {
     borderTopLeftRadius: 12,

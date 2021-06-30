@@ -6,7 +6,14 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   content: {
-    padding: "12px 25px 36px 10px !important",
+    padding: "6px 15px 10px 6px !important",
+  },
+  points: {
+    fontWeight: 900,
+    fontSize: 32,
+  },
+  centerItem: {
+    alignSelf: "center",
   },
   logo: {
     height: 50,
@@ -16,12 +23,17 @@ const useStyles = makeStyles((theme) => ({
   name: {
     fontFamily: "Roboto",
     fontWeight: 500,
-    marginBottom: 5,
+    fontSize: 15,
+    marginBottom: 2,
+  },
+  pointsScored: {
+    fontFamily: "Roboto",
+    fontSize: 12,
+    fontWeight: 500,
   },
   extraInfo: {
-    fontSize: 10,
+    fontSize: 12,
     color: "#383838",
-    marginBottom: 5,
   },
   // value: {
   //   fontWeight: 900,

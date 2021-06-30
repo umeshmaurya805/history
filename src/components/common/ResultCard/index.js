@@ -8,34 +8,48 @@ import useStyles from "./style";
 
 const ResultCard = ({ info }) => {
   const classes = useStyles();
-  const { name, avatar, studentClass, schoolName } = info;
+  const { position, name, avatar, points, studentClass, schoolName } = info;
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <Grid container spacing={2} >
-          <Grid item>
+        <Grid container spacing={1}>
+        <Grid item>
+        <Typography
+              variant="h4"
+              component="div"
+              className={classes.points}
+              color="primary"
+            >
+              {position}
+            </Typography>
+        </Grid>
+          <Grid item className={classes.centerItem}>
             <Avatar src={avatar} className={classes.logo} />
           </Grid>
-          <Grid item>
+          <Grid item className={classes.centerItem}>
             <Typography
-              variant="body"
+              variant="body2"
               component="div"
               className={classes.name}
               color="primary"
             >
               {name}
             </Typography>
-            <Typography
-              className={classes.extraInfo}
-              color="primary"
-            >
+            {points && (
+              <Typography
+                variant="body2"
+                component="div"
+                className={classes.pointsScored}
+                color="primary"
+              >
+                Points Gained - {points}
+              </Typography>
+            )}
+            <Typography className={classes.extraInfo} color="primary">
               Class - {studentClass}
             </Typography>
-            <Typography
-              className={classes.extraInfo}
-              color="primary"
-            >
+            <Typography className={classes.extraInfo} color="primary">
               {schoolName}
             </Typography>
           </Grid>
