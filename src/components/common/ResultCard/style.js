@@ -8,17 +8,22 @@ const useStyles = makeStyles((theme) => ({
   content: {
     padding: "6px 15px 10px 6px !important",
   },
+  container: {
+    height: 90,
+  },
   points: {
     fontWeight: 900,
     fontSize: 32,
   },
   centerItem: {
     alignSelf: "center",
+    flexGrow: 1,
   },
   logo: {
     height: 50,
     width: 50,
     backgroundColor: "#C4C4C4",
+    margin: "auto",
   },
   name: {
     fontFamily: "Roboto",
@@ -35,12 +40,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 12,
     color: "#383838",
   },
-  // value: {
-  //   fontWeight: 900,
-  // },
-  // name: {
-  //   color: "#3D3D3D",
-  // },
 }));
 
 export default useStyles;

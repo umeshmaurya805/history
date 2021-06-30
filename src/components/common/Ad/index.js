@@ -37,25 +37,33 @@ const Ad = () => {
   };
 
   return (
-    <Box className={classes.root}>
-      <div className={classes.adLabel}>Ad</div>
-      <Slide {...slideProperties}>
-        {adData.map((ad) => {
-          return (
-            <a className="each-slide" href="/" target="_blank" rel="noreferrer">
-              <div
-                style={{
-                  backgroundImage: `url(${ad.image})`,
-                  height: 389,
-                  width: 268,
-                  marginLeft: -4,
-                }}
-              ></div>
-            </a>
-          );
-        })}
-      </Slide>
-    </Box>
+    adData?.length !== 0 && (
+      <Box className={classes.root}>
+        <div className={classes.adLabel}>Ad</div>
+        <Slide {...slideProperties}>
+          {adData.map((ad, index) => {
+            return (
+              <a
+                key={index}
+                className="each-slide"
+                href="/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div
+                  style={{
+                    backgroundImage: `url(${ad.image})`,
+                    height: 390,
+                    width: 268,
+                    marginLeft: -4,
+                  }}
+                ></div>
+              </a>
+            );
+          })}
+        </Slide>
+      </Box>
+    )
   );
 };
 

@@ -13,7 +13,7 @@ const ResultCard = ({ info }) => {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} className={classes.container}>
         <Grid item>
         <Typography
               variant="h4"
@@ -54,11 +54,6 @@ const ResultCard = ({ info }) => {
             </Typography>
           </Grid>
         </Grid>
-        {/* 
-        
-        <Typography variant="body" className={classes.name}>
-          {name}
-        </Typography> */}
       </CardContent>
     </Card>
   );

@@ -26,7 +26,7 @@ const Home = () => {
         </Grid>
       </Grid>
       <Typography className={classes.title}>Featured Event</Typography>
-      <Grid container className={classes.container} justify="center">
+      <Grid container className={classes.container} alignItems="center" justify="center">
         <Grid item className={classes.mainSection}>
           <FeaturedEvent />
         </Grid>
