@@ -87,7 +87,7 @@ export const rootTheme = createMuiTheme({
         background: "white",
         "& li": {
           fontSize: 12,
-
+          color: "#383838",
           fontWeight: 200,
           paddingTop: 12,
           paddingBottom: 12,
