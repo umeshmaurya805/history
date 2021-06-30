@@ -18,7 +18,7 @@ const StatsCard = ({ name, value }) => {
         >
           {value}
         </Typography>
-        <Typography variant="body" className={classes.name}>{name}</Typography>
+        <Typography variant="body2" className={classes.name}>{name}</Typography>
       </CardContent>
     </Card>
   );

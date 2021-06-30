@@ -1,31 +1,39 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 import Layout from "../../common/Layout";
 import FeaturedEvent from "../../common/FeaturedEvent";
 import EventStats from "../../common/EventStats";
 import EventResult from "../../common/EventResult";
 import WelcomeBanner from "../../common/WelcomeBanner";
 import Magazine from "../../common/Magazine";
+import Ad from "../../common/Ad";
 import useStyles from "./style";
 
 const Home = () => {
   const classes = useStyles();
+
   return (
     <Layout>
-      <Container>
-        <WelcomeBanner />
-        <Grid container spacing={5} className={classes.resultStatsGrid}>
-          <Grid item lg={9} md={7} sm={6} xs={12}>
-            <EventStats />
-            <EventResult />
-          </Grid>
-          <Grid item lg={3} md={5} sm={6} xs={12}>
-            <Magazine />
-          </Grid>
+      <WelcomeBanner />
+      <Grid container className={classes.container} justify="center">
+        <Grid item className={classes.mainSection}>
+          <EventStats />
+          <EventResult />
         </Grid>
-        <FeaturedEvent />
-      </Container>
+        <Grid item className={classes.sideSection}>
+          <Magazine />
+        </Grid>
+      </Grid>
+      <Typography className={classes.title}>Featured Event</Typography>
+      <Grid container className={classes.container} justify="center">
+        <Grid item className={classes.mainSection}>
+          <FeaturedEvent />
+        </Grid>
+        <Grid item className={classes.sideSection}>
+          <Ad />
+        </Grid>
+      </Grid>
     </Layout>
   );
 };
