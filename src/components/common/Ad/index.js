@@ -1,49 +1,61 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import magazineImage from "../../../assets/svg/magazine-image.png";
+import Box from "@material-ui/core/Box";
+import IconButton from "@material-ui/core/IconButton";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import { Slide } from "react-slideshow-image";
+import adImage from "../../../assets/svg/event-ad-image.png";
+import "react-slideshow-image/dist/styles.css";
 import useStyles from "./style";
+
+const adData = [
+  { image: adImage, url: "/" },
+  // { image: adImage, url: "/" },
+];
 
 const Ad = () => {
   const classes = useStyles();
 
+  const slideProperties = {
+    arrows: adData.length > 1,
+    canSwipe: adData.length > 1,
+    transitionDuration: adData.length > 1 ? 1000 : 0,
+    easing: "ease",
+    cssClass: classes.slider,
+    prevArrow: (
+      <IconButton color="primary" className={classes.adButtonLeft}>
+        <DoubleArrowIcon
+          className={classes.adIcon}
+          style={{ transform: "scaleX(-1)" }}
+        />
+      </IconButton>
+    ),
+    nextArrow: (
+      <IconButton color="primary" className={classes.adButtonRight}>
+        <DoubleArrowIcon className={classes.adIcon} />
+      </IconButton>
+    ),
+  };
+
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        component="img"
-        height="240"
-        image={magazineImage}
-      />
-      <CardContent>
-        <Typography className={classes.description} component="p">
-          Mag description here Mag description here Mag description here Mag
-          description here.
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.cardActions}>
-        <Button
-          className={classes.actionButtons}
-          size="small"
-          color="primary"
-          variant="outlined"
-        >
-          Preview
-        </Button>
-        <Button
-          className={classes.actionButtons}
-          size="small"
-          color="primary"
-          variant="outlined"
-        >
-          Download
-        </Button>
-      </CardActions>
-    </Card>
+    <Box className={classes.root}>
+      <div className={classes.adLabel}>Ad</div>
+      <Slide {...slideProperties}>
+        {adData.map((ad) => {
+          return (
+            <a className="each-slide" href="/" target="_blank" rel="noreferrer">
+              <div
+                style={{
+                  backgroundImage: `url(${ad.image})`,
+                  height: 389,
+                  width: 268,
+                  marginLeft: -4,
+                }}
+              ></div>
+            </a>
+          );
+        })}
+      </Slide>
+    </Box>
   );
 };
 
