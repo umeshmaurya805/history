@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     boxShadow: "0px 5px 20px rgba(0,0,0,0.24)",
     margin: theme.spacing(0, 1),
+    [theme.breakpoints.only("xs")]: {
+      height: 150,
+      width: 250,
+    },
   },
   infoBox: {
     width: "100%",
@@ -41,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(12),
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(7),
+    },[theme.breakpoints.only("xs")]: {
+      paddingLeft: theme.spacing(0),
     },
   },
   innerBox: {
@@ -64,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Roboto",
     marginRight: theme.spacing(2),
     marginLeft: theme.spacing(2),
+    [theme.breakpoints.down("md")]: {
+      alignSelf: "flex-end",
+      marginRight: theme.spacing(0),
+      marginLeft: theme.spacing(1),
+    },
   },
 }));
 
