@@ -17,9 +17,9 @@ const EventStats = () => {
 
   return (
     <Grid container spacing={3}>
-      {data.map(({ name, value }) => {
+      {data.map(({ name, value }, index) => {
         return (
-          <Grid item style={{ flexGrow: 1 }}>
+          <Grid key={index} item style={{ flexGrow: 1 }}>
             <StatsCard name={name} value={value} />
           </Grid>
         );

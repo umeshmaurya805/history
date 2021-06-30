@@ -18,9 +18,15 @@ const useStyles = makeStyles((theme) => ({
   resultContainer: {
     marginTop: theme.spacing(1),
   },
+  selector: {
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
+  },
   select: {
-    [theme.breakpoints.only("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       minWidth: "unset",
+      width: "100%",
     },
   },
 }));

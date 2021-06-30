@@ -39,18 +39,21 @@ const EventResult = () => {
   const data = [
     {
       name: "Priyanka",
+      position: 1,
       avatar,
       studentClass: "10th",
       schoolName: "XYZ Public School",
     },
     {
       name: "Priyanka",
+      position: 2,
       avatar,
       studentClass: "10th",
       schoolName: "XYZ Public School",
     },
     {
       name: "Priyanka",
+      position: 3,
       avatar,
       studentClass: "10th",
       schoolName: "XYZ Public School",
@@ -64,8 +67,8 @@ const EventResult = () => {
           <Grid item>
             <Typography className={classes.title}>Results</Typography>
           </Grid>
-          <Grid item>
-            <FormControl>
+          <Grid item className={classes.selector}>
+            <FormControl className={classes.selector}>
               <Select
                 classes={{ select: classes.select }}
                 disableUnderline
@@ -85,9 +88,9 @@ const EventResult = () => {
       </Box>
       <Box>
         <Grid container spacing={3} className={classes.resultContainer}>
-          {data.map((studentInfo) => {
+          {data.map((studentInfo, index) => {
             return (
-              <Grid item style={{ flexGrow: 1 }}>
+              <Grid key={index} item style={{ flexGrow: 1 }}>
                 <ResultCard info={studentInfo} />
               </Grid>
             );
