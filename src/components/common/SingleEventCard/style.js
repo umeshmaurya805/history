@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1.5),
     paddingLeft: theme.spacing(12),
     [theme.breakpoints.down("md")]: {
-      paddingLeft: theme.spacing(7),
+      paddingLeft: theme.spacing(3),
     },[theme.breakpoints.only("xs")]: {
       paddingLeft: theme.spacing(0),
     },
