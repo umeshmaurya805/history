@@ -9,7 +9,7 @@ import useStyles from "./style";
 
 const adData = [
   { image: adImage, url: "/" },
-  // { image: adImage, url: "/" },
+  { image: adImage, url: "/" },
 ];
 
 const Ad = () => {
