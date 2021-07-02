@@ -6,6 +6,7 @@ import FeaturedEvent from "../../common/FeaturedEvent";
 import EventStats from "../../common/EventStats";
 import EventResult from "../../common/EventResult";
 import WelcomeBanner from "../../common/WelcomeBanner";
+import UpcomingEvents from "../../common/UpcomingEvents";
 import Magazine from "../../common/Magazine";
 import Ad from "../../common/Ad";
 import useStyles from "./style";
@@ -26,14 +27,20 @@ const Home = () => {
         </Grid>
       </Grid>
       <Typography className={classes.title}>Featured Event</Typography>
-      <Grid container className={classes.container} alignItems="center" justify="center">
-        <Grid item className={classes.mainSection}>
+      <Grid
+        container
+        className={classes.container}
+        alignItems="center"
+        justify="space-between"
+      >
+        <Grid item className={classes.featuredEvent}>
           <FeaturedEvent />
         </Grid>
-        <Grid item className={classes.sideSection}>
+        <Grid item className={classes.ad}>
           <Ad />
         </Grid>
       </Grid>
+      <UpcomingEvents />
     </Layout>
   );
 };

@@ -2,26 +2,14 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    [theme.breakpoints.only("xl")]: {
-      width: 1276,
-    },
-    [theme.breakpoints.only("lg")]: {
-      width: 638,
-    },
-    [theme.breakpoints.only("md")]: {
-      width: 319,
-    },
-    [theme.breakpoints.only("sm")]: {
-      width: 319,
-    },
-    [theme.breakpoints.only("xs")]: {
-      width: 319,
-      margin: "auto",
-    },
+    width: "100%",
   },
   itemRoot: {
-    width: 319,
+    width: 310,
     padding: theme.spacing(2),
+    [theme.breakpoints.down("xs")]: {
+      margin: "auto",
+    },
   },
   content: {
     padding: "0px 10px 0px 10px !important",
@@ -69,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2, 0),
   },
   image: {
-    width: 250,
+    width: 240,
     height: 160,
     borderRadius: 12,
     boxShadow: "0px 5px 20px rgba(0,0,0,0.24)",
@@ -98,13 +86,8 @@ const useStyles = makeStyles((theme) => ({
     height: 30,
     fontSize: 12,
     fontFamily: "Roboto",
-    margin: theme.spacing(2, 1),
+    margin: theme.spacing(0, 1, 2, 1),
     alignSelf: "flex-end",
-    // [theme.breakpoints.down("md")]: {
-    //   alignSelf: "flex-end",
-    //   marginRight: theme.spacing(0),
-    //   marginLeft: theme.spacing(1),
-    // },
   },
 }));
 

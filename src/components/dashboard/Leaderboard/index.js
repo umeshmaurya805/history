@@ -9,9 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import TableFooter from "@material-ui/core/TableFooter";
 import TableCell from "@material-ui/core/TableCell";
 import Layout from "../../common/Layout";
-import useStyles, { StyledTableCell } from "./style";
 import LeaderboardImage from "../../../assets/svg/leaderboard.svg";
 import { Typography } from "@material-ui/core";
+import useStyles, { StyledTableCell } from "./style";
 
 const columns = [
   { id: "rank", label: "Rank", fixedWidth: 60 },

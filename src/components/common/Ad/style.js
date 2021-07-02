@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     height: 386,
   },
   slider: {
-    boxShadow: "0px 10px 20px -3px rgba(0,0,0,0.24)",
+    boxShadow: "0px 5px 10px -2px rgba(0,0,0,0.14)",
     borderRadius: 12,
   },
   adLabel: {

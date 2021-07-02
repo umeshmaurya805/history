@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -79,27 +79,18 @@ const Item = ({ data }) => {
 
 const MultiEventCard = ({ data }) => {
   const classes = useStyles();
+  const [width, setWidth] = useState(0);
+
+  const measuredRef = useCallback((node) => {
+    if (node !== null) {
+      setWidth(node.getBoundingClientRect().width);
+    }
+  }, []);
 
   const responsive = {
-    largeDesktop: {
-      breakpoint: { max: 4000, min: 1920 },
-      items: 4,
-    },
-    desktop: {
-      breakpoint: { max: 1920, min: 1280 },
-      items: 2,
-    },
-    laptop: {
-      breakpoint: { max: 1280, min: 960 },
-      items: 1,
-    },
-    tablet: {
-      breakpoint: { max: 960, min: 600 },
-      items: 1,
-    },
-    mobile: {
-      breakpoint: { max: 600, min: 0 },
-      items: 1,
+    custom: {
+      breakpoint: { max: 4000, min: 0 },
+      items: Math.max(1, Math.floor(width / 310)),
     },
   };
 
@@ -129,18 +120,20 @@ const MultiEventCard = ({ data }) => {
       </IconButton>
     );
   };
-
+  
   return (
-    <div className={classes.root}>
-      <Carousel
-        responsive={responsive}
-        customRightArrow={<CustomRightArrow />}
-        customLeftArrow={<CustomLeftArrow />}
-      >
-        {data.map((eventData, index) => {
-          return <Item key={index} data={eventData} />;
-        })}
-      </Carousel>
+    <div ref={measuredRef} className={classes.root}>
+      <div style={{ width: `${Math.max(1, Math.floor(width / 310)) * 310}px` }}>
+        <Carousel
+          responsive={responsive}
+          customRightArrow={<CustomRightArrow />}
+          customLeftArrow={<CustomLeftArrow />}
+        >
+          {data.map((eventData, index) => {
+            return <Item key={index} data={eventData} />;
+          })}
+        </Carousel>
+      </div>
     </div>
   );
 };
