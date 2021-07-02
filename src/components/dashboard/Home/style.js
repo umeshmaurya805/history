@@ -21,6 +21,17 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 255,
     padding: "20px 0 !important",
   },
+  featuredEvent: {
+    flexGrow: 1,
+    marginRight: theme.spacing(2),
+  },
+  ad: {
+    maxWidth: 255,
+    padding: "20px 0 !important",
+    [theme.breakpoints.down("xs")]: {
+      margin: "auto",
+    },
+  },
 }));
 
 export default useStyles;
