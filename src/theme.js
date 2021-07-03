@@ -104,5 +104,16 @@ export const rootTheme = createMuiTheme({
         },
       },
     },
+    MuiTooltip: {
+      tooltip: {
+        fontFamily: "Roboto",
+        backgroundColor: "rgba(255, 255,255, 1)",
+        color: "rgba(0, 0, 0, 0.7)",
+        padding: 10,
+        border: "0.5px solid #E5E5E5",
+        borderRadius: 12,
+        boxShadow: "0px 5px 10px -5px rgba(0,0,0,0.14)",
+      },
+    },
   },
 });
