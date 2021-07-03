@@ -6,9 +6,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import protectedHandler from "../../../utils/protectedHandler";
 import { toast } from "react-toastify";
-import UpdateDialogButton from "../UpdateDialogButton";
+import protectedHandler from "../../../../utils/protectedHandler";
+import UpdateButtonGroup from "../../button/UpdateButtonGroup";
 
 const validationSchema = yup.object({
   currentPassword: yup
@@ -119,7 +119,7 @@ const UpdatePassword = ({ handleClose, ...props }) => {
         </form>
       </DialogContent>
       <DialogActions>
-        <UpdateDialogButton
+        <UpdateButtonGroup
           isLoading={false}
           handleOnSubmit={formik.handleSubmit}
           handleOnClose={handleOnClose}

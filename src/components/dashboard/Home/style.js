@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   title: {
-    width: 200,
+    width: 225,
     marginTop: 20,
     marginBottom: 20,
     fontFamily: "Roboto",

@@ -120,10 +120,14 @@ const MultiEventCard = ({ data }) => {
       </IconButton>
     );
   };
-  
+
   return (
     <div ref={measuredRef} className={classes.root}>
-      <div style={{ width: `${Math.max(1, Math.floor(width / 310)) * 310}px` }}>
+      <div className={classes.container}
+        style={{
+          width: `${Math.max(1, Math.floor(width / 310)) * 310}px`,
+        }}
+      >
         <Carousel
           responsive={responsive}
           customRightArrow={<CustomRightArrow />}

@@ -1,7 +1,7 @@
 import React from "react";
 import eventImage from "../../../assets/svg/event-image.png";
-import SingleEventCard from "../SingleEventCard";
-import MultiEventCard from "../MultiEventCard";
+import SingleEventCard from "../card/SingleEventCard";
+import MultiEventCard from "../card/MultiEventCard";
 
 const FeaturedEvent = () => {
   const eventData = [

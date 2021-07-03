@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import StatsCard from "../StatsCard";
+import StatsCard from "../card/StatsCard";
 
 const EventStats = () => {
   const data = [

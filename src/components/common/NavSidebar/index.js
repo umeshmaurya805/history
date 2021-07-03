@@ -12,7 +12,7 @@ import { useLogoutMutation } from "../../../app/services/hd/auth";
 import protectedHandler from "../../../utils/protectedHandler";
 import { removeSchoolAuth } from "../../../utils/schoolAuth";
 import logoutIcon from "../../../assets/svg/logout-icon.svg";
-import LoadingIconButton from "../LoadingIconButton";
+import LoadingIconButton from "../button/LoadingIconButton";
 import {
   calendarSvgPath,
   homeSvgPath,

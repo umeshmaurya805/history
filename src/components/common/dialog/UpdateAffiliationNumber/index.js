@@ -7,30 +7,30 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import protectedHandler from "../../../utils/protectedHandler";
-import UpdateDialogButton from "../UpdateDialogButton";
+import protectedHandler from "../../../../utils/protectedHandler";
+import UpdateButtonGroup from "../../button/UpdateButtonGroup";
 
 const validationSchema = yup.object({
-  contactNumber: yup
-    .string("Enter school contact number")
-    .required("Contact number is required"),
+  affiliationNumber: yup
+    .string("Enter your affiliation number")
+    .required("Affiliation number is required"),
 });
 
-const UpdateContactNumber = ({ value, handleClose, ...props }) => {
+const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
   const formik = useFormik({
     initialValues: {
-      contactNumber: value,
+      affiliationNumber: value,
     },
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData, actions) => {
       console.log(formData);
 
-      if (formData.contactNumber === value) {
+      if (formData.affiliationNumber === value) {
         return handleClose();
       }
 
-      toast.success("School Contact Number Updated", {
-        toastId: "UpdateContactNumber",
+      toast.success("Affiliation Number Updated", {
+        toastId: "UpdateAffiliationNumber",
       });
 
       actions.resetForm();
@@ -46,7 +46,7 @@ const UpdateContactNumber = ({ value, handleClose, ...props }) => {
   return (
     <Dialog onClose={handleOnClose} {...props}>
       <DialogTitle id="update-dialog-title" disableTypography>
-        Update Contact Number
+        Update Affiliation Number
       </DialogTitle>
       <DialogContent>
         <form>
@@ -56,23 +56,24 @@ const UpdateContactNumber = ({ value, handleClose, ...props }) => {
             autoFocus
             variant="outlined"
             margin="normal"
-            id="contactNumber"
-            name="contactNumber"
-            label="Contact Number"
-            value={formik.values.contactNumber}
+            id="affiliationNumber"
+            name="affiliationNumber"
+            label="Affiliation Number"
+            value={formik.values.affiliationNumber}
             onChange={formik.handleChange}
             error={
-              formik.touched.contactNumber &&
-              Boolean(formik.errors.contactNumber)
+              formik.touched.affiliationNumber &&
+              Boolean(formik.errors.affiliationNumber)
             }
             helperText={
-              formik.touched.contactNumber && formik.errors.contactNumber
+              formik.touched.affiliationNumber &&
+              formik.errors.affiliationNumber
             }
           />
         </form>
       </DialogContent>
       <DialogActions>
-        <UpdateDialogButton
+        <UpdateButtonGroup
           isLoading={false}
           handleOnSubmit={formik.handleSubmit}
           handleOnClose={handleOnClose}
@@ -82,4 +83,4 @@ const UpdateContactNumber = ({ value, handleClose, ...props }) => {
   );
 };
 
-export default UpdateContactNumber;
+export default UpdateAffiliationNumber;

@@ -7,8 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import protectedHandler from "../../../utils/protectedHandler";
-import UpdateDialogButton from "../UpdateDialogButton";
+import protectedHandler from "../../../../utils/protectedHandler";
+import UpdateButtonGroup from "../../button/UpdateButtonGroup";
 
 const validationSchema = yup.object({
   name: yup
@@ -102,9 +102,15 @@ const UpdateCoordinator = ({ values, handleClose, ...props }) => {
             label="Contact Number"
             value={formik.values.contactNumber}
             onChange={formik.handleChange}
-            error={formik.touched.contactNumber && Boolean(formik.errors.contactNumber)}
-            helperText={formik.touched.contactNumber && formik.errors.contactNumber}
-          /><TextField
+            error={
+              formik.touched.contactNumber &&
+              Boolean(formik.errors.contactNumber)
+            }
+            helperText={
+              formik.touched.contactNumber && formik.errors.contactNumber
+            }
+          />
+          <TextField
             fullWidth
             required
             variant="outlined"
@@ -114,15 +120,13 @@ const UpdateCoordinator = ({ values, handleClose, ...props }) => {
             label="Email"
             value={formik.values.email}
             onChange={formik.handleChange}
-            error={
-              formik.touched.email && Boolean(formik.errors.email)
-            }
+            error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
         </form>
       </DialogContent>
       <DialogActions>
-        <UpdateDialogButton
+        <UpdateButtonGroup
           isLoading={false}
           handleOnSubmit={formik.handleSubmit}
           handleOnClose={handleOnClose}

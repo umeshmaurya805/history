@@ -7,30 +7,28 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import protectedHandler from "../../../utils/protectedHandler";
-import UpdateDialogButton from "../UpdateDialogButton";
+import protectedHandler from "../../../../utils/protectedHandler";
+import UpdateButtonGroup from "../../button/UpdateButtonGroup";
 
 const validationSchema = yup.object({
-  affiliationNumber: yup
-    .string("Enter your affiliation number")
-    .required("Affiliation number is required"),
+  board: yup.string("Enter board").required("Board is required"),
 });
 
-const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
+const UpdateBoard = ({ value, handleClose, ...props }) => {
   const formik = useFormik({
     initialValues: {
-      affiliationNumber: value,
+      board: value,
     },
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData, actions) => {
       console.log(formData);
 
-      if (formData.affiliationNumber === value) {
+      if (formData.board === value) {
         return handleClose();
       }
 
-      toast.success("Affiliation Number Updated", {
-        toastId: "UpdateAffiliationNumber",
+      toast.success("Board Updated", {
+        toastId: "UpdateBoard",
       });
 
       actions.resetForm();
@@ -46,7 +44,7 @@ const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
   return (
     <Dialog onClose={handleOnClose} {...props}>
       <DialogTitle id="update-dialog-title" disableTypography>
-        Update Affiliation Number
+        Update Board
       </DialogTitle>
       <DialogContent>
         <form>
@@ -56,24 +54,18 @@ const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
             autoFocus
             variant="outlined"
             margin="normal"
-            id="affiliationNumber"
-            name="affiliationNumber"
-            label="Affiliation Number"
-            value={formik.values.affiliationNumber}
+            id="board"
+            name="board"
+            label="Board"
+            value={formik.values.board}
             onChange={formik.handleChange}
-            error={
-              formik.touched.affiliationNumber &&
-              Boolean(formik.errors.affiliationNumber)
-            }
-            helperText={
-              formik.touched.affiliationNumber &&
-              formik.errors.affiliationNumber
-            }
+            error={formik.touched.board && Boolean(formik.errors.board)}
+            helperText={formik.touched.board && formik.errors.board}
           />
         </form>
       </DialogContent>
       <DialogActions>
-        <UpdateDialogButton
+        <UpdateButtonGroup
           isLoading={false}
           handleOnSubmit={formik.handleSubmit}
           handleOnClose={handleOnClose}
@@ -83,4 +75,4 @@ const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
   );
 };
 
-export default UpdateAffiliationNumber;
+export default UpdateBoard;

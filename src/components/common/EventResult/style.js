@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid #E5E5E5",
   },
   title: {
-    width: 200,
+    width: 225,
     marginBottom: 20,
     fontFamily: "Roboto",
     fontSize: 22,

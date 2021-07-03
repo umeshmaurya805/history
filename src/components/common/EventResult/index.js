@@ -6,7 +6,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import ResultCard from "../ResultCard";
+import ResultCard from "../card/ResultCard";
+import InfoButton from "../button/InfoButton";
 import avatar from "../../../assets/svg/avatar.png";
 import useStyles from "./style";
 
@@ -65,7 +66,13 @@ const EventResult = () => {
       <Box>
         <Grid container justify="space-between">
           <Grid item>
-            <Typography className={classes.title}>Results</Typography>
+            <Typography className={classes.title}>
+              Results
+              <InfoButton
+                position="right-end"
+                text="Result of the events completed till now"
+              />
+            </Typography>
           </Grid>
           <Grid item className={classes.selector}>
             <FormControl className={classes.selector}>

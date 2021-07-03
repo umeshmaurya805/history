@@ -9,6 +9,7 @@ import WelcomeBanner from "../../common/WelcomeBanner";
 import UpcomingEvents from "../../common/UpcomingEvents";
 import Magazine from "../../common/Magazine";
 import Ad from "../../common/Ad";
+import InfoButton from "../../common/button/InfoButton";
 import useStyles from "./style";
 
 const Home = () => {
@@ -26,7 +27,10 @@ const Home = () => {
           <Magazine />
         </Grid>
       </Grid>
-      <Typography className={classes.title}>Featured Event</Typography>
+      <Typography className={classes.title}>
+        Featured Event
+        <InfoButton position="right-end" text="List of the featured events that are open now" />
+      </Typography>
       <Grid
         container
         className={classes.container}
