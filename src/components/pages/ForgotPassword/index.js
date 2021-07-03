@@ -4,10 +4,10 @@ import Typography from "@material-ui/core/Typography";
 import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import useStyles from "./style";
 import { useForgotPasswordMutation } from "../../../app/services/hd/auth";
 import protectedHandler from "../../../utils/protectedHandler";
-import LoadingButton from "../../common/LoadingButton";
+import LoadingButton from "../../common/button/LoadingButton";
+import useStyles from "./style";
 
 const validationSchema = yup.object({
   email: yup
@@ -19,7 +19,7 @@ const validationSchema = yup.object({
 const ForgotPassword = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [forgotPassword, {isLoading}] = useForgotPasswordMutation();
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
   const formik = useFormik({
     initialValues: {

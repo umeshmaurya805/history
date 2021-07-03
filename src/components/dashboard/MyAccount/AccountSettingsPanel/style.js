@@ -9,6 +9,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
     fontWeight: 600,
   },
+  boxStart: {
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  boxEnd: {
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+  },
   box: {
     display: "flex",
     justifyContent: "space-between",
@@ -50,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     marginRight: theme.spacing(5),
     border: "1px solid #C4C4C4",
+    borderRadius: 8,
     height: 86,
     width: 86,
     display: "flex",
@@ -64,9 +73,10 @@ const useStyles = makeStyles((theme) => ({
   logoChange: {
     fontWeight: 600,
     borderRadius: 40,
-    width: 86,
-    padding: theme.spacing(1, 2),
+    width: 80,
+    padding: theme.spacing(1, 0),
     marginTop: theme.spacing(1),
+    marginLeft: 3,
   },
   coordinatorTitle: {
     display: "flex",

@@ -2,17 +2,17 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
+import { Container } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
-import useStyles from "./styles";
-import Login from "../Login";
+import NewFeatureCard from "../../common/card/NewFeatureCard";
+import HDLogo from "../../../assets/images/hd-logo.png";
+import tmpImage from "../../../assets/svg/tmp.svg";
 import ForgotPassword from "../ForgotPassword";
 import ResetPassword from "../ResetPassword";
 import ValidateOTP from "../ValidateOTP";
-import { Container } from "@material-ui/core";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import NewFeatureCard from "../../common/NewFeatureCard";
-import HDLogo from "../../../assets/images/hd-logo.png";
-import tmpImage from "../../../assets/svg/tmp.svg";
+import Login from "../Login";
+import useStyles from "./styles";
 
 const Auth = () => {
   const classes = useStyles();

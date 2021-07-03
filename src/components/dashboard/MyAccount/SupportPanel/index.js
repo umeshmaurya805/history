@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
-import LoadingButton from "../../../common/LoadingButton";
+import LoadingButton from "../../../common/button/LoadingButton";
 import protectedHandler from "../../../../utils/protectedHandler";
 import useStyles from "./style";
 import { toast } from "react-toastify";

@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     border: "1px solid #C4C4C4",
+    borderRadius: 8,
+
     padding: theme.spacing(2.5),
     margin: theme.spacing(2, 0),
   },

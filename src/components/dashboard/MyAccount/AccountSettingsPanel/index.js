@@ -5,12 +5,12 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
-import UpdatePassword from "../../../common/UpdatePassword";
-import UpdateContactNumber from "../../../common/UpdateContactNumber";
-import UpdateBoard from "../../../common/UpdateBoard";
-import UpdateAffiliationNumber from "../../../common/UpdateAffiliationNumber";
-import UpdateLogo from "../../../common/UpdateLogo";
-import UpdateCoordinator from "../../../common/UpdateCoordinator";
+import UpdatePassword from "../../../common/dialog/UpdatePassword";
+import UpdateContactNumber from "../../../common/dialog/UpdateContactNumber";
+import UpdateBoard from "../../../common/dialog/UpdateBoard";
+import UpdateAffiliationNumber from "../../../common/dialog/UpdateAffiliationNumber";
+import UpdateLogo from "../../../common/dialog/UpdateLogo";
+import UpdateCoordinator from "../../../common/dialog/UpdateCoordinator";
 import useStyles from "./style";
 
 const EditableInfo = ({ value, onClick }) => {
@@ -85,11 +85,11 @@ const AccountSettingsPanel = () => {
       <Typography color="primary" className={classes.title}>
         Account Details
       </Typography>
-      <Box className={classes.box}>
+      <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>Email address</Typography>
         <Typography className={classes.value}>abc@gmail.com</Typography>
       </Box>
-      <Box className={classes.editableBox}>
+      <Box className={`${classes.editableBox} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Password</Typography>
         <EditableInfo
           onClick={() => handleClickOpen(0)}
@@ -99,7 +99,7 @@ const AccountSettingsPanel = () => {
       <Typography color="primary" className={classes.title}>
         School Details
       </Typography>
-      <Box className={classes.box}>
+      <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>School name</Typography>
         <Typography className={classes.value}>ABC Public School</Typography>
       </Box>
@@ -119,7 +119,7 @@ const AccountSettingsPanel = () => {
         <Typography className={classes.name}>Affiliation number</Typography>
         <EditableInfo onClick={() => handleClickOpen(3)} value={"12468153"} />
       </Box>
-      <Box className={classes.box}>
+      <Box className={`${classes.box} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Logo</Typography>
         <div>
           <Box className={classes.logoBox}>
@@ -149,7 +149,7 @@ const AccountSettingsPanel = () => {
           <EditIcon className={classes.editIcon} color="primary" />
         </IconButton>
       </Box>
-      <Box className={classes.box}>
+      <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>Name</Typography>
         <Typography className={classes.coordinatorValue}>
           {coordinatorDetails.name}
@@ -167,7 +167,7 @@ const AccountSettingsPanel = () => {
           {coordinatorDetails.contactNumber}
         </Typography>
       </Box>
-      <Box className={classes.box}>
+      <Box className={`${classes.box} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Email address</Typography>
         <Typography className={classes.coordinatorValue}>
           {coordinatorDetails.email}
