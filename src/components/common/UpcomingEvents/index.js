@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -68,6 +68,12 @@ const UpcomingEventsList = [
 
 const UpcomingEvents = () => {
   const classes = useStyles();
+  const eventsTableRef = useRef(null);
+  const [tableHeight, setTableHeight] = useState(0);
+
+  useEffect(() => {
+    setTableHeight(eventsTableRef.current?.clientHeight);
+  }, [setTableHeight]);
 
   const [option, setOption] = useState({ class: -1, user: -1, category: -1 });
 
@@ -92,6 +98,34 @@ const UpcomingEvents = () => {
       horizontal: "left",
     },
     getContentAnchorEl: null,
+  };
+
+  const TableHeader = (props) => {
+    return (
+      <TableHead {...props}>
+        <TableRow>
+          {columns.map((column) => (
+            <StyledTableCell
+              key={column.id}
+              align={column.id === "title" ? "start" : "center"}
+              style={{
+                width: column.fixedWidth,
+                minWidth: column.fixedWidth,
+                paddingRight:
+                  column.id === "list" && tableHeight > 320 ? 40 : undefined,
+              }}
+            >
+              {column.label}
+              <InfoButton
+                fill="white"
+                position="top"
+                text={column.tooltipText}
+              />
+            </StyledTableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+    );
   };
 
   return (
@@ -179,34 +213,24 @@ const UpcomingEvents = () => {
           </Grid>
         </Grid>
       </Box>
-      <Box className={classes.tableBox}>
-        <TableContainer className={classes.container}>
+      <Box>
+        <TableContainer className={classes.tableHeadContainer}>
           <Table
             className={classes.table}
             stickyHeader
             aria-label="upcoming events table"
           >
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <StyledTableCell
-                    key={column.id}
-                    align="center"
-                    style={{
-                      width: column.fixedWidth,
-                      minWidth: column.fixedWidth,
-                    }}
-                  >
-                    {column.label}
-                    <InfoButton
-                      fill="white"
-                      position="top"
-                      text={column.tooltipText}
-                    />
-                  </StyledTableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <TableHeader />
+          </Table>
+        </TableContainer>
+        <TableContainer className={classes.container}>
+          <Table
+            ref={eventsTableRef}
+            className={classes.table}
+            stickyHeader
+            aria-label="upcoming events table"
+          >
+            <TableHeader className={classes.invisibleHeader} />
             <TableBody>
               {UpcomingEventsList.map((school, index) => {
                 return (
@@ -216,7 +240,7 @@ const UpcomingEvents = () => {
                       return (
                         <StyledTableCell
                           key={column.id}
-                          align="center"
+                          align={column.id === "title" ? "start" : "center"}
                           className={
                             column.id === "title"
                               ? classes.titleColumn

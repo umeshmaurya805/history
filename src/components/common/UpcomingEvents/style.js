@@ -10,6 +10,11 @@ export const StyledTableCell = withStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     fontWeight: 900,
     fontSize: 16,
+    // position: "absolute",
+    // height:55,
+    // top:0,
+    // left:0,
+    // right:0,
   },
   body: {
     fontSize: 13,
@@ -21,17 +26,22 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3.3, 0),
   },
-  tableBox: {
-    marginRight: -20,
+  tableHeadContainer: {
+    marginTop: theme.spacing(2),
+  },
+  invisibleHeader: {
+    visibility: "collapse",
   },
   container: {
-    maxHeight: 375,
-    marginTop: theme.spacing(2),
-    // border: "1px solid #DADADA",
+    maxHeight: 320,
+    // marginTop: theme.spacing(2),
+    border: "1px solid #DADADA",
     // boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
-    // borderRadius: 12,
+    // borderBottomLeftRadius: 12,
   },
-  table: { border: "1px solid #DADADA" },
+  table: {
+    // border: "1px solid #DADADA"
+  },
   title: {
     width: 225,
     marginBottom: 20,
