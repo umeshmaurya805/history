@@ -5,6 +5,9 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     width: 260,
     height: 386,
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(2),
+    },
   },
   slider: {
     boxShadow: "0px 5px 10px -2px rgba(0,0,0,0.14)",

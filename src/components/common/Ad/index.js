@@ -7,18 +7,18 @@ import adImage from "../../../assets/svg/event-ad-image.png";
 import "react-slideshow-image/dist/styles.css";
 import useStyles from "./style";
 
-const adData = [
-  { image: adImage, url: "/" },
-  { image: adImage, url: "/" },
-];
-
 const Ad = () => {
   const classes = useStyles();
 
+  const data = [
+    { image: adImage, url: "/" },
+    { image: adImage, url: "/" },
+  ];
+
   const slideProperties = {
-    arrows: adData.length > 1,
-    canSwipe: adData.length > 1,
-    transitionDuration: adData.length > 1 ? 1000 : 0,
+    arrows: data.length > 1,
+    canSwipe: data.length > 1,
+    transitionDuration: data.length > 1 ? 1000 : 0,
     easing: "ease",
     cssClass: classes.slider,
     prevArrow: (
@@ -37,11 +37,11 @@ const Ad = () => {
   };
 
   return (
-    adData?.length !== 0 && (
+    data?.length !== 0 && (
       <Box className={classes.root}>
         <div className={classes.adLabel}>Ad</div>
         <Slide {...slideProperties}>
-          {adData.map((ad, index) => {
+          {data.map((ad, index) => {
             return (
               <a
                 key={index}
