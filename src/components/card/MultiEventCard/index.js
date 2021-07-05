@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -79,19 +80,26 @@ const Item = ({ data }) => {
 
 const MultiEventCard = ({ data }) => {
   const classes = useStyles();
-  const [width, setWidth] = useState(0);
-
-  const measuredRef = useCallback((node) => {
-    if (node !== null) {
-      setWidth(node.getBoundingClientRect().width);
-    }
-  }, []);
+  const isMobile = useMediaQuery("(max-width:1180px)");
+  const isLaptop = useMediaQuery("(max-width:1490px)");
+  const isDesktop = useMediaQuery("(max-width:1800px)");
+  const isLargeDesktop = useMediaQuery("(max-width:2200px)");
 
   const responsive = {
-    custom: {
-      breakpoint: { max: 4000, min: 0 },
-      items: Math.max(1, Math.floor(width / 310)),
-    },
+    superLargeDesktop: { breakpoint: { max: 4000, min: 2200 }, items: 5 },
+    largeDesktop: { breakpoint: { max: 2200, min: 1800 }, items: 4 },
+    desktop: { breakpoint: { max: 1800, min: 1490 }, items: 3 },
+    laptop: { breakpoint: { max: 1490, min: 1180 }, items: 2 },
+    mobile: { breakpoint: { max: 1180, min: 0 }, items: 1 },
+  };
+
+  const getWidth = () => {
+    const singleCardWidth = 310;
+    if (isMobile) return singleCardWidth;
+    else if (isLaptop) return singleCardWidth * 2;
+    else if (isDesktop) return singleCardWidth * 3;
+    else if (isLargeDesktop) return singleCardWidth * 4;
+    else return singleCardWidth * 5;
   };
 
   const CustomRightArrow = ({ onClick }) => {
@@ -122,10 +130,11 @@ const MultiEventCard = ({ data }) => {
   };
 
   return (
-    <div ref={measuredRef} className={classes.root}>
-      <div className={classes.container}
+    <div className={classes.root}>
+      <div
+        className={classes.container}
         style={{
-          width: `${Math.max(1, Math.floor(width / 310)) * 310}px`,
+          width: `${getWidth()}px`,
         }}
       >
         <Carousel

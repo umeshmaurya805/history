@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
   featuredEvent: {
     flexGrow: 1,
     marginRight: theme.spacing(2),
+    [theme.breakpoints.only("xs")]: {
+      marginRight: theme.spacing(0),
+    },
   },
   ad: {
     maxWidth: 255,

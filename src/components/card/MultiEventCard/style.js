@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   container: {
+    marginLeft:-20,
     [theme.breakpoints.only("xs")]: {
       margin: "auto",
     },
