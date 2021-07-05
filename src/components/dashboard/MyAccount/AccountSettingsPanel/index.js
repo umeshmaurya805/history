@@ -5,12 +5,12 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
-import UpdatePassword from "../../../common/dialog/UpdatePassword";
-import UpdateContactNumber from "../../../common/dialog/UpdateContactNumber";
-import UpdateBoard from "../../../common/dialog/UpdateBoard";
-import UpdateAffiliationNumber from "../../../common/dialog/UpdateAffiliationNumber";
-import UpdateLogo from "../../../common/dialog/UpdateLogo";
-import UpdateCoordinator from "../../../common/dialog/UpdateCoordinator";
+import UpdatePassword from "../../../dialog/UpdatePassword";
+import UpdateContactNumber from "../../../dialog/UpdateContactNumber";
+import UpdateBoard from "../../../dialog/UpdateBoard";
+import UpdateAffiliationNumber from "../../../dialog/UpdateAffiliationNumber";
+import UpdateLogo from "../../../dialog/UpdateLogo";
+import UpdateCoordinator from "../../../dialog/UpdateCoordinator";
 import useStyles from "./style";
 
 const EditableInfo = ({ value, onClick }) => {

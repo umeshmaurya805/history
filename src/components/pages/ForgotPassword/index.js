@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useForgotPasswordMutation } from "../../../app/services/hd/auth";
 import protectedHandler from "../../../utils/protectedHandler";
-import LoadingButton from "../../common/button/LoadingButton";
+import LoadingButton from "../../button/LoadingButton";
 import useStyles from "./style";
 
 const validationSchema = yup.object({

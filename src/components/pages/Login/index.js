@@ -6,7 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import LoadingButton from "../../common/button/LoadingButton";
+import LoadingButton from "../../button/LoadingButton";
 import { useLoginMutation } from "../../../app/services/hd/auth";
 import { saveSchoolAuth } from "../../../utils/schoolAuth";
 import protectedHandler from "../../../utils/protectedHandler";

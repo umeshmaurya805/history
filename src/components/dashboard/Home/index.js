@@ -9,7 +9,7 @@ import WelcomeBanner from "../../common/WelcomeBanner";
 import UpcomingEvents from "../../common/UpcomingEvents";
 import Magazine from "../../common/Magazine";
 import Ad from "../../common/Ad";
-import InfoButton from "../../common/button/InfoButton";
+import InfoButton from "../../button/InfoButton";
 import useStyles from "./style";
 
 const Home = () => {

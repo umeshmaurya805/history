@@ -12,7 +12,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import InfoButton from "../button/InfoButton";
+import InfoButton from "../../button/InfoButton";
 import useStyles, { StyledTableCell } from "./style";
 
 const columns = [

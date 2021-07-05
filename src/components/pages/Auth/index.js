@@ -5,7 +5,7 @@ import Hidden from "@material-ui/core/Hidden";
 import { Container } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
-import NewFeatureCard from "../../common/card/NewFeatureCard";
+import NewFeatureCard from "../../card/NewFeatureCard";
 import HDLogo from "../../../assets/images/hd-logo.png";
 import tmpImage from "../../../assets/svg/tmp.svg";
 import ForgotPassword from "../ForgotPassword";

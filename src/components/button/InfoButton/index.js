@@ -1,6 +1,6 @@
 import React from "react";
 import Tooltip from "@material-ui/core/Tooltip";
-import InfoSvg from "../../../../assets/InfoSvg";
+import InfoSvg from "../../../assets/InfoSvg";
 import useStyles from "./style";
 
 const InfoButton = ({ text, fill = "black", position = "right" }) => {
