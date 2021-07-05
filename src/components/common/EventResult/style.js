@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   select: {
+    border: "1px solid #E5E5E5",
+
     [theme.breakpoints.down("xs")]: {
       minWidth: "unset",
       width: "100%",

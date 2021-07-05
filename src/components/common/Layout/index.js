@@ -48,7 +48,6 @@ const Layout = ({ children }) => {
           </Typography>
         </Toolbar>
       </Header>
-      <Hidden smDown>
         <DrawerSidebar
           sidebarId={"primarySidebar"}
           PaperProps={{ className: classes.sidebar }}
@@ -57,7 +56,6 @@ const Layout = ({ children }) => {
             <NavSidebar />
           </SidebarContent>
         </DrawerSidebar>
-      </Hidden>
       <Hidden mdUp>
         <SwipeableDrawer
           PaperProps={{ className: classes.sidebar }}
