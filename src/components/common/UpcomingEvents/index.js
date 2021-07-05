@@ -8,12 +8,15 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import InfoButton from "../../button/InfoButton";
-import useStyles, { StyledTableCell } from "./style";
+import useStyles, {
+  StyledTableCell,
+  StyledTableBody,
+  useCustomTableStyles,
+} from "./style";
 
 const columns = [
   {
@@ -38,8 +41,7 @@ const columns = [
     id: "registrations",
     label: "Registrations",
     fixedWidth: 150,
-    tooltipText:
-      "Number of registrations done for a particular event until now",
+    tooltipText: "Number of registrations done from your school until now",
   },
   {
     id: "list",
@@ -68,6 +70,7 @@ const UpcomingEventsList = [
 
 const UpcomingEvents = () => {
   const classes = useStyles();
+  const customTableStyle = useCustomTableStyles();
   const eventsTableRef = useRef(null);
   const [tableHeight, setTableHeight] = useState(0);
 
@@ -100,34 +103,6 @@ const UpcomingEvents = () => {
     getContentAnchorEl: null,
   };
 
-  const TableHeader = (props) => {
-    return (
-      <TableHead {...props}>
-        <TableRow>
-          {columns.map((column) => (
-            <StyledTableCell
-              key={column.id}
-              align={column.id === "title" ? "start" : "center"}
-              style={{
-                width: column.fixedWidth,
-                minWidth: column.fixedWidth,
-                paddingRight:
-                  column.id === "list" && tableHeight > 320 ? 40 : undefined,
-              }}
-            >
-              {column.label}
-              <InfoButton
-                fill="white"
-                position="top"
-                text={column.tooltipText}
-              />
-            </StyledTableCell>
-          ))}
-        </TableRow>
-      </TableHead>
-    );
-  };
-
   return (
     <div className={classes.root}>
       <Box>
@@ -142,105 +117,132 @@ const UpcomingEvents = () => {
             </Typography>
           </Grid>
           <Grid item className={classes.selectorGrid}>
-            <FormControl className={classes.selector}>
-              <Select
-                classes={{ select: `${classes.select} ${classes.selectClass}` }}
-                disableUnderline
-                MenuProps={menuProps}
-                IconComponent={iconComponent}
-                name="class"
-                value={option.class}
-                onChange={handleChange}
-              >
-                <MenuItem value={-1}>Class</MenuItem>
-                {[10, 9, 8, 7, 6, 5, 4, 3].map((currentClass, index) => {
-                  return (
-                    <MenuItem key={index} value={index}>
-                      Class {currentClass}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            <FormControl className={classes.selector}>
-              <Select
-                classes={{ select: `${classes.select} ${classes.selectUser}` }}
-                disableUnderline
-                MenuProps={menuProps}
-                IconComponent={iconComponent}
-                name="user"
-                value={option.user}
-                onChange={handleChange}
-              >
-                <MenuItem value={-1}>User</MenuItem>
-                {["Student", "Teacher"].map((category, index) => {
-                  return (
-                    <MenuItem key={index} value={index}>
-                      {category}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            <FormControl className={classes.selector}>
-              <Select
-                classes={{
-                  select: `${classes.select} ${classes.selectCategory}`,
-                }}
-                disableUnderline
-                MenuProps={menuProps}
-                IconComponent={iconComponent}
-                name="category"
-                value={option.category}
-                onChange={handleChange}
-              >
-                <MenuItem value={-1}>Category</MenuItem>
-                {[
-                  "Competitive",
-                  "Workshops",
-                  "Courses",
-                  "Virtual Tours",
-                  "Theater Shows",
-                ].map((category, index) => {
-                  return (
-                    <MenuItem key={index} value={index}>
-                      {category}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+            <Box display="flex" justifyContent="flex-end" flexWrap="wrap" className={classes.selectorBox}>
+              <FormControl className={classes.selector}>
+                <Select
+                  classes={{
+                    select: `${classes.select} ${classes.selectClass}`,
+                  }}
+                  disableUnderline
+                  MenuProps={menuProps}
+                  IconComponent={iconComponent}
+                  name="class"
+                  value={option.class}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={-1}>Class</MenuItem>
+                  {[10, 9, 8, 7, 6, 5, 4, 3].map((currentClass, index) => {
+                    return (
+                      <MenuItem key={index} value={index}>
+                        Class {currentClass}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <FormControl className={classes.selector}>
+                <Select
+                  classes={{
+                    select: `${classes.select} ${classes.selectUser}`,
+                  }}
+                  disableUnderline
+                  MenuProps={menuProps}
+                  IconComponent={iconComponent}
+                  name="user"
+                  value={option.user}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={-1}>User</MenuItem>
+                  {["Student", "Teacher"].map((category, index) => {
+                    return (
+                      <MenuItem key={index} value={index}>
+                        {category}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <FormControl className={classes.selector}>
+                <Select
+                  classes={{
+                    select: `${classes.select} ${classes.selectCategory}`,
+                  }}
+                  disableUnderline
+                  MenuProps={menuProps}
+                  IconComponent={iconComponent}
+                  name="category"
+                  value={option.category}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={-1}>Category</MenuItem>
+                  {[
+                    "Competitive",
+                    "Workshops",
+                    "Courses",
+                    "Virtual Tours",
+                    "Theater Shows",
+                  ].map((category, index) => {
+                    return (
+                      <MenuItem key={index} value={index}>
+                        {category}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Box>
           </Grid>
         </Grid>
       </Box>
       <Box>
-        <TableContainer className={classes.tableHeadContainer}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="upcoming events table"
-          >
-            <TableHeader />
-          </Table>
-        </TableContainer>
         <TableContainer className={classes.container}>
           <Table
             ref={eventsTableRef}
-            className={classes.table}
-            stickyHeader
+            classes={{ root: customTableStyle.root }}
             aria-label="upcoming events table"
           >
-            <TableHeader className={classes.invisibleHeader} />
-            <TableBody>
+            <TableHead classes={{ root: customTableStyle.root }}>
+              <TableRow classes={{ root: customTableStyle.root }}>
+                {columns.map((column) => (
+                  <StyledTableCell
+                    key={column.id}
+                    align={column.id === "title" ? "left" : "center"}
+                    style={{
+                      width: column.fixedWidth,
+                      minWidth: column.fixedWidth,
+                      paddingRight:
+                        column.id === "list" && tableHeight > 315
+                          ? 40
+                          : undefined,
+                    }}
+                  >
+                    {column.label}
+                    <InfoButton
+                      fill="white"
+                      position="top"
+                      text={column.tooltipText}
+                    />
+                  </StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <StyledTableBody>
               {UpcomingEventsList.map((school, index) => {
                 return (
-                  <TableRow key={index}>
+                  <TableRow
+                    classes={{ root: customTableStyle.root }}
+                    key={index}
+                  >
                     {columns.map((column) => {
                       const value = school[column.id];
                       return (
                         <StyledTableCell
                           key={column.id}
-                          align={column.id === "title" ? "start" : "center"}
+                          align={column.id === "title" ? "left" : "center"}
+                          style={{
+                            width: column.fixedWidth,
+                            minWidth: column.fixedWidth,
+                          }}
                           className={
                             column.id === "title"
                               ? classes.titleColumn
@@ -264,7 +266,7 @@ const UpcomingEvents = () => {
                   </TableRow>
                 );
               })}
-            </TableBody>
+            </StyledTableBody>
           </Table>
         </TableContainer>
       </Box>

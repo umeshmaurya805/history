@@ -1,5 +1,16 @@
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+
+export const useCustomTableStyles = makeStyles(() => ({
+  root: {
+    display: "table",
+    width: "100%",
+    tableLayout: "fixed",
+    overflow: "auto",
+    minWidth: 900,
+  },
+}));
 
 export const StyledTableCell = withStyles((theme) => ({
   root: {
@@ -10,11 +21,6 @@ export const StyledTableCell = withStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     fontWeight: 900,
     fontSize: 16,
-    // position: "absolute",
-    // height:55,
-    // top:0,
-    // left:0,
-    // right:0,
   },
   body: {
     fontSize: 13,
@@ -22,25 +28,26 @@ export const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
+export const StyledTableBody = withStyles((theme) => ({
+  root: {
+    maxHeight: 315,
+    minWidth: 900,
+    display: "block",
+    overflowX: "hidden",
+    tableLayout: "fixed",
+    width: "100%",
+  },
+}))(TableBody);
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3.3, 0),
   },
-  tableHeadContainer: {
-    marginTop: theme.spacing(2),
-  },
-  invisibleHeader: {
-    visibility: "collapse",
-  },
   container: {
-    maxHeight: 320,
-    // marginTop: theme.spacing(2),
+    marginTop: theme.spacing(2),
     border: "1px solid #DADADA",
-    // boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
-    // borderBottomLeftRadius: 12,
-  },
-  table: {
-    // border: "1px solid #DADADA"
+    boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
+    borderRadius: 8,
   },
   title: {
     width: 225,
@@ -50,8 +57,22 @@ const useStyles = makeStyles((theme) => ({
     color: "#383838",
     borderBottom: "5px solid #F89503",
   },
+  selectorGrid: {
+    flexGrow: 1,
+  },
+  selectorBox: {
+    [theme.breakpoints.only("xs")]: {
+      justifyContent: "space-between",
+      "& > div": {
+        flexGrow: 1,
+        margin: theme.spacing(1),
+      },
+    },
+  },
   selector: {
-    marginLeft: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(2),
+    },
   },
   select: {
     fontSize: 15,
@@ -66,12 +87,26 @@ const useStyles = makeStyles((theme) => ({
   },
   selectClass: {
     minWidth: 58,
+    [theme.breakpoints.only("xs")]: {
+      // minWidth: "unset",
+      // width: "50%",
+    },
   },
   selectUser: {
     minWidth: 55,
+    [theme.breakpoints.only("xs")]: {
+      // minWidth: "unset",
+      // width: "50%",
+    },
   },
   selectCategory: {
-    minWidth: 100,
+    minWidth: 101,
+    [theme.breakpoints.only("xs")]: {
+      // minWidth: "unset",
+      width: "100%",
+      marginLeft: "unset",
+      // marginTop: theme.spacing(1),
+    },
   },
   titleColumn: {
     color: "#383838 !important",
