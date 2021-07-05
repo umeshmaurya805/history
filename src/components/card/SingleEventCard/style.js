@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   content: {
-    padding: "15px 10px 0px 10px !important",
+    padding: "15px 15px 0px 15px !important",
   },
   title: {
     fontFamily: "Roboto",
@@ -16,13 +16,11 @@ const useStyles = makeStyles((theme) => ({
   },
   subHeading: {
     color: "#383838",
-    width: 600,
-    [theme.breakpoints.between("sm", "md")]: {
-      width: 350,
-    },
-    [theme.breakpoints.only("xs")]: {
-      width: 250,
-    },
+    textAlign:"center",
+    padding: theme.spacing(0, 10),
+    [theme.breakpoints.only('xs')]:{
+      padding: theme.spacing(0, 4),
+    }
   },
   imageContainer: {
     margin: theme.spacing(2, 0),
@@ -32,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     height: 200,
     width: 300,
     borderRadius: 12,
-    boxShadow: "0px 5px 20px rgba(0,0,0,0.24)",
+    boxShadow: "0px 5px 10px rgba(0,0,0,0.24)",
     margin: theme.spacing(0, 1),
     [theme.breakpoints.only("xs")]: {
       height: 150,
@@ -45,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(12),
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(3),
-    },[theme.breakpoints.only("xs")]: {
+    },
+    [theme.breakpoints.only("xs")]: {
       paddingLeft: theme.spacing(0),
     },
   },
@@ -68,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
     height: 35,
     fontSize: 12,
     fontFamily: "Roboto",
-    marginRight: theme.spacing(2),
-    marginLeft: theme.spacing(2),
-    [theme.breakpoints.down("md")]: {
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    [theme.breakpoints.down("xs")]: {
       alignSelf: "flex-end",
       marginRight: theme.spacing(0),
       marginLeft: theme.spacing(1),

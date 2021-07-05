@@ -5,15 +5,16 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useStyles from "./style";
 
 const SingleEventCard = ({ data }) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const isLaptopScreen = useMediaQuery(theme.breakpoints.up("lg"));
-  const isTabletScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isAdVisible = true;
+  const isMobileScreen = useMediaQuery("(max-width:700px)");
+  const showOneImageOnAd = useMediaQuery(
+    "(max-width:1500px) && (min-width:700px)"
+  );
 
   const { title, subHeading, images, date, time, forClass } = data;
 
@@ -36,15 +37,16 @@ const SingleEventCard = ({ data }) => {
             justifyContent="space-evenly"
             className={classes.imageContainer}
           >
-            {isLaptopScreen &&
-              images.map((image) => (
-                <img src={image} alt="" className={classes.image} />
-              ))}
-            {isTabletScreen && (
+          {console.log(showOneImageOnAd)}
+            {isMobileScreen || (isAdVisible && showOneImageOnAd) ? (
               <img src={images[0]} alt="" className={classes.image} />
+            ) : (
+              images.map((image, index) => (
+                <img key={index} src={image} alt="" className={classes.image} />
+              ))
             )}
           </Box>
-          <Box display="flex" alignItems='center' className={classes.infoBox}>
+          <Box display="flex" alignItems="center" className={classes.infoBox}>
             <Grid container justify="space-evenly">
               <Box className={classes.innerBox}>
                 <Typography color="primary" className={classes.infoLabel}>
