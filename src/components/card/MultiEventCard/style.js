@@ -5,14 +5,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   container: {
-    marginLeft:-20,
+    marginLeft: -20,
     [theme.breakpoints.only("xs")]: {
       margin: "auto",
     },
-  },
-  itemRoot: {
-    width: 310,
-    padding: theme.spacing(2),
   },
   content: {
     padding: "0px 10px 0px 10px !important",
@@ -63,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     width: 240,
     height: 160,
     borderRadius: 12,
-    boxShadow: "0px 5px 20px rgba(0,0,0,0.24)",
+    boxShadow: "0px 5px 10px rgba(0,0,0,0.24)",
     margin: theme.spacing(0, 1),
   },
   infoBox: {

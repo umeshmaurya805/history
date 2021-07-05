@@ -16,8 +16,17 @@ const Item = ({ data }) => {
   const classes = useStyles();
   const { title, subHeading, images, date, time, forClass } = data;
 
+  const isAdVisible = true;
+
+  const style = isAdVisible
+    ? {
+        width: 310,
+        padding: 16,
+      }
+    : { width: 336, padding: 32 };
+
   return (
-    <div className={classes.itemRoot}>
+    <div style={style}>
       <Card>
         <Box
           display="flex"
@@ -85,6 +94,8 @@ const MultiEventCard = ({ data }) => {
   const isDesktop = useMediaQuery("(max-width:1800px)");
   const isLargeDesktop = useMediaQuery("(max-width:2200px)");
 
+  const isAdVisible = true;
+
   const responsive = {
     superLargeDesktop: { breakpoint: { max: 4000, min: 2200 }, items: 5 },
     largeDesktop: { breakpoint: { max: 2200, min: 1800 }, items: 4 },
@@ -94,7 +105,7 @@ const MultiEventCard = ({ data }) => {
   };
 
   const getWidth = () => {
-    const singleCardWidth = 310;
+    const singleCardWidth = isAdVisible ? 310 : 336;
     if (isMobile) return singleCardWidth;
     else if (isLaptop) return singleCardWidth * 2;
     else if (isDesktop) return singleCardWidth * 3;
@@ -108,6 +119,7 @@ const MultiEventCard = ({ data }) => {
         onClick={() => onClick()}
         color="primary"
         className={classes.buttonRight}
+        style={{ right: isAdVisible ? 5 : 20 }}
       >
         <DoubleArrowIcon className={classes.icon} />
       </IconButton>
@@ -120,6 +132,7 @@ const MultiEventCard = ({ data }) => {
         onClick={() => onClick()}
         color="primary"
         className={classes.buttonLeft}
+        style={{ left: isAdVisible ? 5 : 20 }}
       >
         <DoubleArrowIcon
           className={classes.icon}
