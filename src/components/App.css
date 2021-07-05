@@ -1,6 +1,7 @@
 body {
   background-color: white !important;
 }
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
   width: 20px;
