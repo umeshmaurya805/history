@@ -22,18 +22,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px 0 !important",
   },
   featuredEvent: {
-    flexGrow: 1,
-    marginRight: theme.spacing(2),
     [theme.breakpoints.only("xs")]: {
-      marginRight: theme.spacing(0),
+      margin: "auto",
     },
   },
   ad: {
     maxWidth: 255,
-    padding: "20px 0 !important",
-    [theme.breakpoints.down("xs")]: {
-      margin: "auto",
-    },
   },
 }));
 

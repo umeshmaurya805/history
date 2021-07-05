@@ -14,6 +14,7 @@ import useStyles from "./style";
 
 const Home = () => {
   const classes = useStyles();
+  const isAdVisible = true;
 
   return (
     <Layout>
@@ -29,13 +30,16 @@ const Home = () => {
       </Grid>
       <Typography className={classes.title}>
         Featured Event
-        <InfoButton position="right-end" text="List of the featured events that are open now" />
+        <InfoButton
+          position="right-end"
+          text="List of the featured events that are open now"
+        />
       </Typography>
       <Grid
         container
         className={classes.container}
         alignItems="center"
-        justify="space-between"
+        justify={isAdVisible ? "space-evenly" : "center"}
       >
         <Grid item className={classes.featuredEvent}>
           <FeaturedEvent />
