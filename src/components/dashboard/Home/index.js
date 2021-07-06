@@ -1,20 +1,18 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import Layout from "../../common/Layout";
 import FeaturedEvent from "../../common/FeaturedEvent";
 import EventStats from "../../common/EventStats";
 import EventResult from "../../common/EventResult";
 import WelcomeBanner from "../../common/WelcomeBanner";
-import UpcomingEvents from "../../common/UpcomingEvents";
-import Magazine from "../../common/Magazine";
+import UpcomingEvent from "../../common/UpcomingEvent";
+// import Magazine from "../../common/Magazine";
 import Ad from "../../common/Ad";
-import InfoButton from "../../button/InfoButton";
 import useStyles from "./style";
+import Title from "../../common/Title";
 
 const Home = () => {
   const classes = useStyles();
-  const isAdVisible = true;
 
   return (
     <Layout>
@@ -24,31 +22,15 @@ const Home = () => {
           <EventStats />
           <EventResult />
         </Grid>
-        <Grid item className={classes.sideSection}>
-          <Magazine />
-        </Grid>
-      </Grid>
-      <Typography className={classes.title}>
-        Featured Event
-        <InfoButton
-          position="right-end"
-          text="List of the featured events that are open now"
-        />
-      </Typography>
-      <Grid
-        container
-        className={classes.container}
-        alignItems="center"
-        justify={isAdVisible ? "space-evenly" : "center"}
-      >
-        <Grid item className={classes.featuredEvent}>
-          <FeaturedEvent />
-        </Grid>
         <Grid item className={classes.ad}>
           <Ad />
         </Grid>
       </Grid>
-      <UpcomingEvents />
+      <Title tooltipText="List of the featured events that are open now">
+        Featured Event
+      </Title>
+      <FeaturedEvent />
+      <UpcomingEvent />
     </Layout>
   );
 };
