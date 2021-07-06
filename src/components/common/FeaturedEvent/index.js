@@ -23,15 +23,15 @@ const FeaturedEvent = () => {
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
     },
-    {
-      title: "Trade To Territory 2",
-      subHeading:
-        "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
-      image: eventImage,
-      forClass: "9 - 12",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
-    },
+    // {
+    //   title: "Trade To Territory 2",
+    //   subHeading:
+    //     "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
+    //   image: eventImage,
+    //   forClass: "9 - 12",
+    //   date: new Date().toLocaleDateString(),
+    //   time: new Date().toLocaleTimeString(),
+    // },
     // {
     //   title: "Trade To Territory 3",
     //   subHeading:
