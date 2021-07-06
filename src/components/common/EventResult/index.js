@@ -5,11 +5,10 @@ import FormControl from "@material-ui/core/FormControl";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import ResultCard from "../../card/ResultCard";
-import InfoButton from "../../button/InfoButton";
 import avatar from "../../../assets/svg/avatar.png";
 import useStyles from "./style";
+import Title from "./../Title/index";
 
 const EventResult = () => {
   const classes = useStyles();
@@ -43,7 +42,7 @@ const EventResult = () => {
       position: 1,
       avatar,
       studentClass: "10th",
-      schoolName: "XYZ Public School",
+      schoolName: "ABC Public School",
     },
     {
       name: "Priyanka",
@@ -66,13 +65,9 @@ const EventResult = () => {
       <Box>
         <Grid container justify="space-between">
           <Grid item>
-            <Typography className={classes.title}>
+            <Title tooltipText="Result of the events completed till now">
               Results
-              <InfoButton
-                position="right-end"
-                text="Result of the events completed till now"
-              />
-            </Typography>
+            </Title>
           </Grid>
           <Grid item className={classes.selector}>
             <FormControl className={classes.selector}>
