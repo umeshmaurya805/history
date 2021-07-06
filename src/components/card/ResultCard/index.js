@@ -13,24 +13,23 @@ const ResultCard = ({ info }) => {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <Grid container spacing={1} className={classes.container}>
-        <Grid item>
+        <Grid alignItems="center" container spacing={1} className={classes.container}>
+        <Grid item className={classes.position}>
         <Typography
               variant="h4"
               component="div"
-              className={classes.points}
               color="primary"
             >
               {position}
             </Typography>
         </Grid>
-          <Grid item className={classes.centerItem}>
+          <Grid item>
             <Avatar src={avatar} className={classes.logo} />
           </Grid>
-          <Grid item className={classes.centerItem}>
+          <Grid item>
             <Typography
               variant="body2"
-              component="div"
+              component="h6"
               className={classes.name}
               color="primary"
             >
