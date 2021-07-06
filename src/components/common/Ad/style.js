@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    width: 260,
-    height: 386,
+    width: 255,
+    height: 390,
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(2),
     },
@@ -29,9 +29,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
   },
   ad: {
-    border: "1px solid black",
-    height: "386px",
-    width: "260px",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    height: 390,
+    width: 260,
+    marginBottom: -5,
+    marginTop: -3,
+    marginLeft:-1,
   },
   adButtonLeft: {
     position: "absolute",

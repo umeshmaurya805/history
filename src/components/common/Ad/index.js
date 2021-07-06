@@ -10,10 +10,7 @@ import useStyles from "./style";
 const Ad = () => {
   const classes = useStyles();
 
-  const data = [
-    { image: adImage, url: "/" },
-    { image: adImage, url: "/" },
-  ];
+  const data = [{ image: adImage, url: "/" }];
 
   const slideProperties = {
     arrows: data.length > 1,
@@ -51,11 +48,9 @@ const Ad = () => {
                 rel="noreferrer"
               >
                 <div
+                  className={classes.ad}
                   style={{
                     backgroundImage: `url(${ad.image})`,
-                    height: 390,
-                    width: 268,
-                    marginLeft: -4,
                   }}
                 ></div>
               </a>
