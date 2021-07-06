@@ -49,14 +49,6 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
     borderRadius: 8,
   },
-  title: {
-    width: 225,
-    marginBottom: 20,
-    fontFamily: "Roboto",
-    fontSize: 22,
-    color: "#383838",
-    borderBottom: "5px solid #F89503",
-  },
   selectorGrid: {
     flexGrow: 1,
   },
@@ -87,25 +79,15 @@ const useStyles = makeStyles((theme) => ({
   },
   selectClass: {
     minWidth: 58,
-    [theme.breakpoints.only("xs")]: {
-      // minWidth: "unset",
-      // width: "50%",
-    },
   },
   selectUser: {
     minWidth: 55,
-    [theme.breakpoints.only("xs")]: {
-      // minWidth: "unset",
-      // width: "50%",
-    },
   },
   selectCategory: {
     minWidth: 101,
     [theme.breakpoints.only("xs")]: {
-      // minWidth: "unset",
       width: "100%",
       marginLeft: "unset",
-      // marginTop: theme.spacing(1),
     },
   },
   titleColumn: {

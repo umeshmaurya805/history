@@ -6,7 +6,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
@@ -17,6 +16,7 @@ import useStyles, {
   StyledTableBody,
   useCustomTableStyles,
 } from "./style";
+import Title from "../Title";
 
 const columns = [
   {
@@ -55,7 +55,7 @@ function createData(title, date, classes, registrations, list) {
   return { title, date, classes, registrations, list };
 }
 
-const UpcomingEventsList = [
+const UpcomingEventList = [
   createData("World of Theatre", "11/20/20", "5 - 9", 15, 6),
   createData("Colors Around Painting Competition", "10/15/20", "2 - 5", 23, 5),
   createData("Trade to Territory", "10/10/20", "6 - 12", 234, 5),
@@ -68,7 +68,7 @@ const UpcomingEventsList = [
   createData("World of Theatre", "9/25/20", "5 - 9", 15, 5),
 ];
 
-const UpcomingEvents = () => {
+const UpcomingEvent = () => {
   const classes = useStyles();
   const customTableStyle = useCustomTableStyles();
   const eventsTableRef = useRef(null);
@@ -108,16 +108,17 @@ const UpcomingEvents = () => {
       <Box>
         <Grid container justify="space-between">
           <Grid item>
-            <Typography className={classes.title}>
+            <Title tooltipText="List of upcoming events that are open now">
               Upcoming Events
-              <InfoButton
-                position="right-end"
-                text="List of upcoming events that are open now"
-              />
-            </Typography>
+            </Title>
           </Grid>
           <Grid item className={classes.selectorGrid}>
-            <Box display="flex" justifyContent="flex-end" flexWrap="wrap" className={classes.selectorBox}>
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              flexWrap="wrap"
+              className={classes.selectorBox}
+            >
               <FormControl className={classes.selector}>
                 <Select
                   classes={{
@@ -227,7 +228,7 @@ const UpcomingEvents = () => {
               </TableRow>
             </TableHead>
             <StyledTableBody>
-              {UpcomingEventsList.map((school, index) => {
+              {UpcomingEventList.map((school, index) => {
                 return (
                   <TableRow
                     classes={{ root: customTableStyle.root }}
@@ -274,4 +275,4 @@ const UpcomingEvents = () => {
   );
 };
 
-export default UpcomingEvents;
+export default UpcomingEvent;
