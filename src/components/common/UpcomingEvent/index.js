@@ -17,6 +17,7 @@ import useStyles, {
   useCustomTableStyles,
 } from "./style";
 import Title from "../Title";
+import ParticipantList from "./../../dialog/ParticipantList/index";
 
 const columns = [
   {
@@ -51,21 +52,77 @@ const columns = [
   },
 ];
 
-function createData(title, date, classes, registrations, list) {
-  return { title, date, classes, registrations, list };
+function createData(slug, title, date, classes, registrations, list) {
+  return { slug, title, date, classes, registrations, list };
 }
 
-const UpcomingEventList = [
-  createData("World of Theatre", "11/20/20", "5 - 9", 15, 6),
-  createData("Colors Around Painting Competition", "10/15/20", "2 - 5", 23, 5),
-  createData("Trade to Territory", "10/10/20", "6 - 12", 234, 5),
-  createData("Theatre in Education", "9/27/20", "1 - 5", 5, 5),
-  createData("World of Theatre", "9/25/20", "5 - 9", 15, 5),
-  createData("World of Theatre", "11/20/20", "5 - 9", 15, 6),
-  createData("Colors Around Painting Competition", "10/15/20", "2 - 5", 23, 5),
-  createData("Trade to Territory", "10/10/20", "6 - 12", 234, 5),
-  createData("Theatre in Education", "9/27/20", "1 - 5", 5, 5),
-  createData("World of Theatre", "9/25/20", "5 - 9", 15, 5),
+const upcomingEventList = [
+  createData(
+    "World-of-Theatre",
+    "World of Theatre",
+    "11/20/20",
+    "5 - 9",
+    15,
+    6
+  ),
+  createData(
+    "Colors-Around-Painting-Competition",
+    "Colors Around Painting Competition",
+    "10/15/20",
+    "2 - 5",
+    23,
+    5
+  ),
+  createData(
+    "Trade-to-Territory",
+    "Trade to Territory",
+    "10/10/20",
+    "6 - 12",
+    234,
+    5
+  ),
+  createData(
+    "Theatre-in-Education",
+    "Theatre in Education",
+    "9/27/20",
+    "1 - 5",
+    5,
+    5
+  ),
+  createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
+  createData(
+    "World-of-Theatre",
+    "World of Theatre",
+    "11/20/20",
+    "5 - 9",
+    15,
+    6
+  ),
+  createData(
+    "Colors-Around-Painting-Competition",
+    "Colors Around Painting Competition",
+    "10/15/20",
+    "2 - 5",
+    23,
+    5
+  ),
+  createData(
+    "Trade-to-Territory",
+    "Trade to Territory",
+    "10/10/20",
+    "6 - 12",
+    234,
+    5
+  ),
+  createData(
+    "Theatre-in-Education",
+    "Theatre in Education",
+    "9/27/20",
+    "1 - 5",
+    5,
+    5
+  ),
+  createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
 ];
 
 const UpcomingEvent = () => {
@@ -77,6 +134,19 @@ const UpcomingEvent = () => {
   useEffect(() => {
     setTableHeight(eventsTableRef.current?.clientHeight);
   }, [setTableHeight]);
+
+  const [open, setOpen] = useState(false);
+  const [slug, setSlug] = useState(null);
+
+  const handleClickOpen = (slug) => {
+    setSlug(slug);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setSlug(null);
+    setOpen(false);
+  };
 
   const [option, setOption] = useState({ class: -1, user: -1, category: -1 });
 
@@ -228,7 +298,7 @@ const UpcomingEvent = () => {
               </TableRow>
             </TableHead>
             <StyledTableBody>
-              {UpcomingEventList.map((school, index) => {
+              {upcomingEventList.map((school, index) => {
                 return (
                   <TableRow
                     classes={{ root: customTableStyle.root }}
@@ -252,7 +322,7 @@ const UpcomingEvent = () => {
                         >
                           {column.id === "list" ? (
                             <Button
-                              onClick={() => {}}
+                              onClick={() => handleClickOpen(school.slug)}
                               color="primary"
                               className={classes.viewButton}
                             >
@@ -271,6 +341,7 @@ const UpcomingEvent = () => {
           </Table>
         </TableContainer>
       </Box>
+      <ParticipantList slug={slug} open={open} onClose={handleClose} />
     </div>
   );
 };
