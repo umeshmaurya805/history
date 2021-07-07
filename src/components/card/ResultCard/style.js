@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     height: 120,
   },
   position: {
-    flexGrow: 1,
     alignSelf: "start",
     "& > div.MuiTypography-root": {
       fontWeight: 900,
