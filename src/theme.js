@@ -60,7 +60,6 @@ export const rootTheme = createMuiTheme({
       },
       select: {
         paddingRight: "40px !important",
-        minWidth: 200,
         borderRadius: 12,
         "&:focus": {
           borderRadius: 12,
