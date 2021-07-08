@@ -41,8 +41,14 @@ const EventList = ({ date, data, handleClose, ...props }) => {
                   primary={event.name}
                   secondary={
                     <React.Fragment>
-                      <Typography component="span">{event.subHeading}</Typography>
-                      <Typography component="span">7:00 PM (IST)</Typography>
+                      <Typography component="span">
+                        {event.subHeading}
+                      </Typography>
+
+                      <Typography component="span">
+                        {"                       "}
+                        {event.startDate.toLocaleTimeString()} (IST)
+                      </Typography>
                     </React.Fragment>
                   }
                 />

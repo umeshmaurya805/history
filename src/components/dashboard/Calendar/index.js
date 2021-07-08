@@ -52,8 +52,14 @@ const Calendar = () => {
     {
       name: "Event 1",
       startDate: new Date(2021, 6, 1, 10),
-      endDate: new Date(2021, 6, 3, 18, 30),
+      endDate: new Date(2021, 6, 5, 18, 30),
       slug: "event-1",
+      subHeading: "This is our first event",
+    }, {
+      name: "Event 0",
+      startDate: new Date(2021, 6, 1, 15),
+      endDate: new Date(2021, 6, 2, 18, 30),
+      slug: "event-0",
       subHeading: "This is our first event",
     },
   ];
