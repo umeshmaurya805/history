@@ -1,13 +1,13 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Layout from "../../common/Layout";
-import FeaturedEvent from "../../common/FeaturedEvent";
-import EventStats from "../../common/EventStats";
-import EventResult from "../../common/EventResult";
-import WelcomeBanner from "../../common/WelcomeBanner";
-import UpcomingEvent from "../../common/UpcomingEvent";
-// import Magazine from "../../common/Magazine";
-import Ad from "../../common/Ad";
+import FeaturedEvent from "./FeaturedEvent";
+import EventStats from "./EventStats";
+import EventResult from "./EventResult";
+import WelcomeBanner from "./WelcomeBanner";
+import UpcomingEvent from "./UpcomingEvent";
+// import Magazine from "./Magazine";
+import Ad from "./Ad";
 import useStyles from "./style";
 import Title from "../../common/Title";
 
