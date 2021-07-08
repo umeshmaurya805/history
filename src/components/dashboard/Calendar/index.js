@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
-import eachDayOfInterval from "date-fns/eachDayOfInterval";
+// import eachDayOfInterval from "date-fns/eachDayOfInterval";
 import Layout from "../../common/Layout";
 import EventCalendar from "./EventCalendar";
 // import { useParams } from 'react-router-dom';
