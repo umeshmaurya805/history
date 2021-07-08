@@ -12,7 +12,7 @@ const EventList = ({ date, data, handleClose, ...props }) => {
   return (
     <Dialog onClose={handleClose} {...props}>
       <DialogTitle id="event-list-dialog-title" disableTypography>
-        Events on {date.toLocaleDateString()}
+        Events on {date.toLocaleDateString("in")}
       </DialogTitle>
       <DialogContent>
         <List aria-label="upcoming-event-list">

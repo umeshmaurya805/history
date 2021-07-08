@@ -6,10 +6,12 @@ import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import EventList from "../../../dialog/EventList";
 import EventConfiguration from "../../../common/EventConfiguration";
 import useStyles from "./style";
+import { Button, Typography } from "@material-ui/core";
 
 const EventCalendar = ({ events }) => {
   const classes = useStyles();
 
+  const [displayData, setDisplayData] = useState({});
   const [selectedEvent, setSelectedEvent] = useState({});
   const [eventList, setEventList] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
@@ -18,9 +20,8 @@ const EventCalendar = ({ events }) => {
 
   const handleClose = (selectedEventIndex) => {
     setOpenDialog(false);
-    console.log(selectedEventIndex);
-    const { startDate, endDate } = eventList[selectedEventIndex];
-    console.log(startDate, endDate);
+    const { name, subHeading, startDate, endDate } =
+      eventList[selectedEventIndex];
     setSelectedDayRange({
       from: {
         day: getDate(startDate),
@@ -33,6 +34,8 @@ const EventCalendar = ({ events }) => {
         year: getYear(endDate),
       },
     });
+
+    setDisplayData({ name, subHeading, startDate, endDate });
   };
 
   const dateHash = {};
@@ -99,7 +102,34 @@ const EventCalendar = ({ events }) => {
         colorPrimaryLight="#D5EFFF"
         shouldHighlightWeekends
         customDaysClassName={!selectedDayRange ? selectedDays : []}
+        renderFooter={() =>
+          selectedDayRange && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "1rem 2rem",
+              }}
+            >
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  setSelectedDayRange(null);
+                }}
+                style={{
+                  padding: "1rem 2rem",
+                }}
+              >
+                Reset Value!
+              </Button>
+            </div>
+          )
+        }
       />
+      <Typography>{displayData.name}</Typography>
+      <Typography>{displayData.subHeading}</Typography>
+      <Typography>Event Start Date: {displayData.startDate?.toLocaleDateString("in")}</Typography>
+      <Typography>Event End Date: {displayData.endDate?.toLocaleDateString("in")}</Typography>
       <EventList
         open={openDialog}
         handleClose={handleClose}
