@@ -88,6 +88,7 @@ export const rootTheme = createMuiTheme({
           color: "black",
           paddingTop: 12,
           paddingBottom: 12,
+          height: 40,
         },
         "& li:hover": {
           background: "#C0D8F5",
