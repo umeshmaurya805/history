@@ -2,6 +2,9 @@ import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-u
 import blue from "@material-ui/core/colors/blue";
 
 export const rootTheme = createMuiTheme({
+  typography: {
+    fontFamily: ["Montserrat", "sans-serif"].join(","),
+  },
   palette: {
     primary: {
       light: "#4f84c3",
@@ -9,9 +12,6 @@ export const rootTheme = createMuiTheme({
       dark: "#18477e",
     },
     secondary: blue,
-  },
-  typography: {
-    fontFamily: "'Montserrat', sans-serif",
   },
   overrides: {
     MuiButton: {
@@ -111,6 +111,15 @@ export const rootTheme = createMuiTheme({
         border: "0.5px solid #E5E5E5",
         borderRadius: 12,
         boxShadow: "0px 5px 10px -5px rgba(0,0,0,0.14)",
+      },
+    },
+    MuiListItem: {
+      root: {
+        // backgroundColor: "rgba(41, 121, 255, 0.08) !important",
+      },
+      selected: {
+        backgroundColor: "rgba(41, 121, 255, 0.08) !important",
+        height: 400,
       },
     },
   },
