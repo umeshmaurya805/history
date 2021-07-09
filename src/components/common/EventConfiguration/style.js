@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginBottom: theme.spacing(1),
     [theme.breakpoints.only("xs")]: {
       justifyContent: "space-between",
       "& > div": {
@@ -11,13 +12,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectClass: {
-    minWidth: 60,
+    minWidth: 47,
   },
   selectUser: {
-    minWidth: 55,
+    minWidth: 43,
   },
   selectCategory: {
-    minWidth: 101,
+    minWidth: 82,
     [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",

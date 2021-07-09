@@ -35,8 +35,7 @@ const Configuration = ({ value, handleChange, styles = {} }) => {
       display="flex"
       justifyContent="flex-end"
       flexWrap="wrap"
-      className={classes.root}
-      style={styles.root}
+      className={`${classes.root} ${styles.root}`}
     >
       <Dropdown
         name="class"

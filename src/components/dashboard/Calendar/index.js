@@ -1,11 +1,14 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-// import eachDayOfInterval from "date-fns/eachDayOfInterval";
 import Layout from "../../common/Layout";
 import EventCalendar from "./EventCalendar";
+import NextInLine from "./NextInLine";
+import useStyles from "./style";
 // import { useParams } from 'react-router-dom';
 
 const Calendar = () => {
+  const classes = useStyles();
+
   const events = [
     {
       name: "Event 7",
@@ -55,7 +58,8 @@ const Calendar = () => {
       endDate: new Date(2021, 6, 5, 18, 30),
       slug: "event-1",
       subHeading: "This is our first event",
-    }, {
+    },
+    {
       name: "Event 0",
       startDate: new Date(2021, 6, 1, 15),
       endDate: new Date(2021, 6, 2, 18, 30),
@@ -65,15 +69,23 @@ const Calendar = () => {
   ];
 
   // const day = useParams();
-  
 
   return (
     <Layout>
       <Grid container>
-        <Grid item sm={6}>
-          <EventCalendar events={events} />
+        <Grid item xs={12} lg={6}>
+          <Grid container justify="center">
+            <Grid item xs={12} sm={7} lg={12}>
+              <EventCalendar events={events} />
+            </Grid>
+            <Grid item xs={12} sm={5} lg={12} className={classes.nextLine}>
+              <NextInLine events={events} handleEventClick={() => {}} />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item sm={6}></Grid>
+        <Grid item xs={12} lg={6}>
+          event
+        </Grid>
       </Grid>
     </Layout>
   );
