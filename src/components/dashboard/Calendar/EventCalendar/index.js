@@ -6,7 +6,7 @@ import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import EventList from "../../../dialog/EventList";
 import EventConfiguration from "../../../common/EventConfiguration";
 import useStyles from "./style";
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 const EventCalendar = ({ events }) => {
   const classes = useStyles();
@@ -17,6 +17,8 @@ const EventCalendar = ({ events }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedDayRange, setSelectedDayRange] = useState(null);
   const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
+  
+  console.log(displayData);
 
   const handleClose = (selectedEventIndex) => {
     setOpenDialog(false);
