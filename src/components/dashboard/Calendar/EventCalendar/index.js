@@ -93,9 +93,19 @@ const EventCalendar = ({ events }) => {
   };
 
   return (
-    <Box className={classes.root}>
-      <EventConfiguration value={option} handleChange={handleChange} />
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      className={classes.root}
+    >
+      <EventConfiguration
+        value={option}
+        handleChange={handleChange}
+        styles={{ root: classes.config }}
+      />
       <Calendar
+        calendarClassName={classes.calendar}
         value={selectedDayRange}
         onChange={handleDateClick}
         colorPrimary="#007AFF"
@@ -126,10 +136,6 @@ const EventCalendar = ({ events }) => {
           )
         }
       />
-      <Typography>{displayData.name}</Typography>
-      <Typography>{displayData.subHeading}</Typography>
-      <Typography>Event Start Date: {displayData.startDate?.toLocaleDateString("in")}</Typography>
-      <Typography>Event End Date: {displayData.endDate?.toLocaleDateString("in")}</Typography>
       <EventList
         open={openDialog}
         handleClose={handleClose}
