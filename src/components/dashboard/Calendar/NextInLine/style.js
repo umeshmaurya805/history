@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 429,
     overflow: "auto",
     boxShadow: "0px 5px 40px -10px rgba(0,0,0,0.14)",
-    "& .MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:hover": {
+    "& .MuiListItem-root.Mui-selected, & .MuiListItem-root.Mui-selected:hover": {
       backgroundColor: "rgba(41, 121, 255, 0.08)",
     },
   },

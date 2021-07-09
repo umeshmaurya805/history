@@ -113,14 +113,5 @@ export const rootTheme = createMuiTheme({
         boxShadow: "0px 5px 10px -5px rgba(0,0,0,0.14)",
       },
     },
-    MuiListItem: {
-      root: {
-        // backgroundColor: "rgba(41, 121, 255, 0.08) !important",
-      },
-      selected: {
-        backgroundColor: "rgba(41, 121, 255, 0.08) !important",
-        height: 400,
-      },
-    },
   },
 });
