@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 47,
   },
   selectUser: {
-    minWidth: 43,
+    minWidth: 48,
   },
   selectCategory: {
-    minWidth: 82,
+    minWidth: 90,
     [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",

@@ -11,7 +11,7 @@ const Calendar = () => {
 
   const events = [
     {
-      name: "Event 7",
+      name: "Event 7 - World of Theater",
       startDate: new Date(2021, 6, 28, 10),
       endDate: new Date(2021, 7, 4, 20),
       slug: "event-7",

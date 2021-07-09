@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {},
   config: {
+    marginLeft:2,
     marginBottom: theme.spacing(1),
     justifyContent: "space-between",
     "@media (max-width: 1050px)": {
@@ -14,15 +15,30 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   calendar: {
+    color: "green !important",
     marginBottom: theme.spacing(4.5),
     "@media (min-width: 1050px)": {
-      fontSize: 12,
+      fontSize: 13,
+    },
+    "& .Calendar__yearText, & .Calendar__yearSelectorText, & .Calendar__monthText, & .Calendar__monthSelectorItemText":
+      {
+        color: "#333333",
+      },
+    "& .Calendar__day": {
+      cursor: "unset",
+    },
+    "& .Calendar__day.-selected": {
+      cursor: "pointer",
+      "&:hover": {
+        filter: "brightness(0.9)",
+      },
+      "&:active": {
+        transform: "scale(0.95)",
+      },
     },
   },
-  eventDay: {
-    backgroundColor: "#007AFF",
-    color: "white !important",
-    "&:hover": {},
+  pastEvent: {
+    backgroundColor: "#C4C4C4 !important",
   },
 }));
 

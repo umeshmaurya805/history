@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   subHeading: {
     color: "#383838",
     textAlign: "center",
-    padding: theme.spacing(0, 0.5),
+    padding: theme.spacing(1, 0.5),
     [theme.breakpoints.only("xs")]: {
       padding: theme.spacing(0, 4),
     },
