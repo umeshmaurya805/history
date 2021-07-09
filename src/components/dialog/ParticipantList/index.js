@@ -10,7 +10,7 @@ import DataGrid from "../../common/ParticipationTable";
 import useStyles from "./style";
 
 const isStudent = true;
-const hasTeam = false;
+const hasTeam = true;
 
 const data = [
   {

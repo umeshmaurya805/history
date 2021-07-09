@@ -16,14 +16,14 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2, 0),
   },
   totalCreditsLabel: {
-    color: "#383838",
+    color: "#5C6269",
     fontWeight: 600,
     marginRight: theme.spacing(2),
   },
   creditScore: {
     fontFamily: "'Inter', sans-serif",
     fontWeight: 600,
-    color: "#383838",
+    color: "#5C6269",
   },
   scoreUpdatedAt: {
     color: "#929292",

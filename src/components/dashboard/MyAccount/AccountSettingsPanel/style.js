@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
   },
   name: {
-    color: "#383838",
+    color: "#5C6269",
     fontWeight: 600,
     marginRight: theme.spacing(2),
   },
