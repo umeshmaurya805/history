@@ -14,7 +14,7 @@ const NextInLine = ({ events, handleEventClick }) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.root}>
       <Title tooltipText="Events list for the current month">
         Next In Line
       </Title>
