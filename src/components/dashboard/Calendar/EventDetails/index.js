@@ -24,7 +24,9 @@ const EventDetails = ({ event }) => {
     <Grid container alignContent="space-between" className={classes.root}>
       <Grid item xs={12} sm={6} md={12}>
         <Box display="flex" flexDirection="column" alignItems="center">
-          <img src={image} alt="" className={classes.image} />
+          <div className={classes.imageContainer}>
+            <img src={image} alt="" className={classes.image} />
+          </div>
           <Typography
             color="primary"
             variant="h4"
@@ -40,7 +42,7 @@ const EventDetails = ({ event }) => {
         <Grid container>
           {list.map((item, index) => {
             return (
-              <Grid key={index} item xs={12} sm={4} md={6} lg={4} xl={3}>
+              <Grid key={index} item xs={12}  sm={4} md={6} lg={4} xl={3}>
                 <Box display="flex" flexWrap="wrap" className={classes.item}>
                   <Typography color="primary" className={classes.itemName}>
                     {item[0]}
