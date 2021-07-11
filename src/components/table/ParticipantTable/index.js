@@ -111,11 +111,11 @@ const ParticipantTable = ({ rows, columns }) => {
     setOrderBy(property);
   };
 
-  const handleChangePage = (event, newPage) => {
+  const handleOnPageChange = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleOnRowsPerPageChange = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -192,8 +192,8 @@ const ParticipantTable = ({ rows, columns }) => {
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
+        onPageChange={handleOnPageChange}
+        onRowsPerPageChange={handleOnRowsPerPageChange}
         labelDisplayedRows={({ from, to, count }) =>
           `${from} - ${to} of ${count !== -1 ? count : `more than ${to}`}`
         }

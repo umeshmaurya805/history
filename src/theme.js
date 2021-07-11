@@ -1,10 +1,7 @@
-import createTheme from "@material-ui/core/styles/createTheme";
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core";
 import blue from "@material-ui/core/colors/blue";
 
-export const rootTheme = createTheme({
-  typography: {
-    fontFamily: ["Montserrat", "sans-serif"].join(","),
-  },
+export const rootTheme = createMuiTheme({
   palette: {
     primary: {
       light: "#4f84c3",
@@ -12,6 +9,9 @@ export const rootTheme = createTheme({
       dark: "#18477e",
     },
     secondary: blue,
+  },
+  typography: {
+    fontFamily: "'Montserrat', sans-serif",
   },
   overrides: {
     MuiButton: {
@@ -53,6 +53,7 @@ export const rootTheme = createTheme({
         background: "white",
         color: "#2366B5",
         fontSize: 12,
+        border: "1px solid #E5E5E5",
         paddingLeft: 24,
         paddingTop: 14,
         paddingBottom: 15,
@@ -85,10 +86,10 @@ export const rootTheme = createTheme({
         background: "white",
         "& li": {
           fontSize: 12,
-          color: "black",
+          color: "#383838",
+          fontWeight: 200,
           paddingTop: 12,
           paddingBottom: 12,
-          height: 40,
         },
         "& li:hover": {
           background: "#C0D8F5",

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import ReactMarkdown from "react-markdown";
 import useStyles from "./style";
+import StudentMessageDialog from "../../../dialog/StudentMessageDialog";
+import ConfirmationDialog from "../../../dialog/ConfirmationDialog";
 
 const EventDetails = ({ events }) => {
   const classes = useStyles();
 
-  const { name, subHeading, image,startDate } = events[0];
+  const { name, subHeading, image, startDate } = events[0];
 
   const list = [
     ["Date:", startDate.toLocaleDateString("in")],
@@ -19,6 +21,27 @@ const EventDetails = ({ events }) => {
     ["Fee:", "Rs. 500"],
     ["Registration Deadline:", new Date(2021, 5, 14).toLocaleDateString("in")],
   ];
+
+  const initialState = {
+    studentMessage: false,
+    schoolRegistration: false,
+  };
+
+  const [open, setOpen] = useState(initialState);
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  const handleOpen = (eventType) => {
+    setOpen({ ...initialState, [eventType]: true });
+  };
+
+  const handleClose = () => {
+    setOpen(initialState);
+  };
+
+  const handleRegistration = () => {
+    handleClose();
+    setIsRegistered(!isRegistered);
+  };
 
   return (
     <Grid container alignContent="space-between" className={classes.root}>
@@ -90,6 +113,7 @@ Decription of event here .Decription of event here Decription of event here .Dec
             variant="contained"
             color="secondary"
             className={classes.messageButton}
+            onClick={() => handleOpen("studentMessage")}
           >
             Student Message
           </Button>
@@ -97,11 +121,28 @@ Decription of event here .Decription of event here Decription of event here .Dec
             variant="contained"
             color="primary"
             className={classes.registerButton}
+            onClick={() => handleOpen("schoolRegistration")}
           >
-            Cancel Registration
+            {isRegistered ? "Cancel Registration" : "Register"}
           </Button>
         </Box>
       </Grid>
+      <StudentMessageDialog open={open.studentMessage} onClose={handleClose} />
+      <ConfirmationDialog
+        open={open.schoolRegistration}
+        handleOk={handleRegistration}
+        handleCancel={handleClose}
+        title={isRegistered ? "Cancel Registration" : "School Registration"}
+        content={
+          isRegistered ? (
+            "Are you sure you want to cancel your registration?"
+          ) : (
+            <React.Fragment>
+              Would you like to register for <span>{name}</span>?
+            </React.Fragment>
+          )
+        }
+      />
     </Grid>
   );
 };
