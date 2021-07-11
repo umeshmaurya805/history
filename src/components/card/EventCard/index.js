@@ -34,7 +34,7 @@ const EventCard = ({ data }) => {
             {subHeading}
           </Typography>
           <Box display="flex" alignItems="center" className={classes.infoBox}>
-            <Grid container justify="space-evenly">
+            <Grid container justifyContent="space-evenly">
               <Box className={classes.innerBox}>
                 <Typography color="primary" className={classes.infoLabel}>
                   Date

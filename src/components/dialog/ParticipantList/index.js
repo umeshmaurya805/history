@@ -6,7 +6,7 @@ import Slide from "@material-ui/core/Slide";
 import CloseIcon from "@material-ui/icons/Close";
 import Box from "@material-ui/core/Box";
 import avatarMan from "../../../assets/svg/avatar-man.svg";
-import DataGrid from "../../common/ParticipationTable";
+import DataGrid from "../../table/ParticipantTable";
 import useStyles from "./style";
 
 const isStudent = true;

@@ -131,7 +131,7 @@ const Leaderboard = () => {
                     count={schoolList.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    onChangePage={handleChangePage}
+                    onPageChange={handleChangePage}
                   />
                 </TableCell>
               </TableRow>

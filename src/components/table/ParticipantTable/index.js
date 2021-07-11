@@ -98,7 +98,7 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const ParticipationTable = ({ rows, columns }) => {
+const ParticipantTable = ({ rows, columns }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
@@ -202,4 +202,4 @@ const ParticipationTable = ({ rows, columns }) => {
   );
 };
 
-export default ParticipationTable;
+export default ParticipantTable;

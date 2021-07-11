@@ -1,7 +1,7 @@
-import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core";
+import createTheme from "@material-ui/core/styles/createTheme";
 import blue from "@material-ui/core/colors/blue";
 
-export const rootTheme = createMuiTheme({
+export const rootTheme = createTheme({
   typography: {
     fontFamily: ["Montserrat", "sans-serif"].join(","),
   },

@@ -6,14 +6,14 @@ import Button from "@material-ui/core/Button";
 import ReactMarkdown from "react-markdown";
 import useStyles from "./style";
 
-const EventDetails = ({ event }) => {
+const EventDetails = ({ events }) => {
   const classes = useStyles();
 
-  const { name, subHeading, image } = event;
+  const { name, subHeading, image,startDate } = events[0];
 
   const list = [
-    ["Date:", event.startDate.toLocaleDateString("in")],
-    ["Time:", event.startDate.toLocaleTimeString("in")],
+    ["Date:", startDate.toLocaleDateString("in")],
+    ["Time:", startDate.toLocaleTimeString("in")],
     ["Class:", "9 - 12"],
     ["Mode:", "Online"],
     ["Fee:", "Rs. 500"],

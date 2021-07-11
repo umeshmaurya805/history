@@ -112,7 +112,7 @@ const Calendar = () => {
     <Layout>
       <Grid container spacing={4}>
         <Grid item xs={12} md={5} xl={4} className={classes.itemLeft}>
-          <Grid container justify="center" spacing={3}>
+          <Grid container justifyContent="center" spacing={3}>
             <Grid item xs={12} sm={6} md={12}>
               <EventCalendar slug={slug} events={events} handleEventClick={handleEventClick} />
             </Grid>

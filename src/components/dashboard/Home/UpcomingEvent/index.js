@@ -156,7 +156,7 @@ const UpcomingEvent = () => {
   return (
     <div className={classes.root}>
       <Box>
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Grid item>
             <Title tooltipText="List of upcoming events that are open now">
               Upcoming Events

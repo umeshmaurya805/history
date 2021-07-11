@@ -38,7 +38,7 @@ const EventCard = ({ data }) => {
                   alignItems="center"
                   className={classes.infoBox}
                 >
-                  <Grid container justify="space-evenly">
+                  <Grid container justifyContent="space-evenly">
                     <Box className={classes.innerBox}>
                       <Typography color="primary" className={classes.infoLabel}>
                         Date

@@ -63,7 +63,7 @@ const EventResult = () => {
   return (
     <div className={classes.root}>
       <Box>
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Grid item>
             <Title tooltipText="Result of the events completed till now">
               Results

@@ -1,20 +1,8 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import StatsCard from "../../../card/StatsCard";
+import StatsCard from "../../card/StatsCard";
 
-const EventStats = () => {
-  const data = [
-    {
-      name: "Schools Partnered",
-      value: 56,
-    },
-    {
-      name: "Events Conducted",
-      value: 56,
-    },
-    { name: "Total Participation", value: 4567 },
-  ];
-
+const EventStats = ({data}) => {
   return (
     <Grid container spacing={3}>
       {data.map(({ name, value }, index) => {
