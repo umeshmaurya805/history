@@ -17,7 +17,7 @@ const EventCalendar = ({ slug, events, handleEventClick }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
 
-  // console.log(displayData);
+  console.log(displayData);
 
   const handleClose = (selectedEventIndex) => {
     setOpenDialog(false);

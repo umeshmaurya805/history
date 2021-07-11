@@ -7,7 +7,7 @@ import EventDetails from "./EventDetails";
 import eventImage from "../../../assets/svg/event-image.png";
 import useStyles from "./style";
 // import { useHistory, useParams } from "react-router-dom";
-import { eventBinarySearch } from './../../../utils/algorithms';
+// import { eventBinarySearch } from './../../../utils/algorithms';
 
 const Calendar = () => {
   const classes = useStyles();
