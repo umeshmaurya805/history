@@ -10,20 +10,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     border: "1px solid #E5E5E5",
     borderRadius: 12,
-    maxHeight: 425,
+    maxHeight: 374,
     overflow: "auto",
     boxShadow: "0px 5px 40px -10px rgba(0,0,0,0.14)",
     "& .MuiListItem-root.Mui-selected, & .MuiListItem-root.Mui-selected:hover":
       {
         backgroundColor: "rgba(41, 121, 255, 0.08)",
       },
-    [theme.breakpoints.up("lg")]: {
-      // maxWidth: 430,
-    },
-
-    // [theme.breakpoints.down("sm")]: {
-    //   maxHeight: 425,
-    // },
     "@media (min-width: 1050px) and (max-width: 1279px)": {
       maxHeight: 485,
     },

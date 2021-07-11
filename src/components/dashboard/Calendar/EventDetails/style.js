@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // marginTop: theme.spacing(8),
     height: "100%",
     border: "1px solid #E5E5E5",
     borderRadius: 12,
@@ -20,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     paddingTop: "50%" /* 2:1 Aspect Ratio */,
     position: "relative",
+    "@media (min-width: 1700px)": {
+      width: "80%",
+      paddingTop: "40%",
+    },
   },
   image: {
     height: "100%",
@@ -59,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   reactMarkdown: {
-    maxHeight: 470,
+    maxHeight: 380,
     overflow: "auto",
     margin: theme.spacing(2, 0, 4),
     "@media (min-width: 1700px)": {
@@ -70,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#F89503",
     color: "white",
     width: 180,
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
     "&:hover": {
       backgroundColor: "#C37603",
     },
@@ -79,6 +84,8 @@ const useStyles = makeStyles((theme) => ({
   },
   registerButton: {
     width: 180,
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 

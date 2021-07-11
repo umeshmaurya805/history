@@ -62,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  selectedEvent: {
+    backgroundColor: `${theme.palette.primary.main} !important`,
+  },
+  selectedEventPast: {
+    backgroundColor: "#918C8C !important",
+  },
   pastEvent: {
     backgroundColor: "#C4C4C4 !important",
   },
