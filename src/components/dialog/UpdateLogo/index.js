@@ -34,7 +34,7 @@ const UpdateLogo = ({ value, handleClose, ...props }) => {
   });
 
   const onFilesChange = (files) => {
-    console.log(files);
+    // console.log(files);
     setFile(files[0]);
   };
 

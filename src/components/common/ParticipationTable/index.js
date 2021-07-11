@@ -17,6 +17,7 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import useStyles, { StyledTableCell } from "./style";
+import { toast } from "react-toastify";
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -119,6 +120,12 @@ const ParticipationTable = ({ rows, columns }) => {
     setPage(0);
   };
 
+  const handleDownloadList = () => {
+    toast.success("Participants List Downloaded", {
+      toastId: "downloadList",
+    });
+  };
+
   return (
     <Paper className={classes.root}>
       <TableContainer>
@@ -130,6 +137,7 @@ const ParticipationTable = ({ rows, columns }) => {
             color="primary"
             className={classes.downloadButton}
             endIcon={<GetAppIcon />}
+            onClick={handleDownloadList}
           >
             Download List
           </Button>
