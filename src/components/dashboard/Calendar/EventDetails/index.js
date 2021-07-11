@@ -42,7 +42,7 @@ const EventDetails = ({ event }) => {
         <Grid container>
           {list.map((item, index) => {
             return (
-              <Grid key={index} item xs={12}  sm={4} md={6} lg={4} xl={3}>
+              <Grid key={index} item xs={12} sm={4} md={6} lg={4} xl={3}>
                 <Box display="flex" flexWrap="wrap" className={classes.item}>
                   <Typography color="primary" className={classes.itemName}>
                     {item[0]}

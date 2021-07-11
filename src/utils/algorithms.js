@@ -1,6 +1,6 @@
-import { compareAsc } from "date-fns";
+// import { compareAsc } from "date-fns";
 
-export const eventBinarySearch = (events, dateToCompare) => {
+// export const eventBinarySearch = (events, dateToCompare) => {
   // let low = 0,
   //   high = events.length - 1,
   //   res;
@@ -29,4 +29,5 @@ export const eventBinarySearch = (events, dateToCompare) => {
   // }
 
   // return res;
-};
+// };
+// 

@@ -6,11 +6,12 @@ import NextInLine from "./NextInLine";
 import EventDetails from "./EventDetails";
 import eventImage from "../../../assets/svg/event-image.png";
 import useStyles from "./style";
-// import { useParams } from 'react-router-dom';
+// import { useHistory, useParams } from "react-router-dom";
+import { eventBinarySearch } from './../../../utils/algorithms';
 
 const Calendar = () => {
   const classes = useStyles();
-
+  // const history = useHistory();
   const events = [
     {
       name: "Event X  Online theatre show for",
@@ -94,7 +95,18 @@ const Calendar = () => {
     },
   ];
 
-  // const day = useParams();
+  // let { slug } = useParams();
+  const slug="hi"
+  // console.log('slug',slug);
+
+  // if (!slug) {
+  //   slug = eventBinarySearch(events, new Date());
+  //   history.push(`/dashboard/calendar/${slug}`)
+  // }
+
+  const handleEventClick = (slug) => {
+    // history.push(`/dashboard/calendar/${slug}`);
+  };
 
   return (
     <Layout>
@@ -102,15 +114,19 @@ const Calendar = () => {
         <Grid item xs={12} md={5} xl={4} className={classes.itemLeft}>
           <Grid container justify="center" spacing={3}>
             <Grid item xs={12} sm={6} md={12}>
-              <EventCalendar events={events} />
+              <EventCalendar slug={slug} events={events} handleEventClick={handleEventClick} />
             </Grid>
             <Grid item xs={12} sm={6} md={12} className={classes.nextLine}>
-              <NextInLine events={events} handleEventClick={() => {}} />
+              <NextInLine
+                slug={slug}
+                events={events}
+                handleEventClick={handleEventClick}
+              />
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} md={7} xl={8}>
-          <EventDetails event={events[0]} />
+          <EventDetails slug={slug} events={events} />
         </Grid>
       </Grid>
     </Layout>

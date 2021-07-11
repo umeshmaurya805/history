@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
-import { getDate, getMonth, getYear, isPast } from "date-fns";
+import { getDate, getMonth, getYear, isPast, isSameDay } from "date-fns";
 import { Calendar } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import EventList from "../../../dialog/EventList";
 import EventConfiguration from "../../../common/EventConfiguration";
 import useStyles from "./style";
+// import { eventBinarySearch } from './../../../../utils/algorithms';
 
-const EventCalendar = ({ events }) => {
+const EventCalendar = ({ slug, events, handleEventClick }) => {
   const classes = useStyles();
 
   const [displayData, setDisplayData] = useState({});
-  const [selectedEvent] = useState({});
+  const [selectedEvent, setSelectedEvent] = useState({slug});
   const [eventList] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
-  
-  console.log(displayData);
+
+  // console.log(displayData);
 
   const handleClose = (selectedEventIndex) => {
     setOpenDialog(false);
-    console.log(typeof selectedEventIndex)
-    if(typeof selectedEventIndex !== "number") return;
+    console.log(typeof selectedEventIndex);
+    if (typeof selectedEventIndex !== "number") return;
 
     const { name, subHeading, startDate, endDate } =
       eventList[selectedEventIndex];
@@ -45,12 +46,22 @@ const EventCalendar = ({ events }) => {
 
   const selectedDays = Object.keys(dateHash).map((date) => {
     date = new Date(date);
+    const isSelected = isSameDay(
+      date.setHours(0, 0, 0, 0),
+      new Date(selectedEvent.year, selectedEvent.month - 1, selectedEvent.day)
+    );
 
     return {
       day: getDate(date),
       month: getMonth(date) + 1,
       year: getYear(date),
-      className: `-selected ${isPast(date) && classes.pastEvent}`,
+      className: `-selected ${
+        isSelected
+          ? isPast(date)
+            ? classes.selectedEventPast
+            : classes.selectedEvent
+          : isPast(date) && classes.pastEvent
+      }`,
     };
   });
 
@@ -61,26 +72,27 @@ const EventCalendar = ({ events }) => {
   };
 
   const handleDateClick = (selectedEventDate) => {
-    // selectedDays.forEach((date) => {
-    //   if (
-    //     date.year === selectedEventDate.year &&
-    //     date.month === selectedEventDate.month &&
-    //     date.day === selectedEventDate.day
-    //   ) {
-    //     setEventList(
-    //       events.filter(({ startDate: date }) => {
-    //         return (
-    //           getYear(date) === selectedEventDate.year &&
-    //           getMonth(date) + 1 === selectedEventDate.month &&
-    //           getDate(date) === selectedEventDate.day
-    //         );
-    //       })
-    //     );
-    //     setSelectedEvent(selectedEventDate);
-    //     setOpenDialog(true);
-    //     return;
-    //   }
-    // });
+    selectedDays.forEach((date) => {
+      if (
+        date.year === selectedEventDate.year &&
+        date.month === selectedEventDate.month &&
+        date.day === selectedEventDate.day
+      ) {
+        // setEventList(
+        //   events.filter(({ startDate: date }) => {
+        //     return (
+        //       getYear(date) === selectedEventDate.year &&
+        //       getMonth(date) + 1 === selectedEventDate.month &&
+        //       getDate(date) === selectedEventDate.day
+        //     );
+        //   })
+        // );
+        setSelectedEvent(selectedEventDate);
+        // handleEventClick(eventBinarySearch(events, new Date()));
+        // setOpenDialog(true);
+        return;
+      }
+    });
   };
 
   return (
