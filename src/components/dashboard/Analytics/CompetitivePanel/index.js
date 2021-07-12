@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ParticipantList from "../../../dialog/ParticipantList";
 import EventsTable from "../../../table/EventsTable";
 import useStyles from "./style";
 
@@ -145,13 +146,13 @@ const CompetitivePanel = () => {
     setOpen(false);
   };
 
-  const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
+  // const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
 
-    setOption({ ...option, [name]: value });
-  };
+  //   setOption({ ...option, [name]: value });
+  // };
 
   return (
     <div className={classes.root}>
@@ -160,7 +161,7 @@ const CompetitivePanel = () => {
         columns={columns}
         handleClickOpen={handleClickOpen}
       />
-      {/* <ParticipantList slug={slug} open={open} onClose={handleClose} /> */}
+      <ParticipantList slug={slug} open={open} onClose={handleClose} />
     </div>
   );
 };
