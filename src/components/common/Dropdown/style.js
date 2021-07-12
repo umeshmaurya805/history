@@ -5,7 +5,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   select: {
-    fontSize: 12,
     backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:focus": {
