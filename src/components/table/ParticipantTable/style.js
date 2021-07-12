@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     border: "1px solid #DFE0EB",
     boxShadow: "0px 5px 20px -5px rgba(0,0,0,0.14) !important",
+    borderRadius: 12,
   },
   toolbar: {
     padding: theme.spacing(4, 2),

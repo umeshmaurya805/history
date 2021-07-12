@@ -105,6 +105,11 @@ const ParticipantTable = ({ rows, columns }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const emptyRows =
+    rows.length <= rowsPerPage
+      ? 0
+      : rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -165,7 +170,9 @@ const ParticipantTable = ({ rows, columns }) => {
                               src={row.avatar}
                               className={classes.avatar}
                             />
-                            {value}
+                            <Typography className={classes.participantName}>
+                              {value}
+                            </Typography>
                           </Box>
                         </StyledTableCell>
                       ) : (
@@ -182,6 +189,11 @@ const ParticipantTable = ({ rows, columns }) => {
                   </TableRow>
                 );
               })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 73 * emptyRows }}>
+                <StyledTableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
