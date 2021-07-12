@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 0),
     margin: theme.spacing(-0.5, 0),
   },
+  tag: {
+    fontFamily: "Roboto",
+    padding: theme.spacing(1),
+    width: 130,
+  },
   tablePagination: {
     color: "#5C6269",
     padding: `${theme.spacing(1, 2)} !important`,

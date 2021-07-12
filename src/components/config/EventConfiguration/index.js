@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
-import Dropdown from "../Dropdown";
+import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
 
 const EventConfiguration = ({ value, handleChange, styles = {} }) => {

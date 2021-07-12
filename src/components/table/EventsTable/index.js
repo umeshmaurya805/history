@@ -1,5 +1,6 @@
 import React from "react";
 import Table from "@material-ui/core/Table";
+import Chip from "@material-ui/core/Chip";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
@@ -10,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import useStyles, { StyledTableCell } from "./style";
 import InfoButton from "../../button/InfoButton";
 
-const UpcomingEventsTable = ({ rows, columns, handleClickOpen }) => {
+const EventsTable = ({ rows, columns, handleClickOpen }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -59,9 +60,7 @@ const UpcomingEventsTable = ({ rows, columns, handleClickOpen }) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
-                  <TableRow
-                    key={index}
-                  >
+                  <TableRow key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -86,6 +85,19 @@ const UpcomingEventsTable = ({ rows, columns, handleClickOpen }) => {
                             >
                               View
                             </Button>
+                          ) : column.id === "status" ? (
+                            <Chip
+                              size="small"
+                              variant="outlined"
+                              label={value}
+                              className={classes.tag}
+                              style={{
+                                backgroundColor:
+                                  value === "Participated"
+                                    ? "#69DE91"
+                                    : "#EF7373",
+                              }}
+                            />
                           ) : (
                             value
                           )}
@@ -120,4 +132,4 @@ const UpcomingEventsTable = ({ rows, columns, handleClickOpen }) => {
   );
 };
 
-export default UpcomingEventsTable;
+export default EventsTable;
