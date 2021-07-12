@@ -52,18 +52,6 @@ const useStyles = makeStyles((theme) => ({
   selectorGrid: {
     flexGrow: 1,
   },
-  titleColumn: {
-    color: "#383838 !important",
-    fontWeight: 600,
-  },
-  viewButton: {
-    fontWeight: 700,
-    fontSize: 13,
-    borderRadius: 40,
-    width: 70,
-    padding: theme.spacing(1, 0),
-    margin: theme.spacing(-0.5, 0),
-  },
 }));
 
 export default useStyles;

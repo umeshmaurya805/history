@@ -24,9 +24,9 @@ const StudentMessageDialog = ({ event, onClose, ...props }) => {
       <DialogContent>
         <Box display="flex" justifyContent="flex-end">
           <IconButton
+          className={classes.closeButton}
             edge="start"
-            color="inherit"
-            onClick={onClose}
+size="small"            onClick={onClose}
             aria-label="close"
           >
             <CloseIcon />

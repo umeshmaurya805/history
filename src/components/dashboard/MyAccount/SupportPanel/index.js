@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import LoadingButton from "../../../button/LoadingButton";
 import protectedHandler from "../../../../utils/protectedHandler";
 import useStyles from "./style";
+import ChoiceSelectButton from "./../../../button/ChoiceSelectButton/index";
 
 const SupportPanel = () => {
   const classes = useStyles();
@@ -25,7 +24,7 @@ const SupportPanel = () => {
     onSubmit: protectedHandler(async (formData) => {
       // await login(formData).unwrap();
       console.log(formData);
-      toast.success("Message sent successfully",{ toastId: "SupportMessage"});
+      toast.success("Message sent successfully", { toastId: "SupportMessage" });
     }),
   });
 
@@ -38,7 +37,7 @@ const SupportPanel = () => {
   };
 
   const handleTitleFieldChange = (e) => {
-    setCustomTitle(e.target.value)
+    setCustomTitle(e.target.value);
     formik.handleChange(e);
   };
 
@@ -47,21 +46,12 @@ const SupportPanel = () => {
       <Typography color="primary" className={classes.supportLabel}>
         For any queries write to us
       </Typography>
-      <Box>
-        {queryTitles.map((title, index) => {
-          return (
-            <Button
-              key={index}
-              variant={selectedIndex === index ? "contained" : "outlined"}
-              color={selectedIndex === index ? "primary" : undefined}
-              className={classes.titleButton}
-              onClick={() => handleTitleSelectorChange(index)}
-            >
-              {title}
-            </Button>
-          );
-        })}
-      </Box>
+      <ChoiceSelectButton
+        values={queryTitles}
+        selectedIndex={selectedIndex}
+        onClick={handleTitleSelectorChange}
+        styles={{ button: classes.titleButton }}
+      />
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth

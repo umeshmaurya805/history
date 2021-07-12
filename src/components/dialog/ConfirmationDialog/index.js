@@ -27,8 +27,9 @@ const ConfirmationDialog = ({
       >
         <Typography className={classes.title}> {title} </Typography>
         <IconButton
+        className={classes.closeButton}
+        size="small"
           edge="start"
-          color="inherit"
           onClick={handleCancel}
           aria-label="close"
         >
