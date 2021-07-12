@@ -1,39 +1,19 @@
 import React, { useState } from "react";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import ResultCard from "../../../card/ResultCard";
 import avatar from "../../../../assets/svg/avatar.png";
 import Title from "../../../common/Title/index";
 import useStyles from "./style";
+import Dropdown from "../../../common/Dropdown";
 
 const EventResult = () => {
   const classes = useStyles();
 
-  const [val, setVal] = useState(1);
+  const [val, setVal] = useState(0);
 
   const handleChange = (event) => {
     setVal(event.target.value);
-  };
-
-  const iconComponent = (props) => {
-    return <ExpandMoreIcon className={props.className} />;
-  };
-
-  // moves the menu below the select input
-  const menuProps = {
-    anchorOrigin: {
-      vertical: "bottom",
-      horizontal: "left",
-    },
-    transformOrigin: {
-      vertical: "top",
-      horizontal: "left",
-    },
-    getContentAnchorEl: null,
   };
 
   const data = [
@@ -60,6 +40,13 @@ const EventResult = () => {
     },
   ];
 
+  const items = [
+    "QUIRIOSITY QUIZ COMPETITION",
+    "ESSAY WRITING COMPETITION",
+    "DANCING COMPETITION",
+    "TEACHER WORKSHOP",
+  ];
+
   return (
     <div className={classes.root}>
       <Box>
@@ -70,21 +57,12 @@ const EventResult = () => {
             </Title>
           </Grid>
           <Grid item className={classes.selector}>
-            <FormControl className={classes.selector}>
-              <Select
-                classes={{ select: classes.select }}
-                disableUnderline
-                MenuProps={menuProps}
-                IconComponent={iconComponent}
-                value={val}
-                onChange={handleChange}
-              >
-                <MenuItem value={0}>QUIRIOSITY QUIZ COMPETITION</MenuItem>
-                <MenuItem value={1}>ESSAY WRITING COMPETITION</MenuItem>
-                <MenuItem value={2}>DANCING COMPETITION</MenuItem>
-                <MenuItem value={3}>TEACHER WORKSHOP</MenuItem>
-              </Select>
-            </FormControl>
+            <Dropdown
+              value={val}
+              items={items}
+              handleChange={handleChange}
+              styles={{ select: classes.select }}
+            />
           </Grid>
         </Grid>
       </Box>

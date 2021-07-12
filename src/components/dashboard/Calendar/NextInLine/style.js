@@ -24,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
   eventDate: {
     backgroundColor: "#007AFF",
     fontFamily: "Roboto",
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: 900,
-    marginRight: 45,
+    marginRight: 30,
+    height: 55,
+    width:55,
   },
   eventName: {
     fontFamily: "Roboto",
