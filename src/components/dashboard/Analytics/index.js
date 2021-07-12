@@ -19,7 +19,7 @@ const Analytics = () => {
     <Layout>
     <Typography color="primary" className={classes.title}>School Performance</Typography>
       <TabLayout labels={labelTop} panels={panelTop} />
-      <TabLayout labels={labelBottom} panels={panelBottom} />
+      <TabLayout className={classes.competitiveLayout} labels={labelBottom} panels={panelBottom} />
     </Layout>
   );
 };

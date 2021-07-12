@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import Dropdown from "../Dropdown";
 import useStyles from "./style";
 
-const Configuration = ({ value, handleChange, styles = {} }) => {
+const EventConfiguration = ({ value, handleChange, styles = {} }) => {
   const classes = useStyles();
 
   const classItems = ["Class", "Class 10",  "Class 9",  "Class 8",  "Class 7",  "Class 6",  "Class 5",  "Class 4",  "Class 3"];
@@ -40,6 +40,7 @@ const Configuration = ({ value, handleChange, styles = {} }) => {
       <Dropdown
         name="class"
         value={value.class}
+        colored
         items={classItems}
         handleChange={handleChange}
         styles={{ select: classes.selectClass }}
@@ -47,6 +48,7 @@ const Configuration = ({ value, handleChange, styles = {} }) => {
       <Dropdown
         name="user"
         value={value.user}
+        colored
         items={userItems}
         handleChange={handleChange}
         styles={{ select: classes.selectUser }}
@@ -54,6 +56,7 @@ const Configuration = ({ value, handleChange, styles = {} }) => {
       <Dropdown
         name="category"
         value={value.category}
+        colored
         items={categoryItems[value.user]}
         handleChange={handleChange}
         styles={{ select: classes.selectCategory }}
@@ -62,4 +65,4 @@ const Configuration = ({ value, handleChange, styles = {} }) => {
   );
 };
 
-export default Configuration;
+export default EventConfiguration;

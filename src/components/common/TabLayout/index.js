@@ -32,7 +32,7 @@ function a11yProps(index) {
   };
 }
 
-const TabLayout = ({ labels, panels }) => {
+const TabLayout = ({ labels, panels, ...props }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (_, newValue) => {
@@ -40,7 +40,7 @@ const TabLayout = ({ labels, panels }) => {
   };
 
   return (
-    <div>
+    <div {...props}>
       <StyledTabs
         value={value}
         onChange={handleChange}

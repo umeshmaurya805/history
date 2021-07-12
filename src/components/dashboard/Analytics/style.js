@@ -5,8 +5,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Roboto",
     fontSize: 28,
     fontWeight: 900,
-    textAlign:'center',
-    marginBottom:theme.spacing(5)
+    textAlign: "center",
+    marginBottom: theme.spacing(5),
+  },
+  competitiveLayout: {
+    marginTop: theme.spacing(5),
   },
 }));
 
