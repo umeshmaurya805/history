@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Title from "../../../common/Title";
-import UpcomingEventsTable from "../../../table/UpcomingEventsTable";
-import ParticipantList from "../../../dialog/ParticipantList/index";
-import EventConfiguration from "../../../common/EventConfiguration";
+import EventsTable from "../../../table/EventsTable";
+import ParticipantList from "../../../dialog/ParticipantList";
+import EventConfiguration from "../../../config/EventConfiguration";
 import useStyles from "./style";
 
 const columns = [
@@ -160,7 +160,7 @@ const UpcomingEvent = () => {
         </Grid>
       </Box>
       <Box>
-        <UpcomingEventsTable
+        <EventsTable
           rows={upcomingEventList}
           columns={columns}
           handleClickOpen={handleClickOpen}

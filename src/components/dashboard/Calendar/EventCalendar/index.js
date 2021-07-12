@@ -4,7 +4,7 @@ import { getDate, getMonth, getYear, isPast, isSameDay } from "date-fns";
 import { Calendar } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import EventList from "../../../dialog/EventList";
-import EventConfiguration from "../../../common/EventConfiguration";
+import EventConfiguration from "../../../config/EventConfiguration";
 import useStyles from "./style";
 // import { eventBinarySearch } from './../../../../utils/algorithms';
 
@@ -12,7 +12,7 @@ const EventCalendar = ({ slug, events, handleEventClick }) => {
   const classes = useStyles();
 
   const [displayData, setDisplayData] = useState({});
-  const [selectedEvent, setSelectedEvent] = useState({slug});
+  const [selectedEvent, setSelectedEvent] = useState({ slug });
   const [eventList] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [option, setOption] = useState({ class: 0, user: 0, category: 0 });

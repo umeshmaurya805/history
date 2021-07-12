@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import EventStats from "../../../common/EventStats";
 import useStyles from "./style";
-import AnalyticsConfiguration from "../../../common/AnalyticsConfiguration";
+import AnalyticsConfiguration from "../../../config/AnalyticsConfiguration";
 
 const ParticipantPanel = () => {
   const classes = useStyles();
