@@ -2,11 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(4),
+    borderTop: "1px solid #DADADA",
+    borderBottom: "1px solid #DADADA",
+    paddingBottom: theme.spacing(4),
   },
   stats: {
-    borderTop: "1px solid #DADADA",
-    paddingTop: theme.spacing(2),
+    paddingTop: theme.spacing(4),
   },
   loader: {
     height: "100%",
@@ -14,7 +16,11 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
   },
   chart: {
-    marginTop: theme.spacing(7),
+    marginTop: theme.spacing(4),
+    padding: theme.spacing(2),
+    border: "1px solid #DFE0EB",
+    boxShadow: "0px 5px 20px -5px rgba(0,0,0,0.14) !important",
+    borderRadius: 12,
   },
 }));
 

@@ -16,7 +16,14 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.only("xs")]: {
       marginRight: theme.spacing(2),
-    },
+    },    margin: theme.spacing(1),
+    // width: 90,
+    // boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
+    // borderRadius: 12,
+
+    // "&.MuiButton-outlined": {
+    //   border: "1px solid #E5E5E5",
+    // },
   },
   form: {
     [theme.breakpoints.up("md")]: {

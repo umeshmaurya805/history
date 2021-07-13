@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import ParticipantList from "../../../dialog/ParticipantList";
+import { toast } from 'react-toastify';
+import CompetitiveEventList from "../../../dialog/CompetitiveEventList";
 import EventsTable from "../../../table/EventsTable";
 import useStyles from "./style";
+import PastEventsConfiguration from "./../../../config/PastEventsConfiguration/index";
 
 const columns = [
   {
@@ -146,22 +148,35 @@ const CompetitivePanel = () => {
     setOpen(false);
   };
 
-  // const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
+  const [option, setOption] = useState({
+    status: 0,
+    month: 0,
+    year: 0,
+    class: 0,
+    user: 0,
+  });
 
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-  //   setOption({ ...option, [name]: value });
-  // };
+    setOption({ ...option, [name]: value });
+  };
+
+  const handleDownloadList = () => {
+    toast.success("Events List Downloaded", {
+      toastId: "downloadEventList",
+    });
+  };
 
   return (
     <div className={classes.root}>
+      <PastEventsConfiguration competitive value={option} handleChange={handleChange} handleDownloadList={handleDownloadList} />
       <EventsTable
         rows={eventsList}
         columns={columns}
         handleClickOpen={handleClickOpen}
       />
-      <ParticipantList slug={slug} open={open} onClose={handleClose} />
+      <CompetitiveEventList slug={slug} open={open} onClose={handleClose} />
     </div>
   );
 };

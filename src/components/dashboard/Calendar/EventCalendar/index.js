@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import { getDate, getMonth, getYear, isPast, isSameDay } from "date-fns";
-import { Calendar } from "react-modern-calendar-datepicker";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
+import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import EventList from "../../../dialog/EventList";
 import EventConfiguration from "../../../config/EventConfiguration";
 import useStyles from "./style";
@@ -17,11 +17,10 @@ const EventCalendar = ({ slug, events, handleEventClick }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
 
-  console.log(displayData);
-
   const handleClose = (selectedEventIndex) => {
     setOpenDialog(false);
-    console.log(typeof selectedEventIndex);
+    console.log(displayData);
+
     if (typeof selectedEventIndex !== "number") return;
 
     const { name, subHeading, startDate, endDate } =

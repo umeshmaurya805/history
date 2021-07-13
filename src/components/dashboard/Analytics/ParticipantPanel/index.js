@@ -104,7 +104,6 @@ const ParticipantPanel = () => {
     <div className={classes.root}>
       <EventStats
         className={classes.stats}
-        itemStyle={classes.statsItem}
         data={data}
       />
       <AnalyticsConfiguration value={option} handleChange={handleChange} />
