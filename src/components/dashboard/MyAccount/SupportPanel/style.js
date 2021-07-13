@@ -11,19 +11,18 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(5),
     marginBottom: theme.spacing(2),
     padding: theme.spacing(0.5, 3.5),
+    boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
+    borderRadius: 12,
+
+    "&.MuiButton-outlined": {
+      border: "1px solid #E5E5E5",
+    },
     [theme.breakpoints.only("sm")]: {
       marginRight: theme.spacing(3),
     },
     [theme.breakpoints.only("xs")]: {
       marginRight: theme.spacing(2),
     },    margin: theme.spacing(1),
-    // width: 90,
-    // boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
-    // borderRadius: 12,
-
-    // "&.MuiButton-outlined": {
-    //   border: "1px solid #E5E5E5",
-    // },
   },
   form: {
     [theme.breakpoints.up("md")]: {
