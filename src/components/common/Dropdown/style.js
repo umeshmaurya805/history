@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(1),
+    [theme.breakpoints.only("xs")]: {
+      flexGrow: 1,
+    },
   },
   select: {
     backgroundColor: theme.palette.primary.main,

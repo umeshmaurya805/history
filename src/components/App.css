@@ -2,6 +2,11 @@ body {
   background-color: white !important;
 }
 
+/* custom react-toastify */
+.Toastify__toast {
+  border-radius: 12px;
+}
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
   width: 20px;
