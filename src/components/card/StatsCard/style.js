@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    minHeight:100,
-    minWidth:160,
+    minHeight: 100,
+    minWidth: 160,
   },
   content: {
     padding: "5px 15px 5px 10px !important",
