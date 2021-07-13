@@ -15,11 +15,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 1),
   },
   closeButton: {
-    backgroundColor: "red",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "rgba(255,0,0,0.7)",
-    },
+    // backgroundColor: "red",
+    // color: "white",
+    // "&:hover": {
+    //   backgroundColor: "rgba(255,0,0,0.7)",
+    // },
   },
   button: {
     margin: theme.spacing(1),

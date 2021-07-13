@@ -19,11 +19,12 @@ export const StyledTableCell = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    borderRadius: 12,
     border: "1px solid #DADADA",
-    boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
+    boxShadow: "0px 5px 20px -5px rgba(0,0,0,0.14) !important",
+    borderRadius: 12,
   },
   container: {
+    borderTop: "none",
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
   },

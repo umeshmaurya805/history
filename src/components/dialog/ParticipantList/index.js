@@ -6,7 +6,7 @@ import Slide from "@material-ui/core/Slide";
 import CloseIcon from "@material-ui/icons/Close";
 import Box from "@material-ui/core/Box";
 import avatarMan from "../../../assets/svg/avatar-man.svg";
-import DataGrid from "../../table/ParticipantTable";
+import ParticipantTable from "../../table/ParticipantTable";
 import useStyles from "./style";
 
 const isStudent = true;
@@ -246,7 +246,7 @@ const ParticipantList = ({ slug, open, onClose }) => {
             <CloseIcon />
           </IconButton>
         </Box>
-        <DataGrid rows={rows} columns={columns} />
+        <ParticipantTable rows={rows} columns={columns} />
       </DialogContent>
     </Dialog>
   );

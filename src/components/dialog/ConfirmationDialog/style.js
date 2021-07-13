@@ -23,13 +23,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     margin: theme.spacing(0, 3, 2),
   },
-  closeButton: {
-    backgroundColor: "red",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "rgba(255,0,0,0.7)",
-    },
-  },
   button: {
     width: 120,
     fontFamily: "Roboto",

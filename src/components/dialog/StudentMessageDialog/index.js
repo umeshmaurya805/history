@@ -6,7 +6,7 @@ import Icon from "@material-ui/core/Icon";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import CloseIcon from "@material-ui/icons/Close";
+import CancelIcon from "@material-ui/icons/Cancel";
 import ReactMarkdown from "react-markdown";
 import useStyles from "./style";
 import { toast } from "react-toastify";
@@ -24,12 +24,12 @@ const StudentMessageDialog = ({ event, onClose, ...props }) => {
       <DialogContent>
         <Box display="flex" justifyContent="flex-end">
           <IconButton
-          className={classes.closeButton}
             edge="start"
-size="small"            onClick={onClose}
+            size="small"
+            onClick={onClose}
             aria-label="close"
           >
-            <CloseIcon />
+            <CancelIcon color="error" />
           </IconButton>
         </Box>
         <ReactMarkdown
