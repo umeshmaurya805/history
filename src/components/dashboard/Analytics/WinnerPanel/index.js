@@ -1,6 +1,6 @@
 import React from "react";
 import EventStats from "../../../common/EventStats";
-import WinnersTable from "../../../table/WinnersTable";
+import ParticipantTable from "../../../table/ParticipantTable";
 import avatarMan from "../../../../assets/svg/avatar-man.svg";
 import useStyles from "./style";
 
@@ -163,7 +163,7 @@ const WinnerPanel = () => {
   return (
     <div className={classes.root}>
       <EventStats className={classes.stats} data={data} />
-      <WinnersTable rows={rows} columns={columns} />
+      <ParticipantTable noHeader colored rows={rows} columns={columns} />
     </div>
   );
 };
