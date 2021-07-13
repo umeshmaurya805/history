@@ -8,11 +8,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
   },
-  selector: {
-    [theme.breakpoints.only("xs")]: {
-      flexGrow: 1,
-    },
-  },
   yearSelector: {
     [theme.breakpoints.only("xs")]: {
       width: "100%",
@@ -36,12 +31,18 @@ const useStyles = makeStyles((theme) => ({
   pastDays: {
     minWidth: 80,
     border: "1px solid #E5E5E5",
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(1),  [theme.breakpoints.only("xs")]: {
+      width: "100%",
+      marginLeft: "unset",
+    },
   },
   academicYear: {
     minWidth: 60,
     marginLeft: theme.spacing(1),
-    border: "1px solid #E5E5E5",
+    border: "1px solid #E5E5E5",  [theme.breakpoints.only("xs")]: {
+      width: "100%",
+      marginLeft: "unset",
+    },
   },
   customRangeContainer: {
     display: "flex",

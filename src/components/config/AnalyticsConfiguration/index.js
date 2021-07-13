@@ -4,12 +4,16 @@ import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
 import ChoiceSelectButton from "../../button/ChoiceSelectButton/index";
 
-const AnalyticsConfiguration = ({ value, handleChange}) => {
+const AnalyticsConfiguration = ({ value, handleChange }) => {
   const classes = useStyles();
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const categoryItems = ["Overall Performance", "Competitive", "Non-Competitive"];
+  const categoryItems = [
+    "Overall Performance",
+    "Competitive",
+    "Non-Competitive",
+  ];
 
   const userItems = ["User", "Student", "Teacher"];
 
@@ -34,7 +38,7 @@ const AnalyticsConfiguration = ({ value, handleChange}) => {
 
   const pastDaysItems = ["Last 7 days", "Last 1 month"];
 
-  const chartDateSelectorTypes = ["Yearly", "Weekly", "Monthly"];
+  const chartDateSelectorTypes = ["Weekly", "Monthly", "Yearly"];
 
   return (
     <Grid container className={classes.root}>
@@ -45,7 +49,7 @@ const AnalyticsConfiguration = ({ value, handleChange}) => {
           colored
           items={categoryItems}
           handleChange={handleChange}
-          styles={{ root: classes.selector, select: classes.category }}
+          styles={{ select: classes.category }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -56,14 +60,14 @@ const AnalyticsConfiguration = ({ value, handleChange}) => {
               value={value.user}
               items={userItems}
               handleChange={handleChange}
-              styles={{ root: classes.selector, select: classes.user }}
+              styles={{ select: classes.user }}
             />
             <Dropdown
               name="class"
               value={value.class}
               items={classItems}
               handleChange={handleChange}
-              styles={{ root: classes.selector, select: classes.class }}
+              styles={{ select: classes.class }}
             />
           </Grid>
           <Grid
@@ -71,7 +75,7 @@ const AnalyticsConfiguration = ({ value, handleChange}) => {
             xs={12}
             md={7}
             className={classes.gridItem}
-            justifyContent="flex-end"
+            style={{ justifyContent: "flex-end" }}
           >
             <Dropdown
               name="pastDays"
@@ -85,18 +89,21 @@ const AnalyticsConfiguration = ({ value, handleChange}) => {
               value={value.academicYear}
               items={academicYearItems}
               handleChange={handleChange}
-              styles={{ root: classes.yearSelector, select: classes.academicYear }}
+              styles={{
+                root: classes.yearSelector,
+                select: classes.academicYear,
+              }}
             />
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <ChoiceSelectButton
-            values={chartDateSelectorTypes}
-            selectedIndex={selectedIndex}
-            onClick={setSelectedIndex}
-            styles={{ root: classes.buttonContainer, button: classes.button }}
-          />
-        </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        <ChoiceSelectButton
+          values={chartDateSelectorTypes}
+          selectedIndex={selectedIndex}
+          onClick={setSelectedIndex}
+          styles={{ root: classes.buttonContainer, button: classes.button }}
+        />
       </Grid>
     </Grid>
   );
