@@ -19,6 +19,24 @@ export const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
+export const BlueStyledTableCell = withStyles((theme) => ({
+  root: {
+    borderColor: "#DFE0EB",
+  },
+  head: {
+    color: theme.palette.primary.main,
+    fontWeight: 700,
+    fontSize: 16,
+    "& .MuiTableSortLabel-active": {
+      color: theme.palette.primary.dark,
+    },
+  },
+  body: {
+    fontSize: 14,
+    color: "#252733",
+  },
+}))(TableCell);
+
 const useStyles = makeStyles((theme) => ({
   root: {
     border: "1px solid #DFE0EB",
@@ -26,11 +44,16 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
   },
   toolbar: {
-    padding: theme.spacing(4, 2),
+    padding: theme.spacing(3, 2),
   },
   title: {
     flex: 1,
     fontWeight: 700,
+    textTransform: "uppercase",
+  },
+  participantName: {
+    color: "#323C47 !important",
+    fontWeight: 600,
   },
   downloadButton: {
     margin: theme.spacing(0, 1),
@@ -45,6 +68,14 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginRight: theme.spacing(2),
+  },
+  viewButton: {
+    fontWeight: 700,
+    fontSize: 13,
+    borderRadius: 40,
+    width: 70,
+    padding: theme.spacing(1, 0),
+    margin: theme.spacing(-0.5, 0),
   },
   deleteButton: {
     margin: "-4px 0",

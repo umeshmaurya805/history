@@ -16,8 +16,8 @@ import IconButton from "@material-ui/core/IconButton";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import useStyles, { StyledTableCell } from "./style";
 import { toast } from "react-toastify";
+import useStyles, { StyledTableCell, BlueStyledTableCell } from "./style";
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -46,17 +46,26 @@ const stableSort = (array, comparator) => {
 };
 
 const EnhancedTableHead = (props) => {
-  const { classes, columns, order, orderBy, onRequestSort } = props;
+  const { classes, columns, order, orderBy, onRequestSort, editable, colored } =
+    props;
 
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
+  };
+
+  const TableHeadWrapper = ({ children, ...props }) => {
+    return colored ? (
+      <BlueStyledTableCell {...props}>{children}</BlueStyledTableCell>
+    ) : (
+      <StyledTableCell {...props}>{children}</StyledTableCell>
+    );
   };
 
   return (
     <TableHead>
       <TableRow>
         {columns.map((column) => (
-          <StyledTableCell
+          <TableHeadWrapper
             key={column.id}
             align={column.id === "name" ? "left" : "center"}
             sortDirection={orderBy === column.id ? order : false}
@@ -65,27 +74,35 @@ const EnhancedTableHead = (props) => {
               minWidth: column.fixedWidth,
             }}
           >
-            <TableSortLabel
-              className={column.id !== "name" ? classes.sortLabel : null}
-              active={orderBy === column.id}
-              direction={orderBy === column.id ? order : "asc"}
-              onClick={createSortHandler(column.id)}
-            >
-              {column.label}
-              {orderBy === column.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </span>
-              ) : null}
-            </TableSortLabel>
-          </StyledTableCell>
+            {column.id === "certificate" ? (
+              column.label
+            ) : (
+              <TableSortLabel
+                className={column.id !== "name" ? classes.sortLabel : null}
+                active={orderBy === column.id}
+                direction={orderBy === column.id ? order : "asc"}
+                onClick={createSortHandler(column.id)}
+              >
+                {column.label}
+                {orderBy === column.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </span>
+                ) : null}
+              </TableSortLabel>
+            )}
+          </TableHeadWrapper>
         ))}
-        <StyledTableCell
-          style={{
-            width: 20,
-            minWidth: 20,
-          }}
-        ></StyledTableCell>
+        {editable && (
+          <StyledTableCell
+            style={{
+              width: 20,
+              minWidth: 20,
+            }}
+          />
+        )}
       </TableRow>
     </TableHead>
   );
@@ -98,7 +115,13 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const ParticipantTable = ({ rows, columns }) => {
+const ParticipantTable = ({
+  rows,
+  columns,
+  editable = false,
+  colored = false,
+  noHeader = false,
+}) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
@@ -131,24 +154,46 @@ const ParticipantTable = ({ rows, columns }) => {
     });
   };
 
+  const handleParticipantDelete = (slug) => {
+    toast.success("Participant removed from the event", {
+      toastId: "ParticipantDelete",
+    });
+  };
+
+  const handleCertificateView = (slug) => {
+    toast.success("Preview Certificate", {
+      toastId: "Preview Certificate",
+    });
+  };
+
+  const handleCertificateDownload = (slug) => {
+    toast.success("Certificate download", {
+      toastId: "CertificateDownload",
+    });
+  };
+
   return (
     <Paper className={classes.root}>
       <TableContainer>
-        <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="primary" className={classes.title}>
-            Participant List
-          </Typography>
-          <Button
-            color="primary"
-            className={classes.downloadButton}
-            endIcon={<GetAppIcon />}
-            onClick={handleDownloadList}
-          >
-            Download List
-          </Button>
-        </Toolbar>
+        {!noHeader && (
+          <Toolbar className={classes.toolbar}>
+            <Typography variant="h6" color="primary" className={classes.title}>
+              Participant List
+            </Typography>
+            <Button
+              color="primary"
+              className={classes.downloadButton}
+              endIcon={<GetAppIcon />}
+              onClick={handleDownloadList}
+            >
+              Download List
+            </Button>
+          </Toolbar>
+        )}
         <Table aria-label="participant table">
           <EnhancedTableHead
+            editable={editable}
+            colored={colored}
             classes={classes}
             columns={columns}
             order={order}
@@ -177,15 +222,42 @@ const ParticipantTable = ({ rows, columns }) => {
                         </StyledTableCell>
                       ) : (
                         <StyledTableCell key={column.id} align="center">
-                          {value} {column.id === "currentClass" && row.section}
+                          {column.id === "certificate" ? (
+                            <React.Fragment>
+                              <Button
+                                onClick={() => handleCertificateView(row.slug)}
+                                color="primary"
+                                className={classes.viewButton}
+                              >
+                                View
+                              </Button>
+                              <IconButton
+                                aria-label="download"
+                                color="primary"
+                                onClick={() =>
+                                  handleCertificateDownload(row.slug)
+                                }
+                              >
+                                <GetAppIcon fontSize="small" />
+                              </IconButton>
+                            </React.Fragment>
+                          ) : (
+                            value
+                          )}
+                          {column.id === "currentClass" && row.section}
                         </StyledTableCell>
                       );
                     })}
-                    <StyledTableCell align="right">
-                      <IconButton className={classes.deleteButton}>
-                        <DeleteOutlineIcon fontSize="small" />
-                      </IconButton>
-                    </StyledTableCell>
+                    {editable && (
+                      <StyledTableCell align="right">
+                        <IconButton
+                          className={classes.deleteButton}
+                          onClick={() => handleParticipantDelete(row.slug)}
+                        >
+                          <DeleteOutlineIcon fontSize="small" />
+                        </IconButton>
+                      </StyledTableCell>
+                    )}
                   </TableRow>
                 );
               })}
