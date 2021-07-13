@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   downloadButton: {
     margin: theme.spacing(0, 1),
     padding: theme.spacing(1, 2),
+    borderRadius: 12,
   },
   table: {
     minWidth: 800,

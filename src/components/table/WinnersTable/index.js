@@ -132,6 +132,7 @@ const WinnersTable = ({ rows, columns }) => {
                             <Avatar
                               src={row.avatar}
                               className={classes.avatar}
+                              alt={value}
                             />
                             <Typography className={classes.participantName}>
                               {value}
