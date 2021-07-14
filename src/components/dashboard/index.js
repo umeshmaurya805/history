@@ -12,7 +12,11 @@ const Dashboard = () => {
   return (
     <Switch>
       <Route exact path={`${path}/home`} component={Home} />
-      <Route exact path={`${path}/calendar`} component={Calendar} />
+      <Route
+        exact
+        path={[`${path}/calendar/:slug`, `${path}/calendar`]}
+        component={Calendar}
+      />
       <Route exact path={`${path}/analytics`} component={Analytics} />
       <Route exact path={`${path}/leaderboard`} component={Leaderboard} />
       <Route exact path={`${path}/my-account`} component={MyAccount} />

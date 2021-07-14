@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
-import CompetitiveEventList from "../../../dialog/CompetitiveEventList";
+import PastEventDialog from "../../../dialog/PastEventDialog";
 import EventsTable from "../../../table/EventsTable";
-import useStyles from "./style";
 import PastEventsConfiguration from "./../../../config/PastEventsConfiguration/index";
 
 const columns = [
@@ -133,8 +132,6 @@ const eventsList = [
 ];
 
 const CompetitivePanel = () => {
-  const classes = useStyles();
-
   const [open, setOpen] = useState(false);
   const [slug, setSlug] = useState(null);
 
@@ -169,14 +166,14 @@ const CompetitivePanel = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <PastEventsConfiguration competitive value={option} handleChange={handleChange} handleDownloadList={handleDownloadList} />
       <EventsTable
         rows={eventsList}
         columns={columns}
         handleClickOpen={handleClickOpen}
       />
-      <CompetitiveEventList slug={slug} open={open} onClose={handleClose} />
+      <PastEventDialog competitive slug={slug} open={open} onClose={handleClose} />
     </div>
   );
 };

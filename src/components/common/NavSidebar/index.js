@@ -54,20 +54,25 @@ const NavList = () => {
   ];
 
   return list.map(({ text, Svg, path, url }, index) => {
+    const matches = parentUrl.includes(url);
+
     return (
       <Link to={url} key={index} className={classes.link}>
         <ListItem
           className={classes.listItem}
           classes={{ selected: classes.selected }}
           button
-          selected={parentUrl === url}
+          selected={matches}
         >
           <ListItemIcon className={classes.listItemIcon}>
             {url === "/dashboard/analytics" ? (
               <Svg fill={parentUrl === url ? "#4A90E2" : "white"} />
             ) : (
               <SvgIcon
-                style={{ color: parentUrl === url ? "#4A90E2" : "white" }}
+                style={{
+                  color:
+                    matches ? "#4A90E2" : "white",
+                }}
               >
                 {path}
               </SvgIcon>
@@ -96,11 +101,7 @@ const NavSidebar = () => {
       <Box className={classes.logoBox}>
         <img className={classes.logo} src={HDLogo} alt="History Diaries Logo" />
       </Box>
-      <List
-        className={classes.navList}
-        component="nav"
-        aria-label="navigation"
-      >
+      <List className={classes.navList} component="nav" aria-label="navigation">
         <NavList />
       </List>
       <LoadingIconButton
