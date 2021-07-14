@@ -4,109 +4,50 @@ import Layout from "../../common/Layout";
 import EventCalendar from "./EventCalendar";
 import NextInLine from "./NextInLine";
 import EventDetails from "./EventDetails";
-import eventImage from "../../../assets/svg/event-image.png";
 import useStyles from "./style";
-// import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { isAfter } from "date-fns";
 // import { eventBinarySearch } from './../../../utils/algorithms';
+import { toast } from "react-toastify";
 
 const Calendar = () => {
   const classes = useStyles();
-  // const history = useHistory();
-  const events = [
-    {
-      name: "Event X  Online theatre show for",
-      startDate: new Date(2021, 6, 1, 15),
-      endDate: new Date(2021, 6, 2, 18, 30),
-      slug: "event-0",
-      subHeading:
-        "This is our test event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
-    {
-      name: "Event 1",
-      startDate: new Date(2021, 6, 1, 10),
-      endDate: new Date(2021, 6, 5, 18, 30),
-      slug: "event-1",
-      subHeading:
-        "This is our first event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
-    {
-      name: "Event 2",
-      startDate: new Date(2021, 6, 7, 12),
-      endDate: new Date(2021, 6, 10, 18, 30),
-      slug: "event-2",
-      subHeading:
-        "This is our second event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
-    {
-      name: "Event 3",
-      startDate: new Date(2021, 6, 9, 8),
-      endDate: new Date(2021, 6, 12, 14),
-      slug: "event-3",
-      subHeading:
-        "This is our third event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
-    {
-      name: "Event 4",
-      startDate: new Date(2021, 6, 12, 12),
-      endDate: new Date(2021, 6, 18, 15),
-      slug: "event-4",
-      subHeading:
-        "This is our fourth event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
-    {
-      name: "Event 5",
-      startDate: new Date(2021, 6, 15, 10),
-      endDate: new Date(2021, 6, 16, 18, 30),
-      slug: "event-5",
-      subHeading:
-        "This is our fifth event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
-    {
-      name: "Event 6",
-      startDate: new Date(2021, 6, 20, 10),
-      endDate: new Date(2021, 6, 20, 14, 30),
-      slug: "event-6",
-      subHeading:
-        "This is our sixth event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
-    {
-      name: "Event 7 - World of Theater",
-      startDate: new Date(2021, 6, 28, 10),
-      endDate: new Date(2021, 7, 4, 20),
-      slug: "event-7",
-      subHeading:
-        "This is our seventh event Online theatre show for class 9-12  Online theatre show for class 9-12",
-      image: eventImage,
-      description: "Event details, rounds timings, etc.",
-    },
+  const history = useHistory();
+
+  const { slug } = useParams();
+
+  const slugHash = [
+    ["event-0", { year: 2021, month: 6, day: 1 }],
+    ["event-1", { year: 2021, month: 6, day: 1 }],
+    ["event-2", { year: 2021, month: 6, day: 7 }],
+    ["event-3", { year: 2021, month: 6, day: 9 }],
+    ["event-4", { year: 2021, month: 6, day: 12 }],
+    ["event-5", { year: 2021, month: 6, day: 15 }],
+    ["event-6", { year: 2021, month: 6, day: 20 }],
+    ["event-7", { year: 2021, month: 6, day: 28 }],
+    ["event-8", { year: 2021, month: 6, day: 28 }],
+    ["event-9", { year: 2021, month: 6, day: 28 }],
   ];
 
-  // let { slug } = useParams();
-  const slug="hi"
-  // console.log('slug',slug);
+  if (!slug) {
+    const today = new Date();
 
-  // if (!slug) {
-  //   slug = eventBinarySearch(events, new Date());
-  //   history.push(`/dashboard/calendar/${slug}`)
-  // }
+    const slugItem = slugHash.find(([_, item]) => {
+      const day = new Date(item.year, item.month, item.day);
 
-  const handleEventClick = (slug) => {
-    // history.push(`/dashboard/calendar/${slug}`);
-  };
+      return isAfter(day, today);
+    });
+
+    if (!slugItem) {
+      toast.info("No Events found", {
+        toastId: "NoEventFound",
+      });
+      return <div>No Events</div>;
+    }
+    console.log("slugItem", slugItem);
+    history.push(`/dashboard/calendar/${slugItem[0]}`);
+    return null;
+  }
 
   return (
     <Layout>
@@ -114,19 +55,15 @@ const Calendar = () => {
         <Grid item xs={12} md={5} xl={4} className={classes.itemLeft}>
           <Grid container justifyContent="center" spacing={3}>
             <Grid item xs={12} sm={6} md={12}>
-              <EventCalendar slug={slug} events={events} handleEventClick={handleEventClick} />
+              <EventCalendar              />
             </Grid>
             <Grid item xs={12} sm={6} md={12} className={classes.nextLine}>
-              <NextInLine
-                slug={slug}
-                events={events}
-                handleEventClick={handleEventClick}
-              />
+              <NextInLine />
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} md={7} xl={8}>
-          <EventDetails slug={slug} events={events} />
+          <EventDetails/>
         </Grid>
       </Grid>
     </Layout>
