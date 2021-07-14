@@ -1,9 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  dialogTitle: {
-    display: "flex",
-  },
   title: {
     fontSize: 18,
     fontWeight: 700,

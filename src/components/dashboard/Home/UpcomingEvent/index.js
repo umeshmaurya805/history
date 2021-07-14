@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Title from "../../../common/Title";
 import EventsTable from "../../../table/EventsTable";
-import ParticipantList from "../../../dialog/ParticipantList";
+import ParticipantListDialog from "../../../dialog/ParticipantListDialog";
 import EventConfiguration from "../../../config/EventConfiguration";
 import useStyles from "./style";
 
@@ -166,7 +166,7 @@ const UpcomingEvent = () => {
           handleClickOpen={handleClickOpen}
         />
       </Box>
-      <ParticipantList slug={slug} open={open} onClose={handleClose} />
+      <ParticipantListDialog slug={slug} open={open} onClose={handleClose} />
     </div>
   );
 };

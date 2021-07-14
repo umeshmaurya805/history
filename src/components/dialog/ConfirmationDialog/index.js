@@ -21,7 +21,6 @@ const ConfirmationDialog = ({
       <DialogTitle
         id="confirmation-dialog-title"
         disableTypography
-        className={classes.dialogTitle}
       >
         <Typography className={classes.title}> {title} </Typography>
       </DialogTitle>

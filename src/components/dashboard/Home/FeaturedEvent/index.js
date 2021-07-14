@@ -22,6 +22,7 @@ const FeaturedEvent = () => {
       forClass: "9 - 12",
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
+      slug: "event-1",
     },
     {
       title: "Trade To Territory 2",
@@ -31,6 +32,7 @@ const FeaturedEvent = () => {
       forClass: "9 - 12",
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
+      slug: "event-2",
     },
     {
       title: "Trade To Territory 3",
@@ -40,6 +42,7 @@ const FeaturedEvent = () => {
       forClass: "9 - 12",
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
+      slug: "event-3",
     },
     {
       title: "Trade To Territory 4",
@@ -49,25 +52,28 @@ const FeaturedEvent = () => {
       forClass: "9 - 12",
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
+      slug: "event-4",
     },
-    // {
-    //   title: "Trade To Territory 5",
-    //   subHeading:
-    //     "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
-    //   image: eventImage,
-    //   forClass: "9 - 12",
-    //   date: new Date().toLocaleDateString(),
-    //   time: new Date().toLocaleTimeString(),
-    // },
-    // {
-    //   title: "Trade To Territory 6",
-    //   subHeading:
-    //     "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
-    //   image: eventImage,
-    //   forClass: "9 - 12",
-    //   date: new Date().toLocaleDateString(),
-    //   time: new Date().toLocaleTimeString(),
-    // },
+    {
+      title: "Trade To Territory 5",
+      subHeading:
+        "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
+      image: eventImage,
+      forClass: "9 - 12",
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString(),
+      slug: "event-5",
+    },
+    {
+      title: "Trade To Territory 6",
+      subHeading:
+        "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
+      image: eventImage,
+      forClass: "9 - 12",
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString(),
+      slug: "event-6",
+    },
   ];
 
   const responsive = {
