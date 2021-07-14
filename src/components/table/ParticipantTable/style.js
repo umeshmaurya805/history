@@ -44,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
   },
   toolbar: {
-    padding: theme.spacing(3, 2),
+    padding: theme.spacing(3, 3, 3, 2),
+    flexWrap: "wrap",
   },
   title: {
     flex: 1,
@@ -56,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   downloadButton: {
-    margin: theme.spacing(0, 1),
     padding: theme.spacing(1, 2),
     borderRadius: 12,
   },
