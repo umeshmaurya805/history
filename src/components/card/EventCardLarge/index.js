@@ -6,11 +6,13 @@ import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import useStyles from "./style";
+import { useHistory } from "react-router-dom";
 
-const EventCard = ({ data }) => {
+const EventCardLarge = ({ data }) => {
   const classes = useStyles();
+  const history = useHistory();
 
-  const { title, subHeading, image, date, time, forClass } = data;
+  const { title, subHeading, image, date, time, forClass, slug } = data;
 
   return (
     <div className={classes.root}>
@@ -70,6 +72,7 @@ const EventCard = ({ data }) => {
                   size="small"
                   color="primary"
                   variant="outlined"
+                  onClick={() => history.push(`/dashboard/calendar/${slug}`)}
                 >
                   View Details
                 </Button>
@@ -82,4 +85,4 @@ const EventCard = ({ data }) => {
   );
 };
 
-export default EventCard;
+export default EventCardLarge;
