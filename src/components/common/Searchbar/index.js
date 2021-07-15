@@ -5,7 +5,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./style";
 import { IconButton } from "@material-ui/core";
 
-const SearchBar = ({ value, onChange, onCancel }) => {
+const SearchBar = ({ placeholder, value, onChange, onCancel }) => {
   const classes = useStyles();
 
   return (
@@ -14,7 +14,7 @@ const SearchBar = ({ value, onChange, onCancel }) => {
       classes={classes}
       value={value}
       onChange={onChange}
-      placeholder={"Search for the event"}
+      placeholder={placeholder}
       startAdornment={<SearchIcon />}
       endAdornment={
         value && (

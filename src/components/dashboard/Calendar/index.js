@@ -9,6 +9,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { isAfter } from "date-fns";
 // import { eventBinarySearch } from './../../../utils/algorithms';
 import { toast } from "react-toastify";
+import { getSlugHash } from "../../../data";
 
 const Calendar = () => {
   const classes = useStyles();
@@ -16,26 +17,13 @@ const Calendar = () => {
 
   const { slug } = useParams();
 
-  const slugHash = [
-    ["event-0", { year: 2021, month: 6, day: 1 }],
-    ["event-1", { year: 2021, month: 6, day: 1 }],
-    ["event-2", { year: 2021, month: 6, day: 7 }],
-    ["event-3", { year: 2021, month: 6, day: 9 }],
-    ["event-4", { year: 2021, month: 6, day: 12 }],
-    ["event-5", { year: 2021, month: 6, day: 15 }],
-    ["event-6", { year: 2021, month: 6, day: 20 }],
-    ["event-7", { year: 2021, month: 6, day: 28 }],
-    ["event-8", { year: 2021, month: 6, day: 28 }],
-    ["event-9", { year: 2021, month: 6, day: 28 }],
-  ];
+  const slugHash = getSlugHash();
 
   if (!slug) {
     const today = new Date();
 
-    const slugItem = slugHash.find(([_, item]) => {
-      const day = new Date(item.year, item.month, item.day);
-
-      return isAfter(day, today);
+    const slugItem = slugHash.find((item) => {
+      return isAfter(item[2], today);
     });
 
     if (!slugItem) {
@@ -47,6 +35,12 @@ const Calendar = () => {
     console.log("slugItem", slugItem);
     history.push(`/dashboard/calendar/${slugItem[0]}`);
     return null;
+  } else {
+    const slugItem = slugHash.find((item) => slug === item[0]);
+    if (!slugItem) {
+      history.push("/dashboard/calendar");
+      return null;
+    }
   }
 
   return (
@@ -55,7 +49,7 @@ const Calendar = () => {
         <Grid item xs={12} md={5} xl={4} className={classes.itemLeft}>
           <Grid container justifyContent="center" spacing={3}>
             <Grid item xs={12} sm={6} md={12}>
-              <EventCalendar              />
+              <EventCalendar />
             </Grid>
             <Grid item xs={12} sm={6} md={12} className={classes.nextLine}>
               <NextInLine />
@@ -63,7 +57,7 @@ const Calendar = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={7} xl={8}>
-          <EventDetails/>
+          <EventDetails />
         </Grid>
       </Grid>
     </Layout>

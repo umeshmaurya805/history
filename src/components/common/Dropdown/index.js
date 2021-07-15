@@ -12,7 +12,7 @@ const Dropdown = ({
   items = [],
   colored = false,
   maxItems = 10,
-  styles = {},
+  classes: customClasses = {},
 }) => {
   const classes = useStyles();
 
@@ -43,10 +43,10 @@ const Dropdown = ({
   return (
     items &&
     items.length > 0 && (
-      <FormControl className={`${classes.root} ${styles.root}`}>
+      <FormControl className={`${classes.root} ${customClasses.root}`}>
         <Select
           classes={{
-            select: `${colored && classes.select} ${styles.select}`,
+            select: `${colored && classes.select} ${customClasses.select}`,
           }}
           disableUnderline
           MenuProps={menuProps}

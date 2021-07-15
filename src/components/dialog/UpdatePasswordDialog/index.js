@@ -25,7 +25,7 @@ const validationSchema = yup.object({
     .required("Confirmation is required"),
 });
 
-const UpdatePassword = ({ handleClose, ...props }) => {
+const UpdatePasswordDialog = ({ handleClose, ...props }) => {
   const formik = useFormik({
     initialValues: {
       currentPassword: "",
@@ -37,7 +37,7 @@ const UpdatePassword = ({ handleClose, ...props }) => {
       console.log(formData);
 
       toast.success("Password Updated", {
-        toastId: "UpdatePassword",
+        toastId: "UpdatePasswordDialog",
       });
 
       actions.resetForm();
@@ -129,4 +129,4 @@ const UpdatePassword = ({ handleClose, ...props }) => {
   );
 };
 
-export default UpdatePassword;
+export default UpdatePasswordDialog;

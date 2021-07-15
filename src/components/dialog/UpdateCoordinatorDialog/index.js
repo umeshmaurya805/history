@@ -26,7 +26,7 @@ const validationSchema = yup.object({
     .required("Email is required"),
 });
 
-const UpdateCoordinator = ({ values, handleClose, ...props }) => {
+const UpdateCoordinatorDialog = ({ values, handleClose, ...props }) => {
   const formik = useFormik({
     initialValues: values,
     validationSchema: validationSchema,
@@ -43,7 +43,7 @@ const UpdateCoordinator = ({ values, handleClose, ...props }) => {
       }
 
       toast.success("Coordinator Updated", {
-        toastId: "UpdateCoordinator",
+        toastId: "UpdateCoordinatorDialog",
       });
 
       actions.resetForm();
@@ -136,4 +136,4 @@ const UpdateCoordinator = ({ values, handleClose, ...props }) => {
   );
 };
 
-export default UpdateCoordinator;
+export default UpdateCoordinatorDialog;

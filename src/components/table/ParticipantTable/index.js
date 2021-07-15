@@ -118,6 +118,7 @@ EnhancedTableHead.propTypes = {
 const ParticipantTable = ({
   rows,
   columns,
+  title="Participant List",
   editable = false,
   colored = false,
   noHeader = false,
@@ -178,7 +179,7 @@ const ParticipantTable = ({
         {!noHeader && (
           <Toolbar className={classes.toolbar}>
             <Typography variant="h6" color="primary" className={classes.title}>
-              Participant List
+              {title}
             </Typography>
             <Button
               color="primary"

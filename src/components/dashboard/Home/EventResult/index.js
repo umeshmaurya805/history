@@ -61,7 +61,7 @@ const EventResult = () => {
               value={val}
               items={items}
               handleChange={handleChange}
-              styles={{ select: classes.select }}
+              classes={{ select: classes.select }}
             />
           </Grid>
         </Grid>

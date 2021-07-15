@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
 import CloseIcon from "@material-ui/icons/Close";
 import Box from "@material-ui/core/Box";
+import { format } from "date-fns";
 import avatarMan from "../../../assets/svg/avatar-man.svg";
 import ParticipantTable from "../../table/ParticipantTable";
 import useStyles from "./style";
@@ -19,7 +20,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -29,7 +30,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -39,7 +40,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -49,7 +50,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -59,7 +60,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -69,7 +70,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -79,7 +80,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -89,7 +90,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -99,7 +100,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 4,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team B",
   },
@@ -109,7 +110,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team B",
   },
@@ -119,7 +120,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 3,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -129,7 +130,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 7,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 2",
     team: "Team B",
   },
@@ -139,7 +140,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 4,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 2",
     team: "Team A",
   },
@@ -149,7 +150,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -159,7 +160,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 10,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 2",
     team: "Team A",
   },
@@ -169,7 +170,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 5,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -179,7 +180,7 @@ const data = [
     avatar: avatarMan,
     currentClass: 5,
     section: "A",
-    date: new Date().toLocaleDateString(),
+    date:format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
   },
@@ -246,7 +247,7 @@ const ParticipantListDialog = ({ slug, open, onClose }) => {
             <CloseIcon />
           </IconButton>
         </Box>
-        <ParticipantTable rows={rows} columns={columns} />
+        <ParticipantTable editable rows={rows} columns={columns} />
       </DialogContent>
     </Dialog>
   );

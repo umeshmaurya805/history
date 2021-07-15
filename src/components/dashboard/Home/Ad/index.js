@@ -10,7 +10,10 @@ import useStyles from "./style";
 const Ad = () => {
   const classes = useStyles();
 
-  const data = [{ image: adImage, url: "/" }];
+  const data = [
+    { image: adImage, url: "/" },
+    { image: adImage, url: "/" },
+  ];
 
   const slideProperties = {
     arrows: data.length > 1,

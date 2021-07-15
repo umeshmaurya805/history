@@ -10,7 +10,7 @@ import protectedHandler from "../../../utils/protectedHandler";
 import UpdateButtonGroup from "../../button/UpdateButtonGroup";
 import useStyles from "./style";
 
-const UpdateLogo = ({ value, handleClose, ...props }) => {
+const UpdateLogoDialog = ({ value, handleClose, ...props }) => {
   const classes = useStyles();
   const [file, setFile] = useState(null);
 
@@ -25,7 +25,7 @@ const UpdateLogo = ({ value, handleClose, ...props }) => {
     }
 
     toast.success("School Logo Updated", {
-      toastId: "UpdateLogo",
+      toastId: "UpdateLogoDialog",
     });
 
     setFile(null);
@@ -76,4 +76,4 @@ const UpdateLogo = ({ value, handleClose, ...props }) => {
   );
 };
 
-export default UpdateLogo;
+export default UpdateLogoDialog;

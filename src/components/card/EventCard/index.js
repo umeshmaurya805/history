@@ -15,7 +15,7 @@ const EventCard = ({ data }) => {
 
   return (
     <div className={classes.root}>
-      <Card>
+      <Card className={classes.card}>
         <Box
           display="flex"
           flexDirection="column"

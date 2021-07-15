@@ -14,7 +14,7 @@ const validationSchema = yup.object({
   board: yup.string("Enter board").required("Board is required"),
 });
 
-const UpdateBoard = ({ value, handleClose, ...props }) => {
+const UpdateBoardDialog = ({ value, handleClose, ...props }) => {
   const formik = useFormik({
     initialValues: {
       board: value,
@@ -28,7 +28,7 @@ const UpdateBoard = ({ value, handleClose, ...props }) => {
       }
 
       toast.success("Board Updated", {
-        toastId: "UpdateBoard",
+        toastId: "UpdateBoardDialog",
       });
 
       actions.resetForm();
@@ -75,4 +75,4 @@ const UpdateBoard = ({ value, handleClose, ...props }) => {
   );
 };
 
-export default UpdateBoard;
+export default UpdateBoardDialog;

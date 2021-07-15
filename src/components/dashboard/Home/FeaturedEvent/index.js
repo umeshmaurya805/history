@@ -4,6 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { format } from "date-fns";
 import eventImage from "../../../../assets/svg/event-image.png";
 import EventCardLarge from "../../../card/EventCardLarge";
 import EventCard from "../../../card/EventCard";
@@ -20,8 +21,8 @@ const FeaturedEvent = () => {
         "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
       image: eventImage,
       forClass: "9 - 12",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
+      date: format(new Date(), "PP"),
+      time: format(new Date(), "p"),
       slug: "event-1",
     },
     {
@@ -30,8 +31,8 @@ const FeaturedEvent = () => {
         "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
       image: eventImage,
       forClass: "9 - 12",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
+      date: format(new Date(), "PP"),
+      time: format(new Date(), "p"),
       slug: "event-2",
     },
     {
@@ -40,8 +41,8 @@ const FeaturedEvent = () => {
         "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
       image: eventImage,
       forClass: "9 - 12",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
+      date: format(new Date(), "PP"),
+      time: format(new Date(), "p"),
       slug: "event-3",
     },
     {
@@ -50,8 +51,8 @@ const FeaturedEvent = () => {
         "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
       image: eventImage,
       forClass: "9 - 12",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
+      date: format(new Date(), "PP"),
+      time: format(new Date(), "p"),
       slug: "event-4",
     },
     {
@@ -60,8 +61,8 @@ const FeaturedEvent = () => {
         "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
       image: eventImage,
       forClass: "9 - 12",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
+      date: format(new Date(), "PP"),
+      time: format(new Date(), "p"),
       slug: "event-5",
     },
     {
@@ -70,8 +71,8 @@ const FeaturedEvent = () => {
         "Embark on the journey of historical era of ( 16th - 19th century) that witnessed the transition of foreign piwers in India.",
       image: eventImage,
       forClass: "9 - 12",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
+      date: format(new Date(), "PP"),
+      time: format(new Date(), "p"),
       slug: "event-6",
     },
   ];

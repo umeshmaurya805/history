@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
   },
   item: {
-    margin: theme.spacing(1, 2),
+    margin: theme.spacing(1),
     minWidth: 105,
   },
   itemName: {
@@ -62,14 +62,19 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   reactMarkdown: {
+    color:'#383838',
     maxHeight: 380,
     overflow: "auto",
     margin: theme.spacing(2, 0, 4),
     "@media (min-width: 1700px)": {
       maxHeight: 280,
     },
+    "& > h1, h2, h3, h4, h5, h6": {
+      color:theme.palette.primary.main,
+    }
   },
   messageButton: {
+    // flexGrow: 1,
     backgroundColor: "#F89503",
     color: "white",
     width: 180,
@@ -82,7 +87,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#C37603",
     },
   },
-  registerButton: {
+  button: {
+    // flexGrow: 1,
     width: 180,
     margin: theme.spacing(1),
     padding: theme.spacing(1),

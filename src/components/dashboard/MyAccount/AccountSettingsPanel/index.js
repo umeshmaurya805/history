@@ -5,12 +5,12 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
-import UpdatePassword from "../../../dialog/UpdatePassword";
-import UpdateContactNumber from "../../../dialog/UpdateContactNumber";
-import UpdateBoard from "../../../dialog/UpdateBoard";
+import UpdatePasswordDialog from "../../../dialog/UpdatePasswordDialog";
+import UpdateCoordinatorDialog from "../../../dialog/UpdateCoordinatorDialog";
+import UpdateBoardDialog from "../../../dialog/UpdateBoardDialog";
 import UpdateAffiliationNumber from "../../../dialog/UpdateAffiliationNumber";
-import UpdateLogo from "../../../dialog/UpdateLogo";
-import UpdateCoordinator from "../../../dialog/UpdateCoordinator";
+import UpdateLogoDialog from "../../../dialog/UpdateLogoDialog";
+import UpdateContactNumberDialog from "../../../dialog/UpdateContactNumberDialog";
 import useStyles from "./style";
 
 const EditableInfo = ({ value, onClick }) => {
@@ -173,18 +173,18 @@ const AccountSettingsPanel = () => {
           {coordinatorDetails.email}
         </Typography>
       </Box>
-      <UpdatePassword
+      <UpdatePasswordDialog
         open={open.password}
         handleClose={handleClose}
         aria-labelledby="update-password-dialog"
       />
-      <UpdateBoard
+      <UpdateBoardDialog
         open={open.board}
         value={"CBSE"}
         handleClose={handleClose}
         aria-labelledby="update-board-dialog"
       />
-      <UpdateContactNumber
+      <UpdateContactNumberDialog
         open={open.contactNumber}
         value={"123456789"}
         handleClose={handleClose}
@@ -196,12 +196,12 @@ const AccountSettingsPanel = () => {
         handleClose={handleClose}
         aria-labelledby="update-affiliation-number-dialog"
       />
-      <UpdateLogo
+      <UpdateLogoDialog
         open={open.logo}
         handleClose={handleClose}
         aria-labelledby="update-logo-dialog"
       />
-      <UpdateCoordinator
+      <UpdateCoordinatorDialog
         open={open.coordinator}
         values={coordinatorDetails}
         handleClose={handleClose}

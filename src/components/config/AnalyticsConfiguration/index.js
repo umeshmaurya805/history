@@ -49,7 +49,7 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
           colored
           items={categoryItems}
           handleChange={handleChange}
-          styles={{ select: classes.category }}
+          classes={{ select: classes.category }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -60,14 +60,14 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
               value={value.user}
               items={userItems}
               handleChange={handleChange}
-              styles={{ select: classes.user }}
+              classes={{ select: classes.user }}
             />
             <Dropdown
               name="class"
               value={value.class}
               items={classItems}
               handleChange={handleChange}
-              styles={{ select: classes.class }}
+              classes={{ select: classes.class }}
             />
           </Grid>
           <Grid
@@ -82,14 +82,14 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
               value={value.pastDays}
               items={pastDaysItems}
               handleChange={handleChange}
-              styles={{ root: classes.yearSelector, select: classes.pastDays }}
+              classes={{ root: classes.yearSelector, select: classes.pastDays }}
             />
             <Dropdown
               name="academicYear"
               value={value.academicYear}
               items={academicYearItems}
               handleChange={handleChange}
-              styles={{
+              classes={{
                 root: classes.yearSelector,
                 select: classes.academicYear,
               }}
@@ -102,7 +102,7 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
           values={chartDateSelectorTypes}
           selectedIndex={selectedIndex}
           onClick={setSelectedIndex}
-          styles={{ root: classes.buttonContainer, button: classes.button }}
+          classes={{ root: classes.buttonContainer, button: classes.button }}
         />
       </Grid>
     </Grid>

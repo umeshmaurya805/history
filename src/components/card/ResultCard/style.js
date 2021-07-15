@@ -11,10 +11,14 @@ const useStyles = makeStyles((theme) => ({
     height: 120,
   },
   position: {
+    display: "flex",
+    flexGrow: 1,
     alignSelf: "start",
-    "& > div.MuiTypography-root": {
-      fontWeight: 900,
-      fontSize: 32,
+    justifyContent: "flex-end",
+    "& > img": {
+      minWidth: 30,
+      maxWidth: "10%",
+      width: "25%",
     },
   },
   logo: {

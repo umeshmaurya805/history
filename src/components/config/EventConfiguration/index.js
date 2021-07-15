@@ -3,10 +3,24 @@ import Box from "@material-ui/core/Box";
 import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
 
-const EventConfiguration = ({ value, handleChange, styles = {} }) => {
+const EventConfiguration = ({
+  value,
+  handleChange,
+  classes: customClasses = {},
+}) => {
   const classes = useStyles();
 
-  const classItems = ["Class", "Class 10",  "Class 9",  "Class 8",  "Class 7",  "Class 6",  "Class 5",  "Class 4",  "Class 3"];
+  const classItems = [
+    "Class",
+    "Class 10",
+    "Class 9",
+    "Class 8",
+    "Class 7",
+    "Class 6",
+    "Class 5",
+    "Class 4",
+    "Class 3",
+  ];
 
   const userItems = ["User", "Student", "Teacher"];
 
@@ -35,7 +49,7 @@ const EventConfiguration = ({ value, handleChange, styles = {} }) => {
       display="flex"
       justifyContent="flex-end"
       flexWrap="wrap"
-      className={`${classes.root} ${styles.root}`}
+      className={`${classes.root} ${customClasses.root}`}
     >
       <Dropdown
         name="class"
@@ -43,7 +57,7 @@ const EventConfiguration = ({ value, handleChange, styles = {} }) => {
         colored
         items={classItems}
         handleChange={handleChange}
-        styles={{ select: classes.selectClass }}
+        classes={{ select: classes.selectClass }}
       />
       <Dropdown
         name="user"
@@ -51,7 +65,7 @@ const EventConfiguration = ({ value, handleChange, styles = {} }) => {
         colored
         items={userItems}
         handleChange={handleChange}
-        styles={{ select: classes.selectUser }}
+        classes={{ select: classes.selectUser }}
       />
       <Dropdown
         name="category"
@@ -59,7 +73,7 @@ const EventConfiguration = ({ value, handleChange, styles = {} }) => {
         colored
         items={categoryItems[value.user]}
         handleChange={handleChange}
-        styles={{ select: classes.selectCategory }}
+        classes={{ select: classes.selectCategory }}
       />
     </Box>
   );

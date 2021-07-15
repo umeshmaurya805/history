@@ -10,6 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CancelIcon from "@material-ui/icons/Cancel";
 import useStyles from "./style";
 import Chip from "@material-ui/core/Chip";
+import format from "date-fns/format";
 
 const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
   const classes = useStyles();
@@ -22,7 +23,7 @@ const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
       >
         <Box display="flex" justifyContent="flex-end">
           <Typography className={classes.title}>
-            Events on {date.toLocaleDateString("in")}
+            Events on {format(date, "PP")}
           </Typography>
           <IconButton
             edge="start"
@@ -68,9 +69,7 @@ const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
                     <Chip
                       size="small"
                       variant="outlined"
-                      label={`Starts On: ${event.startDate.toLocaleDateString(
-                        "in"
-                      )}`}
+                      label={`Starts On: ${format(event.startDate, "p")}`}
                       className={classes.eventRegisteredTag}
                     />
                   </Box>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
+import format from "date-fns/format";
 import EventStats from "../../../common/EventStats";
-import useStyles from "./style";
 import AnalyticsConfiguration from "../../../config/AnalyticsConfiguration";
+import useStyles from "./style";
 
 const ParticipantPanel = () => {
   const classes = useStyles();
@@ -39,21 +40,15 @@ const ParticipantPanel = () => {
     },
   ];
 
-  const dateConfig = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-
   const chartData = {
     labels: [
-      new Date(2021, 6, 23).toLocaleDateString("in", dateConfig),
-      new Date(2021, 6, 24).toLocaleDateString("in", dateConfig),
-      new Date(2021, 6, 25).toLocaleDateString("in", dateConfig),
-      new Date(2021, 6, 26).toLocaleDateString("in", dateConfig),
-      new Date(2021, 6, 27).toLocaleDateString("in", dateConfig),
-      new Date(2021, 6, 28).toLocaleDateString("in", dateConfig),
-      new Date(2021, 6, 29).toLocaleDateString("in", dateConfig),
+      format(new Date(2021, 6, 23), "PP"),
+      format(new Date(2021, 6, 24), "PP"),
+      format(new Date(2021, 6, 25), "PP"),
+      format(new Date(2021, 6, 26), "PP"),
+      format(new Date(2021, 6, 27), "PP"),
+      format(new Date(2021, 6, 28), "PP"),
+      format(new Date(2021, 6, 29), "PP"),
     ],
     datasets: [
       {

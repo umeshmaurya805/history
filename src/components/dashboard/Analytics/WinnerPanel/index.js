@@ -1,4 +1,5 @@
 import React from "react";
+import format from "date-fns/format";
 import EventStats from "../../../common/EventStats";
 import ParticipantTable from "../../../table/ParticipantTable";
 import avatarMan from "../../../../assets/svg/avatar-man.svg";
@@ -36,7 +37,7 @@ const WinnerPanel = () => {
       avatar: avatarMan,
       currentClass: 10,
       section: "A",
-      date: new Date().toLocaleDateString(),
+      date: format(new Date(), "PP"),
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
@@ -49,7 +50,7 @@ const WinnerPanel = () => {
       avatar: avatarMan,
       currentClass: 10,
       section: "A",
-      date: new Date().toLocaleDateString(),
+      date: format(new Date(), "PP"),
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
@@ -62,7 +63,7 @@ const WinnerPanel = () => {
       avatar: avatarMan,
       currentClass: 10,
       section: "A",
-      date: new Date().toLocaleDateString(),
+      date: format(new Date(), "PP"),
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
@@ -75,7 +76,7 @@ const WinnerPanel = () => {
       avatar: avatarMan,
       currentClass: 10,
       section: "A",
-      date: new Date().toLocaleDateString(),
+      date: format(new Date(), "PP"),
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
@@ -88,7 +89,7 @@ const WinnerPanel = () => {
       avatar: avatarMan,
       currentClass: 10,
       section: "A",
-      date: new Date().toLocaleDateString(),
+      date: format(new Date(), "PP"),
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
@@ -101,7 +102,7 @@ const WinnerPanel = () => {
       avatar: avatarMan,
       currentClass: 10,
       section: "A",
-      date: new Date().toLocaleDateString(),
+      date: format(new Date(), "PP"),
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
@@ -114,7 +115,7 @@ const WinnerPanel = () => {
       avatar: avatarMan,
       currentClass: 10,
       section: "A",
-      date: new Date().toLocaleDateString(),
+      date: format(new Date(), "PP"),
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
@@ -163,7 +164,7 @@ const WinnerPanel = () => {
   return (
     <div className={classes.root}>
       <EventStats className={classes.stats} data={data} />
-      <ParticipantTable noHeader colored rows={rows} columns={columns} />
+      <ParticipantTable title="Winners List" colored rows={rows} columns={columns} />
     </div>
   );
 };

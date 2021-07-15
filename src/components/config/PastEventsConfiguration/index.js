@@ -6,7 +6,12 @@ import SearchBar from "../../common/Searchbar";
 import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
 
-const PastEventsConfiguration = ({ competitive, value, handleChange,handleDownloadList }) => {
+const PastEventsConfiguration = ({
+  competitive,
+  value,
+  handleChange,
+  handleDownloadList,
+}) => {
   const classes = useStyles();
 
   const [searchEventName, setSearchEventName] = useState("");
@@ -74,6 +79,7 @@ const PastEventsConfiguration = ({ competitive, value, handleChange,handleDownlo
             style={{ marginBottom: 10 }}
           >
             <SearchBar
+              placeholder="Search for the event"
               value={searchEventName}
               onChange={handleOnSearchChange}
               onCancel={() => setSearchEventName("")}
@@ -91,21 +97,21 @@ const PastEventsConfiguration = ({ competitive, value, handleChange,handleDownlo
               value={value.status}
               items={statusItems}
               handleChange={handleChange}
-              styles={{ select: classes.status }}
+              classes={{ select: classes.status }}
             />
             <Dropdown
               name="month"
               value={value.month}
               items={monthItems}
               handleChange={handleChange}
-              styles={{ select: classes.month }}
+              classes={{ select: classes.month }}
             />
             <Dropdown
               name="year"
               value={value.year}
               items={yearItems}
               handleChange={handleChange}
-              styles={{ select: classes.year }}
+              classes={{ select: classes.year }}
             />
           </Grid>
         </Grid>
@@ -117,14 +123,14 @@ const PastEventsConfiguration = ({ competitive, value, handleChange,handleDownlo
                 value={value.class}
                 items={classItems}
                 handleChange={handleChange}
-                styles={{ select: classes.class }}
+                classes={{ select: classes.class }}
               />
               <Dropdown
                 name="user"
                 value={value.user}
                 items={userItems}
                 handleChange={handleChange}
-                styles={{ select: classes.user }}
+                classes={{ select: classes.user }}
               />
               {!competitive && (
                 <Dropdown
@@ -132,7 +138,7 @@ const PastEventsConfiguration = ({ competitive, value, handleChange,handleDownlo
                   value={value.category}
                   items={categoryItems[value.user]}
                   handleChange={handleChange}
-                  styles={{ select: classes.category }}
+                  classes={{ select: classes.category }}
                 />
               )}
             </Grid>

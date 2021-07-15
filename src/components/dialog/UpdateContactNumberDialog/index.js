@@ -16,7 +16,7 @@ const validationSchema = yup.object({
     .required("Contact number is required"),
 });
 
-const UpdateContactNumber = ({ value, handleClose, ...props }) => {
+const UpdateContactNumberDialog = ({ value, handleClose, ...props }) => {
   const formik = useFormik({
     initialValues: {
       contactNumber: value,
@@ -30,7 +30,7 @@ const UpdateContactNumber = ({ value, handleClose, ...props }) => {
       }
 
       toast.success("School Contact Number Updated", {
-        toastId: "UpdateContactNumber",
+        toastId: "UpdateContactNumberDialog",
       });
 
       actions.resetForm();
@@ -82,4 +82,4 @@ const UpdateContactNumber = ({ value, handleClose, ...props }) => {
   );
 };
 
-export default UpdateContactNumber;
+export default UpdateContactNumberDialog;
