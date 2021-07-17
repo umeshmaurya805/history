@@ -2,20 +2,20 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 242,
+    width: "15.125rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   logoBox: {
-    height: 116,
-    width: 116,
-    marginBottom: theme.spacing(2.5),
+    height: "7.25rem",
+    width: "7.25rem",
+    marginBottom: "1.25rem",
   },
   logo: {
-    height: 116,
-    width: 116,
-    marginTop: theme.spacing(2.5),
+    height: "7.25rem",
+    width: "7.25rem",
+    marginTop: "1.25rem",
   },
   navList: {
     width: "100%",
@@ -26,35 +26,35 @@ const useStyles = makeStyles((theme) => ({
   },
   selected: {
     backgroundColor: "white !important",
-    borderLeft: "6px solid #F89503",
-    paddingLeft: "54px !important",
+    borderLeft: "0.375rem solid #F89503",
+    paddingLeft: "3.375rem !important",
     color: "#4A90E2",
     "& span": {
       fontWeight: "500",
     },
   },
   listItem: {
-    paddingLeft: 60,
+    paddingLeft: "3.75rem",
   },
   listItemIcon: {
     minWidth: "unset",
-    marginRight: 10,
-    height: 20,
-    width: 20,
+    marginRight: "0.625rem",
+    height: "1.25rem",
+    width: "1.25rem",
   },
   listItemText: {
     flex: "unset",
     "& span": {
       fontFamily: "Roboto !important",
-      fontSize:20,
+      fontSize: "1.25rem",
     },
   },
   logoutButton: {
     color: theme.palette.primary.main,
     backgroundColor: "white",
-    borderRadius: 21,
-    marginTop: 128,
-    padding: "3px 27px",
+    borderRadius: "1.25rem",
+    marginTop: "8rem",
+    padding: "0.1875rem 1.6875rem",
     "&:hover": {
       backgroundColor: "#F0F0F1",
     },
