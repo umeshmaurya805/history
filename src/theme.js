@@ -1,7 +1,7 @@
-import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core";
+import { unstable_createMuiStrictModeTheme as createMuiTheme ,responsiveFontSizes } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 
-export const rootTheme = createMuiTheme({
+export const rootTheme = responsiveFontSizes(createMuiTheme({
   palette: {
     primary: {
       light: "#4f84c3",
@@ -114,4 +114,4 @@ export const rootTheme = createMuiTheme({
       },
     },
   },
-});
+}));
