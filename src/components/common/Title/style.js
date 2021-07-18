@@ -2,12 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 225,
-    marginBottom: 20,
+    width: "14rem",
+    marginBottom: "1.25rem",
     fontFamily: "Roboto",
-    fontSize: 22,
+    fontSize: "1.375rem",
     color: "#383838",
-    borderBottom: "5px solid #F89503",
+    borderBottom: "0.3125rem solid #F89503",
   },
 }));
 

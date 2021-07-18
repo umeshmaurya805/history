@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   header: {
     color: "white",
-    borderBottom: "1px solid hsl(210, 32%, 93%)",
-    [theme.breakpoints.up("md")]: {
+    borderBottom: "0.0625rem solid hsl(210, 32%, 93%)",
+    [theme.breakpoints.up("lg")]: {
       display: "none",
     },
   },
@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
   },
   content: {
-    padding: theme.spacing(4),
+    padding: "2rem",
     [theme.breakpoints.only("xs")]: {
-      padding: theme.spacing(2),
+      padding: "1rem",
     },
   },
 }));

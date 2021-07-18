@@ -15,7 +15,7 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
     "Non-Competitive",
   ];
 
-  const userItems = ["User", "Student", "Teacher"];
+  const userItems = ["Student", "Teacher"];
 
   const classItems = [
     "Class",

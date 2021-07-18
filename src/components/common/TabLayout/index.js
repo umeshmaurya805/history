@@ -56,7 +56,7 @@ const TabLayout = ({ labels, panels, ...props }) => {
       {panels.map((Panel, index) => {
         return (
           <TabPanel key={index} value={value} index={index}>
-            <Panel />
+            <Panel setActivePanel={(activePanelValue) => setValue(activePanelValue)} />
           </TabPanel>
         );
       })}

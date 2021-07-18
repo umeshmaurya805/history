@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import HDLogo from "../../../assets/images/hd-logo.png";
 import AnalyticsSvg from "../../../assets/AnalyticsSvg";
-import { useLogoutMutation } from "../../../app/services/hd/auth";
+import { useLogoutMutation } from "../../../app/api/auth";
 import protectedHandler from "../../../utils/protectedHandler";
 import { removeSchoolAuth } from "../../../utils/schoolAuth";
 import logoutIcon from "../../../assets/svg/logout-icon.svg";
@@ -70,8 +70,7 @@ const NavList = () => {
             ) : (
               <SvgIcon
                 style={{
-                  color:
-                    matches ? "#4A90E2" : "white",
+                  color: matches ? "#4A90E2" : "white",
                 }}
               >
                 {path}

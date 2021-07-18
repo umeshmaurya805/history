@@ -42,9 +42,8 @@ const Layout = ({ children }) => {
           <Button onClick={toggleDrawer(true)}>
             <MenuIcon />
           </Button>
-
           <Typography variant="h5" color="primary" className={classes.heading}>
-            History Diaries
+            Dashboard
           </Typography>
         </Toolbar>
       </Header>
@@ -56,7 +55,7 @@ const Layout = ({ children }) => {
             <NavSidebar />
           </SidebarContent>
         </DrawerSidebar>
-      <Hidden mdUp>
+      <Hidden lgUp>
         <SwipeableDrawer
           PaperProps={{ className: classes.sidebar }}
           anchor="left"
