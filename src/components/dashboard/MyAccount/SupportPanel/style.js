@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   titleButton: {
     minWidth: "10rem",
-    marginRight: "2.5rem",
+    marginRight: "1rem",
     marginBottom: "1rem",
     padding: "0.45rem 1.75rem",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
