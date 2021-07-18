@@ -6,11 +6,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     margin: "4rem 0rem 1rem",
   },
+  titleButtonRoot: {
+    marginLeft: '-0.5rem',
+  },
   titleButton: {
     minWidth: "10rem",
     marginRight: "2.5rem",
     marginBottom: "1rem",
-    padding: "0.25rem 1.75rem",
+    padding: "0.45rem 1.75rem",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     borderRadius: "0.75rem",
 

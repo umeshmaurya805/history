@@ -74,7 +74,7 @@ const SupportPanel = () => {
         values={supportTitles}
         selectedIndex={selectedSupportIndex}
         onClick={handleTitleSelectorChange}
-        classes={{ button: classes.titleButton }}
+        classes={{ root:classes.titleButtonRoot, button: classes.titleButton }}
       />
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <TextField

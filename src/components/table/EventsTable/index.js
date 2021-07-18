@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import useStyles, { StyledTableCell } from "./style";
 import InfoButton from "../../button/InfoButton";
+import { Link } from "react-router-dom";
 
 const EventsTable = ({ rows, columns, handleClickOpen }) => {
   const classes = useStyles();
@@ -29,7 +30,6 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -63,21 +63,33 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
                   <TableRow key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
-                      return (
-                        <StyledTableCell
-                          key={column.id}
-                          align={column.id === "title" ? "left" : "center"}
-                          style={{
-                            width: column.fixedWidth,
-                            minWidth: column.fixedWidth,
-                          }}
-                          className={
-                            column.id === "title"
-                              ? classes.titleColumn
-                              : undefined
-                          }
-                        >
-                          {column.id === "list" ? (
+
+                      if (column.id === "title") {
+                        return (
+                          <StyledTableCell
+                            key={column.id}
+                            align="left"
+                            style={{
+                              width: column.fixedWidth,
+                              minWidth: column.fixedWidth,
+                            }}
+                            className={classes.titleColumn}
+                          >
+                            <Link to={`/dashboard/calendar/${row.slug}`}>
+                              {value}
+                            </Link>
+                          </StyledTableCell>
+                        );
+                      } else if (column.id === "list") {
+                        return (
+                          <StyledTableCell
+                            key={column.id}
+                            align="center"
+                            style={{
+                              width: column.fixedWidth,
+                              minWidth: column.fixedWidth,
+                            }}
+                          >
                             <Button
                               onClick={() => handleClickOpen(row.slug)}
                               color="primary"
@@ -85,7 +97,18 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
                             >
                               View
                             </Button>
-                          ) : column.id === "status" ? (
+                          </StyledTableCell>
+                        );
+                      } else if (column.id === "status") {
+                        return (
+                          <StyledTableCell
+                            key={column.id}
+                            align="center"
+                            style={{
+                              width: column.fixedWidth,
+                              minWidth: column.fixedWidth,
+                            }}
+                          >
                             <Chip
                               size="small"
                               variant="outlined"
@@ -98,11 +121,22 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
                                     : "#EF7373",
                               }}
                             />
-                          ) : (
-                            value
-                          )}
-                        </StyledTableCell>
-                      );
+                          </StyledTableCell>
+                        );
+                      } else {
+                        return (
+                          <StyledTableCell
+                            key={column.id}
+                            align="center"
+                            style={{
+                              width: column.fixedWidth,
+                              minWidth: column.fixedWidth,
+                            }}
+                          >
+                            {value}
+                          </StyledTableCell>
+                        );
+                      }
                     })}
                   </TableRow>
                 );

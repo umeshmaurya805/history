@@ -37,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   title: {
-    marginTop: 30,
+    marginTop: '1.875rem',
     fontFamily: "Roboto",
     fontWeight: 900,
-    fontSize: 22,
+    fontSize: '1.375rem',
     textAlign: "center",
     "@media (min-width: 1700px)": {
-      marginTop: 50,
+      marginTop: '3.125rem',
     },
   },
   summary: {
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     margin: "0.5rem",
-    minWidth: 105,
+    minWidth: '6.5625rem',
   },
   itemName: {
     fontFamily: "Roboto",
@@ -63,21 +63,17 @@ const useStyles = makeStyles((theme) => ({
   },
   reactMarkdown: {
     color: "#383838",
-    maxHeight: 380,
+    maxHeight: '23.75rem',
     overflow: "auto",
-    margin: theme.spacing(2, 0, 4),
-    "@media (min-width: 1700px)": {
-      maxHeight: 280,
-    },
+    margin: '1rem 0rem 2rem',
     "& > h1, h2, h3, h4, h5, h6": {
       color: theme.palette.primary.main,
     },
   },
   messageButton: {
-    // flexGrow: 1,
     backgroundColor: "#F89503",
     color: "white",
-    width: 180,
+    width: '11.25rem',
     margin: "0.5rem",
     padding: "0.5rem",
     "&:hover": {
@@ -88,8 +84,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    // flexGrow: 1,
-    width: 180,
+    width: '11.25rem',
     margin: "0.5rem",
     padding: "0.5rem",
   },

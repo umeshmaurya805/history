@@ -2,34 +2,34 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(5, 0, 2),
+    margin: "2.5rem 0rem 1rem",
   },
   gridItem: {
     display: "flex",
     flexWrap: "wrap",
   },
   status: {
-    minWidth: 100,
+    minWidth: '6.25rem',
     border: "0.0625rem solid #E5E5E5",
   },
   month: {
-    minWidth: 80,
+    minWidth: '5rem',
     border: "0.0625rem solid #E5E5E5",
   },
   year: {
-    minWidth: 80,
+    minWidth: '5rem',
     border: "0.0625rem solid #E5E5E5",
   },
   class: {
-    minWidth: 50,
+    minWidth: '3.125rem',
     border: "0.0625rem solid #E5E5E5",
   },
   user: {
-    minWidth: 50,
+    minWidth: '3.125rem',
     border: "0.0625rem solid #E5E5E5",
   },
   category: {
-    minWidth: 125,
+    minWidth: '8.125rem',
     border: "0.0625rem solid #E5E5E5",
   },
   customRangeContainer: {
@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
   },
   downloadButton: {
-    margin: theme.spacing("auto", 1),
+    margin: 'auto 0.5rem',
     padding: "0.5rem 1rem",
     borderRadius: "0.75rem",
-    height: 50,
+    height: '3.125rem',
   },
 }));
 

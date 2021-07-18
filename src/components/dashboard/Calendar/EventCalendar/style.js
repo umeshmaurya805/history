@@ -8,21 +8,21 @@ const useStyles = makeStyles((theme) => ({
   },
   config: {
     width: "100%",
-    marginLeft: 2,
+    marginLeft: "0.125rem",
     marginBottom: "0.5rem",
     justifyContent: "space-between",
-    "@media (max-width: 1050px)": {
-      // maxWidth: 330,
-    },
     "& > div": {
       flexGrow: 1,
-      margin: theme.spacing(0, 1, 1),
+      margin: "0rem 0.5rem 0.5rem",
     },
   },
   calendar: {
     width: "100%",
     color: "green !important",
-    marginBottom: theme.spacing(4.5),
+    marginBottom: "2.25rem",
+    [theme.breakpoints.only("sm")]: {
+      marginBottom: "unset",
+    },
     border: "0.0625rem solid #E5E5E5",
     boxShadow: "0rem 0.3125rem 2.5rem -0.625rem rgba(0,0,0,0.14)",
 
@@ -33,16 +33,28 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 14,
     },
     "@media (min-width: 1200px) and (max-width: 1400px)": {
-      fontSize: "0.75rem",
+      fontSize: 12,
     },
     "@media (min-width: 1050px) and (max-width: 1200px)": {
-      fontSize: 10,
+      fontSize: 11,
     },
     "@media (min-width: 960px) and (max-width: 1050px)": {
-      fontSize: 8,
-    },
-    "@media (min-width: 600px) and (max-width: 960px)": {
       fontSize: 10,
+    },
+    "@media (min-width: 750px) and (max-width: 960px)": {
+      fontSize: 11,
+    },
+    "@media (min-width: 450px) and (max-width: 600px)": {
+      fontSize: 13,
+      width: "80%",
+    },
+
+    "& .Calendar__section": {
+      padding: "0 4em",
+    },
+
+    "& .Calendar__weekDays": {
+      padding: "0 3.4em",
     },
 
     "& .Calendar__yearText, & .Calendar__yearSelectorText, & .Calendar__monthText, & .Calendar__monthSelectorItemText":

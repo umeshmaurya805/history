@@ -14,22 +14,22 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   class: {
-    minWidth: 47,
+    minWidth: '3.125rem',
     border: "0.0625rem solid #E5E5E5",
   },
   user: {
-    minWidth: 48,
+    minWidth: '3.125rem',
     border: "0.0625rem solid #E5E5E5",
   },
   category: {
-    minWidth: 125,
+    minWidth: '8.125rem',
     [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",
     },
   },
   pastDays: {
-    minWidth: 80,
+    minWidth: '5.625rem',
     border: "0.0625rem solid #E5E5E5",
     marginLeft: "0.5rem",
     [theme.breakpoints.only("xs")]: {
@@ -37,14 +37,20 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "unset",
     },
   },
-  academicYear: {
-    minWidth: 60,
-    marginLeft: "0.5rem",
+  datePicker: {
+    display: "flex",
+    alignItems: "center",
+  },
+  datePickerInput: {
+    cursor: "pointer",
     border: "0.0625rem solid #E5E5E5",
-    [theme.breakpoints.only("xs")]: {
-      width: "100%",
-      marginLeft: "unset",
-    },
+    textAlign: "center",
+    borderRadius: "0.75rem",
+    padding: "1.05rem 1.5rem",
+    fontSize: "0.75rem",
+    boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
+    color: theme.palette.primary.main,
+    outline: "none",
   },
   customRangeContainer: {
     display: "flex",
@@ -56,7 +62,8 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: "0.5rem",
-    width: 90,
+    width: "5.625rem",
+    padding: "0.35rem 0.5rem",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     borderRadius: "0.75rem",
 

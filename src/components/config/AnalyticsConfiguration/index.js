@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
+import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import Grid from "@material-ui/core/Grid";
 import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
@@ -29,16 +31,36 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
     "Class 3",
   ];
 
-  const academicYearItems = [
-    "DD/MM/YYYY - DD/MM/YYYY",
-    "2020-21",
-    "2019-20",
-    "2018-19",
-  ];
+  // const academicYearItems = [
+  //   "DD/MM/YYYY - DD/MM/YYYY",
+  //   "2020-21",
+  //   "2019-20",
+  //   "2018-19",
+  // ];
 
-  const pastDaysItems = ["Last 7 days", "Last 1 month"];
+  const pastDaysItems = ["Last 7 days", "Last 1 month", "Custom Range"];
 
   const chartDateSelectorTypes = ["Weekly", "Monthly", "Yearly"];
+
+  const [selectedDayRange, setSelectedDayRange] = useState({
+    from: "",
+    to: "",
+  });
+
+  // render regular HTML input element
+  const renderCustomInput = ({ ref }) => (
+    <input
+      readOnly
+      ref={ref} // necessary
+      placeholder="DD/MM/YYYY - DD/MM/YYYY"
+      value={
+        selectedDayRange.from && selectedDayRange.to
+          ? `${selectedDayRange.from.day}/${selectedDayRange.from.month}/${selectedDayRange.from.year} - ${selectedDayRange.to.day}/${selectedDayRange.to.month}/${selectedDayRange.to.year}`
+          : ""
+      }
+      className={classes.datePickerInput}
+    />
+  );
 
   return (
     <Grid container className={classes.root}>
@@ -84,7 +106,15 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
               handleChange={handleChange}
               classes={{ root: classes.yearSelector, select: classes.pastDays }}
             />
-            <Dropdown
+            <DatePicker
+              wrapperClassName={classes.datePicker}
+              value={selectedDayRange}
+              onChange={setSelectedDayRange}
+              renderInput={renderCustomInput} // render a custom input
+              colorPrimary="#007AFF"
+              colorPrimaryLight="#D5EFFF"
+            />
+            {/* <Dropdown
               name="academicYear"
               value={value.academicYear}
               items={academicYearItems}
@@ -93,7 +123,7 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
                 root: classes.yearSelector,
                 select: classes.academicYear,
               }}
-            />
+            /> */}
           </Grid>
         </Grid>
       </Grid>

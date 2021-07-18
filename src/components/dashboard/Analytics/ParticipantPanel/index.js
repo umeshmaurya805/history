@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Line } from "react-chartjs-2";
+import { Line, defaults } from "react-chartjs-2";
 import format from "date-fns/format";
 import EventStats from "../../../common/EventStats";
 import AnalyticsConfiguration from "../../../config/AnalyticsConfiguration";
@@ -66,6 +66,8 @@ const ParticipantPanel = () => {
     ],
   };
 
+  defaults.font.size =16;
+
   const chartOptions = {
     scales: {
       x: {
@@ -97,10 +99,7 @@ const ParticipantPanel = () => {
 
   return (
     <div className={classes.root}>
-      <EventStats
-        className={classes.stats}
-        data={data}
-      />
+      <EventStats className={classes.stats} data={data} />
       <AnalyticsConfiguration value={option} handleChange={handleChange} />
       <Line
         className={classes.chart}

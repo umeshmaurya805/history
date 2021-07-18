@@ -29,8 +29,15 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: "0.75rem",
   },
   titleColumn: {
-    color: "#383838 !important",
     fontWeight: 600,
+    
+    "& a": {
+      textDecoration: "none",
+      color: "#383838",
+    },
+    "& a:hover": {
+      opacity: "0.8",
+    },
   },
   viewButton: {
     fontWeight: 700,

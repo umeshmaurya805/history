@@ -13,130 +13,129 @@ const columns = [
   {
     id: "title",
     label: "Title",
-    fixedWidth: '11.25rem',
+    fixedWidth: "11.25rem",
     tooltipText: "Upcoming event names",
   },
   {
     id: "date",
     label: "Date",
-    fixedWidth: '9.375rem',
+    fixedWidth: "9.375rem",
     tooltipText: "Starting date of the event",
   },
   {
     id: "classes",
     label: "Classes",
-    fixedWidth: '9.375rem',
+    fixedWidth: "9.375rem",
     tooltipText: "Range of classes which can participate in the event",
   },
   {
     id: "registrations",
     label: "Registrations",
-    fixedWidth: '9.375rem',
+    fixedWidth: "9.375rem",
     tooltipText: "Number of registrations done from your school until now",
   },
   {
     id: "list",
     label: "List",
-    fixedWidth: '9.375rem',
+    fixedWidth: "9.375rem",
     tooltipText: "List of participants registered in the event",
   },
 ];
 
-function createData(slug, title, date, classes, registrations, list) {
-  return { slug, title, date, classes, registrations, list };
-}
+// function createData(slug, title, date, classes, registrations, list) {
+//   return { slug, title, date, classes, registrations, list };
+// }
+
 const today = new Date();
 today.setHours(0, 0, 0, 0);
-// const upcomingEventList = getEvents().map((event) => {
-//   if (isAfter(event.startDate, today) && event.isRegistered) {
-//     return {
-//       title: event.title,
-//       slug: event.slug,
-//       date: format(event.startDate, "PP"),
-//       classes: `${event.forClass.from} - ${event.forClass.to}`,
-//       registrations: 10,
-//     };
-//   }
+const upcomingEventList = getEvents()
+  .filter((event) => isAfter(event.startDate, today) && event.isRegistered)
+  .map((event) => {
+    return {
+      title: event.title,
+      slug: event.slug,
+      date: format(event.startDate, "PP"),
+      classes: `${event.forClass.from} - ${event.forClass.to}`,
+      registrations: 17,
+    };
+  });
 
-//   return null;
-// });
-
-const upcomingEventList = [
-  createData(
-    "World-of-Theatre",
-    "World of Theatre",
-    "11/20/20",
-    "5 - 9",
-    15,
-    6
-  ),
-  createData(
-    "World-of-Theatre",
-    "World of Theatre",
-    "11/20/20",
-    "5 - 9",
-    15,
-    6
-  ),
-  createData(
-    "Colors-Around-Painting-Competition",
-    "Colors Around Painting Competition",
-    "10/15/20",
-    "2 - 5",
-    23,
-    5
-  ),
-  createData(
-    "Trade-to-Territory",
-    "Trade to Territory",
-    "10/10/20",
-    "6 - 12",
-    234,
-    5
-  ),
-  createData(
-    "Theatre-in-Education",
-    "Theatre in Education",
-    "9/27/20",
-    "1 - 5",
-    5,
-    5
-  ),
-  createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
-  createData(
-    "World-of-Theatre",
-    "World of Theatre",
-    "11/20/20",
-    "5 - 9",
-    15,
-    6
-  ),
-  createData(
-    "Colors-Around-Painting-Competition",
-    "Colors Around Painting Competition",
-    "10/15/20",
-    "2 - 5",
-    23,
-    5
-  ),
-  createData(
-    "Trade-to-Territory",
-    "Trade to Territory",
-    "10/10/20",
-    "6 - 12",
-    234,
-    5
-  ),
-  createData(
-    "Theatre-in-Education",
-    "Theatre in Education",
-    "9/27/20",
-    "1 - 5",
-    5,
-    5
-  ),
-  createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
-];
+// const upcomingEventList = [
+//   createData(
+//     "World-of-Theatre",
+//     "World of Theatre",
+//     "11/20/20",
+//     "5 - 9",
+//     15,
+//     6
+//   ),
+//   createData(
+//     "World-of-Theatre",
+//     "World of Theatre",
+//     "11/20/20",
+//     "5 - 9",
+//     15,
+//     6
+//   ),
+//   createData(
+//     "Colors-Around-Painting-Competition",
+//     "Colors Around Painting Competition",
+//     "10/15/20",
+//     "2 - 5",
+//     23,
+//     5
+//   ),
+//   createData(
+//     "Trade-to-Territory",
+//     "Trade to Territory",
+//     "10/10/20",
+//     "6 - 12",
+//     234,
+//     5
+//   ),
+//   createData(
+//     "Theatre-in-Education",
+//     "Theatre in Education",
+//     "9/27/20",
+//     "1 - 5",
+//     5,
+//     5
+//   ),
+//   createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
+//   createData(
+//     "World-of-Theatre",
+//     "World of Theatre",
+//     "11/20/20",
+//     "5 - 9",
+//     15,
+//     6
+//   ),
+//   createData(
+//     "Colors-Around-Painting-Competition",
+//     "Colors Around Painting Competition",
+//     "10/15/20",
+//     "2 - 5",
+//     23,
+//     5
+//   ),
+//   createData(
+//     "Trade-to-Territory",
+//     "Trade to Territory",
+//     "10/10/20",
+//     "6 - 12",
+//     234,
+//     5
+//   ),
+//   createData(
+//     "Theatre-in-Education",
+//     "Theatre in Education",
+//     "9/27/20",
+//     "1 - 5",
+//     5,
+//     5
+//   ),
+//   createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
+// ];
 
 const UpcomingEvent = () => {
   const classes = useStyles();

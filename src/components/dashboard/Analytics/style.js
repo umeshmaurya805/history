@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   title: {
     fontFamily: "Roboto",
-    fontSize: 28,
+    fontSize: "1.75rem",
     fontWeight: 900,
     textAlign: "center",
     marginBottom: "2.5rem",

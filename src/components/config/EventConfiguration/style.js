@@ -12,13 +12,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectClass: {
-    minWidth: 47,
+    minWidth: '3.125rem',
   },
   selectUser: {
-    minWidth: 48,
+    minWidth: '3.125rem',
   },
   selectCategory: {
-    minWidth: 90,
+    minWidth: '5.625rem',
     [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",

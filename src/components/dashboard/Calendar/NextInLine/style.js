@@ -2,33 +2,37 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
     [theme.breakpoints.down("sm")]: {
       marginBottom: "2.5rem",
     },
   },
   list: {
+    flexGrow: 1,
+    height: "22.5rem",
     marginTop: "0.5rem",
     border: "0.0625rem solid #E5E5E5",
     borderRadius: "0.75rem",
-    maxHeight: 374,
     overflow: "auto",
     boxShadow: "0rem 0.3125rem 2.5rem -0.625rem rgba(0,0,0,0.14)",
     "& .MuiListItem-root.Mui-selected, & .MuiListItem-root.Mui-selected:hover":
       {
         backgroundColor: "rgba(41, 121, 255, 0.08)",
       },
-    "@media (min-width: 1050px) and (max-width: 1279px)": {
-      maxHeight: 485,
-    },
+  },
+  eventBox: {
+    width: "100%",
   },
   eventDate: {
     backgroundColor: "#007AFF",
     fontFamily: "Roboto",
-    fontSize: 26,
+    fontSize: "1.625rem",
     fontWeight: 900,
-    marginRight: 30,
-    height: 55,
-    width: 55,
+    marginRight: "1.875rem",
+    height: "3.4375rem",
+    width: "3.4375rem",
   },
   eventName: {
     fontFamily: "Roboto",
@@ -43,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   eventRegisteredTag: {
     fontFamily: "Roboto",
     margin: "0.5rem 0rem",
-    padding: theme.spacing(0, 1),
+    padding: "0rem 0.5rem",
   },
 }));
 

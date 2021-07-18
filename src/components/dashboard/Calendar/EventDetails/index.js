@@ -19,7 +19,7 @@ const EventDetails = () => {
 
   const event = getEvents().find((event) => event.slug === slug);
 
-  console.log("event", event);
+  // console.log("event", event);
   const {
     title,
     summary,
@@ -32,8 +32,8 @@ const EventDetails = () => {
     forClass,
     registrationDeadline,
     isLimited,
-    isRegistered: isEventRegistered,
   } = event;
+
   const list = [
     ["Registration Deadline", format(registrationDeadline, "PP")],
     ["Date", format(startDate, "PP")],
@@ -50,8 +50,8 @@ const EventDetails = () => {
   };
 
   const [open, setOpen] = useState(initialState);
-  const [isRegistered, setIsRegistered] = useState(isEventRegistered);
-  console.log(isEventRegistered, isRegistered);
+  const [isRegistered, setIsRegistered] = useState(false);
+
   const handleOpen = (eventType) => {
     setOpen({ ...initialState, [eventType]: true });
   };
@@ -134,7 +134,7 @@ const EventDetails = () => {
             color="primary"
             className={classes.button}
             onClick={() => handleOpen("schoolRegistration")}
-          >
+          >{console.log(isRegistered, event.title)}
             {isRegistered ? "Cancel Registration" : "Register"}
           </Button>
         </Box>
