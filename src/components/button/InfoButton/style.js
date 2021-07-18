@@ -2,10 +2,10 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: 13,
-    width: 13,
+    height: '0.8125rem',
+    width: '0.8125rem',
     borderRadius: "50%",
-    marginLeft: theme.spacing(1),
+    marginLeft: '0.5rem',
   },
 }));
 

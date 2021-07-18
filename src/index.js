@@ -17,7 +17,7 @@ scheme.configureHeader((builder) => {
 scheme.configureEdgeSidebar((builder) => {
   builder
     .create("primarySidebar", { anchor: "left" })
-    .registerPermanentConfig("md", {
+    .registerPermanentConfig("lg", {
       width:'15.125rem',
     });
 });

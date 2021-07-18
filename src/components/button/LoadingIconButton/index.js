@@ -15,7 +15,11 @@ const LoadingIconButton = ({
       startIcon={
         isLoading ? (
           <CircularProgress
-            style={{ height: 15, width: 15, color: loaderColor }}
+            style={{
+              height: "0.9375rem",
+              width: "0.9375rem",
+              color: loaderColor,
+            }}
           />
         ) : (
           icon

@@ -2,18 +2,18 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginRight: theme.spacing(2),
-    marginBottom:theme.spacing(1),
+    marginRight: "1rem",
+    marginBottom: "0.5rem",
   },
-  
+
   cancelButton: {
-    height: 36,
-    width: 90,
+    height: "2.25rem",
+    width: "5.625rem",
   },
   saveButton: {
-    height: 36,
-    width: 90,
-    marginLeft: theme.spacing(1),
+    height: "2.25rem",
+    width: "5.625rem",
+    marginLeft: "0.5rem",
   },
 }));
 
