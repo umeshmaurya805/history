@@ -2,22 +2,22 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   reactMarkdown: {
-    maxHeight: 380,
+    maxHeight: "23.75rem",
     overflow: "auto",
-    margin: theme.spacing(1, 0),
+    margin: "0.5rem 0rem",
     "@media (min-width: 1700px)": {
-      maxHeight: 280,
+      maxHeight: "17.5rem",
     },
   },
   dialogActions: {
     flexWrap: "wrap",
     justifyContent: "space-evenly",
     backgroundColor: "#E7E2E2",
-    padding: theme.spacing(2, 1),
+    padding: "1rem 0.5rem",
   },
   button: {
-    margin: theme.spacing(1),
-    width: 130,
+    margin: "0.5rem",
+    width: "8.125rem",
   },
 }));
 

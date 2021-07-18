@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
-    border: "1px solid #E5E5E5",
-    borderRadius: 12,
-    boxShadow: "0px 5px 40px -10px rgba(0,0,0,0.14)",
-    padding: theme.spacing(5),
+    border: "0.0625rem solid #E5E5E5",
+    borderRadius: "0.75rem",
+    boxShadow: "0rem 0.3125rem 2.5rem -0.625rem rgba(0,0,0,0.14)",
+    padding: "1.5rem",
 
     "@media (max-width: 1100px)": {
       "& > div": {
@@ -32,11 +32,11 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     right: 0,
-    borderRadius: 12,
-    boxShadow: "0px 5px 10px rgba(0,0,0,0.24)",
-    marginBottom: theme.spacing(2),
+    borderRadius: "0.75rem",
+    boxShadow: "0rem 0.3125rem 0.625rem rgba(0,0,0,0.24)",
+    marginBottom: "1rem",
   },
-  name: {
+  title: {
     marginTop: 30,
     fontFamily: "Roboto",
     fontWeight: 900,
@@ -46,23 +46,23 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 50,
     },
   },
-  subHeading: {
+  summary: {
     color: "#383838",
     fontFamily: "Roboto",
     textAlign: "center",
-    marginBottom: theme.spacing(3),
+    marginBottom: "1.5rem",
   },
   item: {
-    margin: theme.spacing(1),
+    margin: "0.5rem",
     minWidth: 105,
   },
   itemName: {
     fontFamily: "Roboto",
     fontWeight: 500,
-    marginRight: theme.spacing(1),
+    marginRight: "0.5rem",
   },
   reactMarkdown: {
-    color:'#383838',
+    color: "#383838",
     maxHeight: 380,
     overflow: "auto",
     margin: theme.spacing(2, 0, 4),
@@ -70,16 +70,16 @@ const useStyles = makeStyles((theme) => ({
       maxHeight: 280,
     },
     "& > h1, h2, h3, h4, h5, h6": {
-      color:theme.palette.primary.main,
-    }
+      color: theme.palette.primary.main,
+    },
   },
   messageButton: {
     // flexGrow: 1,
     backgroundColor: "#F89503",
     color: "white",
     width: 180,
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
+    margin: "0.5rem",
+    padding: "0.5rem",
     "&:hover": {
       backgroundColor: "#C37603",
     },
@@ -90,8 +90,8 @@ const useStyles = makeStyles((theme) => ({
   button: {
     // flexGrow: 1,
     width: 180,
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
+    margin: "0.5rem",
+    padding: "0.5rem",
   },
 }));
 

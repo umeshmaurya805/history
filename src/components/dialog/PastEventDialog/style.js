@@ -2,16 +2,16 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    paddingBottom: theme.spacing(4),
+    paddingBottom: "2rem",
   },
   box: {
-    marginBottom: theme.spacing(2),
+    marginBottom: "1rem",
   },
   cardContainer: {
-    marginTop: theme.spacing(-6),
+    marginTop: '-0.375rem',
   },
   cardContent: {
-    padding: "5px 15px 5px 10px !important",
+    padding: "0.3125rem 15px 0.3125rem 0.625rem !important",
   },
 }));
 

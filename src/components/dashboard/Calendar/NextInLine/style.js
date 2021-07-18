@@ -3,16 +3,16 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.down("sm")]: {
-      marginBottom: theme.spacing(5),
+      marginBottom: "2.5rem",
     },
   },
   list: {
-    marginTop: theme.spacing(1),
-    border: "1px solid #E5E5E5",
-    borderRadius: 12,
+    marginTop: "0.5rem",
+    border: "0.0625rem solid #E5E5E5",
+    borderRadius: "0.75rem",
     maxHeight: 374,
     overflow: "auto",
-    boxShadow: "0px 5px 40px -10px rgba(0,0,0,0.14)",
+    boxShadow: "0rem 0.3125rem 2.5rem -0.625rem rgba(0,0,0,0.14)",
     "& .MuiListItem-root.Mui-selected, & .MuiListItem-root.Mui-selected:hover":
       {
         backgroundColor: "rgba(41, 121, 255, 0.08)",
@@ -28,21 +28,21 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 900,
     marginRight: 30,
     height: 55,
-    width:55,
+    width: 55,
   },
   eventName: {
     fontFamily: "Roboto",
-    fontSize: 20,
+    fontSize: "1.25rem",
     fontWeight: 700,
     color: theme.palette.primary.main,
   },
   eventSubHeading: {
-    fontSize: 12,
+    fontSize: "0.75rem",
     color: "#383838",
   },
   eventRegisteredTag: {
     fontFamily: "Roboto",
-    margin: theme.spacing(1, 0),
+    margin: "0.5rem 0rem",
     padding: theme.spacing(0, 1),
   },
 }));

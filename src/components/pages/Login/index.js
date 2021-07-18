@@ -7,7 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LoadingButton from "../../button/LoadingButton";
-import { useLoginMutation } from "../../../app/services/hd/auth";
+import { useLoginMutation } from "../../../app/api/auth";
 import { saveSchoolAuth } from "../../../utils/schoolAuth";
 import protectedHandler from "../../../utils/protectedHandler";
 import useStyles from "./style";

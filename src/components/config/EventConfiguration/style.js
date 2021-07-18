@@ -2,12 +2,12 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: theme.spacing(1),
+    marginBottom: "0.5rem",
     [theme.breakpoints.only("xs")]: {
       justifyContent: "space-between",
       "& > div": {
         flexGrow: 1,
-        margin: theme.spacing(1),
+        margin: "0.5rem",
       },
     },
   },

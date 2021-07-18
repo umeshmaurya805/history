@@ -149,7 +149,7 @@ const PastEventDialog = ({ open, onClose, competitive = false }) => {
   return (
     <Dialog
       scroll="body"
-      fullScreen
+      // fullScreen
       open={open}
       onClose={onClose}
       TransitionComponent={Transition}
@@ -166,17 +166,17 @@ const PastEventDialog = ({ open, onClose, competitive = false }) => {
           </IconButton>
         </Box>
         <Grid container spacing={4}>
-          <Grid item xs={12} lg={6} xl={4}>
+          <Grid item xs={12} >
             <Grid container spacing={3} className={classes.cardContainer}>
-              <Grid item xs={12} sm={6} md={4} lg={12}>
+              <Grid item xs={12} sm={6}>
                 <PastEventCard competitive={competitive} />
               </Grid>
-              <Grid item xs={12} sm={6} md={8} lg={12}>
+              <Grid item xs={12} sm={6}>
                 {competitive ? <WinnersList />: <EventMedia />}
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} lg={6} xl={8}>
+          <Grid item xs={12} >
             <ParticipantTable colored rows={rows} columns={columns} />
           </Grid>
         </Grid>

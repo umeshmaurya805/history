@@ -6,10 +6,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 28,
     fontWeight: 900,
     textAlign: "center",
-    marginBottom: theme.spacing(5),
+    marginBottom: "2.5rem",
   },
   competitiveLayout: {
-    marginTop: theme.spacing(5),
+    marginTop: "2.5rem",
   },
 }));
 

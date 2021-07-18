@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useForgotPasswordMutation } from "../../../app/services/hd/auth";
+import { useForgotPasswordMutation } from "../../../app/api/auth";
 import protectedHandler from "../../../utils/protectedHandler";
 import LoadingButton from "../../button/LoadingButton";
 import useStyles from "./style";

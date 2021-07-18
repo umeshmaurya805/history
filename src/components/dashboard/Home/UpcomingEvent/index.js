@@ -6,36 +6,38 @@ import EventsTable from "../../../table/EventsTable";
 import ParticipantListDialog from "../../../dialog/ParticipantListDialog";
 import EventConfiguration from "../../../config/EventConfiguration";
 import useStyles from "./style";
+import { getEvents } from "../../../../data";
+import { format, isAfter } from "date-fns";
 
 const columns = [
   {
     id: "title",
     label: "Title",
-    fixedWidth: 180,
+    fixedWidth: '11.25rem',
     tooltipText: "Upcoming event names",
   },
   {
     id: "date",
     label: "Date",
-    fixedWidth: 150,
+    fixedWidth: '9.375rem',
     tooltipText: "Starting date of the event",
   },
   {
     id: "classes",
     label: "Classes",
-    fixedWidth: 150,
+    fixedWidth: '9.375rem',
     tooltipText: "Range of classes which can participate in the event",
   },
   {
     id: "registrations",
     label: "Registrations",
-    fixedWidth: 150,
+    fixedWidth: '9.375rem',
     tooltipText: "Number of registrations done from your school until now",
   },
   {
     id: "list",
     label: "List",
-    fixedWidth: 150,
+    fixedWidth: '9.375rem',
     tooltipText: "List of participants registered in the event",
   },
 ];
@@ -43,6 +45,21 @@ const columns = [
 function createData(slug, title, date, classes, registrations, list) {
   return { slug, title, date, classes, registrations, list };
 }
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+// const upcomingEventList = getEvents().map((event) => {
+//   if (isAfter(event.startDate, today) && event.isRegistered) {
+//     return {
+//       title: event.title,
+//       slug: event.slug,
+//       date: format(event.startDate, "PP"),
+//       classes: `${event.forClass.from} - ${event.forClass.to}`,
+//       registrations: 10,
+//     };
+//   }
+
+//   return null;
+// });
 
 const upcomingEventList = [
   createData(

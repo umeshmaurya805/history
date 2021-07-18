@@ -2,25 +2,36 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(4),
-    padding: theme.spacing(3, 0),
-    borderTop: "1px solid #E5E5E5",
-    borderBottom: "1px solid #E5E5E5",
+    marginTop: "2rem",
+    padding: "1.5rem 0rem",
+    borderTop: "0.0625rem solid #E5E5E5",
+    borderBottom: "0.0625rem solid #E5E5E5",
   },
   resultContainer: {
-    marginTop: theme.spacing(1),
+    marginTop: "0.5rem",
   },
   selector: {
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
-    },
+    justifyContent: "flex-end",
+    display: "flex",
+    flexWrap: "wrap",
+    flexGrow:1,
   },
-  select: {
-    border: "1px solid #E5E5E5",
-    minWidth: 200,
-    [theme.breakpoints.down("xs")]: {
+  selectTheme: {
+    border: "0.0625rem solid #E5E5E5",
+    minWidth: "5rem",
+    [theme.breakpoints.only("xs")]: {
       minWidth: "unset",
       width: "100%",
+      flexGrow: 1,
+    },
+  },
+  selectEvent: {
+    border: "0.0625rem solid #E5E5E5",
+    minWidth: "12.5rem",
+    [theme.breakpoints.only("xs")]: {
+      minWidth: "unset",
+      width: "100%",
+      flexGrow: 1,
     },
   },
 }));

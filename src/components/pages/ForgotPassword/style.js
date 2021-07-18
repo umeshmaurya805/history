@@ -8,9 +8,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     [theme.breakpoints.down("sm")]: {
       margin: theme.spacing(0, 2, 2, 2),
-      padding: theme.spacing(4),
+      padding: "2rem",
       backgroundColor: "white",
-      borderRadius: theme.spacing(1),
+      borderRadius: "0.5rem",
       height: "100%",
       maxWidth: "400px",
     },
@@ -20,15 +20,15 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: "normal",
     fontWeight: "500",
     color: theme.palette.primary.main,
-    marginBottom: "10px",
+    marginBottom: "0.625rem",
   },
   subTitle: {
     fontFamily: "'Inter', sans-serif",
-    marginBottom: "20px",
+    marginBottom: "1.25rem",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: "0.5rem",
   },
   loginLink: {
     display: "flex",

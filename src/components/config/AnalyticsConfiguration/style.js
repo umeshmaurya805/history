@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(5),
+    marginTop: "2.5rem",
   },
   gridItem: {
     display: "flex",
@@ -15,11 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
   class: {
     minWidth: 47,
-    border: "1px solid #E5E5E5",
+    border: "0.0625rem solid #E5E5E5",
   },
   user: {
     minWidth: 48,
-    border: "1px solid #E5E5E5",
+    border: "0.0625rem solid #E5E5E5",
   },
   category: {
     minWidth: 125,
@@ -30,16 +30,18 @@ const useStyles = makeStyles((theme) => ({
   },
   pastDays: {
     minWidth: 80,
-    border: "1px solid #E5E5E5",
-    marginLeft: theme.spacing(1),  [theme.breakpoints.only("xs")]: {
+    border: "0.0625rem solid #E5E5E5",
+    marginLeft: "0.5rem",
+    [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",
     },
   },
   academicYear: {
     minWidth: 60,
-    marginLeft: theme.spacing(1),
-    border: "1px solid #E5E5E5",  [theme.breakpoints.only("xs")]: {
+    marginLeft: "0.5rem",
+    border: "0.0625rem solid #E5E5E5",
+    [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",
     },
@@ -53,13 +55,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
   },
   button: {
-    margin: theme.spacing(1),
+    margin: "0.5rem",
     width: 90,
-    boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
-    borderRadius: 12,
+    boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
+    borderRadius: "0.75rem",
 
     "&.MuiButton-outlined": {
-      border: "1px solid #E5E5E5",
+      border: "0.0625rem solid #E5E5E5",
     },
   },
 }));

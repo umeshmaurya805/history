@@ -33,7 +33,7 @@ const PastEventsConfiguration = ({
     2: ["Category", "Workshops", "Courses"],
   };
 
-  const userItems = ["User", "Student", "Teacher"];
+  const userItems = ["Student", "Teacher"];
 
   const statusItems = ["Status", "Participated", "Not Participated"];
 

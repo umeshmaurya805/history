@@ -32,7 +32,7 @@ const Calendar = () => {
       });
       return <div>No Events</div>;
     }
-    console.log("slugItem", slugItem);
+    // console.log("slugItem", slugItem);
     history.push(`/dashboard/calendar/${slugItem[0]}`);
     return null;
   } else {
@@ -46,19 +46,19 @@ const Calendar = () => {
   return (
     <Layout>
       <Grid container spacing={4}>
-        <Grid item xs={12} md={5} xl={4} className={classes.itemLeft}>
+        <Grid item xs={12} md={12} xl={12} className={classes.itemLeft}>
           <Grid container justifyContent="center" spacing={3}>
-            <Grid item xs={12} sm={6} md={12}>
+            <Grid item xs={12} sm={6} md={6}>
               <EventCalendar />
             </Grid>
-            <Grid item xs={12} sm={6} md={12} className={classes.nextLine}>
+            <Grid item xs={12} sm={6} md={6} className={classes.nextLine}>
               <NextInLine />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={7} xl={8}>
-          <EventDetails />
-        </Grid>
+        {/* <Grid item xs={12} md={7} xl={8}> */}
+          {/* <EventDetails /> */}
+        {/* </Grid> */}
       </Grid>
     </Layout>
   );

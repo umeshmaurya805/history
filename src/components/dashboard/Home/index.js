@@ -7,7 +7,7 @@ import EventResult from "./EventResult";
 import WelcomeBanner from "./WelcomeBanner";
 import UpcomingEvent from "./UpcomingEvent";
 // import Magazine from "./Magazine";
-import Ad from "./Ad";
+// import Ad from "./Ad";
 import useStyles from "./style";
 import Title from "../../common/Title";
 
@@ -28,13 +28,12 @@ const Home = () => {
   return (
     <Layout>
       <WelcomeBanner />
+      <EventStats data={data} />
+      <EventResult />
       <Grid container className={classes.container} justifyContent="center">
-        <Grid item className={classes.mainSection}>
-          <EventStats data={data} />
-          <EventResult />
-        </Grid>
+        <Grid item className={classes.mainSection}></Grid>
         <Grid item className={classes.ad}>
-          <Ad />
+          {/* <Ad /> */}
         </Grid>
       </Grid>
       <Title tooltipText="List of the featured events that are open now">

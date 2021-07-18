@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import ResultCard from "../../../card/ResultCard";
 import avatar from "../../../../assets/svg/avatar.png";
 import Title from "../../../common/Title/index";
@@ -10,73 +9,78 @@ import Dropdown from "../../../common/Dropdown";
 const EventResult = () => {
   const classes = useStyles();
 
-  const [val, setVal] = useState(0);
+  const initialState = { theme: 0, event: 0 };
+  const [option, setOption] = useState(initialState);
 
-  const handleChange = (event) => {
-    setVal(event.target.value);
+  const handleChange = (event, key) => {
+    setOption({ ...option, [key]: event.target.value });
   };
 
   const data = [
     {
-      name: "Priyanka",
+      name: "Abc Surname",
       position: 1,
       avatar,
-      studentClass: "10th",
+      studentClass: "9 A",
       schoolName: "ABC Public School",
     },
     {
-      name: "Priyanka",
+      name: "Lmn Surname",
       position: 2,
       avatar,
-      studentClass: "10th",
+      studentClass: "10 B",
       schoolName: "XYZ Public School",
     },
     {
-      name: "Priyanka",
+      name: "xyz Surname",
       position: 3,
       avatar,
-      studentClass: "10th",
+      studentClass: "10 A",
       schoolName: "XYZ Public School",
     },
   ];
 
-  const items = [
+  const events = [
     "QUIRIOSITY QUIZ COMPETITION",
     "ESSAY WRITING COMPETITION",
     "DANCING COMPETITION",
     "TEACHER WORKSHOP",
   ];
 
+  const themes = ["Theme 1", "Theme 2", "Theme 3"];
+
   return (
     <div className={classes.root}>
-      <Box>
-        <Grid container justifyContent="space-between">
-          <Grid item>
-            <Title tooltipText="Result of the events completed till now">
-              Results
-            </Title>
-          </Grid>
-          <Grid item className={classes.selector}>
-            <Dropdown
-              value={val}
-              items={items}
-              handleChange={handleChange}
-              classes={{ select: classes.select }}
-            />
-          </Grid>
+      <Grid container alignItems="center" justifyContent="space-between">
+        <Grid item>
+          <Title tooltipText="Result of the events completed till now">
+            Results
+          </Title>
         </Grid>
-      </Box>
-      <Box>
-        <Grid container spacing={3} className={classes.resultContainer}>
-          {data.map((studentInfo, index) => {
-            return (
-              <Grid key={index} item style={{ flexGrow: 1 }}>
-                <ResultCard info={studentInfo} />
-              </Grid>
-            );
-          })}
+        <Grid item className={classes.selector}>
+          <Dropdown
+            value={option.theme}
+            items={themes}
+            handleChange={(e) => handleChange(e, 'theme')}
+            classes={{ select: classes.selectTheme }}
+          />
+          <Dropdown
+            value={option.event}
+            items={events}
+            handleChange={(e) => handleChange(e, 'event')}
+            classes={{ select: classes.selectEvent }}
+          />
         </Grid>
-      </Box>
+      </Grid>
+      <Grid container spacing={3} className={classes.resultContainer}>
+        {data.map((studentInfo, index) => {
+          return (
+            <Grid key={index} item style={{ flexGrow: 1 }}>
+              <ResultCard info={studentInfo} />
+            </Grid>
+          );
+        })}
+      </Grid>
     </div>
   );
 };

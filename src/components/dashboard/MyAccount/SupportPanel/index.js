@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import { useFormik } from "formik";
@@ -6,20 +7,32 @@ import { toast } from "react-toastify";
 import LoadingButton from "../../../button/LoadingButton";
 import protectedHandler from "../../../../utils/protectedHandler";
 import useStyles from "./style";
-import ChoiceSelectButton from "./../../../button/ChoiceSelectButton/index";
+import ChoiceSelectButton from "../../../button/ChoiceSelectButton";
+import { supportTitles } from "../../../../data";
+import {
+  setSupportIndex,
+  setSupportTitle,
+  setSupportMessage,
+  resetSupport,
+} from "../../../../app/slices/supportSlice";
+import { Button } from "@material-ui/core";
 
 const SupportPanel = () => {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [customTitle, setCustomTitle] = useState("");
+  const dispatch = useDispatch();
 
-  const queryTitles = ["Technical", "Logical", "Serious", "Others"];
+  const { selectedSupportIndex, supportTitle, supportMessage } = useSelector(
+    (state) => state.support
+  );
   // const [login, { isLoading }] = useLoginMutation();
-
+  console.log(supportTitle);
   const formik = useFormik({
     initialValues: {
-      title: queryTitles[0],
-      message: "",
+      title:
+        selectedSupportIndex !== supportTitles.length - 1
+          ? supportTitles[selectedSupportIndex]
+          : supportTitle,
+      message: supportMessage,
     },
     onSubmit: protectedHandler(async (formData) => {
       // await login(formData).unwrap();
@@ -30,15 +43,26 @@ const SupportPanel = () => {
 
   const handleTitleSelectorChange = (index) => {
     const title =
-      index !== queryTitles.length - 1 ? queryTitles[index] : customTitle;
+      index !== supportTitles.length - 1 ? supportTitles[index] : supportTitle;
 
-    setSelectedIndex(index);
+    dispatch(setSupportIndex(index));
     formik.setFieldValue("title", title);
   };
 
   const handleTitleFieldChange = (e) => {
-    setCustomTitle(e.target.value);
+    dispatch(setSupportTitle(e.target.value));
     formik.handleChange(e);
+  };
+
+  const handleMessageFieldChange = (e) => {
+    dispatch(setSupportMessage(e.target.value));
+    formik.handleChange(e);
+  };
+
+  const handleSupportReset = () => {
+    formik.setFieldValue("title", supportTitles[0]);
+    formik.setFieldValue("message", "");
+    dispatch(resetSupport());
   };
 
   return (
@@ -47,8 +71,8 @@ const SupportPanel = () => {
         For any queries write to us
       </Typography>
       <ChoiceSelectButton
-        values={queryTitles}
-        selectedIndex={selectedIndex}
+        values={supportTitles}
+        selectedIndex={selectedSupportIndex}
         onClick={handleTitleSelectorChange}
         classes={{ button: classes.titleButton }}
       />
@@ -62,7 +86,7 @@ const SupportPanel = () => {
           type="text"
           variant="outlined"
           margin="normal"
-          disabled={selectedIndex !== queryTitles.length - 1}
+          disabled={selectedSupportIndex !== supportTitles.length - 1}
           value={formik.values.title}
           onChange={(e) => handleTitleFieldChange(e)}
           error={formik.touched.title && Boolean(formik.errors.title)}
@@ -81,7 +105,7 @@ const SupportPanel = () => {
           label="Message"
           placeholder="Type your message here"
           value={formik.values.message}
-          onChange={formik.handleChange}
+          onChange={(e) => handleMessageFieldChange(e)}
           error={formik.touched.message && Boolean(formik.errors.message)}
           helperText={formik.touched.message && formik.errors.message}
         />
@@ -89,11 +113,18 @@ const SupportPanel = () => {
           type="submit"
           variant="contained"
           color="primary"
-          className={classes.submit}
+          className={classes.button}
           // isLoading={isLoading}
         >
           Send
         </LoadingButton>
+        <Button
+          color="primary"
+          className={classes.button}
+          onClick={handleSupportReset}
+        >
+          Clear
+        </Button>
       </form>
     </React.Fragment>
   );

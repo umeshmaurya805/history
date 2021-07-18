@@ -2,36 +2,38 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   supportLabel: {
-    fontSize: 24,
+    fontSize: "1.5rem",
     fontWeight: 600,
-    margin: theme.spacing(8, 0, 2),
+    margin: "4rem 0rem 1rem",
   },
   titleButton: {
-    width: 120,
-    marginRight: theme.spacing(5),
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(0.5, 3.5),
-    boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
-    borderRadius: 12,
+    minWidth: "10rem",
+    marginRight: "2.5rem",
+    marginBottom: "1rem",
+    padding: "0.25rem 1.75rem",
+    boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
+    borderRadius: "0.75rem",
 
     "&.MuiButton-outlined": {
-      border: "1px solid #E5E5E5",
+      border: "0.0625rem solid #E5E5E5",
     },
     [theme.breakpoints.only("sm")]: {
-      marginRight: theme.spacing(3),
+      marginRight: "1.2rem",
     },
     [theme.breakpoints.only("xs")]: {
-      marginRight: theme.spacing(2),
-    },    margin: theme.spacing(1),
+      marginRight: "1rem",
+    },
+    margin: "0.5rem",
   },
   form: {
     [theme.breakpoints.up("md")]: {
-      width: 650,
+      width: "49.375rem",
     },
   },
-  submit: {
-    marginTop: theme.spacing(2),
-    width: 120,
+  button: {
+    marginTop: "1rem",
+    marginRight: "1rem",
+    width: "7.5rem",
   },
 }));
 

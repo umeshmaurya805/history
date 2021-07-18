@@ -5,7 +5,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LoadingButton from "../../button/LoadingButton";
-import { useValidateOtpMutation } from "../../../app/services/hd/auth";
+import { useValidateOtpMutation } from "../../../app/api/auth";
 import protectedHandler from "../../../utils/protectedHandler";
 import useStyles from "./style";
 

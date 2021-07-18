@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   config: {
     width: "100%",
     marginLeft: 2,
-    marginBottom: theme.spacing(1),
+    marginBottom: "0.5rem",
     justifyContent: "space-between",
     "@media (max-width: 1050px)": {
       // maxWidth: 330,
@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     color: "green !important",
     marginBottom: theme.spacing(4.5),
-    border: "1px solid #E5E5E5",
-    boxShadow: "0px 5px 40px -10px rgba(0,0,0,0.14)",
+    border: "0.0625rem solid #E5E5E5",
+    boxShadow: "0rem 0.3125rem 2.5rem -0.625rem rgba(0,0,0,0.14)",
 
     "@media (min-width: 1600px)": {
       fontSize: 16,
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 14,
     },
     "@media (min-width: 1200px) and (max-width: 1400px)": {
-      fontSize: 12,
+      fontSize: "0.75rem",
     },
     "@media (min-width: 1050px) and (max-width: 1200px)": {
       fontSize: 10,

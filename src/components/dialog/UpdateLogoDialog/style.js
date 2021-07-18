@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   files: {
     backgroundColor: "#EBEBEB",
-    padding: theme.spacing(3),
-    borderRadius: 8,
-    height: 200,
-    width: 500,
+    padding: "1.5rem",
+    borderRadius: "0.5rem",
+    height: "12.5rem",
+    width: "31.25rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#E8E8E8",
     },
     [theme.breakpoints.down("xs")]: {
-      height: 100,
-      width: 200,
+      height: "6.25rem",
+      width: "12.5rem",
     },
   },
 }));

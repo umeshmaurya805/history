@@ -2,43 +2,43 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontSize: 18,
+    fontSize: "1.125rem",
     fontWeight: 700,
     margin: "auto",
   },
   content: {
-    fontSize: 18,
+    fontSize: "1.125rem",
     fontWeight: 600,
-    maxWidth: 400,
+    maxWidth: "25rem",
   },
   listItem: {
-    borderRadius: 12,
-    border: "2px solid #E5E5E5",
-    boxShadow: "0px 4px 10px -3px rgba(0, 0, 0, 0.15)",
-    marginBottom: theme.spacing(2),
+    borderRadius: "0.75rem",
+    border: "0.125rem solid #E5E5E5",
+    boxShadow: "0rem 0.25rem 0.625rem -0.1875rem rgba(0, 0, 0, 0.15)",
+    marginBottom: "1rem",
     "&:hover": {
-      boxShadow: "0px 5px 30px -10px rgba(0,0,0,0.14)",
+      boxShadow: "0rem 0.3125rem 30px -0.625rem rgba(0,0,0,0.14)",
     },
   },
   eventName: {
     fontFamily: "Roboto",
-    fontSize: 20,
+    fontSize: "1.25rem",
     fontWeight: 700,
     color: theme.palette.primary.main,
   },
   eventSubHeading: {
-    fontSize: 12,
+    fontSize: "0.75rem",
     color: "#383838",
   },
   eventRegisteredTag: {
     fontFamily: "Roboto",
-    margin: theme.spacing(1, 0),
-    padding: theme.spacing(0, 1),
+    margin: "0.5rem 0rem",
+    padding: '0rem 0.5rem',
   },
   eventTiming: {
-    fontSize: 12,
+    fontSize: "0.75rem",
     color: "#383838",
-    marginLeft: theme.spacing(2),
+    marginLeft: "1rem",
   },
 }));
 

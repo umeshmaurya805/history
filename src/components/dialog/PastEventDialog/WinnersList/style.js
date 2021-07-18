@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     fontWeight: 700,
     textTransform: "uppercase",
-    marginBottom: theme.spacing(1),
+    marginBottom: "0.5rem",
   },
 }));
 

@@ -2,11 +2,19 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    height: "100%",
     width: "100%",
     padding: theme.spacing(0, 2),
+    "& > .MuiCard-root": {
+      height: "100%",
+    },
   },
   content: {
     padding: 15,
+    height: "100%",
+    "& > .MuiGrid-container": {
+      height: "105%",
+    },
   },
   imageContainer: {
     display: "flex",
@@ -14,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
   image: {
     margin: "auto",
     width: "100%",
-    borderRadius: 12,
-    boxShadow: "0px 5px 10px rgba(0,0,0,0.24)",
+    height: "100%",
+    borderRadius: "0.75rem",
+    boxShadow: "0rem 0.3125rem 0.625rem rgba(0,0,0,0.24)",
     [theme.breakpoints.only("xs")]: {
       height: 150,
       width: 250,
@@ -28,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#4E4C4C",
     textAlign: "center",
   },
-  subHeading: {
+  summary: {
     color: "#383838",
     textAlign: "center",
     padding: theme.spacing(1, 0.5),
@@ -46,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   infoLabel: {
     fontFamily: "Roboto",
     fontWeight: 500,
-    fontSize: 20,
+    fontSize: "1.25rem",
     textAlign: "center",
   },
   infoValue: {
@@ -57,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   detailsButton: {
     minWidth: 90,
     height: 35,
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontFamily: "Roboto",
     alignSelf: "flex-end",
   },

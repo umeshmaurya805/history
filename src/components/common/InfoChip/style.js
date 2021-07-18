@@ -4,10 +4,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexWrap: "nowrap",
     padding: theme.spacing(1, 1.5),
-    margin: theme.spacing(1),
-    border: "0.5px solid #E5E5E5",
+    margin: "0.5rem",
+    border: "0.0.3125rem solid #E5E5E5",
     borderRadius: 21,
-    boxShadow: "0px 5px 20px -10px rgba(0,0,0,0.14)",
+    boxShadow: "0rem 0.3125rem 1.25rem -0.625rem rgba(0,0,0,0.14)",
     "& > p": {
       display: "flex",
       alignItems: "center",
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "-9px -12px",
     borderTopLeftRadius: 21,
     borderBottomLeftRadius: 21,
-    padding: "8px 16px",
+    padding: "0.5rem 16px",
   },
   value: {
     fontSize: 14,

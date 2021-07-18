@@ -11,14 +11,13 @@ import { useHistory, useParams } from "react-router-dom";
 import Title from "../../../common/Title";
 // import eventImage from "../../../../assets/svg/event-image.png";
 import useStyles from "./style";
-import {  isThisMonth } from "date-fns";
+import { isThisMonth } from "date-fns";
 import { getEvents } from "../../../../data";
 
 const NextInLine = () => {
   const classes = useStyles();
   const history = useHistory();
   const { slug } = useParams();
-
 
   const eventsInThisMonth = getEvents().filter(({ startDate }) =>
     isThisMonth(startDate)
@@ -48,10 +47,10 @@ const NextInLine = () => {
                 </ListItemAvatar>
                 <Box>
                   <Typography component="p" className={classes.eventName}>
-                    {event.name}
+                    {event.title}
                   </Typography>
                   <Typography component="p" className={classes.eventSubHeading}>
-                    {event.subHeading}
+                    {event.summary}
                   </Typography>
                   <Chip
                     size="small"

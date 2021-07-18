@@ -6,12 +6,12 @@ const useStyles = makeStyles((theme) => ({
     width: 255,
     height: 390,
     [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(2),
+      marginLeft: "1rem",
     },
   },
   slider: {
-    boxShadow: "0px 5px 10px -2px rgba(0,0,0,0.14)",
-    borderRadius: 12,
+    boxShadow: "0rem 0.3125rem 0.625rem -0.125rem rgba(0,0,0,0.14)",
+    borderRadius: "0.75rem",
   },
   adLabel: {
     userSelect: "none",
@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: 2,
     backgroundColor: theme.palette.primary.main,
     color: "white",
-    padding: "2px 8px",
+    padding: "0.125rem 0.5rem",
     borderRadius: 6,
     fontWeight: 700,
-    fontSize: 12,
-    boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
+    fontSize: "0.75rem",
+    boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
   },
   ad: {
     backgroundSize: "cover",
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     width: 260,
     marginBottom: -5,
     marginTop: -3,
-    marginLeft:-1,
+    marginLeft: -1,
   },
   adButtonLeft: {
     position: "absolute",

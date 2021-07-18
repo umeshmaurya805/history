@@ -2,10 +2,10 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    paddingBottom: theme.spacing(4),
+    paddingBottom: "2rem",
   },
   box: {
-    marginBottom: theme.spacing(2),
+    marginBottom: "1rem",
   },
 }));
 

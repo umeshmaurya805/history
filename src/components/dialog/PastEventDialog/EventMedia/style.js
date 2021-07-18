@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.up("lg")]: {
-      marginTop: theme.spacing(3),
+      marginTop: "1.5rem",
     },
   },
   card: {
@@ -12,20 +12,20 @@ const useStyles = makeStyles((theme) => ({
   category: {
     cursor: "pointer",
     "&:hover": {
-      transform: "translateY(-2px)",
+      transform: "translateY(-0.125rem)",
     },
     color: "rgba(0, 0, 0, 0.54)",
     fontSize: 14,
     display: "flex",
-    padding: theme.spacing(1),
+    padding: "0.5rem",
     transition: "all 0.2s ease-out 0s",
     alignItems: "center",
     flexShrink: 0,
     borderRadius: 4,
     textDecoration: "none",
     [theme.breakpoints.up("lg")]: {
-      margin: theme.spacing(1),
-      padding: theme.spacing(1, 2),
+      margin: "0.5rem",
+      padding: "0.5rem 1rem",
       fontSize: 16,
     },
   },
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: 12,
     backgroundColor: "#F89503",
     width: "300px",
-    height:'240px'
+    height: "240px",
   },
   item: {
     display: "flex",

@@ -8,47 +8,49 @@ export const StyledTableCell = withStyles((theme) => ({
   head: {
     color: theme.palette.primary.main,
     fontWeight: 700,
-    fontSize: 14,
+    fontSize: "0.875rem",
   },
   body: {
-    fontSize: 13,
+    fontSize: "0.8125rem",
     color: "#707683",
   },
   footer: {
-    fontSize: 13,
+    fontSize: "0.8125rem",
     color: "#707683",
-    borderTop: "1px solid #EBEFF2",
+    borderTop: "0.0625rem solid #EBEFF2",
     "&:first-child": {
-      borderLeft: "1px solid #EBEFF2",
+      borderLeft: "0.0625rem solid #EBEFF2",
     },
     "&:last-child": {
-      borderRight: "1px solid #EBEFF2",
+      borderRight: "0.0625rem solid #EBEFF2",
     },
   },
 }))(TableCell);
 
 const useStyles = makeStyles((theme) => ({
-  root: { padding: theme.spacing(0, 0.5) },
+  root: {
+    padding: "0rem 0.25rem",
+  },
   schoolColumn: {
     color: "#5C6269 !important",
     fontWeight: 600,
-    fontSize: "15px !important",
+    fontSize: "0.9375rem !important",
   },
   paginationCell: { border: "none !important" },
   currentSchoolLabel: {
     color: theme.palette.primary.main,
     fontWeight: 700,
-    margin: theme.spacing(0, 0, 1),
+    margin: "0rem 0rem 0.5rem",
   },
   imageBox: {
     display: "flex",
     justifyContent: "center",
-    marginTop: theme.spacing(7),
+    marginTop: '3.5rem',
   },
   image: {
-    width: 437,
+    width: '27.3125rem',
     [theme.breakpoints.down("xs")]: {
-      width: 250,
+      width: '15.625rem',
     },
   },
   tablePagination: {

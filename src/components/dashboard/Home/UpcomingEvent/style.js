@@ -44,9 +44,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3.3, 0),
   },
   container: {
-    marginTop: theme.spacing(2),
-    border: "1px solid #DADADA",
-    boxShadow: "0px 5px 8px -3px rgba(0,0,0,0.14)",
+    marginTop: "1rem",
+    border: "0.0625rem solid #DADADA",
+    boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     borderRadius: 8,
   },
   selectorGrid: {

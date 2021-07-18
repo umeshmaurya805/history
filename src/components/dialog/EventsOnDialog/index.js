@@ -50,7 +50,7 @@ const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
                     {event.name}
                   </Typography>
                   <Typography component="p" className={classes.eventSubHeading}>
-                    {event.subHeading}
+                    {event.summary}
                   </Typography>
                   <Box
                     display="flex"

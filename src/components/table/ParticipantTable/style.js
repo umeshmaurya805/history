@@ -8,13 +8,13 @@ export const StyledTableCell = withStyles((theme) => ({
   head: {
     color: "#9FA2B4",
     fontWeight: 700,
-    fontSize: 16,
+    fontSize: "1rem",
     "& .MuiTableSortLabel-active": {
       color: "#4F515C",
     },
   },
   body: {
-    fontSize: 14,
+    fontSize: "0.875rem",
     color: "#252733",
   },
 }))(TableCell);
@@ -26,25 +26,25 @@ export const BlueStyledTableCell = withStyles((theme) => ({
   head: {
     color: theme.palette.primary.main,
     fontWeight: 700,
-    fontSize: 16,
+    fontSize: "1rem",
     "& .MuiTableSortLabel-active": {
       color: theme.palette.primary.dark,
     },
   },
   body: {
-    fontSize: 14,
+    fontSize: "0.875rem",
     color: "#252733",
   },
 }))(TableCell);
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    border: "1px solid #DFE0EB",
-    boxShadow: "0px 5px 20px -5px rgba(0,0,0,0.14) !important",
-    borderRadius: 12,
+    border: "0.0625rem solid #DFE0EB",
+    boxShadow: "0rem 0.3125rem 1.25rem -0.3125rem rgba(0,0,0,0.14) !important",
+    borderRadius: "0.75rem",
   },
   toolbar: {
-    padding: theme.spacing(3, 3, 3, 2),
+    padding: "1.5rem 1.5rem 1.5rem 1rem",
     flexWrap: "wrap",
   },
   title: {
@@ -57,47 +57,47 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   downloadButton: {
-    padding: theme.spacing(1, 2),
-    borderRadius: 12,
+    padding: "0.5rem 1rem",
+    borderRadius: "0.75rem",
   },
   table: {
     minWidth: 800,
   },
   sortLabel: {
-    paddingLeft: 18,
+    paddingLeft: "1.125rem",
   },
   avatar: {
-    marginRight: theme.spacing(2),
+    marginRight: "1rem",
   },
   viewButton: {
     fontWeight: 700,
-    fontSize: 13,
-    borderRadius: 40,
-    width: 70,
-    padding: theme.spacing(1, 0),
-    margin: theme.spacing(-0.5, 0),
+    fontSize: "0.8125rem",
+    borderRadius: "2.5rem",
+    width: "4.375rem",
+    padding: "0.5rem 0rem",
+    margin: "-0.25rem 0rem",
   },
   deleteButton: {
-    margin: "-4px 0",
+    margin: "-0.25rem 0",
   },
   visuallyHidden: {
-    border: 0,
+    border: "0rem",
     clip: "rect(0 0 0 0)",
-    height: 1,
-    margin: -1,
+    height: "0.0625rem",
+    margin: "-0.0625rem",
     overflow: "hidden",
-    padding: 0,
+    padding: "0rem",
     position: "absolute",
-    top: 20,
-    width: 1,
+    top: "1.25rem",
+    width: "0.0625rem",
   },
   tablePagination: {
     color: "#5C6269",
-    padding: `${theme.spacing(1, 2)} !important`,
+    padding: "0.5rem 1rem !important",
 
     "& .MuiSelect-select.MuiSelect-select": {
-      border: "0.5px solid #DFE0EB",
-      boxShadow: "0px 4px 8px -3px rgba(0,0,0,0.14)",
+      border: "0.0.3125rem solid #DFE0EB",
+      boxShadow: "0rem 0.25rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     },
   },
 }));

@@ -1,15 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: theme.spacing(2),
-  },
+  container: {},
   mainSection: {
     flexGrow: 1,
-    padding: "20px 20px 20px 0 !important",
+    padding: "1.25rem 1.25rem 1.25rem 0 !important",
   },
   sideSection: {
-    padding: "20px 0 !important",
+    padding: "1.25rem 0 !important",
   },
   featuredEvent: {
     [theme.breakpoints.only("xs")]: {
@@ -17,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   ad: {
-    padding: "20px 0 !important",
+    padding: "1.25rem 0 !important",
     margin: "auto",
   },
 }));

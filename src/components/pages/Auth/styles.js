@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     height: "125px",
     width: "125px",
-    marginBottom: theme.spacing(2),
+    marginBottom: "1rem",
   },
   paper: {
     display: "flex",

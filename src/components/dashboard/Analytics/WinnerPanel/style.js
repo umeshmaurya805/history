@@ -2,13 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(4),
-    borderTop: "1px solid #DADADA",
-    borderBottom: "1px solid #DADADA",
-    paddingBottom: theme.spacing(4),
+    marginTop: "2rem",
+    borderTop: "0.0625rem solid #DADADA",
+    borderBottom: "0.0625rem solid #DADADA",
+    paddingBottom: "2rem",
   },
   stats: {
-    paddingTop: theme.spacing(4),
+    paddingTop: "2rem",
     marginBottom: theme.spacing(6),
   },
 }));

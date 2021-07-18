@@ -22,7 +22,7 @@ const EventConfiguration = ({
     "Class 3",
   ];
 
-  const userItems = ["User", "Student", "Teacher"];
+  const userItems = ["Student", "Teacher"];
 
   const categoryItems = {
     0: [
@@ -33,15 +33,7 @@ const EventConfiguration = ({
       "Virtual Tours",
       "Theater Shows",
     ],
-    1: [
-      "Category",
-      "Competitive",
-      "Workshops",
-      "Courses",
-      "Virtual Tours",
-      "Theater Shows",
-    ],
-    2: ["Category", "Workshops", "Courses"],
+    1: ["Category", "Workshops", "Courses"],
   };
 
   return (

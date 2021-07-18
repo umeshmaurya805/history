@@ -12,6 +12,7 @@ import useStyles from "./style";
 // import { toast } from "react-toastify";
 import { getSlugHash } from "../../../../data";
 import { calendarEvents } from "./../../../../data";
+import { isAfter } from "date-fns/esm";
 
 const EventCalendar = () => {
   const classes = useStyles();
@@ -45,10 +46,10 @@ const EventCalendar = () => {
 
   //   if (typeof selectedEventIndex !== "number") return;
 
-  //   const { name, subHeading, startDate, endDate } =
+  //   const { name, summary, startDate, endDate } =
   //     eventList[selectedEventIndex];
 
-  //   setDisplayData({ name, subHeading, startDate, endDate });
+  //   setDisplayData({ name, summary, startDate, endDate });
   // };
 
   // const dateHash = {};
@@ -93,24 +94,22 @@ const EventCalendar = () => {
   };
   // console.log(events);
   const handleDateClick = (selectedEventDate) => {
-    calendarEvents.forEach(
-      ({ year, month, day, eventCount, events: eventArray }) => {
-        if (
-          year === selectedEventDate.year &&
-          month === selectedEventDate.month &&
-          day === selectedEventDate.day
-        ) {
-          if (eventCount === 1) {
-            history.push(`/dashboard/calendar/${eventArray[0].slug}`);
-            console.log(`/dashboard/calendar/${eventArray[0].slug}`);
-          } else {
-            setEventList(eventArray);
-            setDialogDate(new Date(year, month - 1, day));
-            setOpenDialog(true);
-          }
+    calendarEvents.forEach(({ year, month, day, eventCount, events }) => {
+      if (
+        year === selectedEventDate.year &&
+        month === selectedEventDate.month &&
+        day === selectedEventDate.day
+      ) {
+        if (eventCount === 1) {
+          history.push(`/dashboard/calendar/${events[0].slug}`);
+          console.log(`/dashboard/calendar/${events[0].slug}`);
+        } else {
+          setEventList(events);
+          setDialogDate(new Date(year, month - 1, day));
+          setOpenDialog(true);
         }
       }
-    );
+    });
     // const date = new Date(selectedEventDate)
 
     // console.log(events)
@@ -129,30 +128,36 @@ const EventCalendar = () => {
     //   });
   };
 
-  const isPast = (date) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return date < today;
-  };
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  const displayEventDays = calendarEvents.map(({ year, month, day }) => {
-    const date = new Date(year, month-1, day);
-    // console.log(selectedDay, date);
-    const isSelected = isSameDay(selectedDay, date);
+  const displayEventDays = calendarEvents.map(
+    ({ year, month, day, events }) => {
+      const date = new Date(year, month - 1, day);
+      // console.log(selectedDay, date);
+      const isSelected = isSameDay(selectedDay, date);
+      let isRegistrationDeadlineFinished = true;
 
-    return {
-      year,
-      month: month,
-      day,
-      className: `-selected ${
-        isSelected
-          ? isPast(date)
-            ? classes.selectedEventPast
-            : classes.selectedEvent
-          : isPast(date) && classes.pastEvent
-      }`,
-    };
-  });
+      events.forEach(({ registrationDeadline }) => {
+        if (isAfter(registrationDeadline, today)) {
+          isRegistrationDeadlineFinished = false;
+        }
+      });
+
+      return {
+        year,
+        month: month,
+        day,
+        className: `-selected ${
+          isSelected
+            ? isRegistrationDeadlineFinished
+              ? classes.selectedEventPast
+              : classes.selectedEvent
+            : isRegistrationDeadlineFinished && classes.pastEvent
+        }`,
+      };
+    }
+  );
 
   return (
     <Box

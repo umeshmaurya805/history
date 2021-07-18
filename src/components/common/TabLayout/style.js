@@ -4,7 +4,7 @@ import Tab from "@material-ui/core/Tab";
 
 export const StyledTabs = withStyles({
   indicator: {
-    height: 5,
+    height: "0.3125rem",
     display: "flex",
     justifyContent: "center",
     backgroundColor: "transparent",
@@ -20,7 +20,7 @@ export const StyledTabs = withStyles({
 export const StyledTab = withStyles((theme) => ({
   root: {
     fontFamily: "Roboto",
-    fontSize: 18,
+    fontSize: "1.125rem",
     fontWeight: 500,
     textTransform: "uppercase",
     color: "#7A7878",

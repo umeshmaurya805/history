@@ -98,8 +98,8 @@ const EnhancedTableHead = (props) => {
         {editable && (
           <StyledTableCell
             style={{
-              width: 20,
-              minWidth: 20,
+              width: "1.25rem",
+              minWidth: "1.25rem",
             }}
           />
         )}
@@ -118,7 +118,7 @@ EnhancedTableHead.propTypes = {
 const ParticipantTable = ({
   rows,
   columns,
-  title="Participant List",
+  title = "Participant List",
   editable = false,
   colored = false,
   noHeader = false,
@@ -263,7 +263,7 @@ const ParticipantTable = ({
                 );
               })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 73 * emptyRows }}>
+              <TableRow style={{ height: `${4.5625 * emptyRows}rem` }}>
                 <StyledTableCell colSpan={6} />
               </TableRow>
             )}
