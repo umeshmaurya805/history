@@ -13,16 +13,16 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
   },
   board: {
-    maxWidth: "600px !important",
+    maxWidth: "37.5rem !important",
     margin: "auto",
-    padding: `${theme.spacing(5)}px !important`,
+    padding: "2.5rem !important",
   },
   featureList: {
-    maxHeight: "500px",
+    maxHeight: "31.25rem",
   },
   logo: {
-    height: "125px",
-    width: "125px",
+    height: "7.8125rem",
+    width: "7.8125rem",
     marginBottom: "1rem",
   },
   paper: {

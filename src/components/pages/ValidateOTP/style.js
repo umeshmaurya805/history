@@ -2,12 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(8, 4),
+    margin: "4rem 2rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     [theme.breakpoints.down("sm")]: {
-      margin: theme.spacing(0, 2, 2, 2),
+      margin: "0rem 1rem 1rem 1rem",
       padding: "2rem",
       backgroundColor: "white",
       borderRadius: "0.5rem",
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontFamily: "Roboto",
     fontStyle: "normal",
-    fontWeight: "500",
+    fontWeight: 500,
     color: theme.palette.primary.main,
     marginBottom: "0.625rem",
-    maxWidth: "400px",
+    maxWidth: "25rem",
   },
   subTitle: {
     fontFamily: "'Inter', sans-serif",
@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-    height: "56px",
+    margin: "1.5rem 0rem 1rem",
+    height: "3.5rem",
   },
 }));
 

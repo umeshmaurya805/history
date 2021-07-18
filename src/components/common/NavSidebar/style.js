@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "3.375rem !important",
     color: "#4A90E2",
     "& span": {
-      fontWeight: "500",
+      fontWeight: 500,
     },
   },
   listItem: {
