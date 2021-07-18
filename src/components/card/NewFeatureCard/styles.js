@@ -6,16 +6,16 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "900",
     fontSize: "1.3rem",
     fontFamily: "Roboto",
-    marginBottom: theme.spacing(1),
+    marginBottom: "0.5rem",
   },
   image: {
     width: "100%",
-    marginBottom: theme.spacing(1),
+    marginBottom: "0.5rem",
   },
   description: {
     color: "#F4F9FF",
     fontSize: "14px",
-    marginBottom: theme.spacing(1),
+    marginBottom: "0.5rem",
   },
   learnMore: {
     fontWeight: 500,
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "#B5FCFF",
       "& span": {
-        marginLeft: "2px",
+        marginLeft: "0.125rem",
       },
     },
   },

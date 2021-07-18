@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   content: {
-    padding: "6px 15px 10px 6px !important",
+    padding: "6px 15px 0.625rem 6px !important",
   },
   container: {
     height: 120,
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     height: 80,
     width: 80,
-    marginRight: theme.spacing(1),
+    marginRight: "0.5rem",
     backgroundColor: "#C4C4C4",
     "@media (max-width: 1500px)": {
       height: 60,
@@ -46,14 +46,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     fontWeight: 500,
     "@media (max-width: 1500px)": {
-      fontSize: 12,
+      fontSize: "0.75rem",
     },
   },
   extraInfo: {
     fontSize: 14,
     color: "#383838",
     "@media (max-width: 1500px)": {
-      fontSize: 12,
+      fontSize: "0.75rem",
     },
   },
 }));

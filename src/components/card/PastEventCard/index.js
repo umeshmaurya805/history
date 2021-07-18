@@ -12,7 +12,7 @@ import useStyles from "./style";
 
 const PastEventCard = ({ competitive }) => {
   const classes = useStyles();
-  const name = "If You were (Monologue competition)";
+  const title = "If You were (Monologue competition)";
 
   const handlePdfDownload = () => {
     toast.success("PDF Downloaded", { toastId: "pdf" });
@@ -38,7 +38,7 @@ const PastEventCard = ({ competitive }) => {
             color="primary"
             className={classes.eventName}
           >
-            {name}
+            {title}
           </Typography>
           <Grid container>
             <Grid item>

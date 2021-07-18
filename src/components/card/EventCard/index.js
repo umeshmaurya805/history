@@ -6,12 +6,13 @@ import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import useStyles from "./style";
 import { useHistory } from "react-router-dom";
+import { format } from "date-fns";
 
 const EventCard = ({ data }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { title, subHeading, image, date, time, forClass, slug } = data;
+  const { title, summary, image, startDate, forClass, slug } = data;
 
   return (
     <div className={classes.root}>
@@ -31,9 +32,9 @@ const EventCard = ({ data }) => {
           <Typography
             display="block"
             variant="body2"
-            className={classes.subHeading}
+            className={classes.summary}
           >
-            {subHeading}
+            {summary}
           </Typography>
           <Box display="flex" alignItems="center" className={classes.infoBox}>
             <Grid container justifyContent="space-evenly">
@@ -41,20 +42,24 @@ const EventCard = ({ data }) => {
                 <Typography color="primary" className={classes.infoLabel}>
                   Date
                 </Typography>
-                <Typography className={classes.infoValue}>{date}</Typography>
+                <Typography className={classes.infoValue}>
+                  {format(startDate, "PP")}
+                </Typography>
               </Box>
               <Box className={classes.innerBox}>
                 <Typography color="primary" className={classes.infoLabel}>
                   Time
                 </Typography>
-                <Typography className={classes.infoValue}>{time}</Typography>
+                <Typography className={classes.infoValue}>
+                  {format(startDate, "p")}
+                </Typography>
               </Box>
               <Box className={classes.innerBox}>
                 <Typography color="primary" className={classes.infoLabel}>
                   Class
                 </Typography>
                 <Typography className={classes.infoValue}>
-                  {forClass}
+                  {`${forClass.from} - ${forClass.to}`}
                 </Typography>
               </Box>
             </Grid>
