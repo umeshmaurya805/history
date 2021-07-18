@@ -1,7 +1,8 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-import { hdApi } from "./services/hd";
-// import logger from "redux-logger";
+import { hdApi } from "./api";
+import supportReducer from "./slices/supportSlice";
+import logger from "redux-logger";
 
 const middleware = [...getDefaultMiddleware(), hdApi.middleware];
 
@@ -12,15 +13,16 @@ const config =
         devTools: false,
       }
     : {
-        // middleware: [...middleware, logger],
+        middleware: [...middleware, logger],
         devTools: true,
       };
 
 const store = configureStore({
   reducer: {
     [hdApi.reducerPath]: hdApi.reducer,
+    support: supportReducer,
   },
-  // middleware: config.middleware,
+  middleware: config.middleware,
   devTools: config.devTools,
 });
 

@@ -3,7 +3,7 @@ import {
   getSchoolAuth,
   removeSchoolAuth,
   saveSchoolAuth,
-} from "../../../utils/schoolAuth";
+} from "../../utils/schoolAuth";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${process.env.REACT_APP_SERVER_URL}/api`,

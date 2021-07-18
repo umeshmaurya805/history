@@ -9,24 +9,24 @@ export const StyledTableCell = withStyles((theme) => ({
     color: "white",
     backgroundColor: theme.palette.primary.main,
     fontWeight: 900,
-    fontSize: 16,
+    fontSize: "1rem",
   },
   body: {
-    fontSize: 13,
+    fontSize: "0.8125rem",
     color: "black",
   },
 }))(TableCell);
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    border: "1px solid #DADADA",
-    boxShadow: "0px 5px 20px -5px rgba(0,0,0,0.14) !important",
-    borderRadius: 12,
+    border: "0.0625rem solid #DADADA",
+    boxShadow: "0rem 0.3125rem 1.25rem -0.3125rem rgba(0,0,0,0.14) !important",
+    borderRadius: "0.75rem",
   },
   container: {
     borderTop: "none",
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    borderTopLeftRadius: "0.75rem",
+    borderTopRightRadius: "0.75rem",
   },
   titleColumn: {
     color: "#383838 !important",
@@ -34,24 +34,24 @@ const useStyles = makeStyles((theme) => ({
   },
   viewButton: {
     fontWeight: 700,
-    fontSize: 13,
-    borderRadius: 40,
-    width: 70,
-    padding: theme.spacing(1, 0),
-    margin: theme.spacing(-0.5, 0),
+    fontSize: "0.8125rem",
+    borderRadius: "2.5rem",
+    width: "4.375rem",
+    padding: "0.5rem 0rem",
+    margin: "-0.25rem 0rem",
   },
   tag: {
     fontFamily: "Roboto",
-    padding: theme.spacing(1),
-    width: 130,
+    padding: "0.5rem",
+    width: "8.125rem",
   },
   tablePagination: {
     color: "#5C6269",
-    padding: `${theme.spacing(1, 2)} !important`,
+    padding: "0.5rem 1rem !important",
 
     "& .MuiSelect-select.MuiSelect-select": {
-      border: "0.5px solid #DFE0EB",
-      boxShadow: "0px 4px 8px -3px rgba(0,0,0,0.14)",
+      border: "0.0.3125rem solid #DFE0EB",
+      boxShadow: "0rem 0.25rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     },
   },
 }));

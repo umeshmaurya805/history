@@ -18,6 +18,12 @@ export const rootTheme = responsiveFontSizes(
       MuiButton: {
         root: {
           textTransform: "none",
+          borderRadius: "0.5rem",
+        },
+      },
+      MuiInputBase: {
+        root: {
+          borderRadius: "0.5rem",
         },
       },
       MuiTextField: {
@@ -69,7 +75,7 @@ export const rootTheme = responsiveFontSizes(
         },
         icon: {
           color: "#008FD0",
-          top:'calc(50% - 0.75rem)',
+          top: "calc(50% - 0.75rem)",
           right: "0.75rem",
           position: "absolute",
           userSelect: "none",
@@ -79,11 +85,11 @@ export const rootTheme = responsiveFontSizes(
       MuiMenu: {
         paper: {
           borderRadius: "0.75rem",
-          marginTop: '0.5rem',
+          marginTop: "0.5rem",
         },
         list: {
-          paddingTop: '0rem',
-          paddingBottom: '0rem',
+          paddingTop: "0rem",
+          paddingBottom: "0rem",
           background: "white",
           "& li": {
             fontSize: "0.75rem",
@@ -109,7 +115,7 @@ export const rootTheme = responsiveFontSizes(
           fontFamily: "Roboto",
           backgroundColor: "rgba(255, 255,255, 1)",
           color: "rgba(0, 0, 0, 0.7)",
-          padding: '0.625rem',
+          padding: "0.625rem",
           border: "0.0.3125rem solid #E5E5E5",
           borderRadius: "0.75rem",
           boxShadow: "0rem 0.3125rem 0.625rem -0.3125rem rgba(0,0,0,0.14)",

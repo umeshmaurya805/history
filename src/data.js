@@ -4,6 +4,13 @@ import contest1 from "./assets/images/contest1.png";
 import contest2 from "./assets/images/contest2.png";
 import contest3 from "./assets/images/contest3.png";
 
+export const supportTitles = [
+  "Technical",
+  "Event Related",
+  "Credit Related",
+  "Others",
+];
+
 export const getEvents = () => {
   return [
     {
