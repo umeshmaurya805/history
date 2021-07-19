@@ -2,12 +2,14 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "0.5rem",
+    marginTop: "2rem",
   },
   card: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
     width: "303px",
     position: "relative",
-      margin: "1.5rem 1rem",
   },
   media: {
     borderTopLeftRadius: 12,
@@ -16,13 +18,15 @@ const useStyles = makeStyles((theme) => ({
     width: "300px",
     height: "240px",
   },
+  cardContent: {
+    flexGrow: 1,
+  },
   playImage: {
     position: "absolute",
-    left:0,
-    right:0,
-    top:0,
-    bottom:100,
-    margin:'auto'
+    left: 0,
+    right: 0,
+    top: 120,
+    margin: "auto",
   },
   item: {
     display: "flex",
@@ -32,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   description: {
     fontSize: 11,
     color: "#383838",
+    textAlign:'justify',
   },
   cardActions: {
     display: "flex",

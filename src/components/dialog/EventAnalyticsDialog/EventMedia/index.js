@@ -22,7 +22,7 @@ const EventMediaCard = ({ data, hasVideo }) => {
         height="300"
         image={data.image}
       />
-      <CardContent>
+      <CardContent className={classes.cardContent}>
         <Typography className={classes.description} component="p">
           {data.description}
         </Typography>
