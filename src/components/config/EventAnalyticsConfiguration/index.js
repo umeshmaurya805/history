@@ -6,7 +6,7 @@ import SearchBar from "../../common/Searchbar";
 import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
 
-const PastEventsConfiguration = ({
+const EventAnalyticsConfiguration = ({
   competitive,
   value,
   handleChange,
@@ -76,7 +76,7 @@ const PastEventsConfiguration = ({
             xs={12}
             md={5}
             className={classes.gridItem}
-            style={{ marginBottom: 10 }}
+            style={{ marginBottom: "0.625rem" }}
           >
             <SearchBar
               placeholder="Search for the event"
@@ -165,4 +165,4 @@ const PastEventsConfiguration = ({
   );
 };
 
-export default PastEventsConfiguration;
+export default EventAnalyticsConfiguration;

@@ -38,7 +38,12 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
   //   "2018-19",
   // ];
 
-  const pastDaysItems = ["Last 7 days", "Last 1 month", "Custom Range"];
+  const pastDaysItems = [
+    "Last 7 days",
+    "Last 30 days",
+    "Last 90 days",
+    "Custom Range",
+  ];
 
   const chartDateSelectorTypes = ["Weekly", "Monthly", "Yearly"];
 
@@ -78,18 +83,18 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
         <Grid container>
           <Grid item xs={12} md={5} className={classes.gridItem}>
             <Dropdown
-              name="user"
-              value={value.user}
-              items={userItems}
-              handleChange={handleChange}
-              classes={{ select: classes.user }}
-            />
-            <Dropdown
               name="class"
               value={value.class}
               items={classItems}
               handleChange={handleChange}
               classes={{ select: classes.class }}
+            />
+            <Dropdown
+              name="user"
+              value={value.user}
+              items={userItems}
+              handleChange={handleChange}
+              classes={{ select: classes.user }}
             />
           </Grid>
           <Grid

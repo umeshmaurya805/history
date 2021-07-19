@@ -7,12 +7,15 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
   },
-  select: {
+  coloredSelect: {
     backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:focus": {
       backgroundColor: theme.palette.primary.main,
     },
+  },
+  normalSelect:{
+    border: "0.0625rem solid #E5E5E5",
   },
   icon: {
     color: "white",

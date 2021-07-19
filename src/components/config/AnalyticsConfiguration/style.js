@@ -15,11 +15,9 @@ const useStyles = makeStyles((theme) => ({
   },
   class: {
     minWidth: '3.125rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   user: {
     minWidth: '3.125rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   category: {
     minWidth: '8.125rem',
@@ -30,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
   pastDays: {
     minWidth: '5.625rem',
-    border: "0.0625rem solid #E5E5E5",
     marginLeft: "0.5rem",
     [theme.breakpoints.only("xs")]: {
       width: "100%",

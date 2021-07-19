@@ -10,27 +10,21 @@ const useStyles = makeStyles((theme) => ({
   },
   status: {
     minWidth: '6.25rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   month: {
     minWidth: '5rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   year: {
     minWidth: '5rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   class: {
     minWidth: '3.125rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   user: {
     minWidth: '3.125rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   category: {
     minWidth: '8.125rem',
-    border: "0.0625rem solid #E5E5E5",
   },
   customRangeContainer: {
     display: "flex",

@@ -46,7 +46,9 @@ const Dropdown = ({
       <FormControl className={`${classes.root} ${customClasses.root}`}>
         <Select
           classes={{
-            select: `${colored && classes.select} ${customClasses.select}`,
+            select: `${
+              colored ? classes.coloredSelect : classes.normalSelect
+            } ${customClasses.select}`,
           }}
           disableUnderline
           MenuProps={menuProps}
