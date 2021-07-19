@@ -25,7 +25,7 @@ export const BlueStyledTableCell = withStyles((theme) => ({
     borderColor: "#DFE0EB",
   },
   head: {
-    height: 80, 
+    height: 80,
     color: theme.palette.primary.main,
     fontWeight: 700,
     fontSize: "1rem",
@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.5rem 1rem !important",
 
     "& .MuiSelect-select.MuiSelect-select": {
-      border: "0.0.3125rem solid #DFE0EB",
+      border: "0.03125rem solid #DFE0EB",
       boxShadow: "0rem 0.25rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     },
   },

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   titleColumn: {
     fontWeight: 600,
-    
+
     "& a": {
       textDecoration: "none",
       color: "#383838",
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.5rem 1rem !important",
 
     "& .MuiSelect-select.MuiSelect-select": {
-      border: "0.0.3125rem solid #DFE0EB",
+      border: "0.03125rem solid #DFE0EB",
       boxShadow: "0rem 0.25rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     },
   },

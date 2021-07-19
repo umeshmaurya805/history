@@ -116,7 +116,7 @@ export const rootTheme = responsiveFontSizes(
           backgroundColor: "rgba(255, 255,255, 1)",
           color: "rgba(0, 0, 0, 0.7)",
           padding: "0.625rem",
-          border: "0.0.3125rem solid #E5E5E5",
+          border: "0.03125rem solid #E5E5E5",
           borderRadius: "0.75rem",
           boxShadow: "0rem 0.3125rem 0.625rem -0.3125rem rgba(0,0,0,0.14)",
         },
