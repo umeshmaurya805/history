@@ -6,6 +6,7 @@ export const StyledTableCell = withStyles((theme) => ({
     borderColor: "#DFE0EB",
   },
   head: {
+    height: 80,
     color: "#9FA2B4",
     fontWeight: 700,
     fontSize: "1rem",
@@ -24,6 +25,7 @@ export const BlueStyledTableCell = withStyles((theme) => ({
     borderColor: "#DFE0EB",
   },
   head: {
+    height: 80, 
     color: theme.palette.primary.main,
     fontWeight: 700,
     fontSize: "1rem",
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0.75rem",
   },
   toolbar: {
-    padding: "1.5rem 1.5rem 1.5rem 1rem",
+    padding: "1.5rem 1.5rem 0rem 1rem",
     flexWrap: "wrap",
   },
   title: {
@@ -66,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
   sortLabel: {
     paddingLeft: "1.125rem",
   },
+  bulkCertificateDownload: {
+    marginLeft: "0.5rem",
+  },
   avatar: {
     marginRight: "1rem",
   },
@@ -77,8 +82,16 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.5rem 0rem",
     margin: "-0.25rem 0rem",
   },
+  downloadCertificate: {
+    padding: "0.7rem",
+  },
   deleteButton: {
     margin: "-0.25rem 0",
+  },
+  tag: {
+    fontFamily: "Roboto",
+    padding: "0.5rem",
+    width: "8.125rem",
   },
   visuallyHidden: {
     border: "0rem",

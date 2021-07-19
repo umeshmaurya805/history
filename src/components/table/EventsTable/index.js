@@ -18,7 +18,7 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const emptyRows =
-    rows.length <= rowsPerPage
+    rows.length >= 5 && rows.length <= rowsPerPage
       ? 0
       : rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 

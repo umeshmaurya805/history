@@ -57,7 +57,7 @@ const data = [
 const columns = [
   {
     id: "name",
-    label: `${isStudent ? "Student" : "Teacher"} name`,
+    label: `${isStudent ? "Student" : "Teacher"} Name`,
     fixedWidth: 165,
   },
   { id: "email", label: "Email", fixedWidth: 165 },

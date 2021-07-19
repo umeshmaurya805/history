@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow:1,
   },
   selectTheme: {
-    border: "0.0625rem solid #E5E5E5",
     minWidth: "5rem",
     [theme.breakpoints.only("xs")]: {
       minWidth: "unset",
@@ -27,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectEvent: {
-    border: "0.0625rem solid #E5E5E5",
     minWidth: "12.5rem",
     [theme.breakpoints.only("xs")]: {
       minWidth: "unset",

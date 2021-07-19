@@ -13,7 +13,7 @@ const columns = [
   {
     id: "title",
     label: "Title",
-    fixedWidth: "11.25rem",
+    fixedWidth: "12rem",
     tooltipText: "Upcoming event names",
   },
   {
@@ -48,6 +48,7 @@ const columns = [
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
+
 const upcomingEventList = getEvents()
   .filter((event) => isAfter(event.startDate, today) && event.isRegistered)
   .map((event) => {
@@ -59,83 +60,6 @@ const upcomingEventList = getEvents()
       registrations: 17,
     };
   });
-
-// const upcomingEventList = [
-//   createData(
-//     "World-of-Theatre",
-//     "World of Theatre",
-//     "11/20/20",
-//     "5 - 9",
-//     15,
-//     6
-//   ),
-//   createData(
-//     "World-of-Theatre",
-//     "World of Theatre",
-//     "11/20/20",
-//     "5 - 9",
-//     15,
-//     6
-//   ),
-//   createData(
-//     "Colors-Around-Painting-Competition",
-//     "Colors Around Painting Competition",
-//     "10/15/20",
-//     "2 - 5",
-//     23,
-//     5
-//   ),
-//   createData(
-//     "Trade-to-Territory",
-//     "Trade to Territory",
-//     "10/10/20",
-//     "6 - 12",
-//     234,
-//     5
-//   ),
-//   createData(
-//     "Theatre-in-Education",
-//     "Theatre in Education",
-//     "9/27/20",
-//     "1 - 5",
-//     5,
-//     5
-//   ),
-//   createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
-//   createData(
-//     "World-of-Theatre",
-//     "World of Theatre",
-//     "11/20/20",
-//     "5 - 9",
-//     15,
-//     6
-//   ),
-//   createData(
-//     "Colors-Around-Painting-Competition",
-//     "Colors Around Painting Competition",
-//     "10/15/20",
-//     "2 - 5",
-//     23,
-//     5
-//   ),
-//   createData(
-//     "Trade-to-Territory",
-//     "Trade to Territory",
-//     "10/10/20",
-//     "6 - 12",
-//     234,
-//     5
-//   ),
-//   createData(
-//     "Theatre-in-Education",
-//     "Theatre in Education",
-//     "9/27/20",
-//     "1 - 5",
-//     5,
-//     5
-//   ),
-//   createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
-// ];
 
 const UpcomingEvent = () => {
   const classes = useStyles();

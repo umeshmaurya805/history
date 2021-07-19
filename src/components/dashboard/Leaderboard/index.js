@@ -15,7 +15,7 @@ import useStyles, { StyledTableCell } from "./style";
 
 const columns = [
   { id: "rank", label: "Rank", fixedWidth: 60 },
-  { id: "name", label: "School name", fixedWidth: 150 },
+  { id: "name", label: "School Name", fixedWidth: 150 },
   { id: "city", label: "City", fixedWidth: 60 },
   { id: "points", label: "Points", fixedWidth: 60 },
   {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import PastEventDialog from "../../../dialog/PastEventDialog";
+import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
-import PastEventsConfiguration from "./../../../config/PastEventsConfiguration/index";
+import EventAnalyticsConfiguration from "./../../../config/EventAnalyticsConfiguration/index";
 
 const columns = [
   {
@@ -168,7 +168,7 @@ const NonCompetitivePanel = () => {
 
   return (
     <div>
-      <PastEventsConfiguration
+      <EventAnalyticsConfiguration
         value={option}
         handleChange={handleChange}
         handleDownloadList={handleDownloadList}
@@ -178,7 +178,7 @@ const NonCompetitivePanel = () => {
         columns={columns}
         handleClickOpen={handleClickOpen}
       />
-      <PastEventDialog slug={slug} open={open} onClose={handleClose} />
+      <EventAnalyticsDialog slug={slug} open={open} onClose={handleClose} />
     </div>
   );
 };

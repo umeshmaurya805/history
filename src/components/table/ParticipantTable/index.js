@@ -9,7 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import PropTypes from "prop-types";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
-import { Box } from "@material-ui/core";
+import { Box, Chip } from "@material-ui/core";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -46,8 +46,16 @@ const stableSort = (array, comparator) => {
 };
 
 const EnhancedTableHead = (props) => {
-  const { classes, columns, order, orderBy, onRequestSort, editable, colored } =
-    props;
+  const {
+    classes,
+    columns,
+    order,
+    orderBy,
+    onRequestSort,
+    isCertificatesAvailable,
+    editable,
+    colored,
+  } = props;
 
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -61,40 +69,80 @@ const EnhancedTableHead = (props) => {
     );
   };
 
+  const SortLabelWrapper = ({ column }) => {
+    return (
+      <TableSortLabel
+        className={column.id !== "name" ? classes.sortLabel : null}
+        active={orderBy === column.id}
+        direction={orderBy === column.id ? order : "asc"}
+        onClick={createSortHandler(column.id)}
+      >
+        {column.label}
+        {orderBy === column.id ? (
+          <span className={classes.visuallyHidden}>
+            {order === "desc" ? "sorted descending" : "sorted ascending"}
+          </span>
+        ) : null}
+      </TableSortLabel>
+    );
+  };
+
   return (
     <TableHead>
       <TableRow>
-        {columns.map((column) => (
-          <TableHeadWrapper
-            key={column.id}
-            align={column.id === "name" ? "left" : "center"}
-            sortDirection={orderBy === column.id ? order : false}
-            style={{
-              width: column.fixedWidth,
-              minWidth: column.fixedWidth,
-            }}
-          >
-            {column.id === "certificate" ? (
-              column.label
-            ) : (
-              <TableSortLabel
-                className={column.id !== "name" ? classes.sortLabel : null}
-                active={orderBy === column.id}
-                direction={orderBy === column.id ? order : "asc"}
-                onClick={createSortHandler(column.id)}
+        {columns.map((column) => {
+          if (column.id === "name") {
+            return (
+              <TableHeadWrapper
+                key={column.id}
+                align="left"
+                sortDirection={orderBy === column.id ? order : false}
+                style={{
+                  width: column.fixedWidth,
+                  minWidth: column.fixedWidth,
+                }}
+              >
+                <SortLabelWrapper column={column} />
+              </TableHeadWrapper>
+            );
+          } else if (column.id === "certificate") {
+            return (
+              <TableHeadWrapper
+                key={column.id}
+                align="center"
+                style={{
+                  width: column.fixedWidth,
+                  minWidth: column.fixedWidth,
+                }}
               >
                 {column.label}
-                {orderBy === column.id ? (
-                  <span className={classes.visuallyHidden}>
-                    {order === "desc"
-                      ? "sorted descending"
-                      : "sorted ascending"}
-                  </span>
-                ) : null}
-              </TableSortLabel>
-            )}
-          </TableHeadWrapper>
-        ))}
+                <IconButton
+                  className={classes.bulkCertificateDownload}
+                  aria-label="download-certificate"
+                  color="primary"
+                  disabled={!isCertificatesAvailable}
+                  // onClick={() => handleCertificateDownload(row.slug)}
+                >
+                  <GetAppIcon fontSize="small" />
+                </IconButton>
+              </TableHeadWrapper>
+            );
+          } else {
+            return (
+              <TableHeadWrapper
+                key={column.id}
+                align="center"
+                sortDirection={orderBy === column.id ? order : false}
+                style={{
+                  width: column.fixedWidth,
+                  minWidth: column.fixedWidth,
+                }}
+              >
+                <SortLabelWrapper column={column} />
+              </TableHeadWrapper>
+            );
+          }
+        })}
         {editable && (
           <StyledTableCell
             style={{
@@ -118,7 +166,7 @@ EnhancedTableHead.propTypes = {
 const ParticipantTable = ({
   rows,
   columns,
-  title = "Participant List",
+  title = "Participants List",
   editable = false,
   colored = false,
   noHeader = false,
@@ -128,9 +176,14 @@ const ParticipantTable = ({
   const [orderBy, setOrderBy] = React.useState("name");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  let isCertificatesAvailable = false;
+
+  rows.forEach((row) => {
+    if (row.isCertificateReceived) isCertificatesAvailable = true;
+  });
 
   const emptyRows =
-    rows.length <= rowsPerPage
+    rows.length >= 5 && rows.length <= rowsPerPage
       ? 0
       : rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -200,7 +253,9 @@ const ParticipantTable = ({
             order={order}
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
+            isCertificatesAvailable={isCertificatesAvailable}
           />
+
           <TableBody>
             {stableSort(rows, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -209,45 +264,70 @@ const ParticipantTable = ({
                   <TableRow key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
-                      return column.id === "name" ? (
-                        <StyledTableCell key={column.id} align="left">
-                          <Box display="flex" alignItems="center">
-                            <Avatar
-                              src={row.avatar}
-                              className={classes.avatar}
+
+                      if (column.id === "name") {
+                        return (
+                          <StyledTableCell key={column.id} align="left">
+                            <Box display="flex" alignItems="center">
+                              <Avatar
+                                src={row.avatar}
+                                className={classes.avatar}
+                              />
+                              <Typography className={classes.participantName}>
+                                {value}
+                              </Typography>
+                            </Box>
+                          </StyledTableCell>
+                        );
+                      } else if (column.id === "certificate") {
+                        return (
+                          <StyledTableCell key={column.id} align="center">
+                            <Button
+                              onClick={() => handleCertificateView(row.slug)}
+                              color="primary"
+                              className={classes.viewButton}
+                              disabled={!row.hasParticipated}
+                            >
+                              View
+                            </Button>
+                            <IconButton
+                              className={classes.downloadCertificate}
+                              aria-label="download-certificate"
+                              color="primary"
+                              disabled={!row.hasParticipated}
+                              onClick={() =>
+                                handleCertificateDownload(row.slug)
+                              }
+                            >
+                              <GetAppIcon fontSize="small" />
+                            </IconButton>
+                          </StyledTableCell>
+                        );
+                      } else if (column.id === "status") {
+                        return (
+                          <StyledTableCell key={column.id} align="center">
+                            <Chip
+                              size="small"
+                              variant="outlined"
+                              label={value}
+                              className={classes.tag}
+                              style={{
+                                backgroundColor:
+                                  value === "Participated" // TODO: Make it : hasParticipated
+                                    ? "#69DE91"
+                                    : "#EF7373",
+                              }}
                             />
-                            <Typography className={classes.participantName}>
-                              {value}
-                            </Typography>
-                          </Box>
-                        </StyledTableCell>
-                      ) : (
-                        <StyledTableCell key={column.id} align="center">
-                          {column.id === "certificate" ? (
-                            <React.Fragment>
-                              <Button
-                                onClick={() => handleCertificateView(row.slug)}
-                                color="primary"
-                                className={classes.viewButton}
-                              >
-                                View
-                              </Button>
-                              <IconButton
-                                aria-label="download"
-                                color="primary"
-                                onClick={() =>
-                                  handleCertificateDownload(row.slug)
-                                }
-                              >
-                                <GetAppIcon fontSize="small" />
-                              </IconButton>
-                            </React.Fragment>
-                          ) : (
-                            value
-                          )}
-                          {column.id === "currentClass" && row.section}
-                        </StyledTableCell>
-                      );
+                          </StyledTableCell>
+                        );
+                      } else {
+                        return (
+                          <StyledTableCell key={column.id} align="center">
+                            {value}
+                            {column.id === "currentClass" && ` ${row.section}`}
+                          </StyledTableCell>
+                        );
+                      }
                     })}
                     {editable && (
                       <StyledTableCell align="right">
