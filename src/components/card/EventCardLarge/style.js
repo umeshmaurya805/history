@@ -4,20 +4,24 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
     width: "100%",
-    padding: theme.spacing(0, 2),
+    padding: '0rem 1rem',
     "& > .MuiCard-root": {
       height: "100%",
     },
   },
   content: {
-    padding: 15,
+    padding: '1rem',
     height: "100%",
+    maxWidth:'unset',
     "& > .MuiGrid-container": {
       height: "105%",
     },
   },
   imageContainer: {
     display: "flex",
+    "@media (min-width: 1400px)":{
+      maxHeight: '16.25rem'
+    }
   },
   image: {
     margin: "auto",
@@ -26,31 +30,31 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0.75rem",
     boxShadow: "0rem 0.3125rem 0.625rem rgba(0,0,0,0.24)",
     [theme.breakpoints.only("xs")]: {
-      height: 150,
-      width: 250,
+      height: '9.375rem',
+      width: '15.625rem',
     },
   },
   title: {
     fontFamily: "Roboto",
     fontWeight: 600,
-    fontSize: 22,
+    fontSize: '1.375rem',
     color: "#4E4C4C",
     textAlign: "center",
   },
   summary: {
     color: "#383838",
     textAlign: "center",
-    padding: theme.spacing(1, 0.5),
+    padding: '0.5rem 0.25rem',
     [theme.breakpoints.only("xs")]: {
-      padding: theme.spacing(0, 4),
+      padding:'0rem 2rem',
     },
   },
   infoBox: {
     width: "100%",
-    marginBottom: theme.spacing(1.5),
+    marginBottom: '0.75rem',
   },
   innerBox: {
-    padding: theme.spacing(0, 1),
+    padding: '0rem 0.5rem',
   },
   infoLabel: {
     fontFamily: "Roboto",
@@ -60,12 +64,12 @@ const useStyles = makeStyles((theme) => ({
   },
   infoValue: {
     fontFamily: "Roboto",
-    fontSize: 14,
+    fontSize: '0.875rem',
     textAlign: "center",
   },
   detailsButton: {
-    minWidth: 90,
-    height: 35,
+    minWidth: '5.625rem',
+    height: '2.25rem',
     fontSize: "0.75rem",
     fontFamily: "Roboto",
     alignSelf: "flex-end",

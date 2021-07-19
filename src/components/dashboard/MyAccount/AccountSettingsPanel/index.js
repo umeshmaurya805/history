@@ -35,7 +35,7 @@ const AccountSettingsPanel = () => {
   const classes = useStyles();
 
   const coordinatorDetails = {
-    name: "Elon Musk",
+    name: "Xyz Sharma",
     designation: "Teacher",
     contactNumber: "123456789",
     email: "xyz@gmail.com",

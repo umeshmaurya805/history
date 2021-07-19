@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
   selector: {
     justifyContent: "flex-end",
     display: "flex",
-    flexWrap: "wrap",
+    flexWrap: "wrap-reverse",
+
     flexGrow:1,
   },
   selectTheme: {

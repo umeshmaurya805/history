@@ -2,23 +2,21 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    height: "100%",
     width: "100%",
     padding: "0rem 1rem",
   },
   card: {
+    height: "100%",
     padding: "0rem 1rem",
   },
   content: {
-    padding: "0rem 0.625rem 0rem 0.625rem !important",
+    height: "100%",
   },
   imageContainer: {
     width: "100%",
     paddingTop: "50%" /* 2:1 Aspect Ratio */,
     position: "relative",
-    "@media (min-width: 1700px)": {
-      width: "80%",
-      paddingTop: "40%",
-    },
     margin: "1rem 0rem",
     paddingLeft: "2.5rem",
   },
@@ -35,12 +33,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   title: {
+    flexGrow: 1,
     fontFamily: "Roboto",
     fontWeight: 500,
     fontSize: "1rem",
     color: "black",
+    marginTop: '0.5rem',
   },
   summary: {
+    flexGrow: 1,
     color: "black",
     opacity: 0.8,
     fontSize: "0.75rem",

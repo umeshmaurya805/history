@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   name: {
     fontFamily: "Roboto",
     fontWeight: 500,
-    marginRight: theme.spacing(1.5),
+    marginRight: '0.75rem',
     fontSize: 14,
     backgroundColor: theme.palette.primary.main,
     color: "white",
