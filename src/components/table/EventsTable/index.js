@@ -151,7 +151,7 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
       </TableContainer>
       <TablePagination
         className={classes.tablePagination}
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={rows.length > 5 ? [5, 10, 25] : [5]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
