@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
   reactMarkdown: {
     color: "#383838",
-    maxHeight: "30rem",
+    maxHeight: "34rem",
     overflow: "auto",
     margin: "1rem 0rem 2rem",
     "& > h1, h2, h3, h4, h5, h6": {
