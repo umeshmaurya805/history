@@ -71,6 +71,9 @@ const useStyles = makeStyles((theme) => ({
   bulkCertificateDownload: {
     marginLeft: "0.5rem",
   },
+  medals:{
+    height: 35,
+  },
   avatar: {
     marginRight: "1rem",
   },

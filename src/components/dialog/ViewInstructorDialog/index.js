@@ -12,18 +12,17 @@ import Chip from "@material-ui/core/Chip";
 import format from "date-fns/format";
 import useStyles from "./style";
 
-const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
+const ViewInstructorDialog = ({ date, data, handleClose, ...props }) => {
   const classes = useStyles();
   return (
     <Dialog onClose={handleClose} {...props}>
       <DialogTitle
-        id="event-list-dialog-title"
         disableTypography
         className={classes.dialogTitle}
       >
         <Box display="flex" justifyContent="flex-end">
           <Typography className={classes.title}>
-            Events on {format(date, "PP")}
+            Instructor Details
           </Typography>
           <IconButton
             edge="start"
@@ -83,4 +82,4 @@ const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
   );
 };
 
-export default EventsOnDialog;
+export default ViewInstructorDialog;

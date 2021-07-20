@@ -26,7 +26,7 @@ const NextInLine = () => {
   return (
     <div className={classes.root}>
       <Title tooltipText="Events list for the current month">
-        Next In Line
+        Events on July, 2021
       </Title>
       <List aria-label="next-in-line-list" className={classes.list}>
         {eventsInThisMonth.map((event, index) => {

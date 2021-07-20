@@ -12,7 +12,6 @@ import ConfirmationDialog from "../../../dialog/ConfirmationDialog";
 import ViewParticipantsDialog from "../../../dialog/ViewParticipantsDialog";
 import { getEvents } from "../../../../data";
 import useStyles from "./style";
-import { toast } from "react-toastify";
 
 const EventDetails = () => {
   const classes = useStyles();
@@ -47,6 +46,7 @@ const EventDetails = () => {
     studentMessage: false,
     schoolRegistration: false,
     viewParticipants: false,
+    viewInstructors:false,
   };
 
   const [open, setOpen] = useState(initialState);
@@ -98,14 +98,10 @@ const EventDetails = () => {
           })}
           <Grid item className={classes.item}>
             <Chip
-             className={classes.instructorButton}
+              className={classes.instructorButton}
               label="View Instructors"
               clickable
-              onClick={() =>
-                toast.success("Instructor Details shown", {
-                  toastId: "instructorDetails",
-                })
-              }
+              onClick={() => handleOpen("viewInstructors")}
             />
           </Grid>
         </Grid>

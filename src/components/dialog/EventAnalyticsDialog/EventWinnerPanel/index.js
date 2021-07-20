@@ -9,9 +9,10 @@ import useStyles from "./style";
 
 const EventWinnerPanel = () => {
   const classes = useStyles();
+  const [roundValue, setRoundValue] = useState(0);
 
   const isStudent = true;
-  const hasTeam = false;
+  const hasTeam = true;
 
   const data = [
     {
@@ -22,6 +23,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "ABC Public School",
       certificate: "/certificates/1",
+      theme: "Theme 1",
+      team: "Team A",
+      position: 1,
     },
     {
       firstName: "BBBB",
@@ -31,6 +35,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "XYZ Public School",
       certificate: "/certificates/1",
+      theme: "Theme 1",
+      team: "Team A",
+      position: 1,
     },
     {
       firstName: "CCC",
@@ -40,6 +47,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "ABC Public School",
       certificate: "/certificates/1",
+      theme: "Theme 1",
+      team: "Team A",
+      position: 1,
     },
     {
       firstName: "DDD",
@@ -49,6 +59,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "IPL Public School",
       certificate: "/certificates/1",
+      theme: "Theme 2",
+      team: "Team B",
+      position: 2,
     },
     {
       firstName: "GGG",
@@ -58,6 +71,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "ABC Public School",
       certificate: "/certificates/1",
+      theme: "Theme 2",
+      team: "Team B",
+      position: 2,
     },
     {
       firstName: "QQQ",
@@ -67,6 +83,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "ABC Public School",
       certificate: "/certificates/1",
+      theme: "Theme 3",
+      team: "Team C",
+      position: 3,
     },
     {
       firstName: "EEE",
@@ -76,6 +95,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "BHARTIA Public School",
       certificate: "/certificates/1",
+      theme: "Theme 3",
+      team: "Team C",
+      position: 3,
     },
     {
       firstName: "WWW",
@@ -85,6 +107,9 @@ const EventWinnerPanel = () => {
       section: "A",
       schoolName: "BHARTIA Public School",
       certificate: "/certificates/1",
+      theme: "Theme 3",
+      team: "Team C",
+      position: 3,
     },
     {
       firstName: "HHH",
@@ -136,11 +161,15 @@ const EventWinnerPanel = () => {
       fixedWidth: 180,
     },
     { id: "currentClass", label: "Class", fixedWidth: 165 },
+    { id: "theme", label: "Theme", fixedWidth: 165 },
   ];
 
   if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: 165 });
 
-  const rows = data.map((participant) => {
+  if (roundValue === 2)
+    columns.push({ id: "position", label: "Position", fixedWidth: 165 });
+
+  let rows = data.map((participant) => {
     const {
       firstName,
       lastName,
@@ -148,7 +177,9 @@ const EventWinnerPanel = () => {
       currentClass,
       section,
       schoolName,
-      certificate,
+      theme,
+      team,
+      position,
     } = participant;
 
     return {
@@ -157,13 +188,17 @@ const EventWinnerPanel = () => {
       currentClass,
       section,
       schoolName,
-      certificate,
+      theme,
+      team,
+      position,
     };
   });
 
-  const roundItems = ["Round 1", "Round 2", "Round 3"];
+  if (roundValue === 2) {
+    rows = rows.filter((row, index) => index <= 7);
+  }
 
-  const [roundValue, setRoundValue] = useState(0);
+  const roundItems = ["Round 1", "Round 2", "Round 3"];
 
   const handleChange = (event) => {
     setRoundValue(event.target.value);

@@ -37,18 +37,21 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   title: {
-    marginTop: '1.875rem',
+    marginTop: "1.875rem",
     fontFamily: "Roboto",
     fontWeight: 900,
-    fontSize: '1.375rem',
+    fontSize: "1.375rem",
     textAlign: "center",
     "@media (min-width: 1700px)": {
-      marginTop: '3.125rem',
+      marginTop: "3.125rem",
     },
   },
-  instructorButton:{
-    background:'#ffc856',
-    color:'white'
+  instructorButton: {
+    background: "#F89503",
+    color: "white",
+    "&:hover, &:focus": {
+      backgroundColor: "#C37603",
+    },
   },
   summary: {
     color: "#383838",
@@ -58,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     margin: "0.5rem",
-    minWidth: '6.5625rem',
+    minWidth: "6.5625rem",
   },
   itemName: {
     fontFamily: "Roboto",
@@ -67,9 +70,9 @@ const useStyles = makeStyles((theme) => ({
   },
   reactMarkdown: {
     color: "#383838",
-    maxHeight: '34rem',
+    maxHeight: "30rem",
     overflow: "auto",
-    margin: '1rem 0rem 2rem',
+    margin: "1rem 0rem 2rem",
     "& > h1, h2, h3, h4, h5, h6": {
       color: theme.palette.primary.main,
     },
@@ -77,18 +80,15 @@ const useStyles = makeStyles((theme) => ({
   messageButton: {
     backgroundColor: "#F89503",
     color: "white",
-    width: '11.25rem',
+    width: "11.25rem",
     margin: "0.5rem",
     padding: "0.5rem",
-    "&:hover": {
-      backgroundColor: "#C37603",
-    },
-    "&:active": {
+    "&:hover, &:focus": {
       backgroundColor: "#C37603",
     },
   },
   button: {
-    width: '12rem',
+    width: "12rem",
     margin: "0.5rem",
     padding: "0.5rem",
   },

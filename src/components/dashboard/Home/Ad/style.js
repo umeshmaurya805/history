@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     width: 255,
     height: 390,
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "1rem",
+      margin: "4rem 0rem 0rem 2rem",
     },
   },
   slider: {

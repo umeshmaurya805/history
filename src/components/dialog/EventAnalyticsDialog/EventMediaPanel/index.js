@@ -75,7 +75,7 @@ const EventMediaPanel = () => {
     <Grid container className={classes.root} justifyContent="space-evenly">
       {list.map((item, index) => {
         return (
-          <Grid key={index} item>
+          <Grid key={index} item className={classes.item}>
             <EventMediaCard data={item} hasVideo={index === 0} />
           </Grid>
         );

@@ -7,6 +7,7 @@ import "react-multi-carousel/lib/styles.css";
 import EventCardLarge from "../../../card/EventCardLarge";
 import EventCard from "../../../card/EventCard";
 import { getEvents } from "../../../../data";
+import Title from "../../../common/Title";
 import useStyles from "./style";
 
 const FeaturedEvent = () => {
@@ -59,20 +60,25 @@ const FeaturedEvent = () => {
   };
 
   return (
-    <Carousel
-      className={classes.root}
-      responsive={responsive}
-      customRightArrow={<CustomRightArrow />}
-      customLeftArrow={<CustomLeftArrow />}
-    >
-      {isMobileScreen || eventList.length >= 2
-        ? eventList.map((eventData, index) => {
-            return <EventCard key={index} data={eventData} />;
-          })
-        : eventList.map((eventData, index) => {
-            return <EventCardLarge key={index} data={eventData} />;
-          })}
-    </Carousel>
+    <React.Fragment>
+      <Title tooltipText="List of the featured events that are open now">
+        Featured Event
+      </Title>
+      <Carousel
+        className={classes.root}
+        responsive={responsive}
+        customRightArrow={<CustomRightArrow />}
+        customLeftArrow={<CustomLeftArrow />}
+      >
+        {isMobileScreen || eventList.length >= 2
+          ? eventList.map((eventData, index) => {
+              return <EventCard key={index} data={eventData} />;
+            })
+          : eventList.map((eventData, index) => {
+              return <EventCardLarge key={index} data={eventData} />;
+            })}
+      </Carousel>
+    </React.Fragment>
   );
 };
 

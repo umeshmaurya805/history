@@ -6,10 +6,10 @@ import EventStats from "../../common/EventStats";
 import EventResult from "./EventResult";
 import WelcomeBanner from "./WelcomeBanner";
 import UpcomingEvent from "./UpcomingEvent";
-// import Magazine from "./Magazine";
-// import Ad from "./Ad";
+import Magazine from "./Magazine";
+import Podcast from "./Podcast";
+import Ad from "./Ad";
 import useStyles from "./style";
-import Title from "../../common/Title";
 
 const Home = () => {
   const classes = useStyles();
@@ -31,14 +31,16 @@ const Home = () => {
       <EventStats data={data} />
       <EventResult />
       <Grid container className={classes.container} justifyContent="center">
-        <Grid item className={classes.mainSection}></Grid>
-        <Grid item className={classes.ad}>
-          {/* <Ad /> */}
+        <Grid item className={classes.z}>
+          <Magazine />
+        </Grid>
+        <Grid item>
+          <Podcast />
+        </Grid>
+        <Grid item className={classes.zad}>
+          <Ad />
         </Grid>
       </Grid>
-      <Title tooltipText="List of the featured events that are open now">
-        Featured Event
-      </Title>
       <FeaturedEvent />
       <UpcomingEvent />
     </Layout>

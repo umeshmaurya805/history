@@ -41,7 +41,7 @@ const WinnerPanel = () => {
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
-      position: 2,
+      position: 1,
       event: "Event 1",
     },
     {
@@ -54,7 +54,7 @@ const WinnerPanel = () => {
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
-      position: 2,
+      position: 1,
       event: "Event 1",
     },
     {
@@ -93,7 +93,7 @@ const WinnerPanel = () => {
       theme: "Theme 1",
       team: "Team A",
       participant: 50,
-      position: 2,
+      position: 3,
       event: "Event 1",
     },
     {

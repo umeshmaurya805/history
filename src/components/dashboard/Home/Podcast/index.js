@@ -6,26 +6,26 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import magazineImage from "../../../../assets/svg/magazine-image.png";
+import podcastImage from "../../../../assets/svg/podcast.svg";
 import Title from "../../../common/Title";
 import useStyles from "./style";
 
-const Magazine = () => {
+const Podcast = () => {
   const classes = useStyles();
 
   return (
     <Box>
-      <Title tooltipText="Monthly magazines will appear here">Magazine</Title>
+      <Title tooltipText="Monthly Podcast will appear here">Podcast</Title>
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
           component="img"
           height="255"
-          image={magazineImage}
+          image={podcastImage}
         />
         <CardContent className={classes.content}>
           <Typography className={classes.description} component="p">
-            Mag description here Mag description here Mag description here Mag
+            Podcast description here Podcast description here Podcast description here Podcast
             description here.
           </Typography>
         </CardContent>
@@ -52,4 +52,4 @@ const Magazine = () => {
   );
 };
 
-export default Magazine;
+export default Podcast;

@@ -17,6 +17,10 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { toast } from "react-toastify";
+
+import firstMedal from "../../../assets/svg/first.svg";
+import secondMedal from "../../../assets/svg/second.svg";
+import thirdMedal from "../../../assets/svg/third.svg";
 import useStyles, { StyledTableCell, BlueStyledTableCell } from "./style";
 
 const descendingComparator = (a, b, orderBy) => {
@@ -177,13 +181,14 @@ const ParticipantTable = ({
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   let isCertificatesAvailable = false;
+  const medals = [firstMedal, secondMedal, thirdMedal];
 
   rows.forEach((row) => {
     if (row.isCertificateReceived) isCertificatesAvailable = true;
   });
 
   const emptyRows =
-  rows.length <= rowsPerPage
+    rows.length <= rowsPerPage
       ? 0
       : rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -318,6 +323,12 @@ const ParticipantTable = ({
                                     : "#EF7373",
                               }}
                             />
+                          </StyledTableCell>
+                        );
+                      } else if (column.id === "position") {
+                        return (
+                          <StyledTableCell key={column.id} align="center">
+                            <img className={classes.medals} src={medals[value - 1]} alt="" />
                           </StyledTableCell>
                         );
                       } else {

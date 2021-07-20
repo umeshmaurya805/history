@@ -4,6 +4,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "2rem",
   },
+  item: {
+    margin: "1rem",
+  },
   card: {
     display: "flex",
     flexDirection: "column",
@@ -28,11 +31,6 @@ const useStyles = makeStyles((theme) => ({
     top: 120,
     margin: "auto",
   },
-  item: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-  },
   categoryName: {
     fontSize: 16,
     textAlign: "center",
@@ -43,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
   description: {
     fontSize: 12,
     color: "#383838",
-    textAlign: "justify",    fontFamily: "Roboto",
-
+    textAlign: "justify",
+    fontFamily: "Roboto",
   },
   cardActions: {
     display: "flex",

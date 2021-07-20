@@ -10,7 +10,7 @@ const SchoolParticipantPanel = () => {
   const classes = useStyles();
 
   const isStudent = true;
-  const hasTeam = false;
+  const hasTeam = true;
 
   const data = [
     {
@@ -21,6 +21,8 @@ const SchoolParticipantPanel = () => {
       section: "A",
       hasParticipated: true,
       certificate: "/certificates/1",
+      theme: "Theme 1",
+      team: "Team A",
     },
     {
       firstName: "BBBB",
@@ -30,6 +32,8 @@ const SchoolParticipantPanel = () => {
       section: "A",
       hasParticipated: false,
       // certificate: "/certificates/1",
+      theme: "Theme 2",
+      team: "Team B",
     },
     {
       firstName: "CCC",
@@ -38,6 +42,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 10,
       section: "A",
       hasParticipated: false,
+      theme: "Theme 1",
+      team: "Team A",
       // certificate: "/certificates/1",
     },
     {
@@ -47,6 +53,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 10,
       section: "A",
       hasParticipated: false,
+      theme: "Theme 1",
+      team: "Team A",
       // certificate: "/certificates/1",
     },
     {
@@ -56,6 +64,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 10,
       section: "A",
       hasParticipated: true,
+      theme: "Theme 1",
+      team: "Team A",
       certificate: "/certificates/1",
     },
     {
@@ -65,6 +75,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 10,
       section: "A",
       hasParticipated: true,
+      theme: "Theme 2",
+      team: "Team B",
       certificate: "/certificates/1",
     },
     {
@@ -74,6 +86,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 10,
       section: "A",
       hasParticipated: true,
+      theme: "Theme 1",
+      team: "Team A",
       certificate: "/certificates/1",
     },
     {
@@ -83,6 +97,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 10,
       section: "A",
       hasParticipated: false,
+      theme: "Theme 1",
+      team: "Team A",
       // certificate: "/certificates/1",
     },
     {
@@ -92,6 +108,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 4,
       section: "A",
       hasParticipated: true,
+      theme: "Theme 1",
+      team: "Team A",
       certificate: "/certificates/1",
     },
     {
@@ -101,6 +119,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 10,
       section: "A",
       hasParticipated: true,
+      theme: "Theme 3",
+      team: "Team C",
       certificate: "/certificates/1",
     },
     {
@@ -110,6 +130,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 3,
       section: "A",
       hasParticipated: true,
+      theme: "Theme 2",
+      team: "Team B",
       certificate: "/certificates/1",
     },
     {
@@ -119,6 +141,8 @@ const SchoolParticipantPanel = () => {
       currentClass: 7,
       section: "A",
       hasParticipated: true,
+      theme: "Theme 1",
+      team: "Team A",
       certificate: "/certificates/1",
     },
   ];
@@ -130,11 +154,13 @@ const SchoolParticipantPanel = () => {
       fixedWidth: 180,
     },
     { id: "currentClass", label: "Class", fixedWidth: 165 },
-    { id: "status", label: "Status", fixedWidth: 165 },
-    { id: "certificate", label: "E-Certificates", fixedWidth: 165 },
+    { id: "theme", label: "Theme", fixedWidth: 165 },
   ];
 
   if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: 165 });
+  
+  columns.push({ id: "status", label: "Status", fixedWidth: 165 });
+  columns.push({ id: "certificate", label: "E-Certificates", fixedWidth: 200 });
 
   const rows = data.map((participant) => {
     const {
@@ -144,6 +170,8 @@ const SchoolParticipantPanel = () => {
       currentClass,
       section,
       hasParticipated,
+      theme,
+      team,
       certificate,
     } = participant;
 
@@ -160,6 +188,8 @@ const SchoolParticipantPanel = () => {
       avatar,
       currentClass,
       section,
+      theme,
+      team,
       status,
       hasParticipated,
       isCertificateReceived,
@@ -175,7 +205,12 @@ const SchoolParticipantPanel = () => {
 
   return (
     <div>
-      <Box className={classes.box} display="flex" alignItems="center" justifyContent="flex-end">
+      <Box
+        className={classes.box}
+        display="flex"
+        alignItems="center"
+        justifyContent="flex-end"
+      >
         <Button
           color="primary"
           className={classes.button}

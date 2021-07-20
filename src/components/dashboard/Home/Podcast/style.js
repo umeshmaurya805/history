@@ -4,7 +4,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 255,
     border: "none",
-    marginRight: "2rem",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
   },
   media: {

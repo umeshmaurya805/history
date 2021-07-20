@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   chipItems: {
     flexGrow: 1,
-    "@media (min-width: 1000px) and (max-width: 1320px)": {
+    "@media (min-width: 1000px) and (max-width: 1306px)": {
       minWidth: 310,
     },
   },
