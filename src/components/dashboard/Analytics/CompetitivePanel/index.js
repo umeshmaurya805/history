@@ -1,6 +1,5 @@
-import { isAfter } from "date-fns";
-import format from "date-fns/format";
 import React, { useState } from "react";
+import format from "date-fns/format";
 import { toast } from "react-toastify";
 import { getEvents } from "../../../../data";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
@@ -49,9 +48,7 @@ const columns = [
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
-const eventsList = getEvents()
-  .filter((event) => isAfter(event.startDate, today) && event.isRegistered)
-  .map((event) => {
+const eventsList = getEvents().map((event) => {
     return {
       title: event.title,
       slug: event.slug,

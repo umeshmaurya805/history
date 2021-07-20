@@ -84,7 +84,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const UpdateParticipantsDialog = ({ open, onClose }) => {
+const ViewParticipantsDialog = ({ open, onClose }) => {
   const classes = useStyles();
   const [searchName, setSearchName] = useState("");
 
@@ -135,4 +135,4 @@ const UpdateParticipantsDialog = ({ open, onClose }) => {
   );
 };
 
-export default UpdateParticipantsDialog;
+export default ViewParticipantsDialog;

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     width: "100%",
-    paddingTop: "50%" /* 2:1 Aspect Ratio */,
+    paddingTop: "25%" /* 2:1 Aspect Ratio */,
     position: "relative",
     "@media (min-width: 1700px)": {
       width: "80%",
@@ -46,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '3.125rem',
     },
   },
+  instructorButton:{
+    background:'#ffc856',
+    color:'white'
+  },
   summary: {
     color: "#383838",
     fontFamily: "Roboto",
@@ -63,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
   reactMarkdown: {
     color: "#383838",
-    maxHeight: '23.75rem',
+    maxHeight: '34rem',
     overflow: "auto",
     margin: '1rem 0rem 2rem',
     "& > h1, h2, h3, h4, h5, h6": {
@@ -84,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    width: '11.25rem',
+    width: '12rem',
     margin: "0.5rem",
     padding: "0.5rem",
   },

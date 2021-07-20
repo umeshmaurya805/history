@@ -15,7 +15,7 @@ import InfoChip from "../../common/InfoChip";
 import TabLayout from "../../common/TabLayout";
 import SchoolParticipantPanel from "./SchoolParticipantPanel";
 import EventWinnerPanel from "./EventWinnerPanel";
-import EventMedia from "./EventMedia";
+import EventMediaPanel from "./EventMediaPanel";
 import useStyles from "./style";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -30,7 +30,7 @@ const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
 
   if (!competitive) {
     labels.push("Event Media");
-    panels.push(EventMedia);
+    panels.push(EventMediaPanel);
   }
 
   const title = "If You were (Monologue competition)";

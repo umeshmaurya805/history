@@ -33,17 +33,24 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-evenly",
   },
+  categoryName: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: "1rem",
+    fontWeight: 500,
+    fontFamily: "Roboto",
+  },
   description: {
-    fontSize: 11,
+    fontSize: 12,
     color: "#383838",
-    textAlign:'justify',
+    textAlign: "justify",    fontFamily: "Roboto",
+
   },
   cardActions: {
     display: "flex",
     justifyContent: "center",
     padding: theme.spacing(0, 2, 2),
   },
-  actionButton: {},
 }));
 
 export default useStyles;

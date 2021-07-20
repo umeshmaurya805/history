@@ -101,6 +101,7 @@ const UpcomingEvent = () => {
       </Box>
       <Box>
         <EventsTable
+          clickableEvent
           rows={upcomingEventList}
           columns={columns}
           handleClickOpen={handleClickOpen}

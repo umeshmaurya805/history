@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { getEvents } from "../../../../data";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
-import EventAnalyticsConfiguration from "./../../../config/EventAnalyticsConfiguration/index";
+import EventAnalyticsConfiguration from "../../../config/EventAnalyticsConfiguration";
+import { format } from 'date-fns';
 
 const columns = [
   {
@@ -43,93 +45,19 @@ const columns = [
   },
 ];
 
-function createData(slug, title, date, classes, participation, status, list) {
-  return { slug, title, date, classes, participation, status, list };
-}
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-const eventsList = [
-  createData(
-    "World-of-Theatre",
-    "World of Theatre",
-    "11/20/20",
-    "5 - 9",
-    15,
-    "Not Participated"
-  ),
-  createData(
-    "World-of-Theatre",
-    "World of Theatre",
-    "11/20/20",
-    "5 - 9",
-    15,
-    "Participated"
-  ),
-  createData(
-    "Colors-Around-Painting-Competition",
-    "Colors Around Painting Competition",
-    "10/15/20",
-    "2 - 5",
-    23,
-    "Not Participated"
-  ),
-  createData(
-    "Trade-to-Territory",
-    "Trade to Territory",
-    "10/10/20",
-    "6 - 12",
-    234,
-    "Participated"
-  ),
-  createData(
-    "Theatre-in-Education",
-    "Theatre in Education",
-    "9/27/20",
-    "1 - 5",
-    5,
-    "Not Participated"
-  ),
-  createData("World-of-Theatre", "World of Theatre", "9/25/20", "5 - 9", 15, 5),
-  createData(
-    "World-of-Theatre",
-    "World of Theatre",
-    "11/20/20",
-    "5 - 9",
-    15,
-    "Participated"
-  ),
-  createData(
-    "Colors-Around-Painting-Competition",
-    "Colors Around Painting Competition",
-    "10/15/20",
-    "2 - 5",
-    23,
-    "Not Participated"
-  ),
-  createData(
-    "Trade-to-Territory",
-    "Trade to Territory",
-    "10/10/20",
-    "6 - 12",
-    234,
-    "Participated"
-  ),
-  createData(
-    "Theatre-in-Education",
-    "Theatre in Education",
-    "9/27/20",
-    "1 - 5",
-    5,
-    "Not Participated"
-  ),
-  createData(
-    "World-of-Theatre",
-    "World of Theatre",
-    "9/25/20",
-    "5 - 9",
-    15,
-    "Participated"
-  ),
-];
+const eventsList = getEvents().map((event) => {
+    return {
+      title: event.title,
+      slug: event.slug,
+      date: format(event.startDate, "PP"),
+      classes: `${event.forClass.from} - ${event.forClass.to}`,
+      participation: 8,
+      status: event.isRegistered ? "Participated" : "Not Participated",
+    };
+  });
 
 const NonCompetitivePanel = () => {
   const [open, setOpen] = useState(false);

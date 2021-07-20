@@ -183,7 +183,7 @@ const ParticipantTable = ({
   });
 
   const emptyRows =
-    rows.length >= 5 && rows.length <= rowsPerPage
+  rows.length <= rowsPerPage
       ? 0
       : rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -352,7 +352,7 @@ const ParticipantTable = ({
       </TableContainer>
       <TablePagination
         className={classes.tablePagination}
-        rowsPerPageOptions={rows.length > 5 ? [5, 10, 25] : [5]}
+        rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

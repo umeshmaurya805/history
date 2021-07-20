@@ -23,13 +23,15 @@ const EventMediaCard = ({ data, hasVideo }) => {
         image={data.image}
       />
       <CardContent className={classes.cardContent}>
+      <Typography className={classes.categoryName} component="p">
+          {data.category}
+        </Typography>
         <Typography className={classes.description} component="p">
           {data.description}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button
-          className={classes.actionButton}
           size="small"
           color="primary"
           variant="outlined"
@@ -43,26 +45,26 @@ const EventMediaCard = ({ data, hasVideo }) => {
   );
 };
 
-const EventMedia = () => {
+const EventMediaPanel = () => {
   const classes = useStyles();
 
   const list = [
     {
-      // category: "Video",
+      category: "Video",
       description:
         "Media description here Media description here Media description here Media description here.",
       image: mediaImage,
       url: "https://youtube.com",
     },
     {
-      // category: "Resources",
+      category: "Resources",
       description:
         "Resource description here Resource description here Resource description here Resource description here.",
       image: mediaImage,
       url: "https://youtube.com",
     },
     {
-      // category: "Session Takeaway",
+      category: "Session Takeaway",
       description:
         "Session Takeaway description here Session Takeaway description here Session Takeaway description here Session Takeaway description here.",
       image: mediaImage,
@@ -82,4 +84,4 @@ const EventMedia = () => {
   );
 };
 
-export default EventMedia;
+export default EventMediaPanel;

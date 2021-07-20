@@ -12,13 +12,13 @@ import useStyles, { StyledTableCell } from "./style";
 import InfoButton from "../../button/InfoButton";
 import { Link } from "react-router-dom";
 
-const EventsTable = ({ rows, columns, handleClickOpen }) => {
+const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const emptyRows =
-    rows.length >= 5 && rows.length <= rowsPerPage
+    rows.length <= rowsPerPage
       ? 0
       : rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -75,9 +75,13 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
                             }}
                             className={classes.titleColumn}
                           >
-                            <Link to={`/dashboard/calendar/${row.slug}`}>
-                              {value}
-                            </Link>
+                            {clickableEvent ? (
+                              <Link to={`/dashboard/calendar/${row.slug}`}>
+                                {value}
+                              </Link>
+                            ) : (
+                              value
+                            )}
                           </StyledTableCell>
                         );
                       } else if (column.id === "list") {
@@ -151,7 +155,7 @@ const EventsTable = ({ rows, columns, handleClickOpen }) => {
       </TableContainer>
       <TablePagination
         className={classes.tablePagination}
-        rowsPerPageOptions={rows.length > 5 ? [5, 10, 25] : [5]}
+        rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

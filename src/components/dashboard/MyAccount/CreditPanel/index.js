@@ -36,7 +36,7 @@ const CreditPanel = ({ setActivePanel }) => {
         </Typography>
         <Button
           color="primary"
-          variant="outlined"
+          variant="contained"
           className={classes.button}
           onClick={handleRedeemCredits}
         >

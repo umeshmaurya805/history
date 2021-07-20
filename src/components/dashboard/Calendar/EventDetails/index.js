@@ -9,9 +9,10 @@ import format from "date-fns/format";
 import { Chip } from "@material-ui/core";
 import StudentMessageDialog from "../../../dialog/StudentMessageDialog";
 import ConfirmationDialog from "../../../dialog/ConfirmationDialog";
-import UpdateParticipantsDialog from "../../../dialog/UpdateParticipantsDialog";
+import ViewParticipantsDialog from "../../../dialog/ViewParticipantsDialog";
 import { getEvents } from "../../../../data";
 import useStyles from "./style";
+import { toast } from "react-toastify";
 
 const EventDetails = () => {
   const classes = useStyles();
@@ -19,7 +20,6 @@ const EventDetails = () => {
 
   const event = getEvents().find((event) => event.slug === slug);
 
-  // console.log("event", event);
   const {
     title,
     summary,
@@ -46,7 +46,7 @@ const EventDetails = () => {
   const initialState = {
     studentMessage: false,
     schoolRegistration: false,
-    updateParticipants: false,
+    viewParticipants: false,
   };
 
   const [open, setOpen] = useState(initialState);
@@ -93,14 +93,21 @@ const EventDetails = () => {
                   color="primary"
                   label={`${item[0]}: ${item[1]}`}
                 />
-                {/* <Typography color="primary" className={classes.itemName}> */}
-                {/* {item[0]} */}
-                {/* </Typography> */}
-                {/* <Typography>{item[1]}</Typography> */}
-                {/* </Chip> */}
               </Grid>
             );
           })}
+          <Grid item className={classes.item}>
+            <Chip
+             className={classes.instructorButton}
+              label="View Instructors"
+              clickable
+              onClick={() =>
+                toast.success("Instructor Details shown", {
+                  toastId: "instructorDetails",
+                })
+              }
+            />
+          </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={6} md={12}>
@@ -116,9 +123,9 @@ const EventDetails = () => {
               variant="contained"
               color="primary"
               className={classes.button}
-              onClick={() => handleOpen("updateParticipants")}
+              onClick={() => handleOpen("viewParticipants")}
             >
-              Update Participants
+              Add Team / Participants
             </Button>
           )}
           <Button
@@ -134,13 +141,14 @@ const EventDetails = () => {
             color="primary"
             className={classes.button}
             onClick={() => handleOpen("schoolRegistration")}
-          >{console.log(isRegistered, event.title)}
+          >
+            {console.log(isRegistered, event.title)}
             {isRegistered ? "Cancel Registration" : "Register"}
           </Button>
         </Box>
       </Grid>
-      <UpdateParticipantsDialog
-        open={open.updateParticipants}
+      <ViewParticipantsDialog
+        open={open.viewParticipants}
         onClose={handleClose}
       />
       <StudentMessageDialog open={open.studentMessage} onClose={handleClose} />
