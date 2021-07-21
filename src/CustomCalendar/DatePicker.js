@@ -1,9 +1,13 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 
-import { Calendar } from './Calendar';
-import DatePickerInput from './DatePickerInput';
-import { getValueType } from './shared/generalUtils';
-import { TYPE_SINGLE_DATE, TYPE_MUTLI_DATE, TYPE_RANGE } from './shared/constants';
+import { Calendar } from "./Calendar";
+import DatePickerInput from "./DatePickerInput";
+import { getValueType } from "./shared/generalUtils";
+import {
+  TYPE_SINGLE_DATE,
+  TYPE_MUTLI_DATE,
+  TYPE_RANGE,
+} from "./shared/constants";
 
 const DatePicker = ({
   value,
@@ -44,9 +48,9 @@ const DatePicker = ({
     const handleBlur = () => {
       setCalendarVisiblity(false);
     };
-    window.addEventListener('blur', handleBlur, false);
+    window.addEventListener("blur", handleBlur, false);
     return () => {
-      window.removeEventListener('blur', handleBlur, false);
+      window.removeEventListener("blur", handleBlur, false);
     };
   }, []);
 
@@ -55,14 +59,18 @@ const DatePicker = ({
     const valueType = getValueType(value);
     if (valueType === TYPE_MUTLI_DATE) return; // no need to close the calendar
     const shouldCloseCalendar =
-      valueType === TYPE_SINGLE_DATE ? !isCalendarOpen : !isCalendarOpen && value.from && value.to;
+      valueType === TYPE_SINGLE_DATE
+        ? !isCalendarOpen
+        : !isCalendarOpen && value.from && value.to;
     if (shouldCloseCalendar) inputElement.current.blur();
   }, [value, isCalendarOpen]);
 
-  const handleBlur = e => {
+  const handleBlur = (e) => {
     e.persist();
     if (!isCalendarOpen) return;
-    const isInnerElementFocused = calendarContainerElement.current.contains(e.relatedTarget);
+    const isInnerElementFocused = calendarContainerElement.current.contains(
+      e.relatedTarget
+    );
     if (shouldPreventToggle.current) {
       shouldPreventToggle.current = false;
       inputElement.current.focus();
@@ -80,7 +88,8 @@ const DatePicker = ({
   // Keep the calendar in the screen bounds if input is near the window edges
   useLayoutEffect(() => {
     if (!isCalendarOpen) return;
-    const { left, width, height, top } = calendarContainerElement.current.getBoundingClientRect();
+    const { left, width, height, top } =
+      calendarContainerElement.current.getBoundingClientRect();
     const { clientWidth, clientHeight } = document.documentElement;
     const isOverflowingFromRight = left + width > clientWidth;
     const isOverflowingFromLeft = left < 0;
@@ -91,7 +100,9 @@ const DatePicker = ({
 
       if (!isOverflowingFromRight && !isOverflowingFromLeft) return;
       const overflowFromLeftDistance = Math.abs(left);
-      const rightPosition = isOverflowingFromLeft ? overflowFromLeftDistance : 0;
+      const rightPosition = isOverflowingFromLeft
+        ? overflowFromLeftDistance
+        : 0;
 
       const leftStyle = isOverflowingFromRight
         ? `calc(50% - ${overflowFromRightDistance}px)`
@@ -101,28 +112,31 @@ const DatePicker = ({
 
     calendarContainerElement.current.style.left = getLeftStyle();
     if (
-      (calendarPopperPosition === 'auto' && isOverflowingFromBottom) ||
-      calendarPopperPosition === 'top'
+      (calendarPopperPosition === "auto" && isOverflowingFromBottom) ||
+      calendarPopperPosition === "top"
     ) {
-      calendarContainerElement.current.classList.add('-top');
+      calendarContainerElement.current.classList.add("-top");
     }
-  }, [isCalendarOpen]);
+  }, [isCalendarOpen, calendarPopperPosition]);
 
-  const handleCalendarChange = newValue => {
+  const handleCalendarChange = (newValue) => {
     const valueType = getValueType(value);
     onChange(newValue);
     if (valueType === TYPE_SINGLE_DATE) setCalendarVisiblity(false);
-    else if (valueType === TYPE_RANGE && newValue.from && newValue.to) setCalendarVisiblity(false);
+    else if (valueType === TYPE_RANGE && newValue.from && newValue.to)
+      setCalendarVisiblity(false);
   };
 
   const handleKeyUp = ({ key }) => {
     switch (key) {
-      case 'Enter':
+      case "Enter":
         setCalendarVisiblity(true);
         break;
-      case 'Escape':
+      case "Escape":
         setCalendarVisiblity(false);
         shouldPreventToggle.current = true;
+        break;
+      default:
         break;
     }
   };
@@ -195,9 +209,9 @@ const DatePicker = ({
 };
 
 DatePicker.defaultProps = {
-  wrapperClassName: '',
-  locale: 'en',
-  calendarPopperPosition: 'auto',
+  wrapperClassName: "",
+  locale: "en",
+  calendarPopperPosition: "auto",
 };
 
 export default DatePicker;

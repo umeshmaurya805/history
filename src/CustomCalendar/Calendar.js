@@ -47,6 +47,8 @@ const Calendar = ({
   });
 
   useEffect(() => {
+    const calendarRef = calendarElement.current;
+
     const handleKeyUp = ({ key }) => {
       /* istanbul ignore else */
       if (key === "Tab")
@@ -60,12 +62,8 @@ const Calendar = ({
 
     return () => {
       /* istanbul ignore else */
-      if (calendarElement.current !== null) {
-        calendarElement.current.removeEventListener(
-          "keyup",
-          handleKeyUp,
-          false
-        );
+      if (calendarRef !== null) {
+        calendarRef.removeEventListener("keyup", handleKeyUp, false);
       }
     };
   }, [calendarElement]);
@@ -139,7 +137,7 @@ const Calendar = ({
       isYearSelectorOpen: false,
     });
 
-    onDateChange({ ...activeDate,  year });
+    onDateChange({ ...activeDate, year });
   };
 
   return (

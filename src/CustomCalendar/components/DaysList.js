@@ -1,15 +1,23 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
-import { getSlideDate, handleSlideAnimationEnd, animateContent } from '../shared/sliderHelpers';
+import {
+  getSlideDate,
+  handleSlideAnimationEnd,
+  animateContent,
+} from "../shared/sliderHelpers";
 import {
   deepCloneObject,
   isSameDay,
   createUniqueRange,
   getValueType,
-} from '../shared/generalUtils';
-import { TYPE_SINGLE_DATE, TYPE_RANGE, TYPE_MUTLI_DATE } from '../shared/constants';
-import handleKeyboardNavigation from '../shared/keyboardNavigation';
-import { useLocaleUtils, useLocaleLanguage } from '../shared/hooks';
+} from "../shared/generalUtils";
+import {
+  TYPE_SINGLE_DATE,
+  TYPE_RANGE,
+  TYPE_MUTLI_DATE,
+} from "../shared/constants";
+import handleKeyboardNavigation from "../shared/keyboardNavigation";
+import { useLocaleUtils, useLocaleLanguage } from "../shared/hooks";
 
 const DaysList = ({
   activeDate,
@@ -52,11 +60,13 @@ const DaysList = ({
     });
   }, [monthChangeDirection]);
 
-  const getDayRangeValue = day => {
+  const getDayRangeValue = (day) => {
     const clonedDayRange = deepCloneObject(value);
     const dayRangeValue =
-      clonedDayRange.from && clonedDayRange.to ? { from: null, to: null } : clonedDayRange;
-    const dayRangeProp = !dayRangeValue.from ? 'from' : 'to';
+      clonedDayRange.from && clonedDayRange.to
+        ? { from: null, to: null }
+        : clonedDayRange;
+    const dayRangeProp = !dayRangeValue.from ? "from" : "to";
     dayRangeValue[dayRangeProp] = day;
     const { from, to } = dayRangeValue;
 
@@ -66,7 +76,7 @@ const DaysList = ({
       dayRangeValue.to = from;
     }
 
-    const checkIncludingDisabledDay = disabledDay => {
+    const checkIncludingDisabledDay = (disabledDay) => {
       return checkDayInDayRange({
         day: disabledDay,
         from: dayRangeValue.from,
@@ -82,14 +92,18 @@ const DaysList = ({
     return dayRangeValue;
   };
 
-  const getMultiDateValue = day => {
-    const isAlreadyExisting = value.some(valueDay => isSameDay(valueDay, day));
+  const getMultiDateValue = (day) => {
+    const isAlreadyExisting = value.some((valueDay) =>
+      isSameDay(valueDay, day)
+    );
     const addedToValue = [...value, day];
-    const removedFromValue = value.filter(valueDay => !isSameDay(valueDay, day));
+    const removedFromValue = value.filter(
+      (valueDay) => !isSameDay(valueDay, day)
+    );
     return isAlreadyExisting ? removedFromValue : addedToValue;
   };
 
-  const handleDayClick = day => {
+  const handleDayClick = (day) => {
     const getNewValue = () => {
       const valueType = getValueType(value);
       switch (valueType) {
@@ -99,29 +113,42 @@ const DaysList = ({
           return getDayRangeValue(day);
         case TYPE_MUTLI_DATE:
           return getMultiDateValue(day);
+        default:
+          break;
       }
     };
     const newValue = getNewValue();
     onChange(newValue);
   };
 
-  const isSingleDateSelected = day => {
+  const isSingleDateSelected = (day) => {
     const valueType = getValueType(value);
     if (valueType === TYPE_SINGLE_DATE) return isSameDay(day, value);
-    if (valueType === TYPE_MUTLI_DATE) return value.some(valueDay => isSameDay(valueDay, day));
+    if (valueType === TYPE_MUTLI_DATE)
+      return value.some((valueDay) => isSameDay(valueDay, day));
   };
 
-  const getDayStatus = dayItem => {
+  const getDayStatus = (dayItem) => {
     const isToday = isSameDay(dayItem, today);
     const isSelected = isSingleDateSelected(dayItem);
     const { from: startingDay, to: endingDay } = value || {};
     const isStartingDayRange = isSameDay(dayItem, startingDay);
     const isEndingDayRange = isSameDay(dayItem, endingDay);
-    const isWithinRange = checkDayInDayRange({ day: dayItem, from: startingDay, to: endingDay });
-    return { isToday, isSelected, isStartingDayRange, isEndingDayRange, isWithinRange };
+    const isWithinRange = checkDayInDayRange({
+      day: dayItem,
+      from: startingDay,
+      to: endingDay,
+    });
+    return {
+      isToday,
+      isSelected,
+      isStartingDayRange,
+      isEndingDayRange,
+      isWithinRange,
+    };
   };
 
-  const getDayClassNames = dayItem => {
+  const getDayClassNames = (dayItem) => {
     const {
       isToday,
       isSelected,
@@ -129,24 +156,41 @@ const DaysList = ({
       isEndingDayRange,
       isWithinRange,
     } = getDayStatus(dayItem);
-    const customDayItemClassName = customDaysClassName.find(day => isSameDay(dayItem, day));
-    const classNames = ''
-      .concat(isToday && !isSelected ? ` -today ${calendarTodayClassName}` : '')
-      .concat(!dayItem.isStandard ? ' -blank' : '')
-      .concat(dayItem.isWeekend && shouldHighlightWeekends ? ' -weekend' : '')
-      .concat(customDayItemClassName ? ` ${customDayItemClassName.className}` : '')
-      .concat(isSelected ? ` -selected ${calendarSelectedDayClassName}` : '')
-      .concat(isStartingDayRange ? ` -selectedStart ${calendarRangeStartClassName}` : '')
-      .concat(isEndingDayRange ? ` -selectedEnd ${calendarRangeEndClassName}` : '')
-      .concat(isWithinRange ? ` -selectedBetween ${calendarRangeBetweenClassName}` : '')
-      .concat(dayItem.isDisabled ? ' -disabled' : '');
+    const customDayItemClassName = customDaysClassName.find((day) =>
+      isSameDay(dayItem, day)
+    );
+    const classNames = ""
+      .concat(isToday && !isSelected ? ` -today ${calendarTodayClassName}` : "")
+      .concat(!dayItem.isStandard ? " -blank" : "")
+      .concat(dayItem.isWeekend && shouldHighlightWeekends ? " -weekend" : "")
+      .concat(
+        customDayItemClassName ? ` ${customDayItemClassName.className}` : ""
+      )
+      .concat(isSelected ? ` -selected ${calendarSelectedDayClassName}` : "")
+      .concat(
+        isStartingDayRange
+          ? ` -selectedStart ${calendarRangeStartClassName}`
+          : ""
+      )
+      .concat(
+        isEndingDayRange ? ` -selectedEnd ${calendarRangeEndClassName}` : ""
+      )
+      .concat(
+        isWithinRange
+          ? ` -selectedBetween ${calendarRangeBetweenClassName}`
+          : ""
+      )
+      .concat(dayItem.isDisabled ? " -disabled" : "");
     return classNames;
   };
 
-  const getViewMonthDays = date => {
+  const getViewMonthDays = (date) => {
     // to match month starting date with the correct weekday label
-    const prependingBlankDays = createUniqueRange(getMonthFirstWeekday(date), 'starting-blank');
-    const standardDays = createUniqueRange(getMonthLength(date)).map(day => ({
+    const prependingBlankDays = createUniqueRange(
+      getMonthFirstWeekday(date),
+      "starting-blank"
+    );
+    const standardDays = createUniqueRange(getMonthLength(date)).map((day) => ({
       ...day,
       isStandard: true,
       month: date.month,
@@ -174,21 +218,36 @@ const DaysList = ({
     if (isSelected || isStartingDayRange || isToday || day === 1) return true;
   };
 
-  const renderEachWeekDays = ({ id, value: day, month, year, isStandard }, index) => {
+  const renderEachWeekDays = (
+    { id, value: day, month, year, isStandard },
+    index
+  ) => {
     const dayItem = { day, month, year };
-    const isInDisabledDaysRange = disabledDays.some(disabledDay => isSameDay(dayItem, disabledDay));
+    const isInDisabledDaysRange = disabledDays.some((disabledDay) =>
+      isSameDay(dayItem, disabledDay)
+    );
     const isBeforeMinimumDate = isBeforeDate(dayItem, minimumDate);
     const isAfterMaximumDate = isBeforeDate(maximumDate, dayItem);
-    const isNotInValidRange = isStandard && (isBeforeMinimumDate || isAfterMaximumDate);
+    const isNotInValidRange =
+      isStandard && (isBeforeMinimumDate || isAfterMaximumDate);
     const isDisabled = isInDisabledDaysRange || isNotInValidRange;
     const isWeekend = weekDaysList.some(
-      (weekDayItem, weekDayItemIndex) => weekDayItem.isWeekend && weekDayItemIndex === index,
+      (weekDayItem, weekDayItemIndex) =>
+        weekDayItem.isWeekend && weekDayItemIndex === index
     );
-    const additionalClass = getDayClassNames({ ...dayItem, isWeekend, isStandard, isDisabled });
-    const dayLabel = `${weekDaysList[index].name}, ${day} ${getMonthName(month)} ${year}`;
+    const additionalClass = getDayClassNames({
+      ...dayItem,
+      isWeekend,
+      isStandard,
+      isDisabled,
+    });
+    const dayLabel = `${weekDaysList[index].name}, ${day} ${getMonthName(
+      month
+    )} ${year}`;
     const isOnActiveSlide = month === activeDate.month;
     const dayStatus = getDayStatus(dayItem);
-    const { isSelected, isStartingDayRange, isEndingDayRange, isWithinRange } = dayStatus;
+    const { isSelected, isStartingDayRange, isEndingDayRange, isWithinRange } =
+      dayStatus;
     const shouldEnableKeyboardNavigation = isDayReachableByKeyboard({
       ...dayItem,
       ...dayStatus,
@@ -197,29 +256,33 @@ const DaysList = ({
     });
     return (
       <div
-        tabIndex={shouldEnableKeyboardNavigation ? '0' : '-1'}
+        tabIndex={shouldEnableKeyboardNavigation ? "0" : "-1"}
         key={id}
-        className={`Calendar__day -${isRtl ? 'rtl' : 'ltr'} ${additionalClass}`}
+        className={`Calendar__day -${isRtl ? "rtl" : "ltr"} ${additionalClass}`}
         onClick={() => {
           handleDayPress({ ...dayItem, isDisabled });
         }}
         onKeyDown={({ key }) => {
           /* istanbul ignore else */
-          if (key === 'Enter') handleDayPress({ ...dayItem, isDisabled });
+          if (key === "Enter") handleDayPress({ ...dayItem, isDisabled });
         }}
         aria-disabled={isDisabled}
         aria-label={dayLabel}
-        aria-selected={isSelected || isStartingDayRange || isEndingDayRange || isWithinRange}
-        {...(!isStandard || !isOnActiveSlide || isQuickSelectorOpen ? { 'aria-hidden': true } : {})}
+        aria-selected={
+          isSelected || isStartingDayRange || isEndingDayRange || isWithinRange
+        }
+        {...(!isStandard || !isOnActiveSlide || isQuickSelectorOpen
+          ? { "aria-hidden": true }
+          : {})}
         role="gridcell"
         data-is-default-selectable={shouldEnableKeyboardNavigation}
       >
-        {!isStandard ? '' : getLanguageDigits(day)}
+        {!isStandard ? "" : getLanguageDigits(day)}
       </div>
     );
   };
 
-  const renderMonthDays = isInitialActiveChild => {
+  const renderMonthDays = (isInitialActiveChild) => {
     const date = getSlideDate({
       activeDate,
       isInitialActiveChild,
@@ -227,12 +290,16 @@ const DaysList = ({
       parent: calendarSectionWrapper.current,
     });
     const allDays = getViewMonthDays(date);
-    const renderSingleWeekRow = weekRowIndex => {
+    const renderSingleWeekRow = (weekRowIndex) => {
       const eachWeekDays = allDays
         .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
         .map(renderEachWeekDays);
       return (
-        <div key={String(weekRowIndex)} className="Calendar__weekRow" role="row">
+        <div
+          key={String(weekRowIndex)}
+          className="Calendar__weekRow"
+          role="row"
+        >
           {eachWeekDays}
         </div>
       );
@@ -240,7 +307,7 @@ const DaysList = ({
     return Array.from(Array(6).keys()).map(renderSingleWeekRow);
   };
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     handleKeyboardNavigation(e, { allowVerticalArrows: true });
   };
 
@@ -253,7 +320,7 @@ const DaysList = ({
       onKeyDown={handleKeyDown}
     >
       <div
-        onAnimationEnd={e => {
+        onAnimationEnd={(e) => {
           handleSlideAnimationEnd(e);
           onSlideChange();
         }}
@@ -263,7 +330,7 @@ const DaysList = ({
         {renderMonthDays(true)}
       </div>
       <div
-        onAnimationEnd={e => {
+        onAnimationEnd={(e) => {
           handleSlideAnimationEnd(e);
           onSlideChange();
         }}
@@ -280,11 +347,11 @@ DaysList.defaultProps = {
   onChange: () => {},
   onDisabledDayError: () => {},
   disabledDays: [],
-  calendarTodayClassName: '',
-  calendarSelectedDayClassName: '',
-  calendarRangeStartClassName: '',
-  calendarRangeBetweenClassName: '',
-  calendarRangeEndClassName: '',
+  calendarTodayClassName: "",
+  calendarSelectedDayClassName: "",
+  calendarRangeStartClassName: "",
+  calendarRangeBetweenClassName: "",
+  calendarRangeEndClassName: "",
   shouldHighlightWeekends: false,
 };
 
