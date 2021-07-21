@@ -5,7 +5,8 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     width: 300,
     height: 390,
-    [theme.breakpoints.up("sm")]: {
+    margin: " 3.5rem auto",
+    "@media (min-width:1001px)": {
       margin: "3.5rem 0rem 0rem auto",
     },
   },

@@ -31,13 +31,13 @@ const Home = () => {
       <EventStats data={data} />
       <EventResult />
       <Grid container className={classes.container}>
-        <Grid item sm={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Magazine />
         </Grid>
-        <Grid item sm={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Podcast />
         </Grid>
-        <Grid item sm={4} className={classes.ad}>
+        <Grid item xs={12} sm={12} md={4} className={classes.ad}>
           <Ad />
         </Grid>
       </Grid>
