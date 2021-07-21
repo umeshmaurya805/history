@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    width: 255,
+    width: 300,
     height: 390,
     [theme.breakpoints.up("sm")]: {
-      margin: "4rem 0rem 0rem 2rem",
+      margin: "3.5rem 0rem 0rem auto",
     },
   },
   slider: {
@@ -32,11 +32,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    height: 390,
-    width: 260,
-    marginBottom: -5,
-    marginTop: -3,
-    marginLeft: -1,
+    height: "390px",
+    width: "105%",
+    marginLeft: -4,
   },
   adButtonLeft: {
     position: "absolute",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Layout from "../../common/Layout";
 import EventCalendar from "./EventCalendar";
@@ -14,6 +14,7 @@ import { getSlugHash } from "../../../data";
 const Calendar = () => {
   const classes = useStyles();
   const history = useHistory();
+  const [visibleDate, setVisibleDate] = useState(new Date());
 
   const { slug } = useParams();
 
@@ -49,10 +50,10 @@ const Calendar = () => {
         <Grid item xs={12} md={5} xl={4} className={classes.itemLeft}>
           <Grid container justifyContent="center" spacing={3}>
             <Grid item xs={12} sm={6} md={12}>
-              <EventCalendar />
+              <EventCalendar setVisibleDate={setVisibleDate} />
             </Grid>
             <Grid item xs={12} sm={6} md={12} className={classes.nextLine}>
-              <NextInLine />
+              <NextInLine visibleDate={visibleDate} />
             </Grid>
           </Grid>
         </Grid>

@@ -1,20 +1,20 @@
-import React from 'react'
+import React from "react";
 import Typography from "@material-ui/core/Typography";
 import InfoButton from "../../button/InfoButton";
-import useStyles from './style';
+import useStyles from "./style";
 
-const Title = ({tooltipText, children}) => {
-    const classes = useStyles();
+const Title = ({ tooltipText, size = "medium", children }) => {
+  const classes = useStyles();
 
-    return (
-        <Typography className={classes.root}>
-        {children}
-        <InfoButton
-          position="right-end"
-          text= {tooltipText}
-        />
-      </Typography>
-    )
-}
+  return (
+    <Typography
+      className={classes.root}
+      style={{ width: size === "large" && "16rem" }}
+    >
+      {children}
+      <InfoButton position="right-end" text={tooltipText} />
+    </Typography>
+  );
+};
 
-export default Title
+export default Title;

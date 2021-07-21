@@ -5,11 +5,12 @@ import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./style";
 import { IconButton } from "@material-ui/core";
 
-const SearchBar = ({ placeholder, value, onChange, onCancel }) => {
+const SearchBar = ({ placeholder, value, onChange, onCancel ,...props}) => {
   const classes = useStyles();
 
   return (
     <InputBase
+      autoComplete="off"
       name="searchbar"
       classes={classes}
       value={value}
@@ -23,6 +24,7 @@ const SearchBar = ({ placeholder, value, onChange, onCancel }) => {
           </IconButton>
         )
       }
+      {...props}
     />
   );
 };

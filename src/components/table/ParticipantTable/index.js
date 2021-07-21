@@ -318,8 +318,11 @@ const ParticipantTable = ({
                               className={classes.tag}
                               style={{
                                 backgroundColor:
-                                  value === "Participated" // TODO: Make it : hasParticipated
+                                  value === "Participated" ||
+                                  value === "Registered" // TODO: Make it : hasParticipated
                                     ? "#69DE91"
+                                    : value === "Invited"
+                                    ? "#ffff99"
                                     : "#EF7373",
                               }}
                             />
@@ -328,7 +331,11 @@ const ParticipantTable = ({
                       } else if (column.id === "position") {
                         return (
                           <StyledTableCell key={column.id} align="center">
-                            <img className={classes.medals} src={medals[value - 1]} alt="" />
+                            <img
+                              className={classes.medals}
+                              src={medals[value - 1]}
+                              alt=""
+                            />
                           </StyledTableCell>
                         );
                       } else {

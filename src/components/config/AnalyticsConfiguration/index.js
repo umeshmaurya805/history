@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
-import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import Grid from "@material-ui/core/Grid";
 import Dropdown from "../../common/Dropdown";
+import DatePicker from "../../../CustomCalendar";
+import "../../../CustomCalendar/DatePicker.css";
+import ChoiceSelectButton from "../../button/ChoiceSelectButton";
 import useStyles from "./style";
-import ChoiceSelectButton from "../../button/ChoiceSelectButton/index";
 
 const AnalyticsConfiguration = ({ value, handleChange }) => {
   const classes = useStyles();

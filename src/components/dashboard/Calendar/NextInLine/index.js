@@ -11,25 +11,25 @@ import { useHistory, useParams } from "react-router-dom";
 import Title from "../../../common/Title";
 // import eventImage from "../../../../assets/svg/event-image.png";
 import useStyles from "./style";
-import { format, isThisMonth } from "date-fns";
+import { format, isSameMonth } from "date-fns";
 import { getEvents } from "../../../../data";
 
-const NextInLine = () => {
+const NextInLine = ({ visibleDate }) => {
   const classes = useStyles();
   const history = useHistory();
   const { slug } = useParams();
 
-  const eventsInThisMonth = getEvents().filter(({ startDate }) =>
-    isThisMonth(startDate)
+  const eventsForTheSelectedMonth = getEvents().filter(({ startDate }) =>
+    isSameMonth(startDate, visibleDate)
   );
 
   return (
     <div className={classes.root}>
-      <Title tooltipText="Events list for the current month">
-        Events on July, 2021
+      <Title size="large" tooltipText="Events list for the selected month">
+        Events on {format(visibleDate, "LLL, y")}
       </Title>
       <List aria-label="next-in-line-list" className={classes.list}>
-        {eventsInThisMonth.map((event, index) => {
+        {eventsForTheSelectedMonth.map((event, index) => {
           return (
             <React.Fragment key={index}>
               <ListItem
@@ -68,13 +68,16 @@ const NextInLine = () => {
                     <Chip
                       size="small"
                       variant="outlined"
-                      label={`Starts On: ${format(event.startDate, "p")}`}
+                      label={`Deadline: ${format(
+                        event.registrationDeadline,
+                        "PP"
+                      )}`}
                       className={classes.eventRegisteredTag}
                     />
                   </Box>
                 </Box>
               </ListItem>
-              {index + 1 !== eventsInThisMonth.length && <Divider />}
+              {index + 1 !== eventsForTheSelectedMonth.length && <Divider />}
             </React.Fragment>
           );
         })}

@@ -30,14 +30,14 @@ const Home = () => {
       <WelcomeBanner />
       <EventStats data={data} />
       <EventResult />
-      <Grid container className={classes.container} justifyContent="center">
-        <Grid item className={classes.z}>
+      <Grid container className={classes.container}>
+        <Grid item sm={4}>
           <Magazine />
         </Grid>
-        <Grid item>
+        <Grid item sm={4}>
           <Podcast />
         </Grid>
-        <Grid item className={classes.zad}>
+        <Grid item sm={4} className={classes.ad}>
           <Ad />
         </Grid>
       </Grid>

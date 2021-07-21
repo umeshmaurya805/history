@@ -49,8 +49,11 @@ const useStyles = makeStyles((theme) => ({
   instructorButton: {
     background: "#F89503",
     color: "white",
-    "&:hover, &:focus": {
+    "&:hover": {
       backgroundColor: "#C37603",
+    },
+    "&:focus": {
+      background: "#F89503",
     },
   },
   summary: {
@@ -83,12 +86,12 @@ const useStyles = makeStyles((theme) => ({
     width: "11.25rem",
     margin: "0.5rem",
     padding: "0.5rem",
-    "&:hover, &:focus": {
+    "&:hover": {
       backgroundColor: "#C37603",
     },
   },
   button: {
-    width: "12rem",
+    width: "12.5rem",
     margin: "0.5rem",
     padding: "0.5rem",
   },

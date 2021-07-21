@@ -5,17 +5,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "2rem 0rem !important",
     justifyContent: "space-between",
   },
-  sideSection: {
-    padding: "1.25rem 0 !important",
-  },
-  featuredEvent: {
-    [theme.breakpoints.only("xs")]: {
-      margin: "auto",
-    },
-  },
   ad: {
-    padding: "1.25rem 0 !important",
-    margin: "auto",
+    // padding: "1.25rem 0 !important",
+    // margin: "auto",
   },
 }));
 

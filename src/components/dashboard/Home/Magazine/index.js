@@ -14,9 +14,9 @@ const Magazine = () => {
   const classes = useStyles();
 
   return (
-    <Box>
+    <Box className={classes.root}>
       <Title tooltipText="Monthly magazines will appear here">Magazine</Title>
-      <Card className={classes.root}>
+      <Card className={classes.card}>
         <CardMedia
           className={classes.media}
           component="img"

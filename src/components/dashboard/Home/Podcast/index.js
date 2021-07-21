@@ -14,9 +14,9 @@ const Podcast = () => {
   const classes = useStyles();
 
   return (
-    <Box>
+    <Box className={classes.root}>
       <Title tooltipText="Monthly Podcast will appear here">Podcast</Title>
-      <Card className={classes.root}>
+      <Card className={classes.card}>
         <CardMedia
           className={classes.media}
           component="img"

@@ -9,8 +9,10 @@ import format from "date-fns/format";
 import { Chip } from "@material-ui/core";
 import StudentMessageDialog from "../../../dialog/StudentMessageDialog";
 import ConfirmationDialog from "../../../dialog/ConfirmationDialog";
-import ViewParticipantsDialog from "../../../dialog/ViewParticipantsDialog";
+import AddTeamAndParticipantsDialog from "../../../dialog/AddTeamAndParticipantsDialog";
+import ViewInstructorsDialog from "../../../dialog/ViewInstructorsDialog";
 import { getEvents } from "../../../../data";
+import avatar from "../../../../assets/svg/avatar-man.svg";
 import useStyles from "./style";
 
 const EventDetails = () => {
@@ -30,7 +32,7 @@ const EventDetails = () => {
     isFree,
     forClass,
     registrationDeadline,
-    isLimited,
+    // isLimited,
   } = event;
 
   const list = [
@@ -42,15 +44,41 @@ const EventDetails = () => {
     ["Fee", isFree ? "Free" : `Rs. ${fee}`],
   ];
 
+  const instructors = [
+    {
+      avatar,
+      name: "Divyansh Singh Thakur",
+      about: "Professional Mobile & Web Developer",
+      role: "Instructor",
+    },
+    {
+      avatar,
+      name: "Divyansh Singh Thakur",
+      about: "Professional Mobile & Web Developer",
+      role: "Instructor",
+    },
+  ];
+
   const initialState = {
     studentMessage: false,
     schoolRegistration: false,
     viewParticipants: false,
-    viewInstructors:false,
+    viewInstructors: false,
   };
 
   const [open, setOpen] = useState(initialState);
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(true);
+  let buttonText = "Add Teams / Participants";
+
+  const hasTeam = false;
+  const isLimited = true;
+  const isEventForStudent = true;
+
+  if (!hasTeam && (isLimited || !isEventForStudent)) {
+    buttonText = "Add participants";
+  } else if (hasTeam && !isLimited && isEventForStudent) {
+    buttonText = "Add Teams";
+  }
 
   const handleOpen = (eventType) => {
     setOpen({ ...initialState, [eventType]: true });
@@ -114,14 +142,14 @@ const EventDetails = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={12}>
         <Box display="flex" justifyContent="space-evenly" flexWrap="wrap">
-          {isRegistered && isLimited && (
+          {isRegistered && (hasTeam || isLimited || !isEventForStudent) && (
             <Button
               variant="contained"
               color="primary"
               className={classes.button}
               onClick={() => handleOpen("viewParticipants")}
             >
-              Add Team / Participants
+              {buttonText}
             </Button>
           )}
           <Button
@@ -138,14 +166,21 @@ const EventDetails = () => {
             className={classes.button}
             onClick={() => handleOpen("schoolRegistration")}
           >
-            {console.log(isRegistered, event.title)}
             {isRegistered ? "Cancel Registration" : "Register"}
           </Button>
         </Box>
       </Grid>
-      <ViewParticipantsDialog
+      <AddTeamAndParticipantsDialog
         open={open.viewParticipants}
         onClose={handleClose}
+        hasTeam={hasTeam}
+        isLimited={isLimited}
+        isEventForStudent={isEventForStudent}
+      />
+      <ViewInstructorsDialog
+        open={open.viewInstructors}
+        onClose={handleClose}
+        data={instructors}
       />
       <StudentMessageDialog open={open.studentMessage} onClose={handleClose} />
       <ConfirmationDialog

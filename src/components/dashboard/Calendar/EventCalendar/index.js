@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import { isSameDay } from "date-fns";
+import { isAfter } from "date-fns/esm";
 import { useHistory, useParams } from "react-router-dom";
-import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
-import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar } from "../../../../CustomCalendar";
+import "../../../../CustomCalendar/DatePicker.css";
 import EventsOnDialog from "../../../dialog/EventsOnDialog";
 import EventConfiguration from "../../../config/EventConfiguration";
-import useStyles from "./style";
 import { getSlugHash } from "../../../../data";
 import { calendarEvents } from "./../../../../data";
-import { isAfter } from "date-fns/esm";
+import useStyles from "./style";
 
-const EventCalendar = () => {
+const EventCalendar = ({ setVisibleDate }) => {
   const classes = useStyles();
   const history = useHistory();
   const { slug } = useParams();
@@ -89,6 +89,17 @@ const EventCalendar = () => {
     }
   );
 
+  const handleDateChange = (activeDate) => {
+    console.log(activeDate);
+    const date = new Date(
+      activeDate.year,
+      activeDate.month - 1,
+      activeDate.day
+    );
+
+    setVisibleDate(date);
+  };
+
   return (
     <Box
       display="flex"
@@ -107,6 +118,7 @@ const EventCalendar = () => {
         colorPrimary="#007AFF"
         colorPrimaryLight="#D5EFFF"
         customDaysClassName={displayEventDays}
+        onDateChange={handleDateChange}
       />
       <EventsOnDialog
         open={openDialog}

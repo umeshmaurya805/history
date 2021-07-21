@@ -2,6 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    zIndex: 100,
+    background:'white',
     fontFamily: "Roboto",
     border: "0.0625rem solid #E5E5E5",
     borderRadius: "0.75rem",
