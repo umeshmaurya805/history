@@ -32,7 +32,9 @@ const EventDetails = () => {
     isFree,
     forClass,
     registrationDeadline,
-    // isLimited,
+    hasTeam,
+    isLimited,
+    isEventForStudent,
   } = event;
 
   const list = [
@@ -69,10 +71,6 @@ const EventDetails = () => {
   const [open, setOpen] = useState(initialState);
   const [isRegistered, setIsRegistered] = useState(true);
   let buttonText = "Add Teams / Participants";
-
-  const hasTeam = true;
-  const isLimited = true;
-  const isEventForStudent = true;
 
   if (!hasTeam && (isLimited || !isEventForStudent)) {
     buttonText = "Add participants";

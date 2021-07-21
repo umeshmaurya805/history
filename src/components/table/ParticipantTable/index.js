@@ -131,6 +131,24 @@ const EnhancedTableHead = (props) => {
                 </IconButton>
               </TableHeadWrapper>
             );
+          } else if (
+            column.id === "contact" ||
+            column.id === "email" ||
+            column.id === "teachClasses"
+          ) {
+            return (
+              <TableHeadWrapper
+                key={column.id}
+                align="center"
+                sortDirection={orderBy === column.id ? order : false}
+                style={{
+                  width: column.fixedWidth,
+                  minWidth: column.fixedWidth,
+                }}
+              >
+                {column.label}
+              </TableHeadWrapper>
+            );
           } else {
             return (
               <TableHeadWrapper

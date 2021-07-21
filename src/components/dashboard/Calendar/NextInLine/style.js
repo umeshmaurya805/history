@@ -17,22 +17,36 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0.75rem",
     overflow: "auto",
     boxShadow: "0rem 0.3125rem 2.5rem -0.625rem rgba(0,0,0,0.14)",
-    "& .MuiListItem-root.Mui-selected, & .MuiListItem-root.Mui-selected:hover":
-      {
-        backgroundColor: "rgba(41, 121, 255, 0.08)",
-      },
+  },
+  upcomingEvent: {
+    "&.MuiListItem-root.Mui-selected, &.MuiListItem-root.Mui-selected:hover": {
+      backgroundColor: "rgba(41, 121, 255, 0.08)",
+    },
+  },
+  pastEvent: {
+    "&.MuiListItem-root.Mui-selected, &.MuiListItem-root.Mui-selected:hover": {
+      // backgroundColor: "#918C8C",
+      backgroundColor: "#C4C4C4",
+    },
+
+    // backgroundColor: "#C4C4C4",
   },
   eventBox: {
     width: "100%",
   },
   eventDate: {
-    backgroundColor: "#007AFF",
     fontFamily: "Roboto",
     fontSize: "1.625rem",
     fontWeight: 900,
     marginRight: "1.875rem",
     height: "3.4375rem",
     width: "3.4375rem",
+  },
+  upcomingDate: {
+    backgroundColor: "#007AFF",
+  },
+  pastDate: {
+    backgroundColor: "#918C8C",
   },
   eventName: {
     fontFamily: "Roboto",

@@ -11,7 +11,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Title from "../../../common/Title";
 // import eventImage from "../../../../assets/svg/event-image.png";
 import useStyles from "./style";
-import { format, isSameMonth } from "date-fns";
+import { format, isPast, isSameMonth } from "date-fns";
 import { getEvents } from "../../../../data";
 
 const NextInLine = ({ visibleDate }) => {
@@ -23,16 +23,50 @@ const NextInLine = ({ visibleDate }) => {
     isSameMonth(startDate, visibleDate)
   );
 
+  const rotateArray = function (events, k) {
+    // reverse helper function
+    function reverse(arr, start, end) {
+      while (start < end) {
+        [arr[start], arr[end]] = [arr[end], arr[start]];
+        start++;
+        end--;
+      }
+    }
+
+    k %= events.length;
+
+    reverse(events, 0, events.length - 1);
+    reverse(events, 0, k - 1);
+    reverse(events, k, events.length - 1);
+
+    return events;
+  };
+
   return (
     <div className={classes.root}>
       <Title size="large" tooltipText="Events list for the selected month">
         Events on {format(visibleDate, "LLL, y")}
       </Title>
       <List aria-label="next-in-line-list" className={classes.list}>
-        {eventsForTheSelectedMonth.map((event, index) => {
+        {rotateArray(
+          eventsForTheSelectedMonth,
+          1 +
+            eventsForTheSelectedMonth.findIndex(({ registrationDeadline }) =>
+              isPast(registrationDeadline)
+            )
+        ).map((event, index) => {
           return (
             <React.Fragment key={index}>
               <ListItem
+                className={
+                  isPast(event.registrationDeadline)
+                    ? classes.pastEvent
+                    : classes.upcomingEvent
+                }
+                //  style={{
+                //       backgroundColor:
+                //         isPast(event.registrationDeadline) && "#C4C4C4",
+                //     }}
                 selected={event.slug === slug}
                 button
                 onClick={() =>
@@ -40,7 +74,17 @@ const NextInLine = ({ visibleDate }) => {
                 }
               >
                 <ListItemAvatar>
-                  <Avatar className={classes.eventDate}>
+                  <Avatar
+                    className={`${classes.eventDate} ${
+                      isPast(event.registrationDeadline)
+                        ? classes.pastDate
+                        : classes.upcomingDate
+                    }`}
+                    // style={{
+                    //   backgroundColor:
+                    //     isPast(event.registrationDeadline) && "grey",
+                    // }}
+                  >
                     {event.startDate.getDate()}
                   </Avatar>
                 </ListItemAvatar>

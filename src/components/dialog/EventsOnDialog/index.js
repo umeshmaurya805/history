@@ -14,6 +14,7 @@ import useStyles from "./style";
 
 const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
   const classes = useStyles();
+
   return (
     <Dialog onClose={handleClose} {...props}>
       <DialogTitle
