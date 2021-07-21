@@ -70,7 +70,7 @@ const EventDetails = () => {
   const [isRegistered, setIsRegistered] = useState(true);
   let buttonText = "Add Teams / Participants";
 
-  const hasTeam = false;
+  const hasTeam = true;
   const isLimited = true;
   const isEventForStudent = true;
 

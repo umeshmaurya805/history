@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0.75rem",
     height: "3.125rem",
     width: "18.75rem",
-    margin: "auto 0.3125rem",
+    margin: "auto 0.5rem",
     padding: "0.5rem 1rem",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
     [theme.breakpoints.only("xs")]: {
@@ -24,12 +24,11 @@ const useStyles = makeStyles((theme) => ({
       // * is the icon at the beginning of input
       fontSize: "1.25rem",
       color: theme.palette.grey[500],
-      marginRight: "0.5rem",
+      marginRight: "1rem",
     },
     "& > *:last-child": {
       fontSize: "1.25rem",
       color: theme.palette.grey[500],
-      marginLeft: "0.5rem",
     },
   },
 }));

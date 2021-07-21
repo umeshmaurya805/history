@@ -2,10 +2,10 @@ import React from "react";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 import useStyles from "./style";
-import { IconButton } from "@material-ui/core";
 
-const SearchBar = ({ placeholder, value, onChange, onCancel ,...props}) => {
+const SearchBar = ({ placeholder, value, onChange, onCancel, ...props }) => {
   const classes = useStyles();
 
   return (
