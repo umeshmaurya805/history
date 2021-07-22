@@ -5,10 +5,11 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   content: {
-    padding: "6px 15px 0.625rem 6px !important",
+    height: "100%",
+    padding: "0.75rem !important",
   },
   container: {
-    height: 120,
+    height: "100%",
   },
   position: {
     display: "flex",
@@ -16,9 +17,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "start",
     justifyContent: "flex-end",
     "& > img": {
-      minWidth: 30,
-      maxWidth: "10%",
-      width: "25%",
+      height: 40,
     },
   },
   logo: {

@@ -70,12 +70,12 @@ const EventDetails = () => {
 
   const [open, setOpen] = useState(initialState);
   const [isRegistered, setIsRegistered] = useState(true);
-  let buttonText = "Add Teams / Participants";
+  let buttonText = "Add Teams / Students";
 
-  if (!hasTeam && (isLimited || !isEventForStudent)) {
-    buttonText = "Add participants";
-  } else if (hasTeam && !isLimited && isEventForStudent) {
-    buttonText = "Add Teams";
+  if (isEventForStudent) {
+    if (isLimited && !hasTeam) buttonText = "Add Students";
+  } else {
+    buttonText = "Add Teachers";
   }
 
   const handleOpen = (eventType) => {
@@ -140,16 +140,6 @@ const EventDetails = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={12}>
         <Box display="flex" justifyContent="space-evenly" flexWrap="wrap">
-          {isRegistered && (hasTeam || isLimited || !isEventForStudent) && (
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={() => handleOpen("viewParticipants")}
-            >
-              {buttonText}
-            </Button>
-          )}
           <Button
             variant="contained"
             color="secondary"
@@ -166,6 +156,16 @@ const EventDetails = () => {
           >
             {isRegistered ? "Cancel Registration" : "Register"}
           </Button>
+          {isRegistered && (hasTeam || isLimited || !isEventForStudent) && (
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => handleOpen("viewParticipants")}
+            >
+              {buttonText}
+            </Button>
+          )}
         </Box>
       </Grid>
       <AddTeamAndParticipantsDialog

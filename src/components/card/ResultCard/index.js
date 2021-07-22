@@ -51,9 +51,12 @@ const ResultCard = ({ info }) => {
             <Typography className={classes.extraInfo} color="primary">
               {schoolName}
             </Typography>
+            <Typography className={classes.extraInfo} color="primary">
+              near Tagore Park, new Delhi
+            </Typography>
           </Grid>
           <Grid item className={classes.position}>
-            <img src={medals[position-1]} alt="" />
+            <img src={medals[position - 1]} alt="" />
           </Grid>
         </Grid>
       </CardContent>

@@ -6,7 +6,9 @@ const useStyles = makeStyles((theme) => ({
     width: 300,
     display: "flex",
     flexDirection: "column",
-    margin: "auto",
+    [theme.breakpoints.up("lg")]: {
+      margin: "auto",
+    },
   },
   card: {
     flexGrow: 1,

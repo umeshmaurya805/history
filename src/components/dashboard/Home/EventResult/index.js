@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import ResultCard from "../../../card/ResultCard";
-import avatar from "../../../../assets/svg/avatar.png";
+import avatar from "../../../../assets/svg/avatar-man.svg";
 import Title from "../../../common/Title/index";
-import useStyles from "./style";
 import Dropdown from "../../../common/Dropdown";
+import useStyles from "./style";
 
 const EventResult = () => {
   const classes = useStyles();
@@ -29,14 +29,14 @@ const EventResult = () => {
       position: 2,
       avatar,
       studentClass: "10 B",
-      schoolName: "XYZ Public School",
+      schoolName: "ABC Public School",
     },
     {
-      name: "xyz Surname",
+      name: "Xyz Surname",
       position: 3,
       avatar,
       studentClass: "10 A",
-      schoolName: "XYZ Public School",
+      schoolName: "ABC Public School",
     },
   ];
 
@@ -61,13 +61,13 @@ const EventResult = () => {
           <Dropdown
             value={option.theme}
             items={themes}
-            handleChange={(e) => handleChange(e, 'theme')}
+            handleChange={(e) => handleChange(e, "theme")}
             classes={{ select: classes.selectTheme }}
           />
           <Dropdown
             value={option.event}
             items={events}
-            handleChange={(e) => handleChange(e, 'event')}
+            handleChange={(e) => handleChange(e, "event")}
             classes={{ select: classes.selectEvent }}
           />
         </Grid>

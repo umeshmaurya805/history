@@ -25,11 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   pastEvent: {
     "&.MuiListItem-root.Mui-selected, &.MuiListItem-root.Mui-selected:hover": {
-      // backgroundColor: "#918C8C",
-      backgroundColor: "#C4C4C4",
+      backgroundColor: "#f3f0f0",
     },
-
-    // backgroundColor: "#C4C4C4",
   },
   eventBox: {
     width: "100%",

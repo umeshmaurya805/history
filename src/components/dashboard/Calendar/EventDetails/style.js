@@ -64,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     margin: "0.5rem",
-    minWidth: "6.5625rem",
   },
   itemName: {
     fontFamily: "Roboto",
@@ -83,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   messageButton: {
     backgroundColor: "#F89503",
     color: "white",
-    width: "11.25rem",
+    minWidth: "10rem",
     margin: "0.5rem",
     padding: "0.5rem",
     "&:hover": {
@@ -91,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    width: "12.5rem",
+    minWidth: "10rem",
     margin: "0.5rem",
     padding: "0.5rem",
   },

@@ -4,6 +4,7 @@ html {
 
 body {
   background-color: white !important;
+  min-width: 360px;
 }
 
 @media (min-width: 1700px) {
