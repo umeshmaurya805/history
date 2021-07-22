@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    marginBottom: "2rem",
+  },
   toolbar: {
     padding: "1.5rem 1.5rem 1.5rem 1rem",
     display: "flex",
@@ -9,12 +12,13 @@ const useStyles = makeStyles((theme) => ({
   },
   greyBackground: {
     background: "rgba(0,0,0,0.6)",
-    position: "absolute",
+    position: "fixed",
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
     zIndex: 99,
+    opacity: 0,
     transition: "opacity .2s ease-in",
     visibility: "hidden",
   },
@@ -24,8 +28,7 @@ const useStyles = makeStyles((theme) => ({
     left: 20,
     zIndex: 100,
     background: "white",
-    maxHeight: "342px",
-    width: "30rem",
+    maxHeight: "332px",
     marginTop: "0.5rem",
     border: "0.0625rem solid #E5E5E5",
     borderRadius: "0.75rem",
@@ -35,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
       {
         backgroundColor: "rgba(41, 121, 255, 0.08)",
       },
+
+    [theme.breakpoints.up("sm")]: {
+      minWidth: "30rem",
+    },
+  },
+  listItem: {
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   emptyItemText: {
     textAlign: "center",
@@ -47,8 +58,13 @@ const useStyles = makeStyles((theme) => ({
     width: "4rem",
     marginRight: "1rem",
   },
-  eventBox: {
+  studentBox: {
     flexGrow: 1,
+    [theme.breakpoints.only("xs")]: {
+      order: 1,
+      flexBasis: "100%",
+      margin: "1rem 0 0",
+    },
   },
   eventName: {
     fontFamily: "Roboto",
@@ -65,8 +81,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.8125rem",
     borderRadius: "2.5rem",
     width: "5rem",
-    padding: "0.4rem 0rem",
-    marginLeft: "2rem",
+    padding: "0.4rem 0rem", [theme.breakpoints.up("sm")]: {
+          marginLeft: "2rem",
+    },
+
   },
 }));
 

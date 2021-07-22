@@ -21,6 +21,42 @@ const AddStudentsPanel = () => {
 
   const data = [
     {
+      name: "Divyansh Singh Thakur",
+      avatar: avatarMan,
+      currentClass: 10,
+      section: "A",
+      email: "abc@example.com",
+      contact: "0123456789",
+      status: "Invited",
+    },
+    {
+      name: "Bhanupratap Singh Thakur",
+      avatar: avatarMan,
+      currentClass: 10,
+      section: "A",
+      email: "abc@example.com",
+      contact: "0123456789",
+      status: "Registered",
+    },
+    {
+      name: "CCC Surname",
+      avatar: avatarMan,
+      currentClass: 10,
+      section: "A",
+      email: "abc@example.com",
+      contact: "0123456789",
+      status: "Registered",
+    },
+    {
+      name: "DDD Surname",
+      avatar: avatarMan,
+      currentClass: 10,
+      section: "A",
+      email: "abc@example.com",
+      contact: "0123456789",
+      status: "Invited",
+    },
+    {
       name: "ABC Surname",
       avatar: avatarMan,
       currentClass: 10,
@@ -73,7 +109,8 @@ const AddStudentsPanel = () => {
   // if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: 165 });
 
   const rows = data.map((participant) => {
-    const { name, avatar, currentClass, section, email, contact,status } = participant;
+    const { name, avatar, currentClass, section, email, contact, status } =
+      participant;
 
     return {
       name,
@@ -82,7 +119,7 @@ const AddStudentsPanel = () => {
       section,
       email,
       contact,
-      status
+      status,
     };
   });
   const [searchName, setSearchName] = useState("");
@@ -108,11 +145,11 @@ const AddStudentsPanel = () => {
     return searchList.map((student, index, currentList) => {
       return (
         <React.Fragment key={index}>
-          <ListItem>
+          <ListItem className={classes.listItem}>
             <ListItemAvatar>
               <Avatar src={student.avatar} className={classes.avatar} />
             </ListItemAvatar>
-            <Box className={classes.eventBox}>
+            <Box className={classes.studentBox}>
               <Typography component="p" className={classes.eventName}>
                 {student.name}
               </Typography>
@@ -136,7 +173,7 @@ const AddStudentsPanel = () => {
   };
 
   return (
-    <div>
+    <div className={classes.root}>
       <Toolbar className={classes.toolbar}>
         <SearchBar
           placeholder="Add students by name"
@@ -150,11 +187,11 @@ const AddStudentsPanel = () => {
           </List>
         )}
       </Toolbar>
-      <div className={classes.content}>
+      <div>
         <div
           onClick={() => setSearchName("")}
           className={classes.greyBackground}
-          style={{ visibility: searchName !== "" ? "visible" : "hidden" }}
+          style={searchName !== "" ? { visibility: "visible", opacity: 1 } : {}}
         />
         <ParticipantTable noHeader editable rows={rows} columns={columns} />
       </div>
