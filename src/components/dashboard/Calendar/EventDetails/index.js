@@ -74,6 +74,7 @@ const EventDetails = () => {
 
   if (isEventForStudent) {
     if (isLimited && !hasTeam) buttonText = "Add Students";
+    else if (!isLimited && hasTeam) buttonText = "Add Teams";
   } else {
     buttonText = "Add Teachers";
   }
