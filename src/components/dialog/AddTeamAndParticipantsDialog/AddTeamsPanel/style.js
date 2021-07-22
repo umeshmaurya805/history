@@ -13,24 +13,47 @@ const useStyles = makeStyles((theme) => ({
     margin: "4rem 0rem",
   },
   teamBox: {
+    flexWrap: "wrap",
     color: theme.palette.grey[500],
     margin: "1rem 0rem",
     fontFamily: "Roboto",
     border: "0.0625rem solid #E5E5E5",
     borderRadius: "0.75rem",
-    height: "4rem",
     width: "100%",
     padding: "0.5rem 1rem",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
   },
+  groupIcon: {
+    marginRight: "2rem",
+    [theme.breakpoints.only("xs")]: {
+      display: "none",
+    },
+  },
+  editBox: {
+    [theme.breakpoints.only("xs")]: {
+      flexGrow: 1,
+    },
+  },
+  nameBox: {
+    [theme.breakpoints.only("xs")]: {
+      flexGrow: 1,
+    },
+  },
   teamName: {
     flexGrow: 1,
-    marginLeft: "2rem",
     color: "#383838",
     fontWeight: 600,
+    [theme.breakpoints.only("xs")]: {
+      marginBottom: "1rem",
+    },
   },
   avatarGroup: {
     margin: "0rem 1rem",
+    [theme.breakpoints.down("sm")]: {
+      margin: "0rem",
+      marginRight: "1rem",
+      flexGrow: 1,
+    },
   },
   input: {
     fontSize: "1.1rem",

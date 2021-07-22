@@ -42,29 +42,30 @@ const AddTeamsPanel = () => {
           display="flex"
           alignItems="center"
         >
-          <GroupIcon />
+          <GroupIcon className={classes.groupIcon} />
           <Typography className={classes.teamName}>{team.name}</Typography>
-          <AvatarGroup className={classes.avatarGroup} max={3}>
-            <Avatar alt="Remy Sharp" src={team.avatar} />
-            <Avatar alt="Travis Howard" src={team.avatar} />
-            <Avatar alt="Cindy Baker" src={team.avatar} />
-            <Avatar alt="Agnes Walker" src={team.avatar} />
-            <Avatar alt="Trevor Henderson" src={team.avatar} />
-          </AvatarGroup>
-          <IconButton
-            className={classes.iconButton}
-            size="medium"
-            onClick={() => setTeamName("")}
-          >
-            <EditIcon fontSize="small" />
-          </IconButton>
-          <IconButton
-            className={classes.iconButton}
-            size="medium"
-            onClick={() => setTeamName("")}
-          >
-            <DeleteIcon  fontSize="small"/>
-          </IconButton>
+          <Box display="flex" className={classes.editBox}>
+            <AvatarGroup className={classes.avatarGroup} max={3}>
+              <Avatar alt="Remy Sharp" src={team.avatar} />
+              <Avatar alt="Travis Howard" src={team.avatar} />
+              <Avatar alt="Cindy Baker" src={team.avatar} />
+              <Avatar alt="Agnes Walker" src={team.avatar} />
+            </AvatarGroup>
+            <IconButton
+              className={classes.iconButton}
+              size="medium"
+              onClick={() => setTeamName("")}
+            >
+              <EditIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              className={classes.iconButton}
+              size="medium"
+              onClick={() => setTeamName("")}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          </Box>
         </Box>
       );
     });
