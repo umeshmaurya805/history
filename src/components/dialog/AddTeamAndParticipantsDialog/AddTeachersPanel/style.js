@@ -2,11 +2,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "2rem",
+    margin: "2rem 0rem",
   },
   button: {
     padding: "0.5rem 1rem",
-    margin: "1rem 0rem 1rem 1rem",
+    margin: "1rem 2rem 1rem 1rem",
   },
   formContainer: {
     margin: "2rem",

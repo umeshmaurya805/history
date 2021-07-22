@@ -121,8 +121,8 @@ const AddTeachersPanel = () => {
   });
 
   const resetForm = () => {
-    formik.setFieldValue("classes", []);
     formik.resetForm();
+    setIsFormActive(false);
   };
 
   const onAvatarChange = (files) => {
@@ -145,12 +145,11 @@ const AddTeachersPanel = () => {
   ];
 
   const handleChange = (e) => {
-    formik.setFieldValue('classes',e.target.value)
+    formik.setFieldValue("classes", e.target.value);
   };
 
   return (
     <div className={classes.root}>
-      <ParticipantTable noHeader editable rows={rows} columns={columns} />
       {isFormActive ? (
         <Container className={classes.formContainer}>
           <form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -298,6 +297,7 @@ const AddTeachersPanel = () => {
           </Button>
         </Box>
       )}
+      <ParticipantTable noHeader editable rows={rows} columns={columns} />
     </div>
   );
 };
