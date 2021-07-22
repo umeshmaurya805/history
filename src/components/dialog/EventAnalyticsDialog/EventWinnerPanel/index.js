@@ -153,21 +153,22 @@ const EventWinnerPanel = () => {
     {
       id: "name",
       label: `${isStudent ? "Student" : "Teacher"} Name`,
-      fixedWidth: 180,
+      fixedWidth: "11.25rem",
     },
     {
       id: "schoolName",
       label: "School Name",
-      fixedWidth: 180,
+      fixedWidth: "11.25rem",
     },
-    { id: "currentClass", label: "Class", fixedWidth: 165 },
-    { id: "theme", label: "Theme", fixedWidth: 165 },
+    { id: "currentClass", label: "Class", fixedWidth: "10.5rem" },
+    { id: "theme", label: "Theme", fixedWidth: "10.5rem" },
   ];
 
-  if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: 165 });
+  if (hasTeam)
+    columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
 
   if (roundValue === 2)
-    columns.push({ id: "position", label: "Position", fixedWidth: 165 });
+    columns.push({ id: "position", label: "Position", fixedWidth: "10.5rem" });
 
   let rows = data.map((participant) => {
     const {

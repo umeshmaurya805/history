@@ -4,43 +4,43 @@ import { getEvents } from "../../../../data";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
 import EventAnalyticsConfiguration from "../../../config/EventAnalyticsConfiguration";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 const columns = [
   {
     id: "title",
     label: "Title",
-    fixedWidth: 180,
+    fixedWidth: "11.25rem",
     tooltipText: "Upcoming event names",
   },
   {
     id: "date",
     label: "Date",
-    fixedWidth: 150,
+    fixedWidth: "9.375rem",
     tooltipText: "Starting date of the event",
   },
   {
     id: "classes",
     label: "Classes",
-    fixedWidth: 150,
+    fixedWidth: "9.375rem",
     tooltipText: "Range of classes which have participated in the event",
   },
   {
     id: "participation",
     label: "Participation ",
-    fixedWidth: 150,
+    fixedWidth: "9.375rem",
     tooltipText: "Total number of participants",
   },
   {
     id: "status",
     label: "Status",
-    fixedWidth: 150,
+    fixedWidth: "9.375rem",
     tooltipText: "Have your school participated or not",
   },
   {
     id: "list",
     label: "Details",
-    fixedWidth: 150,
+    fixedWidth: "9.375rem",
     tooltipText: "Event details",
   },
 ];
@@ -49,15 +49,15 @@ const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 const eventsList = getEvents().map((event) => {
-    return {
-      title: event.title,
-      slug: event.slug,
-      date: format(event.startDate, "PP"),
-      classes: `${event.forClass.from} - ${event.forClass.to}`,
-      participation: 8,
-      status: event.isRegistered ? "Participated" : "Not Participated",
-    };
-  });
+  return {
+    title: event.title,
+    slug: event.slug,
+    date: format(event.startDate, "PP"),
+    classes: `${event.forClass.from} - ${event.forClass.to}`,
+    participation: 8,
+    status: event.isRegistered ? "Participated" : "Not Participated",
+  };
+});
 
 const NonCompetitivePanel = () => {
   const [open, setOpen] = useState(false);

@@ -6,7 +6,7 @@ export const StyledTableCell = withStyles((theme) => ({
     borderColor: "#DFE0EB",
   },
   head: {
-    height: 80,
+    height: '5rem',
     color: "#9FA2B4",
     fontWeight: 700,
     fontSize: "1rem",
@@ -25,7 +25,7 @@ export const BlueStyledTableCell = withStyles((theme) => ({
     borderColor: "#DFE0EB",
   },
   head: {
-    height: 80,
+    height: '5rem',
     color: theme.palette.primary.main,
     fontWeight: 700,
     fontSize: "1rem",
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "0.5rem",
   },
   medals:{
-    height: 35,
+    height: '2.25rem',
   },
   avatar: {
     marginRight: "1rem",

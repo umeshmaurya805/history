@@ -128,15 +128,15 @@ const WinnerPanel = () => {
     {
       id: "name",
       label: `${isStudent ? "Student" : "Teacher"} name`,
-      fixedWidth: 165,
+      fixedWidth: '11rem',
     },
-    { id: "currentClass", label: "Class", fixedWidth: 165 },
-    { id: "event", label: "Events", fixedWidth: 165 },
-    { id: "participant", label: "Participants", fixedWidth: 165 },
-    { id: "position", label: "Positions", fixedWidth: 165 },
+    { id: "currentClass", label: "Class", fixedWidth: '11rem' },
+    { id: "event", label: "Events", fixedWidth: '11rem' },
+    { id: "participant", label: "Participants", fixedWidth: '11rem' },
+    { id: "position", label: "Positions", fixedWidth: '11rem' },
   ];
 
-  if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: 165 });
+  if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: '11rem' });
 
   const rows = participantData.map((row) => {
     const {

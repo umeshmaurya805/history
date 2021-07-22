@@ -8,7 +8,7 @@ export const useCustomTableStyles = makeStyles(() => ({
     width: "100%",
     tableLayout: "fixed",
     overflow: "auto",
-    minWidth: 900,
+    minWidth: "56.25rem",
   },
 }));
 
@@ -19,19 +19,19 @@ export const StyledTableCell = withStyles((theme) => ({
   head: {
     color: "white",
     backgroundColor: theme.palette.primary.main,
-    fontWeight: 900,
-    fontSize: 16,
+    fontWeight: "56.25rem",
+    fontSize: "1rem",
   },
   body: {
-    fontSize: 13,
+    fontSize: "0.875rem",
     color: "black",
   },
 }))(TableCell);
 
 export const StyledTableBody = withStyles((theme) => ({
   root: {
-    maxHeight: 315,
-    minWidth: 900,
+    maxHeight: "19.687rem",
+    minWidth: "56.25rem",
     display: "block",
     overflowX: "hidden",
     tableLayout: "fixed",
@@ -41,13 +41,13 @@ export const StyledTableBody = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(3.3, 0),
+    padding: "1.65rem 0",
   },
   container: {
     marginTop: "1rem",
     border: "0.0625rem solid #DADADA",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
-    borderRadius: 8,
+    borderRadius: '0.5rem',
   },
   selectorGrid: {
     flexGrow: 1,

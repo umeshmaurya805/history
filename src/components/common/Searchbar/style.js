@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   input: {
-    fontSize: 15,
+    fontSize: '1rem',
   },
   adornedStart: {
     "& > *:first-child": {

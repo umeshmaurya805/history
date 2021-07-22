@@ -13,29 +13,29 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     fontFamily: "Roboto",
     fontWeight: 700,
-    fontSize: 18,
-    marginLeft: 50,
+    fontSize: "1.125rem",
+    marginLeft: "3.125rem",
     textAlign: "center",
     [theme.breakpoints.up("lg")]: {
-      fontSize: 32,
+      fontSize: "2rem",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: 28,
+      fontSize: "1.75rem",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: 24,
+      fontSize: "1.5rem",
     },
     [theme.breakpoints.only("xs")]: {
       marginLeft: "unset",
     },
   },
   chips: {
-    margin: theme.spacing(2, 0),
+    margin: "1rem 0",
   },
   chipItems: {
     flexGrow: 1,
     "@media (min-width: 1000px) and (max-width: 1306px)": {
-      minWidth: 310,
+      minWidth: '19.5rem',
     },
   },
   button: {

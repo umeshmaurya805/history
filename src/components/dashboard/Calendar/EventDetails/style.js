@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   messageButton: {
     backgroundColor: "#F89503",
     color: "white",
-    minWidth: "10rem",
+    minWidth: "10.25rem",
     margin: "0.5rem",
     padding: "0.5rem",
     "&:hover": {
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    minWidth: "10rem",
+    minWidth: "10.25rem",
     margin: "0.5rem",
     padding: "0.5rem",
   },

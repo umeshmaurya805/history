@@ -14,20 +14,20 @@ const useStyles = makeStyles((theme) => ({
   eventName: {
     fontFamily: "Roboto",
     fontWeight: 700,
-    fontSize: 16,
+    fontSize: "1rem",
     textAlign: "center",
   },
   competitiveInfoChip: {
-    minWidth: 220,
+    minWidth: "13.75rem",
   },
   info: {
-    fontSize: 14,
+    fontSize: "0.875rem",
     "& > span": {
       color: "#383838",
     },
   },
   chips: {
-    margin: theme.spacing(2, 0),
+    margin: "1rem 0rem",
   },
   button: {
     alignSelf: "flex-end",

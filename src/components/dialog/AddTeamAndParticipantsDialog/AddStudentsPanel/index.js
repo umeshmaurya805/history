@@ -98,15 +98,15 @@ const AddStudentsPanel = () => {
     {
       id: "name",
       label: `${isStudent ? "Student" : "Teacher"} Name`,
-      fixedWidth: 165,
+      fixedWidth: "10.5rem",
     },
-    { id: "email", label: "Email", fixedWidth: 165 },
-    { id: "currentClass", label: "Class", fixedWidth: 165 },
-    { id: "contact", label: "Contact", fixedWidth: 165 },
-    { id: "status", label: "Status", fixedWidth: 165 },
+    { id: "email", label: "Email", fixedWidth: "10.5rem" },
+    { id: "currentClass", label: "Class", fixedWidth: "10.5rem" },
+    { id: "contact", label: "Contact", fixedWidth: "10.5rem" },
+    { id: "status", label: "Status", fixedWidth: "10.5rem" },
   ];
 
-  // if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: 165 });
+  // if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: '10.5rem' });
 
   const rows = data.map((participant) => {
     const { name, avatar, currentClass, section, email, contact, status } =

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     color: "#F4F9FF",
-    fontSize: "14px",
+    fontSize: "0.875rem",
     marginBottom: "0.5rem",
   },
   learnMore: {

@@ -151,16 +151,17 @@ const SchoolParticipantPanel = () => {
     {
       id: "name",
       label: `${isStudent ? "Student" : "Teacher"} Name`,
-      fixedWidth: 180,
+      fixedWidth: "11.25rem",
     },
-    { id: "currentClass", label: "Class", fixedWidth: 165 },
-    { id: "theme", label: "Theme", fixedWidth: 165 },
+    { id: "currentClass", label: "Class", fixedWidth: "10.5rem" },
+    { id: "theme", label: "Theme", fixedWidth: "10.5rem" },
   ];
 
-  if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: 165 });
-  
-  columns.push({ id: "status", label: "Status", fixedWidth: 165 });
-  columns.push({ id: "certificate", label: "E-Certificates", fixedWidth: 200 });
+  if (hasTeam)
+    columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
+
+  columns.push({ id: "status", label: "Status", fixedWidth: "10.5rem" });
+  columns.push({ id: "certificate", label: "E-Certificates", fixedWidth: '12.5rem' });
 
   const rows = data.map((participant) => {
     const {

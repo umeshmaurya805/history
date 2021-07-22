@@ -9,16 +9,16 @@ const useStyles = makeStyles((theme) => ({
   coloredSelect: {
     backgroundColor: theme.palette.primary.main,
     color: "white",
-    minWidth: 120,
-    maxWidth: 300,
+    minWidth: '7.5rem',
+    maxWidth: '18.75rem',
     "&:focus": {
       backgroundColor: theme.palette.primary.main,
     },
   },
   normalSelect:{
     border: "0.0625rem solid #E5E5E5",
-    minWidth: 120,
-    maxWidth: 300,
+    minWidth: '7.5rem',
+    maxWidth: '18.75rem',
   },
   icon: {
     color: "white",

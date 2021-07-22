@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    width: 300,
-    height: 390,
+    width: '18.75rem',
+    height: '24.375rem',
     margin: " 3.5rem auto",
     "@media (min-width:1001px)": {
       margin: "3.5rem 0rem 0rem auto",
@@ -17,14 +17,14 @@ const useStyles = makeStyles((theme) => ({
   adLabel: {
     userSelect: "none",
     position: "absolute",
-    left: 10,
-    top: 15,
+    left: '0.625rem',
+    top: '1rem',
     zIndex: 1,
     letterSpacing: 2,
     backgroundColor: theme.palette.primary.main,
     color: "white",
     padding: "0.125rem 0.5rem",
-    borderRadius: 6,
+    borderRadius: '0.5rem',
     fontWeight: 700,
     fontSize: "0.75rem",
     boxShadow: "0rem 0.3125rem 0.5rem -0.1875rem rgba(0,0,0,0.14)",
@@ -33,15 +33,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    height: "390px",
+    height: "24.375rem",
     width: "105%",
-    marginLeft: -4,
+    marginLeft: '-0.25rem',
   },
   adButtonLeft: {
     position: "absolute",
-    left: 10,
-    height: 25,
-    width: 25,
+    left: '0.625rem',
+    height: '1.562rem',
+    width: '1.562rem',
     backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:hover": {
@@ -50,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   adButtonRight: {
     position: "absolute",
-    right: 10,
-    height: 25,
-    width: 25,
+    right: '0.625rem',
+    height: '1.562rem',
+    width: '1.562rem',
     backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:hover": {
@@ -60,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   adIcon: {
-    width: 15,
-    height: 15,
+    width: '0.937rem',
+    height: '0.937rem',
   },
 }));
 

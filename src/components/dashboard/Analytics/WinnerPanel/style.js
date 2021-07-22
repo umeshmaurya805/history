@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   stats: {
     paddingTop: "2rem",
-    marginBottom: theme.spacing(6),
+    marginBottom: "3rem",
   },
 }));
 

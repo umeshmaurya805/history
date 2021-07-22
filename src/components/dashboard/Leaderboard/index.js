@@ -14,19 +14,19 @@ import { Typography } from "@material-ui/core";
 import useStyles, { StyledTableCell } from "./style";
 
 const columns = [
-  { id: "rank", label: "Rank", fixedWidth: 60 },
-  { id: "name", label: "School Name", fixedWidth: 150 },
-  { id: "city", label: "City", fixedWidth: 60 },
-  { id: "points", label: "Points", fixedWidth: 60 },
+  { id: "rank", label: "Rank", fixedWidth: '3.75rem' },
+  { id: "name", label: "School Name", fixedWidth: "9.375rem" },
+  { id: "city", label: "City", fixedWidth: '3.75rem' },
+  { id: "points", label: "Points", fixedWidth: '3.75rem' },
   {
     id: "eventsParticipated",
     label: "Events Participated",
-    fixedWidth: 60,
+    fixedWidth: '3.75rem',
   },
   {
     id: "studentsParticipated",
     label: "Students Participated",
-    fixedWidth: 60,
+    fixedWidth: '3.75rem',
   },
 ];
 
@@ -144,7 +144,7 @@ const Leaderboard = () => {
                   color="primary"
                   className={classes.currentSchoolLabel}
                   style={
-                    schoolList.length <= 5 ? { paddingTop: 25 } : undefined
+                    schoolList.length <= 5 ? { paddingTop: '1.5rem' } : undefined
                   }
                 >
                   School Position

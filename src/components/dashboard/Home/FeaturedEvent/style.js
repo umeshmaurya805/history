@@ -3,13 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingBottom: "0.5rem",
-    marginLeft:-16,  marginRight:-16,
+    marginLeft: '-1rem',
+    marginRight: '-1rem',
   },
   buttonLeft: {
     position: "absolute",
-    left: 5,
-    height: 25,
-    width: 25,
+    left: '0.312rem',
+    height: '1.562rem',
+    width: '1.562rem',
     backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:hover": {
@@ -18,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonRight: {
     position: "absolute",
-    right: 5,
-    height: 25,
-    width: 25,
+    right: '0.312rem',
+    height: '1.562rem',
+    width: '1.562rem',
     backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:hover": {
@@ -28,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icon: {
-    width: 15,
-    height: 15,
+    width: '1rem',
+    height: '1rem',
   },
 }));
 

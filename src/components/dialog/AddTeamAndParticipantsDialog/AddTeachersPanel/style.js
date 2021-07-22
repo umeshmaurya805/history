@@ -21,15 +21,15 @@ const useStyles = makeStyles((theme) => ({
   files: {
     marginTop: "2rem !important",
     position: "relative",
-    height: 100,
-    width: 100,
+    height: '6.25rem',
+    width: '6.25rem',
     backgroundColor: "#C4C4C4",
     borderRadius: "50%",
     cursor: "pointer",
   },
   avatar: {
-    height: 100,
-    width: 100,
+    height: '6.25rem',
+    width: '6.25rem',
     border: "0.125rem solid #E5E5E5",
   },
   classRoot: {

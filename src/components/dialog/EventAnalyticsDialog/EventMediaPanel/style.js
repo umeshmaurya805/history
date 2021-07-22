@@ -11,12 +11,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     height: "100%",
-    width: "303px",
+    width: "19rem",
     position: "relative",
   },
   media: {
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    borderTopLeftRadius: "0.75rem",
+    borderTopRightRadius: "0.75rem",
     backgroundColor: "#F89503",
     width: "300px",
     height: "240px",
@@ -28,18 +28,18 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     left: 0,
     right: 0,
-    top: 120,
+    top: "7.5rem",
     margin: "auto",
   },
   categoryName: {
-    fontSize: 16,
+    fontSize: "1rem",
     textAlign: "center",
     marginBottom: "1rem",
     fontWeight: 500,
     fontFamily: "Roboto",
   },
   description: {
-    fontSize: 12,
+    fontSize: "0.75rem",
     color: "#383838",
     textAlign: "justify",
     fontFamily: "Roboto",
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   cardActions: {
     display: "flex",
     justifyContent: "center",
-    padding: theme.spacing(0, 2, 2),
+    padding: "0rem 1rem 1rem",
   },
 }));
 
