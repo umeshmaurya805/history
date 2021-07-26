@@ -134,6 +134,8 @@ const AddTeachersPanel = () => {
   };
 
   const classItems = [
+    "Class 12",
+    "Class 11",
     "Class 10",
     "Class 9",
     "Class 8",

@@ -337,7 +337,8 @@ const ParticipantTable = ({
                               style={{
                                 backgroundColor:
                                   value === "Participated" ||
-                                  value === "Registered" // TODO: Make it : hasParticipated
+                                  value === "Registered" ||
+                                  value === "Submitted" // TODO: Make it : hasParticipated
                                     ? "#69DE91"
                                     : value === "Invited"
                                     ? "#ffff99"

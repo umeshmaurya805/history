@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,21 +12,22 @@ import Layout from "../../common/Layout";
 import LeaderboardImage from "../../../assets/svg/leaderboard.svg";
 import { Typography } from "@material-ui/core";
 import useStyles, { StyledTableCell } from "./style";
+import Dropdown from "../../common/Dropdown";
 
 const columns = [
-  { id: "rank", label: "Rank", fixedWidth: '3.75rem' },
+  { id: "rank", label: "Rank", fixedWidth: "3.75rem" },
   { id: "name", label: "School Name", fixedWidth: "9.375rem" },
-  { id: "city", label: "City", fixedWidth: '3.75rem' },
-  { id: "points", label: "Points", fixedWidth: '3.75rem' },
+  { id: "city", label: "City", fixedWidth: "3.75rem" },
+  { id: "points", label: "Points", fixedWidth: "3.75rem" },
   {
     id: "eventsParticipated",
     label: "Events Participated",
-    fixedWidth: '3.75rem',
+    fixedWidth: "3.75rem",
   },
   {
     id: "studentsParticipated",
     label: "Students Participated",
-    fixedWidth: '3.75rem',
+    fixedWidth: "3.75rem",
   },
 ];
 
@@ -65,8 +66,25 @@ const Leaderboard = () => {
     setPage(newPage);
   };
 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const yearItems = ["2020-21", "2019-20", "2018-2019"];
+
   return (
     <Layout>
+      <Box display="flex" justifyContent="flex-end">
+        <Dropdown
+          name="year"
+          value={value}
+          items={yearItems}
+          handleChange={handleChange}
+          classes={{ select: classes.year }}
+        />
+      </Box>
       <TableContainer className={classes.root}>
         <Table aria-label="leaderboard table">
           <TableHead>
@@ -113,29 +131,27 @@ const Leaderboard = () => {
                   </TableRow>
                 );
               })}
-            {schoolList.length > 5 && (
-              <TableRow>
-                <TableCell
-                  className={classes.paginationCell}
-                  colSpan={columns.length}
-                >
-                  <TablePagination
-                    className={classes.tablePagination}
-                    labelDisplayedRows={({ from, to, count }) =>
-                      `${from} - ${to} of ${
-                        count !== -1 ? count : `more than ${to}`
-                      }`
-                    }
-                    rowsPerPageOptions={[5]}
-                    component="div"
-                    count={schoolList.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                  />
-                </TableCell>
-              </TableRow>
-            )}
+            <TableRow>
+              <TableCell
+                className={classes.paginationCell}
+                colSpan={columns.length}
+              >
+                <TablePagination
+                  className={classes.tablePagination}
+                  labelDisplayedRows={({ from, to, count }) =>
+                    `${from} - ${to} of ${
+                      count !== -1 ? count : `more than ${to}`
+                    }`
+                  }
+                  rowsPerPageOptions={[5]}
+                  component="div"
+                  count={schoolList.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                />
+              </TableCell>
+            </TableRow>
           </TableBody>
           <TableFooter>
             <TableRow>
@@ -144,7 +160,9 @@ const Leaderboard = () => {
                   color="primary"
                   className={classes.currentSchoolLabel}
                   style={
-                    schoolList.length <= 5 ? { paddingTop: '1.5rem' } : undefined
+                    schoolList.length <= 5
+                      ? { paddingTop: "1.5rem" }
+                      : undefined
                   }
                 >
                   School Position

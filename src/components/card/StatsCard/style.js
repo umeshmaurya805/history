@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    height: "100%",
     minHeight: "6.25rem",
   },
   content:{

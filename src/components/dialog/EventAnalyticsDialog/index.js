@@ -25,10 +25,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
   const classes = useStyles();
 
-  const labels = ["Event Winners", "School Participants"];
-  const panels = [EventWinnerPanel, SchoolParticipantPanel];
+  const labels = ["School Participants"];
+  const panels = [SchoolParticipantPanel];
 
-  if (!competitive) {
+  if (competitive) {
+    labels.push("Event Winners");
+    panels.push(EventWinnerPanel);
+  } else {
     labels.push("Event Media");
     panels.push(EventMediaPanel);
   }
@@ -77,9 +80,11 @@ const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
           <Grid container className={classes.chips}>
             {list.map((item, index) => {
               return (
-                <Grid key={index} item className={classes.chipItems}>
-                  <InfoChip name={item[0]} value={item[1]} />
-                </Grid>
+                (competitive || index !== 2) && (
+                  <Grid key={index} item className={classes.chipItems}>
+                    <InfoChip name={item[0]} value={item[1]} />
+                  </Grid>
+                )
               );
             })}
           </Grid>

@@ -117,6 +117,7 @@ const EventCalendar = ({ setVisibleDate }) => {
         onChange={handleDateClick}
         colorPrimary="#007AFF"
         colorPrimaryLight="#D5EFFF"
+        calendarTodayClassName={classes.today}
         customDaysClassName={displayEventDays}
         onDateChange={handleDateChange}
       />

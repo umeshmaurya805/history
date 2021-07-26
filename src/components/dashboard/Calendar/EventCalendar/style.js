@@ -74,6 +74,12 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  today: {
+    border:'2px solid #383838',
+    "&::after": {
+      visibility: "hidden",
+    },
+  },
   selectedEvent: {
     backgroundColor: `${theme.palette.primary.main} !important`,
   },

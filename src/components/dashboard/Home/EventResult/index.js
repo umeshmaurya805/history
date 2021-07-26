@@ -47,7 +47,7 @@ const EventResult = () => {
     "TEACHER WORKSHOP",
   ];
 
-  const themes = ["Theme 1", "Theme 2", "Theme 3"];
+  // const themes = ["Theme 1", "Theme 2", "Theme 3"];
 
   return (
     <div className={classes.root}>
@@ -58,12 +58,12 @@ const EventResult = () => {
           </Title>
         </Grid>
         <Grid item className={classes.selector}>
-          <Dropdown
+          {/* <Dropdown
             value={option.theme}
             items={themes}
             handleChange={(e) => handleChange(e, "theme")}
             classes={{ select: classes.selectTheme }}
-          />
+          /> */}
           <Dropdown
             value={option.event}
             items={events}

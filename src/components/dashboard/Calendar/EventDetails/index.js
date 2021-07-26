@@ -69,7 +69,7 @@ const EventDetails = () => {
   };
 
   const [open, setOpen] = useState(initialState);
-  const [isRegistered, setIsRegistered] = useState(true);
+  const [isRegistered, setIsRegistered] = useState(false);
   let buttonText = "Add Teams / Students";
 
   if (isEventForStudent) {

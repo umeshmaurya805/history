@@ -23,6 +23,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Submitted'
   },
   {
     firstName: "BBBB",
@@ -33,6 +34,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Submitted'
   },
   {
     firstName: "CCC",
@@ -43,6 +45,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Not Submitted'
   },
   {
     firstName: "DDD",
@@ -53,6 +56,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Submitted'
   },
   {
     firstName: "GGG",
@@ -63,6 +67,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Not Submitted'
   },
   {
     firstName: "QQQ",
@@ -73,6 +78,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Not Submitted'
   },
   {
     firstName: "EEE",
@@ -83,6 +89,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Not Submitted'
   },
   {
     firstName: "WWW",
@@ -93,6 +100,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Not Submitted'
   },
   {
     firstName: "HHH",
@@ -123,6 +131,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Submitted'
   },
   {
     firstName: "YYY",
@@ -143,6 +152,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 2",
     team: "Team A",
+    status:'Not Submitted'
   },
   {
     firstName: "EEE",
@@ -153,6 +163,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Submitted'
   },
   {
     firstName: "PPP",
@@ -163,6 +174,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 2",
     team: "Team A",
+    status:'Submitted'
   },
   {
     firstName: "OOO",
@@ -173,6 +185,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Not Submitted'
   },
   {
     firstName: "HHH",
@@ -183,6 +196,7 @@ const data = [
     date: format(new Date(), "PP"),
     theme: "Theme 1",
     team: "Team A",
+    status:'Submitted'
   },
 ];
 
@@ -199,6 +213,8 @@ const columns = [
 
 if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
 
+if (true) columns.push({ id: "status", label: "Status", fixedWidth: "8rem" });
+
 const rows = data.map((participant) => {
   const {
     firstName,
@@ -209,6 +225,7 @@ const rows = data.map((participant) => {
     date,
     theme,
     team,
+    status,
   } = participant;
 
   return {
@@ -219,6 +236,7 @@ const rows = data.map((participant) => {
     date,
     theme,
     team,
+    status,
   };
 });
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -247,7 +265,7 @@ const ParticipantListDialog = ({ slug, open, onClose }) => {
             <CloseIcon />
           </IconButton>
         </Box>
-        <ParticipantTable editable rows={rows} columns={columns} />
+        <ParticipantTable rows={rows} columns={columns} />
       </DialogContent>
     </Dialog>
   );

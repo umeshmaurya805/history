@@ -39,6 +39,8 @@ const EventAnalyticsConfiguration = ({
 
   const classItems = [
     "Class",
+    "Class 12",
+    "Class 11",
     "Class 10",
     "Class 9",
     "Class 8",
@@ -65,7 +67,7 @@ const EventAnalyticsConfiguration = ({
     "December",
   ];
 
-  const yearItems = ["Year", "2020-21", "2019-20", "2018-2019"];
+  const yearItems = ["2020-21", "2019-20", "2018-2019"];
 
   return (
     <Grid container className={classes.root}>
@@ -125,21 +127,24 @@ const EventAnalyticsConfiguration = ({
                 handleChange={handleChange}
                 classes={{ select: classes.class }}
               />
-              <Dropdown
-                name="user"
-                value={value.user}
-                items={userItems}
-                handleChange={handleChange}
-                classes={{ select: classes.user }}
-              />
               {!competitive && (
-                <Dropdown
-                  name="category"
-                  value={value.category}
-                  items={categoryItems[value.user]}
-                  handleChange={handleChange}
-                  classes={{ select: classes.category }}
-                />
+                <React.Fragment>
+                  <Dropdown
+                    name="user"
+                    value={value.user}
+                    items={userItems}
+                    handleChange={handleChange}
+                    classes={{ select: classes.user }}
+                  />
+
+                  <Dropdown
+                    name="category"
+                    value={value.category}
+                    items={categoryItems[value.user]}
+                    handleChange={handleChange}
+                    classes={{ select: classes.category }}
+                  />
+                </React.Fragment>
               )}
             </Grid>
             <Grid

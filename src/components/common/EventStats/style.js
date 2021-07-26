@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1rem",
   },
   cardContainer: {
-      flexGrow: 1,
+    flexGrow: 1,
   },
 }));
 

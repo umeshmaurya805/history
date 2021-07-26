@@ -29,7 +29,11 @@ export const StyledTableCell = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop:'1rem',
     padding: "0rem 0.25rem",
+  },
+  year: {
+    minWidth: "5rem",
   },
   schoolColumn: {
     color: "#5C6269 !important",
@@ -45,12 +49,12 @@ const useStyles = makeStyles((theme) => ({
   imageBox: {
     display: "flex",
     justifyContent: "center",
-    marginTop: '3.5rem',
+    marginTop: "3.5rem",
   },
   image: {
-    width: '27.3125rem',
+    width: "27.3125rem",
     [theme.breakpoints.down("xs")]: {
-      width: '15.625rem',
+      width: "15.625rem",
     },
   },
   tablePagination: {

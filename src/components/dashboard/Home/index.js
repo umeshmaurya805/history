@@ -19,7 +19,10 @@ const Home = () => {
       value: 56,
     },
     {
-      name: "Events Conducted",
+      name: "Competitive Events",
+      value: 56,
+    },   {
+      name: "Non-Competitive Events",
       value: 56,
     },
     { name: "Total Participation", value: 4567 },

@@ -47,7 +47,7 @@ const Calendar = () => {
   return (
     <Layout>
       <Grid container spacing={4}>
-        <Grid item xs={12} md={5} xl={4} className={classes.itemLeft}>
+        <Grid item xs={12} md={5} xl={5} className={classes.itemLeft}>
           <Grid container justifyContent="center" spacing={3}>
             <Grid item xs={12} sm={6} md={12}>
               <EventCalendar setVisibleDate={setVisibleDate} />
@@ -57,7 +57,7 @@ const Calendar = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={7} xl={8}>
+        <Grid item xs={12} md={7} xl={7}>
           <EventDetails />
         </Grid>
       </Grid>

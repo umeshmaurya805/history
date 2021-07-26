@@ -52,7 +52,7 @@ const ResultCard = ({ info }) => {
               {schoolName}
             </Typography>
             <Typography className={classes.extraInfo} color="primary">
-              near Tagore Park, new Delhi
+              Tagore Park, new Delhi
             </Typography>
           </Grid>
           <Grid item className={classes.position}>

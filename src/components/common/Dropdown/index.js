@@ -11,7 +11,7 @@ const Dropdown = ({
   handleChange,
   items = [],
   colored = false,
-  maxItems = 10,
+  maxItems = 5,
   classes: customClasses = {},
 }) => {
   const classes = useStyles();

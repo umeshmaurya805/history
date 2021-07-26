@@ -10,37 +10,43 @@ const columns = [
   {
     id: "title",
     label: "Title",
-    fixedWidth: "11.25rem",
+    fixedWidth: "12rem",
     tooltipText: "Upcoming event names",
   },
   {
     id: "date",
     label: "Date",
-    fixedWidth: "9.375rem",
+    fixedWidth: "8rem",
     tooltipText: "Starting date of the event",
   },
   {
     id: "classes",
     label: "Classes",
-    fixedWidth: "9.375rem",
+    fixedWidth: "8rem",
     tooltipText: "Range of classes which have participated in the event",
   },
   {
+    id: "schoolParticipation",
+    label: "Schools",
+    fixedWidth: "8rem",
+    tooltipText: "Total schools participated",
+  },
+  {
     id: "participation",
-    label: "Participation ",
-    fixedWidth: "9.375rem",
+    label: "Participants",
+    fixedWidth: "10rem",
     tooltipText: "Total number of participants",
   },
   {
     id: "status",
     label: "Status",
-    fixedWidth: "9.375rem",
+    fixedWidth: "8rem",
     tooltipText: "Have your school participated or not",
   },
   {
     id: "list",
     label: "Details",
-    fixedWidth: "9.375rem",
+    fixedWidth: "9rem",
     tooltipText: "Event details",
   },
 ];
@@ -54,7 +60,8 @@ const eventsList = getEvents().map((event) => {
     slug: event.slug,
     date: format(event.startDate, "PP"),
     classes: `${event.forClass.from} - ${event.forClass.to}`,
-    participation: 8,
+    schoolParticipation: 200,
+    participation: 2000,
     status: event.isRegistered ? "Participated" : "Not Participated",
   };
 });
@@ -78,7 +85,6 @@ const CompetitivePanel = () => {
     month: 0,
     year: 0,
     class: 0,
-    user: 0,
   });
 
   const handleChange = (event) => {
