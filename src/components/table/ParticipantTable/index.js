@@ -360,7 +360,7 @@ const ParticipantTable = ({
                         return (
                           <StyledTableCell key={column.id} align="center">
                             {value}
-                            {column.id === "currentClass" && ` ${row.section}`}
+                            {column.id === "studentClass" && ` ${row.section}`}
                           </StyledTableCell>
                         );
                       }

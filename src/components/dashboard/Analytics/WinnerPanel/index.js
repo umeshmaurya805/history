@@ -35,7 +35,7 @@ const WinnerPanel = () => {
       firstName: "ABC",
       lastName: "Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       date: format(new Date(), "PP"),
       theme: "Theme 1",
@@ -48,7 +48,7 @@ const WinnerPanel = () => {
       firstName: "BBBB",
       lastName: "Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       date: format(new Date(), "PP"),
       theme: "Theme 1",
@@ -61,7 +61,7 @@ const WinnerPanel = () => {
       firstName: "CCC",
       lastName: "Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       date: format(new Date(), "PP"),
       theme: "Theme 1",
@@ -74,7 +74,7 @@ const WinnerPanel = () => {
       firstName: "DDD",
       lastName: "Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       date: format(new Date(), "PP"),
       theme: "Theme 1",
@@ -87,7 +87,7 @@ const WinnerPanel = () => {
       firstName: "GGG",
       lastName: "Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       date: format(new Date(), "PP"),
       theme: "Theme 1",
@@ -100,7 +100,7 @@ const WinnerPanel = () => {
       firstName: "QQQ",
       lastName: "Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       date: format(new Date(), "PP"),
       theme: "Theme 1",
@@ -113,7 +113,7 @@ const WinnerPanel = () => {
       firstName: "EEE",
       lastName: "Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       date: format(new Date(), "PP"),
       theme: "Theme 1",
@@ -128,22 +128,22 @@ const WinnerPanel = () => {
     {
       id: "name",
       label: `${isStudent ? "Student" : "Teacher"} name`,
-      fixedWidth: '11rem',
+      fixedWidth: "11rem",
     },
-    { id: "currentClass", label: "Class", fixedWidth: '11rem' },
-    { id: "event", label: "Events", fixedWidth: '11rem' },
-    { id: "participant", label: "Participants", fixedWidth: '11rem' },
-    { id: "position", label: "Positions", fixedWidth: '11rem' },
+    { id: "studentClass", label: "Class", fixedWidth: "11rem" },
+    { id: "event", label: "Events", fixedWidth: "11rem" },
+    { id: "participant", label: "Participants", fixedWidth: "11rem" },
+    { id: "position", label: "Positions", fixedWidth: "11rem" },
   ];
 
-  if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: '11rem' });
+  if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: "11rem" });
 
   const rows = participantData.map((row) => {
     const {
       firstName,
       lastName,
       avatar,
-      currentClass,
+      studentClass,
       section,
       event,
       participant,
@@ -153,7 +153,7 @@ const WinnerPanel = () => {
     return {
       name: `${firstName} ${lastName}`,
       avatar,
-      currentClass,
+      studentClass,
       section,
       event,
       participant,
@@ -164,7 +164,12 @@ const WinnerPanel = () => {
   return (
     <div className={classes.root}>
       <EventStats className={classes.stats} data={data} />
-      <ParticipantTable title="Winners List" colored rows={rows} columns={columns} />
+      <ParticipantTable
+        title="Winners List"
+        colored
+        rows={rows}
+        columns={columns}
+      />
     </div>
   );
 };

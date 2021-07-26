@@ -23,7 +23,7 @@ const AddStudentsPanel = () => {
     {
       name: "Divyansh Singh Thakur",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -32,7 +32,7 @@ const AddStudentsPanel = () => {
     {
       name: "Bhanupratap Singh Thakur",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -41,7 +41,7 @@ const AddStudentsPanel = () => {
     {
       name: "CCC Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -50,7 +50,7 @@ const AddStudentsPanel = () => {
     {
       name: "DDD Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -59,7 +59,7 @@ const AddStudentsPanel = () => {
     {
       name: "ABC Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -68,7 +68,7 @@ const AddStudentsPanel = () => {
     {
       name: "BBBB Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -77,7 +77,7 @@ const AddStudentsPanel = () => {
     {
       name: "CCC Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -86,7 +86,7 @@ const AddStudentsPanel = () => {
     {
       name: "DDD Surname",
       avatar: avatarMan,
-      currentClass: 10,
+      studentClass: 10,
       section: "A",
       email: "abc@example.com",
       contact: "0123456789",
@@ -101,7 +101,7 @@ const AddStudentsPanel = () => {
       fixedWidth: "10.5rem",
     },
     { id: "email", label: "Email", fixedWidth: "10.5rem" },
-    { id: "currentClass", label: "Class", fixedWidth: "10.5rem" },
+    { id: "studentClass", label: "Class", fixedWidth: "10.5rem" },
     { id: "contact", label: "Contact", fixedWidth: "10.5rem" },
     { id: "status", label: "Status", fixedWidth: "10.5rem" },
   ];
@@ -109,13 +109,13 @@ const AddStudentsPanel = () => {
   // if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: '10.5rem' });
 
   const rows = data.map((participant) => {
-    const { name, avatar, currentClass, section, email, contact, status } =
+    const { name, avatar, studentClass, section, email, contact, status } =
       participant;
 
     return {
       name,
       avatar,
-      currentClass,
+      studentClass,
       section,
       email,
       contact,
@@ -154,7 +154,7 @@ const AddStudentsPanel = () => {
                 {student.name}
               </Typography>
               <Typography component="p" className={classes.eventSubHeading}>
-                {`Class: ${student.currentClass} - ${student.section}`}
+                {`Class: ${student.studentClass} - ${student.section}`}
               </Typography>
             </Box>
             <Button
