@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import Layout, { Root } from "@mui-treasury/layout";
@@ -23,12 +23,10 @@ scheme.configureEdgeSidebar((builder) => {
 });
 
 render(
-  <StrictMode>
     <Provider store={store}>
       <Root theme={rootTheme} scheme={scheme}>
         <App />
       </Root>
-    </Provider>
-  </StrictMode>,
+    </Provider>,
   document.getElementById("root")
 );

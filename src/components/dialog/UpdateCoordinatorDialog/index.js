@@ -1,5 +1,6 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -9,15 +10,22 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import protectedHandler from "../../../utils/protectedHandler";
 import UpdateButtonGroup from "../../button/UpdateButtonGroup";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../../app/api/school";
 
 const validationSchema = yup.object({
-  name: yup
-    .string("Enter coordinator name")
-    .required("Coordinator name is required"),
+  firstName: yup
+    .string("Enter coordinator first name")
+    .required("Coordinator's first name is required"),
+  lastName: yup
+    .string("Enter coordinator last name")
+    .required("Coordinator's last name is required"),
   designation: yup
     .string("Enter coordinator designation")
     .required("Designation is required"),
-  contactNumber: yup
+  phone: yup
     .string("Enter coordinator contact number")
     .required("Contact number is required"),
   email: yup
@@ -26,21 +34,31 @@ const validationSchema = yup.object({
     .required("Email is required"),
 });
 
-const UpdateCoordinatorDialog = ({ values, handleClose, ...props }) => {
-  const formik = useFormik({
-    initialValues: values,
-    validationSchema: validationSchema,
-    onSubmit: protectedHandler(async (formData, actions) => {
-      console.log(formData);
+const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
+  const { coordinator } = useGetProfileQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      coordinator: data ? data.coordinator : {},
+    }),
+  });
 
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+
+  const formik = useFormik({
+    initialValues: coordinator,
+    validationSchema: validationSchema,
+    enableReinitialize: true,
+    onSubmit: protectedHandler(async (formData, actions) => {
       if (
-        formData.name === values.name &&
-        formData.designation === values.designation &&
-        formData.contactNumber === values.contactNumber &&
-        formData.email === values.email
+        formData.firstName === coordinator.firstName &&
+        formData.lastName === coordinator.lastName &&
+        formData.designation === coordinator.designation &&
+        formData.phone === coordinator.phone &&
+        formData.email === coordinator.email
       ) {
         return handleClose();
       }
+
+      await updateProfile({ coordinator: formData }).unwrap();
 
       toast.success("Coordinator Updated", {
         toastId: "UpdateCoordinatorDialog",
@@ -63,20 +81,44 @@ const UpdateCoordinatorDialog = ({ values, handleClose, ...props }) => {
       </DialogTitle>
       <DialogContent>
         <form>
-          <TextField
-            fullWidth
-            required
-            autoFocus
-            variant="outlined"
-            margin="normal"
-            id="name"
-            name="name"
-            label="Name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
-          />
+          <Grid container spacing={4}>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                required
+                autoFocus
+                variant="outlined"
+                margin="normal"
+                id="firstName"
+                name="firstName"
+                label="First Name"
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.firstName && Boolean(formik.errors.firstName)
+                }
+                helperText={formik.touched.firstName && formik.errors.firstName}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                required
+                autoFocus
+                variant="outlined"
+                margin="normal"
+                id="lastName"
+                name="lastName"
+                label="Last Name"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.lastName && Boolean(formik.errors.lastName)
+                }
+                helperText={formik.touched.lastName && formik.errors.lastName}
+              />
+            </Grid>
+          </Grid>
           <TextField
             fullWidth
             required
@@ -97,18 +139,13 @@ const UpdateCoordinatorDialog = ({ values, handleClose, ...props }) => {
             required
             variant="outlined"
             margin="normal"
-            id="contactNumber"
-            name="contactNumber"
+            id="phone"
+            name="phone"
             label="Contact Number"
-            value={formik.values.contactNumber}
+            value={formik.values.phone}
             onChange={formik.handleChange}
-            error={
-              formik.touched.contactNumber &&
-              Boolean(formik.errors.contactNumber)
-            }
-            helperText={
-              formik.touched.contactNumber && formik.errors.contactNumber
-            }
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            helperText={formik.touched.phone && formik.errors.phone}
           />
           <TextField
             fullWidth
@@ -127,8 +164,8 @@ const UpdateCoordinatorDialog = ({ values, handleClose, ...props }) => {
       </DialogContent>
       <DialogActions>
         <UpdateButtonGroup
-          isLoading={false}
-          handleOnSubmit={formik.handleSubmit}
+          isLoading={isLoading}
+          handleOnSubmit={() => formik.handleSubmit()}
           handleOnClose={handleOnClose}
         />
       </DialogActions>

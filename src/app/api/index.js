@@ -8,6 +8,6 @@ export const hdApi = createApi({
   // refetchOnReconnect: true,
   reducerPath: "hdApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Admin", "School", "User"],
+  tagTypes: ["SchoolProfile"],
   endpoints: () => ({}),
 });

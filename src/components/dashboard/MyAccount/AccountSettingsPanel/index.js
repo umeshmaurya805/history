@@ -12,6 +12,7 @@ import UpdateAffiliationNumber from "../../../dialog/UpdateAffiliationNumber";
 import UpdateLogoDialog from "../../../dialog/UpdateLogoDialog";
 import UpdateContactNumberDialog from "../../../dialog/UpdateContactNumberDialog";
 import useStyles from "./style";
+import { useGetProfileQuery } from "../../../../app/api/school";
 
 const EditableInfo = ({ value, onClick }) => {
   const classes = useStyles();
@@ -33,13 +34,9 @@ const EditableInfo = ({ value, onClick }) => {
 
 const AccountSettingsPanel = () => {
   const classes = useStyles();
+  const { data = {}, isLoading } = useGetProfileQuery();
 
-  const coordinatorDetails = {
-    name: "Xyz Sharma",
-    designation: "Teacher",
-    contactNumber: "123456789",
-    email: "xyz@gmail.com",
-  };
+  const coordinator = isLoading ? {} : data.coordinator;
 
   const initialState = {
     password: false,
@@ -87,13 +84,13 @@ const AccountSettingsPanel = () => {
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>Email address</Typography>
-        <Typography className={classes.value}>abc@gmail.com</Typography>
+        <Typography className={classes.value}>{data.email}</Typography>
       </Box>
       <Box className={`${classes.editableBox} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Password</Typography>
         <EditableInfo
           onClick={() => handleClickOpen(0)}
-          value={"***********"}
+          value={data.displayPassword}
         />
       </Box>
       <Typography color="primary" className={classes.title}>
@@ -101,29 +98,32 @@ const AccountSettingsPanel = () => {
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>School name</Typography>
-        <Typography className={classes.value}>ABC Public School</Typography>
+        <Typography className={classes.value}>{data.name}</Typography>
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>School address</Typography>
-        <Typography className={classes.value}>abc, abc street</Typography>
+        <Typography className={classes.value}>{data.address}</Typography>
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>Board</Typography>
-        <EditableInfo onClick={() => handleClickOpen(1)} value={"CBSE"} />
+        <EditableInfo onClick={() => handleClickOpen(1)} value={data.board} />
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>School Contact Number</Typography>
-        <EditableInfo onClick={() => handleClickOpen(2)} value={"123456789"} />
+        <EditableInfo onClick={() => handleClickOpen(2)} value={data.phone} />
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>Affiliation number</Typography>
-        <EditableInfo onClick={() => handleClickOpen(3)} value={"12468153"} />
+        <EditableInfo
+          onClick={() => handleClickOpen(3)}
+          value={data.affiliationNumber}
+        />
       </Box>
       <Box className={`${classes.box} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Logo</Typography>
         <div>
           <Box className={classes.logoBox}>
-            <Avatar src={undefined} className={classes.logo}>
+            <Avatar src={data.logo} className={classes.logo}>
               {""}
             </Avatar>
           </Box>
@@ -152,25 +152,25 @@ const AccountSettingsPanel = () => {
       <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>Name</Typography>
         <Typography className={classes.coordinatorValue}>
-          {coordinatorDetails.name}
+          {`${coordinator.firstName} ${coordinator.lastName}`}
         </Typography>
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>Designation</Typography>
         <Typography className={classes.coordinatorValue}>
-          {coordinatorDetails.designation}
+          {coordinator.designation}
         </Typography>
       </Box>
       <Box className={classes.box}>
         <Typography className={classes.name}>Contact Number</Typography>
         <Typography className={classes.coordinatorValue}>
-          {coordinatorDetails.contactNumber}
+          {coordinator.phone}
         </Typography>
       </Box>
       <Box className={`${classes.box} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Email address</Typography>
         <Typography className={classes.coordinatorValue}>
-          {coordinatorDetails.email}
+          {coordinator.email}
         </Typography>
       </Box>
       <UpdatePasswordDialog
@@ -203,7 +203,6 @@ const AccountSettingsPanel = () => {
       />
       <UpdateCoordinatorDialog
         open={open.coordinator}
-        values={coordinatorDetails}
         handleClose={handleClose}
         aria-labelledby="update-coordinator-dialog"
       />
