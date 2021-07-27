@@ -1,10 +1,10 @@
 import React from "react";
+import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
-import CloseIcon from "@material-ui/icons/Close";
-import Box from "@material-ui/core/Box";
+import CancelIcon from "@material-ui/icons/Cancel";
 import TabLayout from "../../common/TabLayout";
 import AddStudentsPanel from "./AddStudentsPanel";
 import AddTeachersPanel from "./AddTeachersPanel";
@@ -59,7 +59,7 @@ const AddTeamAndParticipantsDialog = ({
 
   return (
     <Dialog
-    className={classes.root}
+      className={classes.root}
       scroll="body"
       fullScreen
       open={open}
@@ -73,8 +73,9 @@ const AddTeamAndParticipantsDialog = ({
             color="inherit"
             onClick={onClose}
             aria-label="close"
+            size="small"
           >
-            <CloseIcon />
+            <CancelIcon fontSize="large" color="error" />
           </IconButton>
         </Box>
         {renderComponent()}

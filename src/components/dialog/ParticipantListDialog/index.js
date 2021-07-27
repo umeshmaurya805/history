@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
-import CloseIcon from "@material-ui/icons/Close";
+import CancelIcon from "@material-ui/icons/Cancel";
 import Box from "@material-ui/core/Box";
 import { format } from "date-fns";
 import avatarMan from "../../../assets/svg/avatar-man.svg";
@@ -256,13 +256,14 @@ const ParticipantListDialog = ({ slug, open, onClose }) => {
     >
       <DialogContent className={classes.content}>
         <Box display="flex" justifyContent="flex-end" className={classes.box}>
-          <IconButton
+        <IconButton
             edge="start"
             color="inherit"
             onClick={onClose}
             aria-label="close"
+            size="small"
           >
-            <CloseIcon />
+            <CancelIcon fontSize="large" color="error" />
           </IconButton>
         </Box>
         <ParticipantTable rows={rows} columns={columns} />

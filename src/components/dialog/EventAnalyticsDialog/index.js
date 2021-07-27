@@ -3,9 +3,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
-import CloseIcon from "@material-ui/icons/Close";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import  CancelIcon from '@material-ui/icons/Cancel';
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
@@ -72,8 +72,9 @@ const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
             color="inherit"
             onClick={onClose}
             aria-label="close"
+            size="small"
           >
-            <CloseIcon />
+            <CancelIcon fontSize="large" color="error" />
           </IconButton>
         </Box>
         <Box className={classes.box}>
