@@ -21,5 +21,5 @@ export const getSchoolAuth = () => {
   
   data = JSON.parse(data);
 
-  return data// data.expiresAt > Date.now() ? data : getInitialState();
+  return data.expiresAt > Date.now() ? data : getInitialState();
 };

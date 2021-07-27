@@ -8,7 +8,6 @@ export const authApi = hdApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      transformResponse: (response) => response.data,
     }),
     logout: build.mutation({
       query: () => ({
