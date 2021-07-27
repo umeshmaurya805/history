@@ -4,20 +4,21 @@ export const authApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation({
       query: (body) => ({
-        url: "schools/login",
+        url: "auth/login",
         method: "POST",
         body,
       }),
+      transformResponse: (response) => response.data,
     }),
     logout: build.mutation({
       query: () => ({
-        url: "schools/logout",
+        url: "auth/logout",
         method: "POST",
       }),
     }),
     forgotPassword: build.mutation({
       query: (body) => ({
-        url: "schools/forgot-password",
+        url: "auth/forgot-password",
         method: "POST",
         body,
       }),
@@ -27,7 +28,7 @@ export const authApi = hdApi.injectEndpoints({
         const { resetToken, ...body } = data;
 
         return {
-          url: `schools/validate-otp/${resetToken}`,
+          url: `auth/validate-otp/${resetToken}`,
           method: "POST",
           body,
         };
@@ -38,7 +39,7 @@ export const authApi = hdApi.injectEndpoints({
         const { resetToken, ...body } = data;
 
         return {
-          url: `schools/reset-password/${resetToken}`,
+          url: `auth/reset-password/${resetToken}`,
           method: "PUT",
           body,
         };
@@ -46,13 +47,13 @@ export const authApi = hdApi.injectEndpoints({
     }),
     refreshToken: build.mutation({
       query: () => ({
-        url: "schools/refresh-token",
+        url: "auth/refresh-token",
         method: "POST",
       }),
     }),
     revokeRefreshTokens: build.mutation({
       query: () => ({
-        url: "schools/revoke-refresh-tokens",
+        url: "auth/revoke-refresh-tokens",
         method: "POST",
       }),
     }),

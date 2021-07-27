@@ -26,7 +26,7 @@ export const baseQueryWithReauth = async (args, api, extraOptions) => {
   if (result?.error?.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
-      { url: "schools/refresh-token", method: "POST" },
+      { url: "auth/refresh-token", method: "POST" },
       api,
       extraOptions
     );
@@ -41,10 +41,10 @@ export const baseQueryWithReauth = async (args, api, extraOptions) => {
       const { url } = args;
 
       if (
-        url !== "schools/login" &&
-        url !== "schools/forgot-password" &&
-        url !== "schools/reset-password" &&
-        url !== "schools/validate-otp"
+        url !== "auth/login" &&
+        url !== "auth/forgot-password" &&
+        url !== "auth/reset-password" &&
+        url !== "auth/validate-otp"
       ) {
         window.location.reload();
       }
