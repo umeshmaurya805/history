@@ -73,6 +73,7 @@ const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
             onClick={onClose}
             aria-label="close"
             size="small"
+            className={classes.cancelButton}
           >
             <CancelIcon fontSize="large" color="error" />
           </IconButton>

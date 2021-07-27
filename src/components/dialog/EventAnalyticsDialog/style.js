@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+  cancelButton: {
+    height: "2.5rem",
+    width: "2.5rem",
+  },
   eventName: {
     flexGrow: 1,
     fontFamily: "Roboto",
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   chipItems: {
     flexGrow: 1,
     "@media (min-width: 1000px) and (max-width: 1306px)": {
-      minWidth: '19.5rem',
+      minWidth: "19.5rem",
     },
   },
   button: {
