@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData) => {
       const data = await forgotPassword(formData).unwrap();
-      history.push(`/auth/validate-otp/${data}`);
+      history.push(`/auth/validate-otp/${data.resetToken}`);
     }),
   });
 

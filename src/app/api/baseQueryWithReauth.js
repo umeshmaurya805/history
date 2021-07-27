@@ -25,13 +25,13 @@ export const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   if (result?.error?.status === 401) {
     // try to get a new token
-    const refreshResult = await baseQuery(
+    const { data: refreshResult } = await baseQuery(
       { url: "auth/refresh-token", method: "POST" },
       api,
       extraOptions
     );
 
-    if (refreshResult.data) {
+    if (refreshResult) {
       // store the new token
       saveSchoolAuth(refreshResult.data);
 
