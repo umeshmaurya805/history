@@ -8,6 +8,7 @@ import LoadingButton from "../../button/LoadingButton";
 import { useResetPasswordMutation } from "../../../app/api/auth";
 import protectedHandler from "../../../utils/protectedHandler";
 import useStyles from "./style";
+import { toast } from "react-toastify";
 
 const validationSchema = yup.object({
   password: yup
@@ -35,6 +36,11 @@ const ResetPassword = () => {
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData) => {
       await resetPassword({ ...formData, resetToken }).unwrap();
+      
+      toast.success("Password reset successfully", {
+        toastId: "ResetPassword",
+      });
+
       history.push("/auth/login");
     }),
   });

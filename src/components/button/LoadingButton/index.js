@@ -4,7 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 const LoadingButton = ({ isLoading, children, ...props }) => {
   return (
-    <Button {...props}>
+    <Button disableFocusRipple {...props}>
       {isLoading ? <CircularProgress style={{ color: "white" }} /> : children}
     </Button>
   );

@@ -6,12 +6,10 @@ export const schoolApi = hdApi.injectEndpoints({
       query: () => "schools/my-account",
       providesTags: ["SchoolProfile"],
       transformResponse: ({ data }) => {
-        const { block, street, area, city } = data.model.address;
+        const { block, street, area, city } = data.address;
 
         return {
-          email: data.email,
-          phone: data.phone,
-          ...data.model,
+          ...data,
           address: `${block}, ${street}, ${area}, ${city}`,
         };
       },
