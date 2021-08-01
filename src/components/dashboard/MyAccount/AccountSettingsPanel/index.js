@@ -90,14 +90,11 @@ const AccountSettingsPanel = () => {
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>Email Address</Typography>
-        <Typography className={classes.value}>{schoolProfile.email}</Typography>
+        <Typography className={classes.value}>example@gmail.com</Typography>
       </Box>
       <Box className={`${classes.editableBox} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Password</Typography>
-        <EditableInfo
-          onClick={() => handleClickOpen(0)}
-          value={schoolProfile.displayPassword}
-        />
+        <EditableInfo onClick={() => handleClickOpen(0)} value={"********"} />
       </Box>
       <Typography color="primary" className={classes.title}>
         School Details
