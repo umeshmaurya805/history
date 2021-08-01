@@ -1,10 +1,11 @@
 import { hdApi } from ".";
+import { MAIN_COORDINATOR, SCHOOL_PROFILE } from "./constants";
 
 export const schoolApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
     getProfile: build.query({
-      query: () => "schools/my-account",
-      providesTags: ["SchoolProfile"],
+      query: () => "schools/my-account?filter=profile",
+      providesTags: [SCHOOL_PROFILE],
       transformResponse: ({ data }) => {
         const { block, street, area, city } = data.address;
 
@@ -21,7 +22,25 @@ export const schoolApi = hdApi.injectEndpoints({
         body,
       }),
       transformResponse: (response) => response.data,
-      invalidatesTags: ["SchoolProfile"],
+      invalidatesTags: [SCHOOL_PROFILE],
+    }),
+    getMainCoordinator: build.query({
+      query: () => "coordinators/my-account",
+      providesTags: [MAIN_COORDINATOR],
+      transformResponse: ({ data }) => {
+        return {
+          ...data,
+        };
+      },
+    }),
+    updateMainCoordinator: build.mutation({
+      query: (body) => ({
+        url: "coordinators/my-account",
+        method: "PUT",
+        body,
+      }),
+      transformResponse: (response) => response.data,
+      invalidatesTags: [MAIN_COORDINATOR],
     }),
   }),
 });
