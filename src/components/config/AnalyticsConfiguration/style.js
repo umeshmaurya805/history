@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '3.125rem',
   },
   category: {
-    minWidth: '8.125rem',
+    minWidth: '10rem',
     [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",

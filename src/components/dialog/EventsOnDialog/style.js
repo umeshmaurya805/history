@@ -8,8 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     fontSize: "1.125rem",
-    fontWeight: 600,
-    maxWidth: "25rem",
+    maxWidth: "30rem",
   },
   listItem: {
     borderRadius: "0.75rem",

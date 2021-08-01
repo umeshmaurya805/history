@@ -15,17 +15,18 @@ const Home = () => {
   const classes = useStyles();
   const data = [
     {
-      name: "Schools Partnered",
+      name: "Schools",
       value: 56,
     },
     {
       name: "Competitive Events",
       value: 56,
-    },   {
+    },
+    {
       name: "Non-Competitive Events",
       value: 56,
     },
-    { name: "Total Participation", value: 4567 },
+    { name: "Student Participation", value: 4567 },
   ];
 
   return (

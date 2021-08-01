@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0rem 0.25rem",
   },
   year: {
-    minWidth: "5rem",
+    minWidth: "10rem",
   },
   schoolColumn: {
     color: "#5C6269 !important",

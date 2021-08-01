@@ -34,9 +34,15 @@ const EditableInfo = ({ value, onClick }) => {
 
 const AccountSettingsPanel = () => {
   const classes = useStyles();
-  const { data = {}, isLoading } = useGetProfileQuery();
+  const { data: schoolProfile = {} } = useGetProfileQuery();
 
-  const coordinator = isLoading ? {} : data.coordinator;
+  const coordinator = {
+    firstName: "Divyansh",
+    lastName: "Thakur",
+    phone: "1234567890",
+    designation: "Teacher",
+    email: "example@gmail.com",
+  };
 
   const initialState = {
     password: false,
@@ -83,47 +89,55 @@ const AccountSettingsPanel = () => {
         Account Details
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
-        <Typography className={classes.name}>Email address</Typography>
-        <Typography className={classes.value}>{data.email}</Typography>
+        <Typography className={classes.name}>Email Address</Typography>
+        <Typography className={classes.value}>{schoolProfile.email}</Typography>
       </Box>
       <Box className={`${classes.editableBox} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Password</Typography>
         <EditableInfo
           onClick={() => handleClickOpen(0)}
-          value={data.displayPassword}
+          value={schoolProfile.displayPassword}
         />
       </Box>
       <Typography color="primary" className={classes.title}>
         School Details
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
-        <Typography className={classes.name}>School name</Typography>
-        <Typography className={classes.value}>{data.name}</Typography>
+        <Typography className={classes.name}>School Name</Typography>
+        <Typography className={classes.value}>{schoolProfile.name}</Typography>
       </Box>
       <Box className={classes.box}>
-        <Typography className={classes.name}>School address</Typography>
-        <Typography className={classes.value}>{data.address}</Typography>
+        <Typography className={classes.name}>School Address</Typography>
+        <Typography className={classes.value}>
+          {schoolProfile.address}
+        </Typography>
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>Board</Typography>
-        <EditableInfo onClick={() => handleClickOpen(1)} value={data.board} />
+        <EditableInfo
+          onClick={() => handleClickOpen(1)}
+          value={schoolProfile.board}
+        />
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>School Contact Number</Typography>
-        <EditableInfo onClick={() => handleClickOpen(2)} value={data.phone} />
+        <EditableInfo
+          onClick={() => handleClickOpen(2)}
+          value={schoolProfile.phone}
+        />
       </Box>
       <Box className={classes.editableBox}>
-        <Typography className={classes.name}>Affiliation number</Typography>
+        <Typography className={classes.name}>Affiliation Number</Typography>
         <EditableInfo
           onClick={() => handleClickOpen(3)}
-          value={data.affiliationNumber}
+          value={schoolProfile.affiliationNumber}
         />
       </Box>
       <Box className={`${classes.box} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Logo</Typography>
         <div>
           <Box className={classes.logoBox}>
-            <Avatar src={data.logo} className={classes.logo}>
+            <Avatar src={schoolProfile.logo} className={classes.logo}>
               {""}
             </Avatar>
           </Box>
@@ -168,7 +182,7 @@ const AccountSettingsPanel = () => {
         </Typography>
       </Box>
       <Box className={`${classes.box} ${classes.boxEnd}`}>
-        <Typography className={classes.name}>Email address</Typography>
+        <Typography className={classes.name}>Email Address</Typography>
         <Typography className={classes.coordinatorValue}>
           {coordinator.email}
         </Typography>

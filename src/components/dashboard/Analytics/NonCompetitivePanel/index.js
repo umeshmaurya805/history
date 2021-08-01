@@ -11,19 +11,16 @@ const columns = [
     id: "title",
     label: "Title",
     fixedWidth: "12rem",
-    tooltipText: "Upcoming event names",
   },
   {
     id: "date",
     label: "Date",
     fixedWidth: "8rem",
-    tooltipText: "Starting date of the event",
   },
   {
     id: "classes",
     label: "Classes",
     fixedWidth: "8rem",
-    tooltipText: "Range of classes which have participated in the event",
   },
   {
     id: "schoolParticipation",
@@ -41,7 +38,7 @@ const columns = [
     id: "status",
     label: "Status",
     fixedWidth: "8rem",
-    tooltipText: "Have your school participated or not",
+    tooltipText: "Whether your school participated in the event",
   },
   {
     id: "list",

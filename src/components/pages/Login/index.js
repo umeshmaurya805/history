@@ -13,10 +13,9 @@ import protectedHandler from "../../../utils/protectedHandler";
 import useStyles from "./style";
 
 const validationSchema = yup.object({
-  email: yup
-    .string("Enter your email")
-    .email("Enter a valid email")
-    .required("Email is required"),
+  username: yup
+    .string("Enter your username")
+    .required("Username is required"),
   password: yup
     .string("Enter your password")
     .min(6, "Password should be of minimum 6 characters length")
@@ -30,7 +29,7 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
       rememberMe: false,
     },
@@ -60,17 +59,17 @@ const Login = () => {
         <TextField
           fullWidth
           required
-          id="email"
-          name="email"
-          label="Email"
+          id="username"
+          name="username"
+          label="Username"
           variant="outlined"
           margin="normal"
-          autoComplete="email"
+          autoComplete="username"
           autoFocus
-          value={formik.values.email}
+          value={formik.values.username}
           onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
+          error={formik.touched.username && Boolean(formik.errors.username)}
+          helperText={formik.touched.username && formik.errors.username}
         />
 
         <TextField

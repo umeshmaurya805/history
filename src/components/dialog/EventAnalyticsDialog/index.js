@@ -29,7 +29,7 @@ const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
   const panels = [SchoolParticipantPanel];
 
   if (competitive) {
-    labels.push("Event Winners");
+    labels.push("Competition Winners");
     panels.push(EventWinnerPanel);
   } else {
     labels.push("Event Media");

@@ -11,43 +11,40 @@ const columns = [
     id: "title",
     label: "Title",
     fixedWidth: "12rem",
-    tooltipText: "Upcoming event names",
   },
   {
     id: "date",
     label: "Date",
     fixedWidth: "8rem",
-    tooltipText: "Starting date of the event",
   },
   {
     id: "classes",
     label: "Classes",
     fixedWidth: "8rem",
-    tooltipText: "Range of classes which have participated in the event",
   },
   {
     id: "schoolParticipation",
     label: "Schools",
     fixedWidth: "8rem",
-    tooltipText: "Total schools participated",
+    tooltipText: "Total number of schools participated in the competition",
   },
   {
     id: "participation",
-    label: "Participants",
+    label: "Students",
     fixedWidth: "10rem",
-    tooltipText: "Total number of participants",
+    tooltipText: "Total number of students participated in the competition",
   },
   {
     id: "status",
     label: "Status",
     fixedWidth: "8rem",
-    tooltipText: "Have your school participated or not",
+    tooltipText: "Whether your school participated in the competition",
   },
   {
     id: "list",
     label: "Details",
     fixedWidth: "9rem",
-    tooltipText: "Event details",
+    tooltipText: "Competition details",
   },
 ];
 

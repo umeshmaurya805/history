@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Line, defaults } from "react-chartjs-2";
 import format from "date-fns/format";
-import EventStats from "../../../common/EventStats";
 import AnalyticsConfiguration from "../../../config/AnalyticsConfiguration";
 import useStyles from "./style";
 
@@ -20,25 +19,6 @@ const ParticipantPanel = () => {
 
     setOption({ ...option, [name]: value });
   };
-  const data = [
-    {
-      name: "Schools Points",
-      value: 150,
-    },
-    {
-      name: "Competitive Events",
-      value: 15,
-    },
-    { name: "Non Competitive Events", value: 56 },
-    {
-      name: "Students",
-      value: 2000,
-    },
-    {
-      name: "Teachers",
-      value: 250,
-    },
-  ];
 
   const chartData = {
     labels: [
@@ -52,13 +32,13 @@ const ParticipantPanel = () => {
     ],
     datasets: [
       {
-        label: "Competitive",
+        label: "Competitive Events",
         data: [50, 90, 120, 136, 120, 120, 50],
         backgroundColor: "blue",
         borderColor: "blue",
       },
       {
-        label: "Non-Competitive",
+        label: "Non-Competitive Events",
         data: [60, 100, 80, 100, 140, 60, 40],
         backgroundColor: "#F89503",
         borderColor: "#F89503",
@@ -70,14 +50,7 @@ const ParticipantPanel = () => {
 
   const chartOptions = {
     scales: {
-      x: {
-        display: true,
-        title: {
-          display: true,
-          text: "Event Day",
-          padding: { top: 20, left: 0, right: 0, bottom: 0 },
-        },
-      },
+
       y: {
         display: true,
         title: {
@@ -99,7 +72,6 @@ const ParticipantPanel = () => {
 
   return (
     <div className={classes.root}>
-      <EventStats className={classes.stats} data={data} />
       <AnalyticsConfiguration value={option} handleChange={handleChange} />
       <Line
         className={classes.chart}

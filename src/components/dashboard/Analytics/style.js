@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginBottom: "2.5rem",
   },
+  stats: {
+    paddingBottom: "2rem",
+  },
   competitiveLayout: {
     marginTop: "2.5rem",
   },

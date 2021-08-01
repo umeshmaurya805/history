@@ -70,7 +70,7 @@ const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
                     <Chip
                       size="small"
                       variant="outlined"
-                      label={`Deadline: ${format(event.registrationDeadline, "PP")}`}
+                      label={`Registration Deadline: ${format(event.registrationDeadline, "PP")}`}
                       className={classes.eventRegisteredTag}
                     />
                   </Box>

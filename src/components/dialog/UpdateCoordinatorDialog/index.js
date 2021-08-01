@@ -10,10 +10,10 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import protectedHandler from "../../../utils/protectedHandler";
 import UpdateButtonGroup from "../../button/UpdateButtonGroup";
-import {
-  useGetProfileQuery,
-  useUpdateProfileMutation,
-} from "../../../app/api/school";
+// import {
+  // useGetProfileQuery,
+  // useUpdateProfileMutation,
+// } from "../../../app/api/school";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -35,13 +35,22 @@ const validationSchema = yup.object({
 });
 
 const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
-  const { coordinator } = useGetProfileQuery(undefined, {
-    selectFromResult: ({ data }) => ({
-      coordinator: data ? data.coordinator : {},
-    }),
-  });
+  // const { coordinator } = useGetProfileQuery(undefined, {
+  //   selectFromResult: ({ data }) => ({
+  //     coordinator: data ? data.coordinator : {},
+  //   }),
+  // });
 
-  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+  const coordinator = {
+    firstName: "Divyansh",
+    lastName: "Thakur",
+    phone: "1234567890",
+    designation: "Teacher",
+    email: "example@gmail.com",
+  };
+
+  const isLoading = false;
+  // const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   const formik = useFormik({
     initialValues: coordinator,
@@ -58,7 +67,7 @@ const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
         return handleClose();
       }
 
-      await updateProfile({ coordinator: formData }).unwrap();
+      // await updateProfile({ coordinator: formData }).unwrap();
 
       toast.success("Coordinator Updated", {
         toastId: "UpdateCoordinatorDialog",

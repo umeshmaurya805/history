@@ -12,7 +12,7 @@ const Title = ({ tooltipText, size = "medium", children }) => {
       style={{ width: size === "large" && "16rem" }}
     >
       {children}
-      <InfoButton position="right-end" text={tooltipText} />
+      {tooltipText && <InfoButton position="right-end" text={tooltipText} />}
     </Typography>
   );
 };

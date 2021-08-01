@@ -13,15 +13,15 @@ import LeaderboardImage from "../../../assets/svg/leaderboard.svg";
 import { Typography } from "@material-ui/core";
 import useStyles, { StyledTableCell } from "./style";
 import Dropdown from "../../common/Dropdown";
-
+//TODO: change rank to position
 const columns = [
-  { id: "rank", label: "Rank", fixedWidth: "3.75rem" },
+  { id: "rank", label: "Position", fixedWidth: "3rem" },
   { id: "name", label: "School Name", fixedWidth: "9.375rem" },
   { id: "city", label: "City", fixedWidth: "3.75rem" },
-  { id: "points", label: "Points", fixedWidth: "3.75rem" },
+  { id: "points", label: "Points Earned", fixedWidth: "3.75rem" },
   {
     id: "eventsParticipated",
-    label: "Events Participated",
+    label: "Competitions Participated",
     fixedWidth: "3.75rem",
   },
   {
@@ -72,7 +72,7 @@ const Leaderboard = () => {
     setValue(event.target.value);
   };
 
-  const yearItems = ["2020-21", "2019-20", "2018-2019"];
+  const yearItems = ["Academic Year: 2020-21", "Academic Year: 2019-20", "Academic Year: 2018-2019"];
 
   return (
     <Layout>

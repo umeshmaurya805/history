@@ -1,31 +1,11 @@
 import React from "react";
 import format from "date-fns/format";
-import EventStats from "../../../common/EventStats";
 import ParticipantTable from "../../../table/ParticipantTable";
 import avatarMan from "../../../../assets/svg/avatar-man.svg";
 import useStyles from "./style";
 
 const WinnerPanel = () => {
   const classes = useStyles();
-  const data = [
-    {
-      name: "Schools Points",
-      value: 150,
-    },
-    {
-      name: "Competitive Events",
-      value: 15,
-    },
-    { name: "Non Competitive Events", value: 56 },
-    {
-      name: "Students",
-      value: 2000,
-    },
-    {
-      name: "Teachers",
-      value: 250,
-    },
-  ];
 
   const isStudent = true;
   const hasTeam = false;
@@ -127,13 +107,13 @@ const WinnerPanel = () => {
   const columns = [
     {
       id: "name",
-      label: `${isStudent ? "Student" : "Teacher"} name`,
+      label: `${isStudent ? "Student" : "Teacher"} Name`,
       fixedWidth: "11rem",
     },
     { id: "studentClass", label: "Class", fixedWidth: "11rem" },
-    { id: "event", label: "Events", fixedWidth: "11rem" },
-    { id: "participant", label: "Participants", fixedWidth: "11rem" },
-    { id: "position", label: "Positions", fixedWidth: "11rem" },
+    { id: "event", label: "Competition", fixedWidth: "11rem" },
+    { id: "participant", label: "Total Participants", fixedWidth: "11rem" },
+    { id: "position", label: "Position", fixedWidth: "11rem" },
   ];
 
   if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: "11rem" });
@@ -163,7 +143,6 @@ const WinnerPanel = () => {
 
   return (
     <div className={classes.root}>
-      <EventStats className={classes.stats} data={data} />
       <ParticipantTable
         title="Winners List"
         colored

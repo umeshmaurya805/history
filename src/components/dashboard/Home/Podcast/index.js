@@ -15,7 +15,7 @@ const Podcast = () => {
 
   return (
     <Box className={classes.root}>
-      <Title tooltipText="Monthly Podcast will appear here">Podcast</Title>
+      <Title tooltipText="Monthly Podcast">Podcast</Title>
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}

@@ -46,11 +46,13 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
                   }}
                 >
                   {column.label}
-                  <InfoButton
-                    fill="white"
-                    position="top"
-                    text={column.tooltipText}
-                  />
+                  {column.tooltipText && (
+                    <InfoButton
+                      fill="white"
+                      position="top"
+                      text={column.tooltipText}
+                    />
+                  )}
                 </StyledTableCell>
               ))}
             </TableRow>

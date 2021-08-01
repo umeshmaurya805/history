@@ -29,7 +29,7 @@ const EventConfiguration = ({
   const categoryItems = {
     0: [
       "Category",
-      "Competitive",
+      "Competitions",
       "Workshops",
       "Courses",
       "Virtual Tours",

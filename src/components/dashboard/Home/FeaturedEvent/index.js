@@ -61,9 +61,7 @@ const FeaturedEvent = () => {
 
   return (
     <React.Fragment>
-      <Title tooltipText="List of the featured events that are open now">
-        Featured Event
-      </Title>
+      <Title>Featured Event{eventList.length >= 1 && "s"}</Title>
       <Carousel
         className={classes.root}
         responsive={responsive}

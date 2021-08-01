@@ -6,7 +6,7 @@ import CreditPanel from "./CreditPanel";
 import SupportPanel from "./SupportPanel";
 
 const MyAccount = () => {
-  const labels = ["Account Settings", "Credit", "Support"];
+  const labels = ["Account Settings", "Credits", "Support"];
   const panels = [AccountSettingsPanel, CreditPanel, SupportPanel];
 
   return (

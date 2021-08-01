@@ -45,7 +45,7 @@ const NextInLine = ({ visibleDate }) => {
   return (
     <div className={classes.root}>
       <Title size="large" tooltipText="Events list for the selected month">
-        Events on {format(visibleDate, "LLL, y")}
+        Events in {format(visibleDate, "LLL, y")}
       </Title>
       <List aria-label="next-in-line-list" className={classes.list}>
         {rotateArray(
@@ -112,7 +112,7 @@ const NextInLine = ({ visibleDate }) => {
                     <Chip
                       size="small"
                       variant="outlined"
-                      label={`Deadline: ${format(
+                      label={`Registration Deadline: ${format(
                         event.registrationDeadline,
                         "PP"
                       )}`}

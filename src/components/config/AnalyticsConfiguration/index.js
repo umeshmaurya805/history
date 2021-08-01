@@ -13,8 +13,8 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
 
   const categoryItems = [
     "Overall Performance",
-    "Competitive",
-    "Non-Competitive",
+    "Competitive Events",
+    "Non-Competitive Events",
   ];
 
   const userItems = ["Student", "Teacher"];
@@ -41,9 +41,9 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
   // ];
 
   const pastDaysItems = [
-    "Last 7 days",
-    "Last 30 days",
-    "Last 90 days",
+    "Past 7 days",
+    "Past 30 days",
+    "Past 90 days",
     "Custom Range",
   ];
 

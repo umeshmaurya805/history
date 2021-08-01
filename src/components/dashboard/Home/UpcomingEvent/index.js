@@ -14,31 +14,28 @@ const columns = [
     id: "title",
     label: "Title",
     fixedWidth: "12rem",
-    tooltipText: "Upcoming event names",
   },
   {
     id: "date",
     label: "Date",
     fixedWidth: "9.375rem",
-    tooltipText: "Starting date of the event",
   },
   {
     id: "classes",
     label: "Classes",
     fixedWidth: "9.375rem",
-    tooltipText: "Range of classes which can participate in the event",
   },
   {
     id: "registrations",
     label: "Registrations",
     fixedWidth: "9.375rem",
-    tooltipText: "Number of registrations done from your school until now",
+    tooltipText: "Number of student registrations for this event",
   },
   {
     id: "list",
     label: "List",
     fixedWidth: "9.375rem",
-    tooltipText: "List of participants registered in the event",
+    tooltipText: "List of students registered for this event",
   },
 ];
 
@@ -90,7 +87,7 @@ const UpcomingEvent = () => {
       <Box>
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Title tooltipText="List of upcoming events that are open now">
+            <Title tooltipText="List of upcoming events your school is registered into">
               Upcoming Events
             </Title>
           </Grid>

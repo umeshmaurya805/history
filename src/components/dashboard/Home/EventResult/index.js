@@ -53,7 +53,7 @@ const EventResult = () => {
     <div className={classes.root}>
       <Grid container alignItems="center" justifyContent="space-between">
         <Grid item>
-          <Title tooltipText="Result of the events completed till now">
+          <Title tooltipText="Results of past 5 competitions">
             Results
           </Title>
         </Grid>
