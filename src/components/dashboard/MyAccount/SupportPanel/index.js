@@ -44,7 +44,7 @@ const SupportPanel = () => {
         ...formData,
       });
 
-      socket.on("ticketReceived", (data) => {
+      socket.on("ticketCreated", (data) => {
         handleSupportReset();
         if (data.success) {
           notify.success("TicketMessage", data.message);
