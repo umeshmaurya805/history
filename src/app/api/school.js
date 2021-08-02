@@ -29,7 +29,17 @@ export const schoolApi = hdApi.injectEndpoints({
       providesTags: [MAIN_COORDINATOR],
       transformResponse: ({ data }) => {
         return {
-          ...data,
+          school: {
+            email: data.email,
+            displayPassword: data.displayPassword,
+          },
+          coordinator: {
+            email: data.secondaryEmail,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            designation: data.designation,
+            phone: data.phone,
+          },
         };
       },
     }),
@@ -45,4 +55,9 @@ export const schoolApi = hdApi.injectEndpoints({
   }),
 });
 
-export const { useGetProfileQuery, useUpdateProfileMutation } = schoolApi;
+export const {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useGetMainCoordinatorQuery,
+  useUpdateMainCoordinatorMutation,
+} = schoolApi;

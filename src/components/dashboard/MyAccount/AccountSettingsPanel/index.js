@@ -12,7 +12,10 @@ import UpdateAffiliationNumber from "../../../dialog/UpdateAffiliationNumber";
 import UpdateLogoDialog from "../../../dialog/UpdateLogoDialog";
 import UpdateContactNumberDialog from "../../../dialog/UpdateContactNumberDialog";
 import useStyles from "./style";
-import { useGetProfileQuery } from "../../../../app/api/school";
+import {
+  useGetMainCoordinatorQuery,
+  useGetProfileQuery,
+} from "../../../../app/api/school";
 
 const EditableInfo = ({ value, onClick }) => {
   const classes = useStyles();
@@ -35,14 +38,10 @@ const EditableInfo = ({ value, onClick }) => {
 const AccountSettingsPanel = () => {
   const classes = useStyles();
   const { data: schoolProfile = {} } = useGetProfileQuery();
-
-  const coordinator = {
-    firstName: "Divyansh",
-    lastName: "Thakur",
-    phone: "1234567890",
-    designation: "Teacher",
-    email: "example@gmail.com",
-  };
+  const { data } = useGetMainCoordinatorQuery();
+  // const { school = {}, coordinator = {} } = data
+  const school = data ? data.school : {};
+  const coordinator = data ? data.coordinator : {};
 
   const initialState = {
     password: false,
@@ -90,11 +89,14 @@ const AccountSettingsPanel = () => {
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>Email Address</Typography>
-        <Typography className={classes.value}>example@gmail.com</Typography>
+        <Typography className={classes.value}>{school.email}</Typography>
       </Box>
       <Box className={`${classes.editableBox} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Password</Typography>
-        <EditableInfo onClick={() => handleClickOpen(0)} value={"********"} />
+        <EditableInfo
+          onClick={() => handleClickOpen(0)}
+          value={school.displayPassword}
+        />
       </Box>
       <Typography color="primary" className={classes.title}>
         School Details
