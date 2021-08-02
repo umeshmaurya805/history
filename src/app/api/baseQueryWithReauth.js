@@ -16,6 +16,8 @@ const baseQuery = fetchBaseQuery({
       headers.set("authorization", `Bearer ${accessToken}`);
     }
 
+    headers.set("x-role", "coordinator");
+
     return headers;
   },
 });
