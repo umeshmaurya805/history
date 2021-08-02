@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import { useFormik } from "formik";
-import { toast } from "react-toastify";
 import LoadingButton from "../../../button/LoadingButton";
 import protectedHandler from "../../../../utils/protectedHandler";
 import useStyles from "./style";
@@ -15,17 +15,21 @@ import {
   setSupportMessage,
   resetSupport,
 } from "../../../../app/slices/supportSlice";
-import { Button } from "@material-ui/core";
+import socket from "../../../../socketIO";
+import { notify } from "../../../../utils";
+import { useGetProfileQuery } from "../../../../app/api/school";
 
 const SupportPanel = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { schoolId } = useGetProfileQuery(undefined, {
+    selectFromResult: ({ data }) => ({ schoolId: data?._id }),
+  });
 
   const { selectedSupportIndex, supportTitle, supportMessage } = useSelector(
     (state) => state.support
   );
-  // const [login, { isLoading }] = useLoginMutation();
-  console.log(supportTitle);
+
   const formik = useFormik({
     initialValues: {
       title:
@@ -35,9 +39,19 @@ const SupportPanel = () => {
       message: supportMessage,
     },
     onSubmit: protectedHandler(async (formData) => {
-      // await login(formData).unwrap();
-      console.log(formData);
-      toast.success("Message sent successfully", { toastId: "SupportMessage" });
+      socket.emit("ticketMessage", {
+        schoolId,
+        ...formData,
+      });
+
+      socket.on("ticketReceived", (data) => {
+        handleSupportReset();
+        if (data.success) {
+          notify.success("TicketMessage", data.message);
+        } else {
+          notify.error("TicketMessage", data.message);
+        }
+      });
     }),
   });
 
@@ -74,7 +88,7 @@ const SupportPanel = () => {
         values={supportTitles}
         selectedIndex={selectedSupportIndex}
         onClick={handleTitleSelectorChange}
-        classes={{ root:classes.titleButtonRoot, button: classes.titleButton }}
+        classes={{ root: classes.titleButtonRoot, button: classes.titleButton }}
       />
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <TextField
