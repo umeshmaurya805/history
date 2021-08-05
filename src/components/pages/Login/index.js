@@ -31,7 +31,6 @@ const Login = () => {
     initialValues: {
       username: "",
       password: "",
-      rememberMe: false,
     },
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData) => {
@@ -86,20 +85,6 @@ const Login = () => {
           onChange={formik.handleChange}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
-        />
-        <FormControlLabel
-          style={{ userSelect: "none" }}
-          control={
-            <Checkbox
-              id="rememberMe"
-              name="rememberMe"
-              value="remember"
-              color="primary"
-              checked={formik.values.rememberMe}
-              onChange={formik.handleChange}
-            />
-          }
-          label="Remember me"
         />
         <LoadingButton
           fullWidth

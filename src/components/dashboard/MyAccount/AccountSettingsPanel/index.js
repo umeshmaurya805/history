@@ -115,21 +115,21 @@ const AccountSettingsPanel = () => {
         <Typography className={classes.name}>Board</Typography>
         <EditableInfo
           onClick={() => handleClickOpen(1)}
-          value={schoolProfile.board}
+          value={schoolProfile.boards?.join(", ")}
         />
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>School Contact Number</Typography>
         <EditableInfo
           onClick={() => handleClickOpen(2)}
-          value={schoolProfile.phone}
+          value={schoolProfile.phones?.join(", ")}
         />
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>Affiliation Number</Typography>
         <EditableInfo
           onClick={() => handleClickOpen(3)}
-          value={schoolProfile.affiliationNumber}
+          value={schoolProfile.affiliationNumbers?.join(", ")}
         />
       </Box>
       <Box className={`${classes.box} ${classes.boxEnd}`}>
