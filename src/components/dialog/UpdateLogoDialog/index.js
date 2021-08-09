@@ -4,29 +4,34 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
-import { toast } from "react-toastify";
-import Files from "react-files"
+import Files from "react-files";
 import protectedHandler from "../../../utils/protectedHandler";
 import UpdateButtonGroup from "../../button/UpdateButtonGroup";
+import { useUploadLogoMutation } from "../../../app/api/school";
+import { notify } from "../../../utils";
 import useStyles from "./style";
 
 const UpdateLogoDialog = ({ value, handleClose, ...props }) => {
   const classes = useStyles();
   const [file, setFile] = useState(null);
 
+  const [uploadLogo, { isLoading }] = useUploadLogoMutation();
+
   const handleOnClose = () => {
     setFile(null);
     handleClose();
   };
-
   const handleOnSubmit = protectedHandler(async () => {
     if (!file) {
       return handleClose();
     }
 
-    toast.success("School Logo Updated", {
-      toastId: "UpdateLogoDialog",
-    });
+    const formData = new FormData();
+    formData.append("logo", file);
+
+    await uploadLogo(formData).unwrap();
+
+    notify.success("SchoolLogo", "School logo updated", 3000);
 
     setFile(null);
 
@@ -34,13 +39,11 @@ const UpdateLogoDialog = ({ value, handleClose, ...props }) => {
   });
 
   const onFilesChange = (files) => {
-    // console.log(files);
     setFile(files[0]);
   };
 
   const onFilesError = (error, file) => {
     setFile(null);
-
     console.log("error code " + error.code + ": " + error.message);
   };
 
@@ -67,7 +70,7 @@ const UpdateLogoDialog = ({ value, handleClose, ...props }) => {
       </DialogContent>
       <DialogActions>
         <UpdateButtonGroup
-          isLoading={false}
+          isLoading={isLoading}
           handleOnSubmit={handleOnSubmit}
           handleOnClose={handleOnClose}
         />

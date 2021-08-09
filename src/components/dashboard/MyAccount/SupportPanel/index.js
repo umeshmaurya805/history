@@ -15,16 +15,15 @@ import {
   setSupportMessage,
   resetSupport,
 } from "../../../../app/slices/supportSlice";
-import socket from "../../../../socketIO";
-import { notify } from "../../../../utils";
-import { useGetProfileQuery } from "../../../../app/api/school";
+// import { notify } from "../../../../utils";
+// import { useGetProfileQuery } from "../../../../app/api/school";
 
 const SupportPanel = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { schoolId } = useGetProfileQuery(undefined, {
-    selectFromResult: ({ data }) => ({ schoolId: data?._id }),
-  });
+  // const { schoolId } = useGetProfileQuery(undefined, {
+  //   selectFromResult: ({ data }) => ({ schoolId: data?._id }),
+  // });
 
   const { selectedSupportIndex, supportTitle, supportMessage } = useSelector(
     (state) => state.support
@@ -39,19 +38,19 @@ const SupportPanel = () => {
       message: supportMessage,
     },
     onSubmit: protectedHandler(async (formData) => {
-      socket.emit("ticketMessage", {
-        schoolId,
-        ...formData,
-      });
+      // socket.emit("ticketMessage", {
+      //   schoolId,
+      //   ...formData,
+      // });
 
-      socket.on("ticketCreated", (data) => {
-        handleSupportReset();
-        if (data.success) {
-          notify.success("TicketMessage", data.message);
-        } else {
-          notify.error("TicketMessage", data.message);
-        }
-      });
+      // socket.on("ticketCreated", (data) => {
+      //   handleSupportReset();
+      //   if (data.success) {
+      //     notify.success("TicketMessage", data.message);
+      //   } else {
+      //     notify.error("TicketMessage", data.message);
+      //   }
+      // });
     }),
   });
 

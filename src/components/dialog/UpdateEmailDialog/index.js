@@ -11,26 +11,25 @@ import protectedHandler from "../../../utils/protectedHandler";
 import UpdateButtonGroup from "../../button/UpdateButtonGroup";
 
 const validationSchema = yup.object({
-  affiliationNumber: yup
-    .string("Enter your affiliation number")
-    .required("Affiliation number is required"),
+  email: yup
+    .string("Enter your email address")
+    .email("Enter a valid email")
+    .required("Email is required"),
+  otp: yup.string("Enter the OTP sent to your new email address"),
 });
 
-const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
+const UpdateEmailDialog = ({ handleClose, ...props }) => {
   const formik = useFormik({
     initialValues: {
-      affiliationNumber: value,
+      email: "",
+      otp: "",
     },
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData, actions) => {
       console.log(formData);
 
-      if (formData.affiliationNumber === value) {
-        return handleClose();
-      }
-
-      toast.success("Affiliation Number Updated", {
-        toastId: "UpdateAffiliationNumber",
+      toast.success("Email Updated", {
+        toastId: "UpdateEmailDialog",
       });
 
       actions.resetForm();
@@ -46,29 +45,22 @@ const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
   return (
     <Dialog onClose={handleOnClose} {...props}>
       <DialogTitle id="update-dialog-title" disableTypography>
-        Update Affiliation Number
+        Update Email Address
       </DialogTitle>
       <DialogContent>
         <form>
           <TextField
             fullWidth
             required
-            autoFocus
             variant="outlined"
             margin="normal"
-            id="affiliationNumber"
-            name="affiliationNumber"
-            label="Affiliation Number"
-            value={formik.values.affiliationNumber}
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
             onChange={formik.handleChange}
-            error={
-              formik.touched.affiliationNumber &&
-              Boolean(formik.errors.affiliationNumber)
-            }
-            helperText={
-              formik.touched.affiliationNumber &&
-              formik.errors.affiliationNumber
-            }
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
           />
         </form>
       </DialogContent>
@@ -83,4 +75,4 @@ const UpdateAffiliationNumber = ({ value, handleClose, ...props }) => {
   );
 };
 
-export default UpdateAffiliationNumber;
+export default UpdateEmailDialog;

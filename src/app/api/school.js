@@ -1,5 +1,5 @@
 import { hdApi } from ".";
-import { MAIN_COORDINATOR, SCHOOL_PROFILE } from "./constants";
+import { SCHOOL_PROFILE } from "./constants";
 
 export const schoolApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
@@ -24,33 +24,13 @@ export const schoolApi = hdApi.injectEndpoints({
       transformResponse: (response) => response.data,
       invalidatesTags: [SCHOOL_PROFILE],
     }),
-    getMainCoordinator: build.query({
-      query: () => "coordinators/my-account",
-      providesTags: [MAIN_COORDINATOR],
-      transformResponse: ({ data }) => {
-        return {
-          school: {
-            email: data.email,
-            displayPassword: data.displayPassword,
-          },
-          coordinator: {
-            email: data.secondaryEmail,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            designation: data.designation,
-            phone: data.phone,
-          },
-        };
-      },
-    }),
-    updateMainCoordinator: build.mutation({
+    uploadLogo: build.mutation({
       query: (body) => ({
-        url: "coordinators/my-account",
+        url: "schools/logo",
         method: "PUT",
         body,
       }),
-      transformResponse: (response) => response.data,
-      invalidatesTags: [MAIN_COORDINATOR],
+      invalidatesTags: [SCHOOL_PROFILE],
     }),
   }),
 });
@@ -58,6 +38,5 @@ export const schoolApi = hdApi.injectEndpoints({
 export const {
   useGetProfileQuery,
   useUpdateProfileMutation,
-  useGetMainCoordinatorQuery,
-  useUpdateMainCoordinatorMutation,
+  useUploadLogoMutation,
 } = schoolApi;

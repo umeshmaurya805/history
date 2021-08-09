@@ -7,15 +7,12 @@ import EditIcon from "@material-ui/icons/Edit";
 import Avatar from "@material-ui/core/Avatar";
 import UpdatePasswordDialog from "../../../dialog/UpdatePasswordDialog";
 import UpdateCoordinatorDialog from "../../../dialog/UpdateCoordinatorDialog";
-import UpdateBoardDialog from "../../../dialog/UpdateBoardDialog";
-import UpdateAffiliationNumber from "../../../dialog/UpdateAffiliationNumber";
 import UpdateLogoDialog from "../../../dialog/UpdateLogoDialog";
 import UpdateContactNumberDialog from "../../../dialog/UpdateContactNumberDialog";
+import { useGetProfileQuery } from "../../../../app/api/school";
+import { useGetMainCoordinatorQuery } from "../../../../app/api/coordinator";
+import UpdateEmailDialog from "../../../dialog/UpdateEmailDialog";
 import useStyles from "./style";
-import {
-  useGetMainCoordinatorQuery,
-  useGetProfileQuery,
-} from "../../../../app/api/school";
 
 const EditableInfo = ({ value, onClick }) => {
   const classes = useStyles();
@@ -44,10 +41,9 @@ const AccountSettingsPanel = () => {
   const coordinator = data ? data.coordinator : {};
 
   const initialState = {
+    email: false,
     password: false,
-    board: false,
     contactNumber: false,
-    affiliationNumber: false,
     logo: false,
     coordinator: false,
   };
@@ -57,21 +53,18 @@ const AccountSettingsPanel = () => {
   const handleClickOpen = (id) => {
     switch (id) {
       case 0:
-        setOpen({ ...initialState, password: true });
+        setOpen({ ...initialState, email: true });
         break;
       case 1:
-        setOpen({ ...initialState, board: true });
+        setOpen({ ...initialState, password: true });
         break;
       case 2:
         setOpen({ ...initialState, contactNumber: true });
         break;
       case 3:
-        setOpen({ ...initialState, affiliationNumber: true });
-        break;
-      case 4:
         setOpen({ ...initialState, logo: true });
         break;
-      case 5:
+      case 4:
         setOpen({ ...initialState, coordinator: true });
         break;
       default: // do nothing
@@ -88,13 +81,17 @@ const AccountSettingsPanel = () => {
         Account Details
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
+        <Typography className={classes.name}>Username</Typography>
+        <Typography className={classes.value}>username</Typography>
+      </Box>
+      <Box className={classes.editableBox}>
         <Typography className={classes.name}>Email Address</Typography>
-        <Typography className={classes.value}>{school.email}</Typography>
+        <EditableInfo onClick={() => handleClickOpen(0)} value={school.email} />
       </Box>
       <Box className={`${classes.editableBox} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Password</Typography>
         <EditableInfo
-          onClick={() => handleClickOpen(0)}
+          onClick={() => handleClickOpen(1)}
           value={school.displayPassword}
         />
       </Box>
@@ -111,12 +108,11 @@ const AccountSettingsPanel = () => {
           {schoolProfile.address}
         </Typography>
       </Box>
-      <Box className={classes.editableBox}>
+      <Box className={classes.box}>
         <Typography className={classes.name}>Board</Typography>
-        <EditableInfo
-          onClick={() => handleClickOpen(1)}
-          value={schoolProfile.boards?.join(", ")}
-        />
+        <Typography className={classes.value}>
+          {schoolProfile.boards?.join(", ")}
+        </Typography>
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>School Contact Number</Typography>
@@ -125,12 +121,11 @@ const AccountSettingsPanel = () => {
           value={schoolProfile.phones?.join(", ")}
         />
       </Box>
-      <Box className={classes.editableBox}>
+      <Box className={classes.box}>
         <Typography className={classes.name}>Affiliation Number</Typography>
-        <EditableInfo
-          onClick={() => handleClickOpen(3)}
-          value={schoolProfile.affiliationNumbers?.join(", ")}
-        />
+        <Typography className={classes.value}>
+          {schoolProfile.affiliationNumbers?.join(", ")}
+        </Typography>
       </Box>
       <Box className={`${classes.box} ${classes.boxEnd}`}>
         <Typography className={classes.name}>Logo</Typography>
@@ -141,7 +136,7 @@ const AccountSettingsPanel = () => {
             </Avatar>
           </Box>
           <Button
-            onClick={() => handleClickOpen(4)}
+            onClick={() => handleClickOpen(3)}
             color="primary"
             className={classes.logoChange}
           >
@@ -155,7 +150,7 @@ const AccountSettingsPanel = () => {
         </Typography>
         <IconButton
           color="primary"
-          onClick={() => handleClickOpen(5)}
+          onClick={() => handleClickOpen(4)}
           className={classes.titleButton}
           aria-label="edit"
         >
@@ -186,28 +181,22 @@ const AccountSettingsPanel = () => {
           {coordinator.email}
         </Typography>
       </Box>
+      <UpdateEmailDialog
+        open={open.email}
+        value={"demo@gmail.com"}
+        handleClose={handleClose}
+        aria-labelledby="update-email-dialog"
+      />
       <UpdatePasswordDialog
         open={open.password}
         handleClose={handleClose}
         aria-labelledby="update-password-dialog"
-      />
-      <UpdateBoardDialog
-        open={open.board}
-        value={"CBSE"}
-        handleClose={handleClose}
-        aria-labelledby="update-board-dialog"
       />
       <UpdateContactNumberDialog
         open={open.contactNumber}
         value={"123456789"}
         handleClose={handleClose}
         aria-labelledby="update-contact-number-dialog"
-      />
-      <UpdateAffiliationNumber
-        open={open.affiliationNumber}
-        value={"12468153"}
-        handleClose={handleClose}
-        aria-labelledby="update-affiliation-number-dialog"
       />
       <UpdateLogoDialog
         open={open.logo}
