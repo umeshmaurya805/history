@@ -36,7 +36,6 @@ const AccountSettingsPanel = () => {
   const classes = useStyles();
   const { data: schoolProfile = {} } = useGetProfileQuery();
   const { data } = useGetMainCoordinatorQuery();
-  // const { school = {}, coordinator = {} } = data
   const school = data ? data.school : {};
   const coordinator = data ? data.coordinator : {};
 
@@ -82,7 +81,7 @@ const AccountSettingsPanel = () => {
       </Typography>
       <Box className={`${classes.box} ${classes.boxStart}`}>
         <Typography className={classes.name}>Username</Typography>
-        <Typography className={classes.value}>username</Typography>
+        <Typography className={classes.value}>{school.username}</Typography>
       </Box>
       <Box className={classes.editableBox}>
         <Typography className={classes.name}>Email Address</Typography>
@@ -194,7 +193,7 @@ const AccountSettingsPanel = () => {
       />
       <UpdateContactNumberDialog
         open={open.contactNumber}
-        value={"123456789"}
+        values={schoolProfile.phones}
         handleClose={handleClose}
         aria-labelledby="update-contact-number-dialog"
       />

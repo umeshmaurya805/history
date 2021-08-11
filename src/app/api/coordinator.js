@@ -10,6 +10,7 @@ export const coordinatorApi = hdApi.injectEndpoints({
         return {
           school: {
             email: data.email,
+            username: data.username,
             displayPassword: data.displayPassword,
           },
           coordinator: {

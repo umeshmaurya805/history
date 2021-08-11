@@ -8,6 +8,7 @@ const UpdateButtonGroup = ({
   isLoading,
   handleOnClose,
   handleOnSubmit,
+  disabled,
 }) => {
   const classes = useStyles();
 
@@ -29,6 +30,7 @@ const UpdateButtonGroup = ({
         color="primary"
         variant="contained"
         isLoading={isLoading}
+        disabled={disabled}
       >
         Save
       </LoadingIconButton>
