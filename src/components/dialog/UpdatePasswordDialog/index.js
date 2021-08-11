@@ -6,9 +6,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { toast } from "react-toastify";
+import { notify } from "../../../utils";
 import protectedHandler from "../../../utils/protectedHandler";
 import UpdateButtonGroup from "../../button/UpdateButtonGroup";
+import { useUpdatePasswordMutation } from "../../../app/api/auth";
 
 const validationSchema = yup.object({
   currentPassword: yup
@@ -26,6 +27,8 @@ const validationSchema = yup.object({
 });
 
 const UpdatePasswordDialog = ({ handleClose, ...props }) => {
+  const [updatePassword, { isLoading }] = useUpdatePasswordMutation();
+
   const formik = useFormik({
     initialValues: {
       currentPassword: "",
@@ -36,12 +39,17 @@ const UpdatePasswordDialog = ({ handleClose, ...props }) => {
     onSubmit: protectedHandler(async (formData, actions) => {
       console.log(formData);
 
-      toast.success("Password Updated", {
-        toastId: "UpdatePasswordDialog",
-      });
+      if (formData.newPassword !== formData.confirmNewPassword) {
+        notify.error("UpdatePasswordDialog", "Password does not match");
+        return;
+      }
 
-      actions.resetForm();
+      await updatePassword(formData).unwrap();
+
+      notify.success("UpdatePasswordDialog", "Password Updated");
+
       handleClose();
+      actions.resetForm();
     }),
   });
 
@@ -120,7 +128,7 @@ const UpdatePasswordDialog = ({ handleClose, ...props }) => {
       </DialogContent>
       <DialogActions>
         <UpdateButtonGroup
-          isLoading={false}
+          isLoading={isLoading}
           handleOnSubmit={formik.handleSubmit}
           handleOnClose={handleOnClose}
         />

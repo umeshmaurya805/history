@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Dialog from "@material-ui/core/Dialog";
+import Grid  from "@material-ui/core/Grid";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -19,7 +20,6 @@ import {
   useGetProfileQuery,
   useUpdateProfileMutation,
 } from "../../../app/api/school";
-import { Grid } from "@material-ui/core";
 
 const PhoneListItem = ({ value, onDelete }) => {
   return (
@@ -89,7 +89,7 @@ const UpdateContactNumberDialog = ({ handleClose, ...props }) => {
             </Grid>
             <Grid item>
               <IconButton
-                disabled={value.length < 10}
+                disabled={value.length < 8}
                 onClick={addPhone}
                 aria-label="delete"
               >

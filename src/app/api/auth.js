@@ -1,5 +1,5 @@
 import { hdApi } from ".";
-import { MAIN_COORDINATOR, SCHOOL_PROFILE } from "./constants";
+import { MAIN_COORDINATOR } from "./constants";
 
 export const authApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
@@ -11,7 +11,7 @@ export const authApi = hdApi.injectEndpoints({
       }),
       transformResponse: (response) => response.data,
     }),
-    generateOTP: build.mutation({
+    requestEmailUpdate: build.mutation({
       query: (body) => ({
         url: "auth/request-email-update",
         method: "PUT",
@@ -30,12 +30,12 @@ export const authApi = hdApi.injectEndpoints({
     }),
     updatePassword: build.mutation({
       query: (body) => ({
-        url: "schools/my-account",
+        url: "auth/update-password",
         method: "PUT",
         body,
       }),
       transformResponse: (response) => response.data,
-      invalidatesTags: [SCHOOL_PROFILE],
+      invalidatesTags: [MAIN_COORDINATOR],
     }),
     logout: build.mutation({
       query: () => ({
@@ -92,8 +92,9 @@ export const authApi = hdApi.injectEndpoints({
 
 export const {
   useLoginMutation,
-  useGenerateOTPMutation,
+  useRequestEmailUpdateMutation,
   useUpdateEmailMutation,
+  useUpdatePasswordMutation,
   useLogoutMutation,
   useForgotPasswordMutation,
   useValidateOtpMutation,
