@@ -1,19 +1,22 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogActions from "@material-ui/core/DialogActions";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { toast } from "react-toastify";
-import protectedHandler from "../../../utils/protectedHandler";
 import UpdateButtonGroup from "../../button/UpdateButtonGroup";
-// import {
-  // useGetProfileQuery,
-  // useUpdateProfileMutation,
-// } from "../../../app/api/school";
+import PhoneInput from "react-phone-input-2";
+import EmailUpdate from "./EmailUpdate";
+import protectedHandler from "../../../utils/protectedHandler";
+import {
+  useGetMainCoordinatorQuery,
+  useUpdateMainCoordinatorMutation,
+} from "../../../app/api/coordinator";
+import useStyles from "./style";
+import { notify } from "../../../utils";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -28,29 +31,22 @@ const validationSchema = yup.object({
   phone: yup
     .string("Enter coordinator contact number")
     .required("Contact number is required"),
-  email: yup
-    .string("Enter coordinator email")
-    .email("Enter a valid email")
-    .required("Email is required"),
 });
 
 const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
-  // const { coordinator } = useGetProfileQuery(undefined, {
-  //   selectFromResult: ({ data }) => ({
-  //     coordinator: data ? data.coordinator : {},
-  //   }),
-  // });
+  const classes = useStyles();
+
+  const { data } = useGetMainCoordinatorQuery();
+
+  const [updateMainCoordinator, { isLoading: isEmailUpdating }] =
+    useUpdateMainCoordinatorMutation();
 
   const coordinator = {
-    firstName: "Divyansh",
-    lastName: "Thakur",
-    phone: "1234567890",
-    designation: "Teacher",
-    email: "example@gmail.com",
+    firstName: data?.coordinator?.firstName,
+    lastName: data?.coordinator?.lastName,
+    designation: data?.coordinator?.designation,
+    phone: data?.coordinator?.phone,
   };
-
-  const isLoading = false;
-  // const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   const formik = useFormik({
     initialValues: coordinator,
@@ -61,17 +57,18 @@ const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
         formData.firstName === coordinator.firstName &&
         formData.lastName === coordinator.lastName &&
         formData.designation === coordinator.designation &&
-        formData.phone === coordinator.phone &&
-        formData.email === coordinator.email
+        formData.phone === coordinator.phone
       ) {
         return handleClose();
       }
 
-      // await updateProfile({ coordinator: formData }).unwrap();
+      if (formData.phone.length < 10) {
+        return notify.error("PhoneNumber", "Phone number isn't valid");
+      }
 
-      toast.success("Coordinator Updated", {
-        toastId: "UpdateCoordinatorDialog",
-      });
+      await updateMainCoordinator(formData).unwrap();
+
+      notify.success("UpdateCoordinatorDialog", "Coordinator Updated");
 
       actions.resetForm();
       handleClose();
@@ -84,14 +81,15 @@ const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
   };
 
   return (
-    <Dialog onClose={handleOnClose} {...props}>
+    <Dialog onClose={handleClose} {...props}>
       <DialogTitle id="update-dialog-title" disableTypography>
         Update Coordinator Details
       </DialogTitle>
       <DialogContent>
+        <EmailUpdate />
         <form>
-          <Grid container spacing={4}>
-            <Grid item xs={6}>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 required
@@ -109,7 +107,7 @@ const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
                 helperText={formik.touched.firstName && formik.errors.firstName}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 required
@@ -127,53 +125,42 @@ const UpdateCoordinatorDialog = ({ handleClose, ...props }) => {
                 helperText={formik.touched.lastName && formik.errors.lastName}
               />
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                required
+                variant="outlined"
+                margin="normal"
+                id="designation"
+                name="designation"
+                label="Designation"
+                value={formik.values.designation}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.designation &&
+                  Boolean(formik.errors.designation)
+                }
+                helperText={
+                  formik.touched.designation && formik.errors.designation
+                }
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <PhoneInput
+                inputClass={classes.phoneInput}
+                country={"in"}
+                value={formik.values.phone}
+                onChange={(phone) => formik.setFieldValue("phone", phone)}
+                error={formik.touched.phone && Boolean(formik.errors.phone)}
+                helperText={formik.touched.phone && formik.errors.phone}
+              />
+            </Grid>
           </Grid>
-          <TextField
-            fullWidth
-            required
-            variant="outlined"
-            margin="normal"
-            id="designation"
-            name="designation"
-            label="Designation"
-            value={formik.values.designation}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.designation && Boolean(formik.errors.designation)
-            }
-            helperText={formik.touched.designation && formik.errors.designation}
-          />
-          <TextField
-            fullWidth
-            required
-            variant="outlined"
-            margin="normal"
-            id="phone"
-            name="phone"
-            label="Contact Number"
-            value={formik.values.phone}
-            onChange={formik.handleChange}
-            error={formik.touched.phone && Boolean(formik.errors.phone)}
-            helperText={formik.touched.phone && formik.errors.phone}
-          />
-          <TextField
-            fullWidth
-            required
-            variant="outlined"
-            margin="normal"
-            id="email"
-            name="email"
-            label="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-          />
         </form>
       </DialogContent>
       <DialogActions>
         <UpdateButtonGroup
-          isLoading={isLoading}
+          isLoading={isEmailUpdating}
           handleOnSubmit={() => formik.handleSubmit()}
           handleOnClose={handleOnClose}
         />

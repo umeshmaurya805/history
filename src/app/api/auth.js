@@ -37,6 +37,24 @@ export const authApi = hdApi.injectEndpoints({
       transformResponse: (response) => response.data,
       invalidatesTags: [MAIN_COORDINATOR],
     }),
+    initializeEmailVerification: build.mutation({
+      query: (body) => ({
+        url: "auth/email-initialize-verification",
+        method: "POST",
+        body,
+      }),
+      transformResponse: (response) => response.data,
+      invalidatesTags: [MAIN_COORDINATOR],
+    }),
+    emailVerification: build.mutation({
+      query: (body) => ({
+        url: "auth/email-verification",
+        method: "POST",
+        body,
+      }),
+      transformResponse: (response) => response.data,
+      invalidatesTags: [MAIN_COORDINATOR],
+    }),
     logout: build.mutation({
       query: () => ({
         url: "auth/logout",
@@ -95,6 +113,8 @@ export const {
   useRequestEmailUpdateMutation,
   useUpdateEmailMutation,
   useUpdatePasswordMutation,
+  useInitializeEmailVerificationMutation,
+  useEmailVerificationMutation,
   useLogoutMutation,
   useForgotPasswordMutation,
   useValidateOtpMutation,

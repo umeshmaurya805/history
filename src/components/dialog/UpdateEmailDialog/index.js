@@ -44,7 +44,7 @@ const UpdateEmailDialog = ({ handleClose, ...props }) => {
     onSubmit: protectedHandler(async ({ email, otp }, actions) => {
       switch (activeButton) {
         case 0:
-          await requestEmailUpdate({ newEmail: email, otp }).unwrap();
+          await requestEmailUpdate({ newEmail: email }).unwrap();
           setEnabledOTPField(true);
           notify.success("EmailUpdation", "OTP sent to your email address");
           break;
@@ -102,7 +102,7 @@ const UpdateEmailDialog = ({ handleClose, ...props }) => {
                 margin="normal"
                 id="otp"
                 name="otp"
-                label="Otp"
+                label="OTP"
                 value={formik.values.otp}
                 onChange={formik.handleChange}
                 error={formik.touched.otp && Boolean(formik.errors.otp)}

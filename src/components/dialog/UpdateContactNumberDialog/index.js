@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Dialog from "@material-ui/core/Dialog";
-import Grid  from "@material-ui/core/Grid";
+import Grid from "@material-ui/core/Grid";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -53,8 +53,9 @@ const UpdateContactNumberDialog = ({ handleClose, ...props }) => {
   }, [phones]);
 
   const handleOnClose = () => {
-    setValue("");
     handleClose();
+    setValue("");
+    setPhoneList(phones);
   };
 
   const addPhone = () => {
