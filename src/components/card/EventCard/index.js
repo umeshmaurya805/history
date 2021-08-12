@@ -6,13 +6,13 @@ import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import useStyles from "./style";
 import { useHistory } from "react-router-dom";
-import { format } from "date-fns";
 
 const EventCard = ({ data }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { title, summary, image, startDate, forClass, slug } = data;
+  const { _id, title, cardSummary, banner, date, time, availableClasses } =
+    data;
 
   return (
     <div className={classes.root}>
@@ -24,7 +24,7 @@ const EventCard = ({ data }) => {
           className={classes.content}
         >
           <Box className={classes.imageContainer}>
-            <img src={image} alt="" className={classes.image} />
+            <img src={banner} alt="" className={classes.image} />
           </Box>
           <Typography variant="h4" className={classes.title}>
             {title}
@@ -34,7 +34,7 @@ const EventCard = ({ data }) => {
             variant="body2"
             className={classes.summary}
           >
-            {summary}
+            {cardSummary}
           </Typography>
           <Box display="flex" alignItems="center" className={classes.infoBox}>
             <Grid container justifyContent="space-evenly">
@@ -42,24 +42,20 @@ const EventCard = ({ data }) => {
                 <Typography color="primary" className={classes.infoLabel}>
                   Date
                 </Typography>
-                <Typography className={classes.infoValue}>
-                  {format(startDate, "PP")}
-                </Typography>
+                <Typography className={classes.infoValue}>{date}</Typography>
               </Box>
               <Box className={classes.innerBox}>
                 <Typography color="primary" className={classes.infoLabel}>
                   Time
                 </Typography>
-                <Typography className={classes.infoValue}>
-                  {format(startDate, "p")}
-                </Typography>
+                <Typography className={classes.infoValue}>{time}</Typography>
               </Box>
               <Box className={classes.innerBox}>
                 <Typography color="primary" className={classes.infoLabel}>
                   Class
                 </Typography>
                 <Typography className={classes.infoValue}>
-                  {`${forClass.from} - ${forClass.to}`}
+                  {`${availableClasses.from} - ${availableClasses.to}`}
                 </Typography>
               </Box>
             </Grid>
@@ -69,7 +65,7 @@ const EventCard = ({ data }) => {
             size="small"
             color="primary"
             variant="outlined"
-            onClick={() => history.push(`/dashboard/calendar/${slug}`)}
+            onClick={() => history.push(`/dashboard/calendar/${_id}`)}
           >
             View Details
           </Button>

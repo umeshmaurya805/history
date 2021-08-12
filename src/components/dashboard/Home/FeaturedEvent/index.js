@@ -6,28 +6,28 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import EventCardLarge from "../../../card/EventCardLarge";
 import EventCard from "../../../card/EventCard";
-import { getEvents } from "../../../../data";
 import Title from "../../../common/Title";
+import { useGetFeaturedEventsQuery } from "../../../../app/api/events";
 import useStyles from "./style";
 
 const FeaturedEvent = () => {
   const classes = useStyles();
   const isMobileScreen = useMediaQuery("(max-width:700px)");
 
-  const eventList = getEvents().filter(({ isFeatured }) => isFeatured);
+  const { data = [] } = useGetFeaturedEventsQuery();
 
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1920 },
-      items: Math.min(3, eventList.length),
+      items: Math.min(3, data.length),
     },
     desktop: {
       breakpoint: { max: 1920, min: 1100 },
-      items: Math.min(3, eventList.length),
+      items: Math.min(3, data.length),
     },
     laptop: {
       breakpoint: { max: 1100, min: 700 },
-      items: Math.min(2, eventList.length),
+      items: Math.min(2, data.length),
     },
     mobile: { breakpoint: { max: 700, min: 0 }, items: 1 },
   };
@@ -60,23 +60,25 @@ const FeaturedEvent = () => {
   };
 
   return (
-    <React.Fragment>
-      <Title>Featured Event{eventList.length >= 1 && "s"}</Title>
-      <Carousel
-        className={classes.root}
-        responsive={responsive}
-        customRightArrow={<CustomRightArrow />}
-        customLeftArrow={<CustomLeftArrow />}
-      >
-        {isMobileScreen || eventList.length >= 2
-          ? eventList.map((eventData, index) => {
-              return <EventCard key={index} data={eventData} />;
-            })
-          : eventList.map((eventData, index) => {
-              return <EventCardLarge key={index} data={eventData} />;
-            })}
-      </Carousel>
-    </React.Fragment>
+    data.length > 0 && (
+      <React.Fragment>
+        <Title>Featured Event{data.length >= 1 && "s"}</Title>
+        <Carousel
+          className={classes.root}
+          responsive={responsive}
+          customRightArrow={<CustomRightArrow />}
+          customLeftArrow={<CustomLeftArrow />}
+        >
+          {isMobileScreen || data.length >= 2
+            ? data.map((eventData) => {
+                return <EventCard key={eventData._id} data={eventData} />;
+              })
+            : data.map((eventData) => {
+                return <EventCardLarge key={eventData._id} data={eventData} />;
+              })}
+        </Carousel>
+      </React.Fragment>
+    )
   );
 };
 
