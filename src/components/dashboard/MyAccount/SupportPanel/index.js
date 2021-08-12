@@ -124,6 +124,7 @@ const SupportPanel = () => {
           className={classes.button}
           isLoading={isLoading}
           icon={<SendIcon />}
+          startIcon={false}
         >
           Send
         </LoadingIconButton>

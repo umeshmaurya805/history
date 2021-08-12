@@ -6,6 +6,7 @@ const LoadingIconButton = ({
   isLoading,
   icon,
   children,
+  startIcon = true,
   loaderColor = "white",
   ...props
 }) => {
@@ -13,17 +14,34 @@ const LoadingIconButton = ({
     <Button
       {...props}
       startIcon={
-        isLoading ? (
-          <CircularProgress
-            style={{
-              height: "0.9375rem",
-              width: "0.9375rem",
-              color: loaderColor,
-            }}
-          />
-        ) : (
-          icon
-        )
+        startIcon ? (
+          isLoading ? (
+            <CircularProgress
+              style={{
+                height: "0.9375rem",
+                width: "0.9375rem",
+                color: loaderColor,
+              }}
+            />
+          ) : (
+            icon
+          )
+        ) : undefined
+      }
+      endIcon={
+        !startIcon ? (
+          isLoading ? (
+            <CircularProgress
+              style={{
+                height: "0.9375rem",
+                width: "0.9375rem",
+                color: loaderColor,
+              }}
+            />
+          ) : (
+            icon
+          )
+        ) : undefined
       }
     >
       {children}
