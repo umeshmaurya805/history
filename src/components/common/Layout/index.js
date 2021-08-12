@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
@@ -23,10 +23,6 @@ const Content = getContent(styled);
 const Layout = ({ children }) => {
   const classes = useStyles();
   const [opened, setOpened] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const toggleDrawer = (open) => (event) => {
     if (

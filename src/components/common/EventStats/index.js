@@ -10,7 +10,7 @@ const EventStats = ({ data, ...props }) => {
 
   return (
     <Grid container spacing={3} className={classes.root} {...props}>
-      {data.map(({ name, value }, index) => {
+      {data.map(({ name, value, tooltipText }, index) => {
         return (
           <Grid
             key={index}
@@ -18,7 +18,7 @@ const EventStats = ({ data, ...props }) => {
             className={classes.cardContainer}
             style={enableFixedWidth ? { width: `${100 / data.length}%` } : {}}
           >
-            <StatsCard name={name} value={value} />
+            <StatsCard name={name} value={value} tooltipText={tooltipText} />
           </Grid>
         );
       })}

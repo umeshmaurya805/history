@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Layout from "../../common/Layout";
 import EventCalendar from "./EventCalendar";
@@ -7,11 +7,15 @@ import EventDetails from "./EventDetails";
 import useStyles from "./style";
 import { useHistory, useParams } from "react-router-dom";
 import { isAfter } from "date-fns";
-// import { eventBinarySearch } from './../../../utils/algorithms';
 import { toast } from "react-toastify";
 import { getSlugHash } from "../../../data";
 
 const Calendar = () => {
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const classes = useStyles();
   const history = useHistory();
   const [visibleDate, setVisibleDate] = useState(new Date());

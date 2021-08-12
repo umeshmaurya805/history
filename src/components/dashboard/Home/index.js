@@ -9,24 +9,51 @@ import UpcomingEvent from "./UpcomingEvent";
 import Magazine from "./Magazine";
 import Podcast from "./Podcast";
 import Ad from "./Ad";
+import { useGetStatsQuery } from "../../../app/api/historyDiaries";
 import useStyles from "./style";
 
 const Home = () => {
   const classes = useStyles();
+  const {
+    data: stats = {
+      schools: 0,
+      competitiveEvents: 0,
+      nonCompetitiveEvents: 0,
+      students: 0,
+      studentCompetitiveEvents: 0,
+      studentNonCompetitiveEvents: 0,
+    },
+  } = useGetStatsQuery();
+
   const data = [
     {
       name: "Schools",
-      value: 56,
+      value: stats.schools,
     },
     {
       name: "Competitive Events",
-      value: 56,
+      value: stats.competitiveEvents,
     },
     {
       name: "Non-Competitive Events",
-      value: 56,
+      value: stats.nonCompetitiveEvents,
     },
-    { name: "Student Participation", value: 4567 },
+    {
+      name: "Student Participation",
+      value: stats.students,
+      tooltipText: (
+        <div>
+          <Grid container spacing={2} justifyContent="space-between">
+            <Grid item>Competitive Events:</Grid>
+            <Grid item>{stats.studentCompetitiveEvents}</Grid>
+          </Grid>
+          <Grid container spacing={2} justifyContent="space-between">
+            <Grid item>Non-Competitive Events:</Grid>
+            <Grid item>{stats.studentNonCompetitiveEvents}</Grid>
+          </Grid>
+        </div>
+      ),
+    },
   ];
 
   return (

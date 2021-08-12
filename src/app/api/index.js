@@ -3,7 +3,6 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "./baseQueryWithReauth";
 import {
   MAIN_COORDINATOR,
-  SCHOOL_LEADERBOARD,
   SCHOOL_PROFILE,
 } from "./constants";
 
@@ -13,6 +12,6 @@ export const hdApi = createApi({
   refetchOnReconnect: true,
   reducerPath: "hdApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: [SCHOOL_PROFILE, MAIN_COORDINATOR, SCHOOL_LEADERBOARD],
+  tagTypes: [SCHOOL_PROFILE, MAIN_COORDINATOR],
   endpoints: () => ({}),
 });

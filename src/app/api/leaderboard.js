@@ -1,11 +1,9 @@
 import { hdApi } from ".";
-import { SCHOOL_LEADERBOARD } from "./constants";
 
-export const schoolApi = hdApi.injectEndpoints({
+export const leaderboardApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
     getSchoolLeaderboard: build.query({
       query: () => "school-leaderboard",
-      providesTags: [SCHOOL_LEADERBOARD],
       transformResponse: ({ data }) => {
         const academicYears = data.map(({ academicYear }) => academicYear);
 
@@ -25,4 +23,4 @@ export const schoolApi = hdApi.injectEndpoints({
   }),
 });
 
-export const { useGetSchoolLeaderboardQuery } = schoolApi;
+export const { useGetSchoolLeaderboardQuery } = leaderboardApi;
