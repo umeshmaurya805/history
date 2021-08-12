@@ -1,6 +1,6 @@
 import { hdApi } from ".";
 
-export const schoolApi = hdApi.injectEndpoints({
+export const supportApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
     createTicket: build.mutation({
       query: (body) => ({
@@ -13,4 +13,4 @@ export const schoolApi = hdApi.injectEndpoints({
   }),
 });
 
-export const { useCreateTicketMutation } = schoolApi;
+export const { useCreateTicketMutation } = supportApi;
