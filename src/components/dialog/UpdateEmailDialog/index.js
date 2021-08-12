@@ -16,6 +16,7 @@ import {
   useUpdateEmailMutation,
 } from "../../../app/api/auth";
 import { notify } from "../../../utils";
+import { useGetMainCoordinatorQuery } from "../../../app/api/coordinator";
 
 const validationSchema = yup.object({
   email: yup
@@ -27,7 +28,14 @@ const validationSchema = yup.object({
 
 const UpdateEmailDialog = ({ handleClose, ...props }) => {
   const [enableOTPField, setEnabledOTPField] = useState(false);
+  const [enableGenerateOTPButton, setEnableGenerateOTPButton] = useState(false);
   const [activeButton, setActiveButton] = useState(0);
+
+  const { email } = useGetMainCoordinatorQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      email: data?.school?.email,
+    }),
+  });
 
   const [requestEmailUpdate, { isLoading: isOTPGenerating }] =
     useRequestEmailUpdateMutation();
@@ -37,10 +45,11 @@ const UpdateEmailDialog = ({ handleClose, ...props }) => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email,
       otp: "",
     },
     validationSchema: validationSchema,
+    enableReinitialize: true,
     onSubmit: protectedHandler(async ({ email, otp }, actions) => {
       switch (activeButton) {
         case 0:
@@ -88,7 +97,10 @@ const UpdateEmailDialog = ({ handleClose, ...props }) => {
                 name="email"
                 label="Email"
                 value={formik.values.email}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  setEnableGenerateOTPButton(email !== e.target.value);
+                  formik.handleChange(e);
+                }}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
               />
@@ -111,6 +123,7 @@ const UpdateEmailDialog = ({ handleClose, ...props }) => {
             </Grid>
             <Grid container justifyContent="center" item xs={12} sm={5}>
               <LoadingIconButton
+                disabled={!enableGenerateOTPButton}
                 variant="contained"
                 color="primary"
                 icon={<LockIcon />}

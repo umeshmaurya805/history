@@ -51,6 +51,7 @@ const EmailUpdate = () => {
       otp: "",
     },
     validationSchema: validationSchema,
+    enableReinitialize: true,
     onSubmit: protectedHandler(async (formData, actions) => {
       switch (activeButton) {
         case 0:

@@ -4,7 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useFormik } from "formik";
-import LoadingButton from "../../../button/LoadingButton";
+import SendIcon from "@material-ui/icons/Send";
+import LoadingIconButton from "../../../button/LoadingIconButton";
 import protectedHandler from "../../../../utils/protectedHandler";
 import useStyles from "./style";
 import ChoiceSelectButton from "../../../button/ChoiceSelectButton";
@@ -116,15 +117,16 @@ const SupportPanel = () => {
           error={formik.touched.message && Boolean(formik.errors.message)}
           helperText={formik.touched.message && formik.errors.message}
         />
-        <LoadingButton
+        <LoadingIconButton
           type="submit"
           variant="contained"
           color="primary"
           className={classes.button}
-          // isLoading={isLoading}
+          isLoading={isLoading}
+          icon={<SendIcon />}
         >
           Send
-        </LoadingButton>
+        </LoadingIconButton>
         <Button
           color="primary"
           className={classes.button}
