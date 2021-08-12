@@ -13,74 +13,76 @@ import LeaderboardImage from "../../../assets/svg/leaderboard.svg";
 import { Typography } from "@material-ui/core";
 import useStyles, { StyledTableCell } from "./style";
 import Dropdown from "../../common/Dropdown";
-//TODO: change rank to position
+import { useGetSchoolLeaderboardQuery } from "../../../app/api/leaderboard";
+
 const columns = [
-  { id: "rank", label: "Position", fixedWidth: "3rem" },
-  { id: "name", label: "School Name", fixedWidth: "9.375rem" },
-  { id: "city", label: "City", fixedWidth: "3.75rem" },
+  { id: "position", label: "Position", fixedWidth: "3rem" },
+  { id: "schoolName", label: "School Name", fixedWidth: "9.375rem" },
+  { id: "address", label: "Address", fixedWidth: "3.75rem" },
   { id: "points", label: "Points Earned", fixedWidth: "3.75rem" },
   {
-    id: "eventsParticipated",
+    id: "competitionParticipated",
     label: "Competitions Participated",
     fixedWidth: "3.75rem",
   },
   {
-    id: "studentsParticipated",
+    id: "studentParticipation",
     label: "Students Participated",
     fixedWidth: "3.75rem",
   },
 ];
-
-function createData(
-  rank,
-  name,
-  city,
-  points,
-  eventsParticipated,
-  studentsParticipated
-) {
-  return { rank, name, city, points, eventsParticipated, studentsParticipated };
-}
-
-const schoolList = [
-  createData(1, "ABC Public School", "Delhi", 5, 5, 20),
-  createData(2, "DEF Public School", "Delhi", 5, 5, 40),
-  createData(3, "ABCD Public School", "Delhi", 5, 5, 80),
-  createData(4, "ABC Public School", "Delhi", 5, 5, 40),
-  createData(5, "DEF Public School", "Delhi", 5, 5, 45),
-  createData(6, "ABC Public School", "Delhi", 5, 5, 20),
-  createData(7, "DEF Public School", "Delhi", 5, 5, 40),
-  createData(8, "ABC Public School", "Delhi", 5, 5, 80),
-  createData(9, "ABC Public School", "Delhi", 5, 5, 40),
-  createData(10, "DEF Public School", "Delhi", 5, 5, 45),
-];
-
-const currentSchool = createData(3, "ABCD Public School", "Delhi", 5, 5, 80);
 
 const Leaderboard = () => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 5;
 
+  const { data = {} } = useGetSchoolLeaderboardQuery();
+  const currentYear = new Date().getFullYear();
+
+  const {
+    academicYears = [
+      `Academic Year: ${currentYear}-${(currentYear + 1)
+        .toString()
+        .substr(-2)}`,
+    ],
+    schools = [
+      [1].map(() => ({
+        position: "-",
+        schoolName: "-",
+        points: "-",
+        competitionParticipated: "-",
+        studentParticipation: "-",
+      })),
+    ],
+    schoolPositions = [
+      {
+        position: "1",
+        schoolName: "-",
+        points: "-",
+        competitionParticipated: "-",
+        studentParticipation: "-",
+      },
+    ],
+  } = data;
+
   const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
 
-  const [value, setValue] = useState(0);
+  const [selectedAcademicYear, setSelectedAcademicYear] = useState(0);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setSelectedAcademicYear(event.target.value);
   };
-
-  const yearItems = ["Academic Year: 2020-21", "Academic Year: 2019-20", "Academic Year: 2018-2019"];
 
   return (
     <Layout>
       <Box display="flex" justifyContent="flex-end">
         <Dropdown
           name="year"
-          value={value}
-          items={yearItems}
+          value={selectedAcademicYear}
+          items={academicYears}
           handleChange={handleChange}
           classes={{ select: classes.year }}
         />
@@ -104,13 +106,16 @@ const Leaderboard = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {schoolList
+            {schools[selectedAcademicYear]
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((school) => {
+              .map((school, index) => {
                 return (
                   <TableRow
-                    selected={currentSchool.rank === school.rank}
-                    key={school.rank}
+                    selected={
+                      schoolPositions[selectedAcademicYear].position ===
+                      school.position
+                    }
+                    key={index}
                   >
                     {columns.map((column) => {
                       const value = school[column.id];
@@ -119,7 +124,7 @@ const Leaderboard = () => {
                           key={column.id}
                           align="center"
                           className={
-                            column.id === "name"
+                            column.id === "schoolName"
                               ? classes.schoolColumn
                               : undefined
                           }
@@ -145,7 +150,7 @@ const Leaderboard = () => {
                   }
                   rowsPerPageOptions={[5]}
                   component="div"
-                  count={schoolList.length}
+                  count={schools[selectedAcademicYear].length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onPageChange={handleChangePage}
@@ -160,7 +165,7 @@ const Leaderboard = () => {
                   color="primary"
                   className={classes.currentSchoolLabel}
                   style={
-                    schoolList.length <= 5
+                    schools[selectedAcademicYear].length <= 5
                       ? { paddingTop: "1.5rem" }
                       : undefined
                   }
@@ -171,13 +176,15 @@ const Leaderboard = () => {
             </TableRow>
             <TableRow>
               {columns.map((column) => {
-                const value = currentSchool[column.id];
+                const value = schoolPositions[selectedAcademicYear][column.id];
                 return (
                   <StyledTableCell
                     key={column.id}
                     align="center"
                     className={
-                      column.id === "name" ? classes.schoolColumn : undefined
+                      column.id === "schoolName"
+                        ? classes.schoolColumn
+                        : undefined
                     }
                   >
                     {value}
