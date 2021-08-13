@@ -11,7 +11,7 @@ const EventCard = ({ data }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { _id, title, cardSummary, banner, date, time, availableClasses } =
+  const { _id, title, cardSummary, banner, date, time, forClass } =
     data;
 
   return (
@@ -55,7 +55,7 @@ const EventCard = ({ data }) => {
                   Class
                 </Typography>
                 <Typography className={classes.infoValue}>
-                  {`${availableClasses.from} - ${availableClasses.to}`}
+                  {forClass}
                 </Typography>
               </Box>
             </Grid>

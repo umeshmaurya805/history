@@ -12,8 +12,7 @@ const EventCardLarge = ({ data }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { _id, title, cardSummary, banner, date, time, availableClasses } =
-    data;
+  const { _id, title, cardSummary, banner, date, time, forClass } = data;
 
   return (
     <div className={classes.root}>
@@ -63,7 +62,7 @@ const EventCardLarge = ({ data }) => {
                         Class
                       </Typography>
                       <Typography className={classes.infoValue}>
-                        {`${availableClasses.from} - ${availableClasses.to}`}
+                        {forClass}
                       </Typography>
                     </Box>
                   </Grid>
