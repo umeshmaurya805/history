@@ -7,13 +7,6 @@ export const eventApi = hdApi.injectEndpoints({
       // providesTags: [SCHOOL_PROFILE],
       transformResponse: ({ data }) => data,
     }),
-    getUpcomingEvents: build.query({
-      query: () => "events/upcoming",
-      // providesTags: [SCHOOL_PROFILE],
-      transformResponse: ({ data }) => {
-        return data;
-      },
-    }),
     getEventResults: build.query({
       query: () => "events/results",
       // providesTags: [SCHOOL_PROFILE],
@@ -26,6 +19,5 @@ export const eventApi = hdApi.injectEndpoints({
 
 export const {
   useGetFeaturedEventsQuery,
-  useGetUpcomingEventsQuery,
   useGetEventResultsQuery,
 } = eventApi;

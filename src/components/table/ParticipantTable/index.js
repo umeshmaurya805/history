@@ -22,6 +22,7 @@ import firstMedal from "../../../assets/svg/first.svg";
 import secondMedal from "../../../assets/svg/second.svg";
 import thirdMedal from "../../../assets/svg/third.svg";
 import useStyles, { StyledTableCell, BlueStyledTableCell } from "./style";
+import { format } from "date-fns";
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -355,6 +356,12 @@ const ParticipantTable = ({
                               src={medals[value - 1]}
                               alt=""
                             />
+                          </StyledTableCell>
+                        );
+                      } else if (column.id === "submissionDate") {
+                        return (
+                          <StyledTableCell key={column.id} align="center">
+                            {format(new Date(value), "PP")}
                           </StyledTableCell>
                         );
                       } else {

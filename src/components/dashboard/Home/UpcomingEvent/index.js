@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Title from "../../../common/Title";
@@ -6,8 +6,9 @@ import EventsTable from "../../../table/EventsTable";
 import ParticipantListDialog from "../../../dialog/ParticipantListDialog";
 import EventConfiguration from "../../../config/EventConfiguration";
 import useStyles from "./style";
-import { getEvents } from "../../../../data";
-import { format, isAfter } from "date-fns";
+// import { getEvents } from "../../../../data";
+// import { format, isAfter } from "date-fns";
+import { useGetUpcomingEventsQuery } from "../../../../app/api/schoolEvent";
 
 const columns = [
   {
@@ -21,7 +22,7 @@ const columns = [
     fixedWidth: "9.375rem",
   },
   {
-    id: "classes",
+    id: "forClass",
     label: "Classes",
     fixedWidth: "9.375rem",
   },
@@ -39,38 +40,48 @@ const columns = [
   },
 ];
 
-// function createData(slug, title, date, classes, registrations, list) {
-//   return { slug, title, date, classes, registrations, list };
+// function createData(eventId, title, date, classes, registrations, list) {
+//   return { eventId, title, date, classes, registrations, list };
 // }
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+// const today = new Date();
+// today.setHours(0, 0, 0, 0);
 
-const upcomingEventList = getEvents()
-  .filter((event) => isAfter(event.startDate, today) && event.isRegistered)
-  .map((event) => {
-    return {
-      title: event.title,
-      slug: event.slug,
-      date: format(event.startDate, "PP"),
-      classes: `${event.forClass.from} - ${event.forClass.to}`,
-      registrations: 17,
-    };
-  });
+// const upcomingEventList = getEvents()
+//   .filter((event) => isAfter(event.startDate, today) && event.isRegistered)
+//   .map((event) => {
+//     return {
+//       title: event.title,
+//       eventId: event.eventId,
+//       date: format(event.startDate, "PP"),
+//       classes: `${event.forClass.from} - ${event.forClass.to}`,
+//       registrations: 17,
+//     };
+//   });
 
 const UpcomingEvent = () => {
   const classes = useStyles();
+  const { data } = useGetUpcomingEventsQuery();
 
   const [open, setOpen] = useState(false);
-  const [slug, setSlug] = useState(null);
+  const [eventId, setEventId] = useState(null);
+
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  console.log(upcomingEvents);
+
+  useEffect(() => {
+    if (data) {
+      setUpcomingEvents(data);
+    }
+  }, [data]);
 
   const handleClickOpen = (slug) => {
-    setSlug(slug);
+    setEventId(slug);
     setOpen(true);
   };
 
   const handleClose = () => {
-    setSlug(null);
+    setEventId(null);
     setOpen(false);
   };
 
@@ -99,12 +110,16 @@ const UpcomingEvent = () => {
       <Box>
         <EventsTable
           clickableEvent
-          rows={upcomingEventList}
+          rows={upcomingEvents}
           columns={columns}
           handleClickOpen={handleClickOpen}
         />
       </Box>
-      <ParticipantListDialog slug={slug} open={open} onClose={handleClose} />
+      <ParticipantListDialog
+        eventId={eventId}
+        open={open}
+        onClose={handleClose}
+      />
     </div>
   );
 };

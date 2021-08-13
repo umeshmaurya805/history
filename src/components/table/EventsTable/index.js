@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import useStyles, { StyledTableCell } from "./style";
 import InfoButton from "../../button/InfoButton";
 import { Link } from "react-router-dom";
+import { format } from "date-fns/esm";
 
 const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
   const classes = useStyles();
@@ -78,7 +79,7 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
                             className={classes.titleColumn}
                           >
                             {clickableEvent ? (
-                              <Link to={`/dashboard/calendar/${row.slug}`}>
+                              <Link to={`/dashboard/calendar/${row._id}`}>
                                 {value}
                               </Link>
                             ) : (
@@ -97,7 +98,7 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
                             }}
                           >
                             <Button
-                              onClick={() => handleClickOpen(row.slug)}
+                              onClick={() => handleClickOpen(row._id)}
                               color="primary"
                               className={classes.viewButton}
                             >
@@ -127,6 +128,19 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
                                     : "#EF7373",
                               }}
                             />
+                          </StyledTableCell>
+                        );
+                      } else if (column.id === "date") {
+                        return (
+                          <StyledTableCell
+                            key={column.id}
+                            align="center"
+                            style={{
+                              width: column.fixedWidth,
+                              minWidth: column.fixedWidth,
+                            }}
+                          >
+                            {format(new Date(value), "PP")}
                           </StyledTableCell>
                         );
                       } else {

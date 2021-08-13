@@ -5,247 +5,49 @@ import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
 import CancelIcon from "@material-ui/icons/Cancel";
 import Box from "@material-ui/core/Box";
-import { format } from "date-fns";
-import avatarMan from "../../../assets/svg/avatar-man.svg";
 import ParticipantTable from "../../table/ParticipantTable";
 import useStyles from "./style";
+import { useGetUpcomingEventsQuery } from "../../../app/api/schoolEvent";
 
-const isStudent = true;
-const hasTeam = true;
-
-const data = [
-  {
-    firstName: "ABC",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Submitted'
-  },
-  {
-    firstName: "BBBB",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Submitted'
-  },
-  {
-    firstName: "CCC",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Not Submitted'
-  },
-  {
-    firstName: "DDD",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Submitted'
-  },
-  {
-    firstName: "GGG",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Not Submitted'
-  },
-  {
-    firstName: "QQQ",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Not Submitted'
-  },
-  {
-    firstName: "EEE",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Not Submitted'
-  },
-  {
-    firstName: "WWW",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Not Submitted'
-  },
-  {
-    firstName: "HHH",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 4,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team B",
-  },
-  {
-    firstName: "LHJ",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team B",
-  },
-  {
-    firstName: "GJHGGHJ",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 3,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Submitted'
-  },
-  {
-    firstName: "YYY",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 7,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 2",
-    team: "Team B",
-  },
-  {
-    firstName: "TTT",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 4,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 2",
-    team: "Team A",
-    status:'Not Submitted'
-  },
-  {
-    firstName: "EEE",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Submitted'
-  },
-  {
-    firstName: "PPP",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 10,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 2",
-    team: "Team A",
-    status:'Submitted'
-  },
-  {
-    firstName: "OOO",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 5,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Not Submitted'
-  },
-  {
-    firstName: "HHH",
-    lastName: "Surname",
-    avatar: avatarMan,
-    studentClass: 5,
-    section: "A",
-    date: format(new Date(), "PP"),
-    theme: "Theme 1",
-    team: "Team A",
-    status:'Submitted'
-  },
-];
-
-const columns = [
-  {
-    id: "name",
-    label: `${isStudent ? "Student" : "Teacher"} Name`,
-    fixedWidth: "10.5rem",
-  },
-  { id: "studentClass", label: "Class", fixedWidth: "10.5rem" },
-  { id: "date", label: "Date", fixedWidth: "10.5rem" },
-  { id: "theme", label: "Theme", fixedWidth: "10.5rem" },
-];
-
-if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
-
-if (true) columns.push({ id: "status", label: "Status", fixedWidth: "8rem" });
-
-const rows = data.map((participant) => {
-  const {
-    firstName,
-    lastName,
-    avatar,
-    studentClass,
-    section,
-    date,
-    theme,
-    team,
-    status,
-  } = participant;
-
-  return {
-    name: `${firstName} ${lastName}`,
-    avatar,
-    studentClass,
-    section,
-    date,
-    theme,
-    team,
-    status,
-  };
-});
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ParticipantListDialog = ({ slug, open, onClose }) => {
+const ParticipantListDialog = ({ eventId = "", open, onClose }) => {
   const classes = useStyles();
+  const { data = {} } = useGetUpcomingEventsQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      data: data?.find((event) => eventId === event._id),
+    }),
+  });
 
+  const {
+    eventFor = "Teacher",
+    isTeamEvent,
+    hasThemes,
+    hasSubmissions,
+    participants = [],
+  } = data;
+
+  const columns = [
+    {
+      id: "name",
+      label: `${eventFor} Name`,
+      fixedWidth: "10.5rem",
+    },
+    { id: "studentClass", label: "Class", fixedWidth: "10.5rem" },
+    { id: "submissionDate", label: "Date", fixedWidth: "10.5rem" },
+  ];
+
+  if (hasThemes)
+    columns.push({ id: "theme", label: "Theme", fixedWidth: "10.5rem" });
+
+    if (isTeamEvent)
+    columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
+
+  if (hasSubmissions)
+    columns.push({ id: "status", label: "Status", fixedWidth: "8rem" });
+console.log('participants',participants)
   return (
     <Dialog
       scroll="body"
@@ -256,7 +58,7 @@ const ParticipantListDialog = ({ slug, open, onClose }) => {
     >
       <DialogContent className={classes.content}>
         <Box display="flex" justifyContent="flex-end" className={classes.box}>
-        <IconButton
+          <IconButton
             edge="start"
             color="inherit"
             onClick={onClose}
@@ -266,7 +68,7 @@ const ParticipantListDialog = ({ slug, open, onClose }) => {
             <CancelIcon fontSize="large" color="error" />
           </IconButton>
         </Box>
-        <ParticipantTable rows={rows} columns={columns} />
+        <ParticipantTable rows={participants} columns={columns} />
       </DialogContent>
     </Dialog>
   );
