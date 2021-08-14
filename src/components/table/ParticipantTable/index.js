@@ -279,113 +279,124 @@ const ParticipantTable = ({
           />
 
           <TableBody>
-            {stableSort(rows, getComparator(order, orderBy))
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
-                return (
-                  <TableRow key={index}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
+            {rows.length > 0 ? (
+              stableSort(rows, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  return (
+                    <TableRow key={index}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
 
-                      if (column.id === "name") {
-                        return (
-                          <StyledTableCell key={column.id} align="left">
-                            <Box display="flex" alignItems="center">
-                              <Avatar
-                                src={row.avatar}
-                                className={classes.avatar}
+                        if (column.id === "name") {
+                          return (
+                            <StyledTableCell key={column.id} align="left">
+                              <Box display="flex" alignItems="center">
+                                <Avatar
+                                  src={row.avatar}
+                                  className={classes.avatar}
+                                />
+                                <Typography className={classes.participantName}>
+                                  {value}
+                                </Typography>
+                              </Box>
+                            </StyledTableCell>
+                          );
+                        } else if (column.id === "certificate") {
+                          return (
+                            <StyledTableCell key={column.id} align="center">
+                              <Button
+                                onClick={() => handleCertificateView(row.slug)}
+                                color="primary"
+                                className={classes.viewButton}
+                                disabled={!row.hasParticipated}
+                              >
+                                View
+                              </Button>
+                              <IconButton
+                                className={classes.downloadCertificate}
+                                aria-label="download-certificate"
+                                color="primary"
+                                disabled={!row.hasParticipated}
+                                onClick={() =>
+                                  handleCertificateDownload(row.slug)
+                                }
+                              >
+                                <GetAppIcon fontSize="small" />
+                              </IconButton>
+                            </StyledTableCell>
+                          );
+                        } else if (column.id === "status") {
+                          return (
+                            <StyledTableCell key={column.id} align="center">
+                              <Chip
+                                size="small"
+                                variant="outlined"
+                                label={value}
+                                className={classes.tag}
+                                style={{
+                                  backgroundColor:
+                                    value === "Participated" ||
+                                    value === "Registered" ||
+                                    value === "Submitted"
+                                      ? "#69DE91"
+                                      : value === "Invited"
+                                      ? "#ffff99"
+                                      : "#EF7373",
+                                }}
                               />
-                              <Typography className={classes.participantName}>
-                                {value}
-                              </Typography>
-                            </Box>
-                          </StyledTableCell>
-                        );
-                      } else if (column.id === "certificate") {
-                        return (
-                          <StyledTableCell key={column.id} align="center">
-                            <Button
-                              onClick={() => handleCertificateView(row.slug)}
-                              color="primary"
-                              className={classes.viewButton}
-                              disabled={!row.hasParticipated}
-                            >
-                              View
-                            </Button>
-                            <IconButton
-                              className={classes.downloadCertificate}
-                              aria-label="download-certificate"
-                              color="primary"
-                              disabled={!row.hasParticipated}
-                              onClick={() =>
-                                handleCertificateDownload(row.slug)
-                              }
-                            >
-                              <GetAppIcon fontSize="small" />
-                            </IconButton>
-                          </StyledTableCell>
-                        );
-                      } else if (column.id === "status") {
-                        return (
-                          <StyledTableCell key={column.id} align="center">
-                            <Chip
-                              size="small"
-                              variant="outlined"
-                              label={value}
-                              className={classes.tag}
-                              style={{
-                                backgroundColor:
-                                  value === "Participated" ||
-                                  value === "Registered" ||
-                                  value === "Submitted"
-                                    ? "#69DE91"
-                                    : value === "Invited"
-                                    ? "#ffff99"
-                                    : "#EF7373",
-                              }}
-                            />
-                          </StyledTableCell>
-                        );
-                      } else if (column.id === "position") {
-                        return (
-                          <StyledTableCell key={column.id} align="center">
-                            <img
-                              className={classes.medals}
-                              src={medals[value - 1]}
-                              alt=""
-                            />
-                          </StyledTableCell>
-                        );
-                      } else if (column.id === "submissionDate") {
-                        return (
-                          <StyledTableCell key={column.id} align="center">
-                            {format(new Date(value), "PP")}
-                          </StyledTableCell>
-                        );
-                      } else {
-                        return (
-                          <StyledTableCell key={column.id} align="center">
-                            {value}
-                            {column.id === "studentClass" &&
-                              row.section &&
-                              ` ${row.section}`}
-                          </StyledTableCell>
-                        );
-                      }
-                    })}
-                    {editable && (
-                      <StyledTableCell align="right">
-                        <IconButton
-                          className={classes.deleteButton}
-                          onClick={() => handleParticipantDelete(row.slug)}
-                        >
-                          <DeleteOutlineIcon fontSize="small" />
-                        </IconButton>
-                      </StyledTableCell>
-                    )}
-                  </TableRow>
-                );
-              })}
+                            </StyledTableCell>
+                          );
+                        } else if (column.id === "position") {
+                          return (
+                            <StyledTableCell key={column.id} align="center">
+                              <img
+                                className={classes.medals}
+                                src={medals[value - 1]}
+                                alt=""
+                              />
+                            </StyledTableCell>
+                          );
+                        } else if (column.id === "submissionDate") {
+                          return (
+                            <StyledTableCell key={column.id} align="center">
+                              {format(new Date(value), "PP")}
+                            </StyledTableCell>
+                          );
+                        } else {
+                          return (
+                            <StyledTableCell key={column.id} align="center">
+                              {value}
+                              {column.id === "studentClass" &&
+                                row.section &&
+                                ` ${row.section}`}
+                            </StyledTableCell>
+                          );
+                        }
+                      })}
+                      {editable && (
+                        <StyledTableCell align="right">
+                          <IconButton
+                            className={classes.deleteButton}
+                            onClick={() => handleParticipantDelete(row.slug)}
+                          >
+                            <DeleteOutlineIcon fontSize="small" />
+                          </IconButton>
+                        </StyledTableCell>
+                      )}
+                    </TableRow>
+                  );
+                })
+            ) : (
+              <TableRow>
+                <StyledTableCell
+                  align="center"
+                  colSpan={6}
+                >
+                  No data available
+                </StyledTableCell>
+              </TableRow>
+            )}
             {emptyRows > 0 && (
               <TableRow style={{ height: `${4.5625 * emptyRows}rem` }}>
                 <StyledTableCell colSpan={6} />

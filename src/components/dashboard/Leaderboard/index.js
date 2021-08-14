@@ -46,18 +46,10 @@ const Leaderboard = () => {
         .toString()
         .substr(-2)}`,
     ],
-    schools = [
-      [1].map(() => ({
-        position: "-",
-        schoolName: "-",
-        points: "-",
-        competitionParticipated: "-",
-        studentParticipation: "-",
-      })),
-    ],
+    schools = [[]],
     schoolPositions = [
       {
-        position: "1",
+        position: "-",
         schoolName: "-",
         points: "-",
         competitionParticipated: "-",
@@ -106,36 +98,44 @@ const Leaderboard = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {schools[selectedAcademicYear]
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((school, index) => {
-                return (
-                  <TableRow
-                    selected={
-                      schoolPositions[selectedAcademicYear].position ===
-                      school.position
-                    }
-                    key={index}
-                  >
-                    {columns.map((column) => {
-                      const value = school[column.id];
-                      return (
-                        <StyledTableCell
-                          key={column.id}
-                          align="center"
-                          className={
-                            column.id === "schoolName"
-                              ? classes.schoolColumn
-                              : undefined
-                          }
-                        >
-                          {value}
-                        </StyledTableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {schools[selectedAcademicYear].length > 0 ? (
+              schools[selectedAcademicYear]
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((school, index) => {
+                  return (
+                    <TableRow
+                      selected={
+                        schoolPositions[selectedAcademicYear].position ===
+                        school.position
+                      }
+                      key={index}
+                    >
+                      {columns.map((column) => {
+                        const value = school[column.id];
+                        return (
+                          <StyledTableCell
+                            key={column.id}
+                            align="center"
+                            className={
+                              column.id === "schoolName"
+                                ? classes.schoolColumn
+                                : undefined
+                            }
+                          >
+                            {value}
+                          </StyledTableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })
+            ) : (
+              <TableRow>
+                <StyledTableCell align="center" colSpan={6}>
+                  No data available
+                </StyledTableCell>
+              </TableRow>
+            )}
             <TableRow>
               <TableCell
                 className={classes.paginationCell}

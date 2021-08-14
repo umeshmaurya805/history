@@ -59,108 +59,116 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
-                return (
-                  <TableRow key={index}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
+            {rows.length > 0 ? (
+              rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  return (
+                    <TableRow key={index}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
 
-                      if (column.id === "title") {
-                        return (
-                          <StyledTableCell
-                            key={column.id}
-                            align="left"
-                            style={{
-                              width: column.fixedWidth,
-                              minWidth: column.fixedWidth,
-                            }}
-                            className={classes.titleColumn}
-                          >
-                            {clickableEvent ? (
-                              <Link to={`/dashboard/calendar/${row._id}`}>
-                                {value}
-                              </Link>
-                            ) : (
-                              value
-                            )}
-                          </StyledTableCell>
-                        );
-                      } else if (column.id === "list") {
-                        return (
-                          <StyledTableCell
-                            key={column.id}
-                            align="center"
-                            style={{
-                              width: column.fixedWidth,
-                              minWidth: column.fixedWidth,
-                            }}
-                          >
-                            <Button
-                              onClick={() => handleClickOpen(row._id)}
-                              color="primary"
-                              className={classes.viewButton}
-                            >
-                              View
-                            </Button>
-                          </StyledTableCell>
-                        );
-                      } else if (column.id === "status") {
-                        return (
-                          <StyledTableCell
-                            key={column.id}
-                            align="center"
-                            style={{
-                              width: column.fixedWidth,
-                              minWidth: column.fixedWidth,
-                            }}
-                          >
-                            <Chip
-                              size="small"
-                              variant="outlined"
-                              label={value}
-                              className={classes.tag}
+                        if (column.id === "title") {
+                          return (
+                            <StyledTableCell
+                              key={column.id}
+                              align="left"
                               style={{
-                                backgroundColor:
-                                  value === "Participated"
-                                    ? "#69DE91"
-                                    : "#EF7373",
+                                width: column.fixedWidth,
+                                minWidth: column.fixedWidth,
                               }}
-                            />
-                          </StyledTableCell>
-                        );
-                      } else if (column.id === "date") {
-                        return (
-                          <StyledTableCell
-                            key={column.id}
-                            align="center"
-                            style={{
-                              width: column.fixedWidth,
-                              minWidth: column.fixedWidth,
-                            }}
-                          >
-                            {format(new Date(value), "PP")}
-                          </StyledTableCell>
-                        );
-                      } else {
-                        return (
-                          <StyledTableCell
-                            key={column.id}
-                            align="center"
-                            style={{
-                              width: column.fixedWidth,
-                              minWidth: column.fixedWidth,
-                            }}
-                          >
-                            {value}
-                          </StyledTableCell>
-                        );
-                      }
-                    })}
-                  </TableRow>
-                );
-              })}
+                              className={classes.titleColumn}
+                            >
+                              {clickableEvent ? (
+                                <Link to={`/dashboard/calendar/${row._id}`}>
+                                  {value}
+                                </Link>
+                              ) : (
+                                value
+                              )}
+                            </StyledTableCell>
+                          );
+                        } else if (column.id === "list") {
+                          return (
+                            <StyledTableCell
+                              key={column.id}
+                              align="center"
+                              style={{
+                                width: column.fixedWidth,
+                                minWidth: column.fixedWidth,
+                              }}
+                            >
+                              <Button
+                                onClick={() => handleClickOpen(row._id)}
+                                color="primary"
+                                className={classes.viewButton}
+                              >
+                                View
+                              </Button>
+                            </StyledTableCell>
+                          );
+                        } else if (column.id === "status") {
+                          return (
+                            <StyledTableCell
+                              key={column.id}
+                              align="center"
+                              style={{
+                                width: column.fixedWidth,
+                                minWidth: column.fixedWidth,
+                              }}
+                            >
+                              <Chip
+                                size="small"
+                                variant="outlined"
+                                label={value}
+                                className={classes.tag}
+                                style={{
+                                  backgroundColor:
+                                    value === "Participated"
+                                      ? "#69DE91"
+                                      : "#EF7373",
+                                }}
+                              />
+                            </StyledTableCell>
+                          );
+                        } else if (column.id === "date") {
+                          return (
+                            <StyledTableCell
+                              key={column.id}
+                              align="center"
+                              style={{
+                                width: column.fixedWidth,
+                                minWidth: column.fixedWidth,
+                              }}
+                            >
+                              {format(new Date(value), "PP")}
+                            </StyledTableCell>
+                          );
+                        } else {
+                          return (
+                            <StyledTableCell
+                              key={column.id}
+                              align="center"
+                              style={{
+                                width: column.fixedWidth,
+                                minWidth: column.fixedWidth,
+                              }}
+                            >
+                              {value}
+                            </StyledTableCell>
+                          );
+                        }
+                      })}
+                    </TableRow>
+                  );
+                })
+            ) : (
+              <TableRow>
+                <StyledTableCell align="center" colSpan={6}>
+                  No data available
+                </StyledTableCell>
+              </TableRow>
+            )}
             {emptyRows > 0 && (
               <TableRow style={{ height: `${3.9625 * emptyRows}rem` }}>
                 <StyledTableCell colSpan={6} />
