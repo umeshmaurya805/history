@@ -1,156 +1,34 @@
 import React from "react";
-import format from "date-fns/format";
 import ParticipantTable from "../../../table/ParticipantTable";
-import avatarMan from "../../../../assets/svg/avatar-man.svg";
 import useStyles from "./style";
+import { useGetSchoolWinnersQuery } from "../../../../app/api/school";
 
 const WinnerPanel = () => {
   const classes = useStyles();
 
-  const isStudent = true;
-  const hasTeam = false;
-
-  const participantData = [
-    {
-      firstName: "ABC",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      date: format(new Date(), "PP"),
-      theme: "Theme 1",
-      team: "Team A",
-      participant: 50,
-      position: 1,
-      event: "Event 1",
-    },
-    {
-      firstName: "BBBB",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      date: format(new Date(), "PP"),
-      theme: "Theme 1",
-      team: "Team A",
-      participant: 50,
-      position: 1,
-      event: "Event 1",
-    },
-    {
-      firstName: "CCC",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      date: format(new Date(), "PP"),
-      theme: "Theme 1",
-      team: "Team A",
-      participant: 50,
-      position: 2,
-      event: "Event 1",
-    },
-    {
-      firstName: "DDD",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      date: format(new Date(), "PP"),
-      theme: "Theme 1",
-      team: "Team A",
-      participant: 50,
-      position: 2,
-      event: "Event 1",
-    },
-    {
-      firstName: "GGG",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      date: format(new Date(), "PP"),
-      theme: "Theme 1",
-      team: "Team A",
-      participant: 50,
-      position: 3,
-      event: "Event 1",
-    },
-    {
-      firstName: "QQQ",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      date: format(new Date(), "PP"),
-      theme: "Theme 1",
-      team: "Team A",
-      participant: 50,
-      position: 2,
-      event: "Event 1",
-    },
-    {
-      firstName: "EEE",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      date: format(new Date(), "PP"),
-      theme: "Theme 1",
-      team: "Team A",
-      participant: 50,
-      position: 2,
-      event: "Event 1",
-    },
-  ];
+  const { data = [] } = useGetSchoolWinnersQuery();
 
   const columns = [
     {
       id: "name",
-      label: `${isStudent ? "Student" : "Teacher"} Name`,
-      fixedWidth: "11rem",
+      label: "Student Name",
+      fixedWidth: "12rem",
     },
-    { id: "studentClass", label: "Class", fixedWidth: "11rem" },
-    { id: "event", label: "Competition", fixedWidth: "11rem" },
-    { id: "participant", label: "Total Participants", fixedWidth: "11rem" },
-    { id: "position", label: "Position", fixedWidth: "11rem" },
+    { id: "studentClass", label: "Class", fixedWidth: "8rem" },
+    { id: "event", label: "Competition", fixedWidth: "16rem" },
+    { id: "participant", label: "Total Participants", fixedWidth: "10rem" },
+    { id: "position", label: "Position", fixedWidth: "10rem" },
   ];
 
-  if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: "11rem" });
-
-  const rows = participantData.map((row) => {
-    const {
-      firstName,
-      lastName,
-      avatar,
-      studentClass,
-      section,
-      event,
-      participant,
-      position,
-    } = row;
-
-    return {
-      name: `${firstName} ${lastName}`,
-      avatar,
-      studentClass,
-      section,
-      event,
-      participant,
-      position,
-    };
-  });
-
   const generateCSVData = () => {
-    return rows.map((participant) => {
+    return data.map((winner) => {
       return {
-        Name: participant.name,
-        Class: participant.studentClass,
-        Section: participant.section,
-        // "Submission Date": format(new Date(participant.submissionDate), "PP"),
-        Team: participant.team,
-        Theme: participant.theme,
-        Status: participant.status,
+        Name: winner.name,
+        Class: winner.studentClass,
+        Section: winner.section,
+        Competition: winner.event,
+        "Total Participants": winner.participant,
+        Position: winner.position,
       };
     });
   };
@@ -160,9 +38,9 @@ const WinnerPanel = () => {
       <ParticipantTable
         title="Winners List"
         colored
-        rows={rows}
+        rows={data}
         columns={columns}
-        filename="Registration List"
+        filename="Winners List"
         generateCSVData={generateCSVData}
       />
     </div>

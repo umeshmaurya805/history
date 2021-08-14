@@ -203,7 +203,11 @@ const ParticipantTable = ({
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   let isCertificatesAvailable = false;
-  const medals = [firstMedal, secondMedal, thirdMedal];
+  const medals = {
+    first: firstMedal,
+    second: secondMedal,
+    third: thirdMedal,
+  };
 
   rows.forEach((row) => {
     if (row.isCertificateReceived) isCertificatesAvailable = true;
@@ -255,7 +259,7 @@ const ParticipantTable = ({
             <Typography variant="h6" color="primary" className={classes.title}>
               {title}
             </Typography>
-            <CsvDownloader filename={filename} datas={generateCSVData()}>
+            <CsvDownloader suffix filename={filename} datas={generateCSVData()}>
               <Button
                 color="primary"
                 className={classes.downloadButton}
@@ -352,7 +356,7 @@ const ParticipantTable = ({
                             <StyledTableCell key={column.id} align="center">
                               <img
                                 className={classes.medals}
-                                src={medals[value - 1]}
+                                src={medals[value]}
                                 alt=""
                               />
                             </StyledTableCell>
@@ -389,10 +393,7 @@ const ParticipantTable = ({
                 })
             ) : (
               <TableRow>
-                <StyledTableCell
-                  align="center"
-                  colSpan={6}
-                >
+                <StyledTableCell align="center" colSpan={6}>
                   No data available
                 </StyledTableCell>
               </TableRow>

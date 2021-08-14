@@ -12,15 +12,11 @@ export const eventApi = hdApi.injectEndpoints({
         return data;
       },
     }),
-    getSchoolWinners: build.query({
-      query: () => "schools/my-account?filter=winners",
-      transformResponse: ({ data }) => data,
-    }),
+   
   }),
 });
 
 export const {
   useGetFeaturedEventsQuery,
   useGetEventResultsQuery,
-  useGetSchoolWinnersQuery,
 } = eventApi;

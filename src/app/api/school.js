@@ -41,6 +41,21 @@ export const schoolApi = hdApi.injectEndpoints({
         };
       },
     }),
+    getSchoolWinners: build.query({
+      query: () => "schools/my-account?filter=winners",
+      transformResponse: ({ data }) =>
+        data.winners.map((winner) => {
+          return {
+            name: `${winner.firstName} ${winner.lastName}`,
+            avatar: winner.avatar,
+            event: winner.eventTitle,
+            studentClass: winner.studentClass,
+            section: winner.section,
+            participant: winner.totalParticipants,
+            position: winner.position,
+          };
+        }),
+    }),
   }),
 });
 
@@ -49,4 +64,5 @@ export const {
   useUpdateProfileMutation,
   useUploadLogoMutation,
   useGetSchoolStatsQuery,
+  useGetSchoolWinnersQuery,
 } = schoolApi;
