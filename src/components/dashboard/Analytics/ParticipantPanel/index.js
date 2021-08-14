@@ -58,10 +58,11 @@ const ParticipantPanel = () => {
           text: "No. of Participants",
           padding: { top: 0, left: 0, right: 0, bottom: 20 },
         },
+        min: 0,
       },
     },
     layout: {
-      padding: 0,
+      padding: 20,
     },
     plugins: {
       legend: {

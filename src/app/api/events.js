@@ -4,15 +4,17 @@ export const eventApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
     getFeaturedEvents: build.query({
       query: () => "events/featured",
-      // providesTags: [SCHOOL_PROFILE],
       transformResponse: ({ data }) => data,
     }),
     getEventResults: build.query({
       query: () => "events/results",
-      // providesTags: [SCHOOL_PROFILE],
       transformResponse: ({ data }) => {
         return data;
       },
+    }),
+    getSchoolWinners: build.query({
+      query: () => "schools/my-account?filter=winners",
+      transformResponse: ({ data }) => data,
     }),
   }),
 });
@@ -20,4 +22,5 @@ export const eventApi = hdApi.injectEndpoints({
 export const {
   useGetFeaturedEventsQuery,
   useGetEventResultsQuery,
+  useGetSchoolWinnersQuery,
 } = eventApi;

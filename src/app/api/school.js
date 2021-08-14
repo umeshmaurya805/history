@@ -32,6 +32,15 @@ export const schoolApi = hdApi.injectEndpoints({
       }),
       invalidatesTags: [SCHOOL_PROFILE],
     }),
+    getSchoolStats: build.query({
+      query: () => "schools/my-account?fields=points,stats",
+      transformResponse: ({ data: { points, stats } }) => {
+        return {
+          points: points.current,
+          ...stats,
+        };
+      },
+    }),
   }),
 });
 
@@ -39,4 +48,5 @@ export const {
   useGetProfileQuery,
   useUpdateProfileMutation,
   useUploadLogoMutation,
+  useGetSchoolStatsQuery,
 } = schoolApi;

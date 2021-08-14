@@ -41,11 +41,6 @@ const columns = [
 const UpcomingEvent = () => {
   const classes = useStyles();
   const { data } = useGetUpcomingEventsQuery();
-  const initialFilter = {
-    class: "all",
-    user: "Student",
-    category: "all",
-  };
 
   const [open, setOpen] = useState(false);
   const [eventId, setEventId] = useState(null);
@@ -68,57 +63,6 @@ const UpcomingEvent = () => {
     setOpen(false);
   };
 
-  const [option, setOption] = useState(initialFilter);
-
-  const classFilter = (updatedOptions, availableClasses) => {
-    return (
-      updatedOptions.class === "all" ||
-      (updatedOptions.class >= availableClasses.from &&
-        updatedOptions.class <= availableClasses.to)
-    );
-  };
-
-  const userFilter = (updatedOptions, user) => {
-    return user === updatedOptions.user;
-  };
-
-  const categoryFilter = (updatedOptions, category) => {
-    return (
-      updatedOptions.category === "all" || category === updatedOptions.category
-    );
-  };
-
-  const handleFilter = (name, key) => {
-    const updatedOptions =
-      name === "user"
-        ? { ...option, user: key, category: "all" }
-        : { ...option, [name]: key };
-
-    setOption(updatedOptions);
-
-    setUpcomingEvents(
-      data.filter(
-        (event) =>
-          classFilter(updatedOptions, event.availableClasses) &&
-          userFilter(updatedOptions, event.eventFor) &&
-          categoryFilter(updatedOptions, event.eventType)
-      )
-    );
-  };
-
-  const handleFilterReset = () => {
-    setOption(initialFilter);
-
-    setUpcomingEvents(
-      data.filter(
-        (event) =>
-          classFilter(initialFilter, event.availableClasses) &&
-          userFilter(initialFilter, event.eventFor) &&
-          categoryFilter(initialFilter, event.eventType)
-      )
-    );
-  };
-
   return (
     <div className={classes.root}>
       <Box>
@@ -130,9 +74,8 @@ const UpcomingEvent = () => {
           </Grid>
           <Grid item className={classes.selectorGrid}>
             <EventConfiguration
-              value={option}
-              handleFilter={handleFilter}
-              handleFilterReset={handleFilterReset}
+              data={data}
+              onChange={setUpcomingEvents}
             />
           </Grid>
         </Grid>

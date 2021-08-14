@@ -8,12 +8,9 @@ export const historyDiariesApi = hdApi.injectEndpoints({
         schools: stats.schoolsPartnered,
         competitiveEvents: stats.totalCompetitiveEvents,
         nonCompetitiveEvents: stats.totalNonCompetitiveEvents,
-        students:
-          stats.competitiveEventsStudentParticipation +
-          stats.nonCompetitiveEventsStudentParticipation,
-        studentCompetitiveEvents: stats.competitiveEventsStudentParticipation,
-        studentNonCompetitiveEvents:
-          stats.nonCompetitiveEventsStudentParticipation,
+        students: stats.studentParticipation,
+        studentCompetitiveEvents: stats.studentCompetitiveEvent,
+        studentNonCompetitiveEvents: stats.studentNonCompetitiveEvent,
       }),
     }),
   }),

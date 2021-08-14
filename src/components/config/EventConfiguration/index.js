@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
 import { Button } from "@material-ui/core";
 
 const EventConfiguration = ({
-  value,
-  handleFilter,
-  handleFilterReset,
+  data,
+  onChange,
   classes: customClasses = {},
 }) => {
   const classes = useStyles();
+
+  const initialFilter = {
+    class: "all",
+    user: "Student",
+    category: "all",
+  };
+
+  const [option, setOption] = useState(initialFilter);
 
   const classItems = [
     "Class",
@@ -56,6 +63,55 @@ const EventConfiguration = ({
     Teacher: ["all", "workshop", "course"],
   };
 
+  const classFilter = (updatedOptions, availableClasses) => {
+    return (
+      updatedOptions.class === "all" ||
+      (updatedOptions.class >= availableClasses.from &&
+        updatedOptions.class <= availableClasses.to)
+    );
+  };
+
+  const userFilter = (updatedOptions, user) => {
+    return user === updatedOptions.user;
+  };
+
+  const categoryFilter = (updatedOptions, category) => {
+    return (
+      updatedOptions.category === "all" || category === updatedOptions.category
+    );
+  };
+
+  const handleFilter = (name, key) => {
+    const updatedOptions =
+      name === "user"
+        ? { ...option, user: key, category: "all" }
+        : { ...option, [name]: key };
+
+    setOption(updatedOptions);
+
+    onChange(
+      data.filter(
+        (event) =>
+          classFilter(updatedOptions, event.availableClasses) &&
+          userFilter(updatedOptions, event.eventFor) &&
+          categoryFilter(updatedOptions, event.eventType)
+      )
+    );
+  };
+
+  const handleFilterReset = () => {
+    setOption(initialFilter);
+
+    onChange(
+      data.filter(
+        (event) =>
+          classFilter(initialFilter, event.availableClasses) &&
+          userFilter(initialFilter, event.eventFor) &&
+          categoryFilter(initialFilter, event.eventType)
+      )
+    );
+  };
+
   const getIndex = (arr, value) => {
     return arr.findIndex((val) => val === value);
   };
@@ -73,7 +129,7 @@ const EventConfiguration = ({
         key = userKeys[selectedValue];
         break;
       case "category":
-        key = categoryKeys[value.user][selectedValue];
+        key = categoryKeys[option.user][selectedValue];
         break;
       default:
         key = classKeys[selectedValue];
@@ -85,14 +141,13 @@ const EventConfiguration = ({
   return (
     <Box
       display="flex"
-      justifyContent="flex-end"
       alignItems="center"
       flexWrap="wrap"
       className={`${classes.root} ${customClasses.root}`}
     >
       <Dropdown
         name="class"
-        value={getIndex(classKeys, value.class)}
+        value={getIndex(classKeys, option.class)}
         colored
         items={classItems}
         handleChange={handleChange}
@@ -100,7 +155,7 @@ const EventConfiguration = ({
       />
       <Dropdown
         name="user"
-        value={getIndex(userKeys, value.user)}
+        value={getIndex(userKeys, option.user)}
         colored
         items={userItems}
         handleChange={handleChange}
@@ -108,9 +163,9 @@ const EventConfiguration = ({
       />
       <Dropdown
         name="category"
-        value={getIndex(categoryKeys[value.user], value.category)}
+        value={getIndex(categoryKeys[option.user], option.category)}
         colored
-        items={categoryItems[value.user]}
+        items={categoryItems[option.user]}
         handleChange={handleChange}
         classes={{ select: classes.selectCategory }}
       />

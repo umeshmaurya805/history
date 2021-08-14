@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    justifyContent: "flex-end !important",
     marginBottom: "0.5rem",
     [theme.breakpoints.only("xs")]: {
       justifyContent: "space-between",

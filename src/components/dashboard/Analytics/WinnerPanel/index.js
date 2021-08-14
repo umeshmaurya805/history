@@ -141,6 +141,20 @@ const WinnerPanel = () => {
     };
   });
 
+  const generateCSVData = () => {
+    return rows.map((participant) => {
+      return {
+        Name: participant.name,
+        Class: participant.studentClass,
+        Section: participant.section,
+        // "Submission Date": format(new Date(participant.submissionDate), "PP"),
+        Team: participant.team,
+        Theme: participant.theme,
+        Status: participant.status,
+      };
+    });
+  };
+
   return (
     <div className={classes.root}>
       <ParticipantTable
@@ -148,6 +162,8 @@ const WinnerPanel = () => {
         colored
         rows={rows}
         columns={columns}
+        filename="Registration List"
+        generateCSVData={generateCSVData}
       />
     </div>
   );

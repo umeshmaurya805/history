@@ -16,6 +16,12 @@ const EventCalendar = ({ setVisibleDate }) => {
   const history = useHistory();
   const { slug } = useParams();
 
+  const initialFilter = {
+    class: "all",
+    user: "Student",
+    category: "all",
+  };
+
   const slugHash = getSlugHash();
 
   const selectedDay = slugHash.find((item) => slug === item[0])[1];
@@ -23,7 +29,7 @@ const EventCalendar = ({ setVisibleDate }) => {
   const [eventList, setEventList] = useState([]);
   const [dialogDate, setDialogDate] = useState(selectedDay);
   const [openDialog, setOpenDialog] = useState(false);
-  const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
+  const [option, setOption] = useState(initialFilter);
 
   const handleClose = (slug) => {
     setOpenDialog(false);
@@ -108,8 +114,9 @@ const EventCalendar = ({ setVisibleDate }) => {
       className={classes.root}
     >
       <EventConfiguration
+        data={calendarEvents}
         value={option}
-        handleChange={handleChange}
+        onChange={handleChange}
         classes={{ root: classes.config }}
       />
       <Calendar
