@@ -1,4 +1,5 @@
 import React from "react";
+import CsvDownloader from "react-csv-downloader";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -193,6 +194,8 @@ const ParticipantTable = ({
   editable = false,
   colored = false,
   noHeader = false,
+  filename = "Participants List",
+  generateCSVData,
 }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
@@ -226,12 +229,6 @@ const ParticipantTable = ({
     setPage(0);
   };
 
-  const handleDownloadList = () => {
-    toast.success("Participants List Downloaded", {
-      toastId: "downloadList",
-    });
-  };
-
   const handleParticipantDelete = (slug) => {
     toast.success("Participant removed from the event", {
       toastId: "ParticipantDelete",
@@ -258,14 +255,15 @@ const ParticipantTable = ({
             <Typography variant="h6" color="primary" className={classes.title}>
               {title}
             </Typography>
-            <Button
-              color="primary"
-              className={classes.downloadButton}
-              endIcon={<GetAppIcon />}
-              onClick={handleDownloadList}
-            >
-              Download List
-            </Button>
+            <CsvDownloader filename={filename} datas={generateCSVData()}>
+              <Button
+                color="primary"
+                className={classes.downloadButton}
+                endIcon={<GetAppIcon />}
+              >
+                Download List
+              </Button>
+            </CsvDownloader>
           </Toolbar>
         )}
         <Table aria-label="participant table">
@@ -339,7 +337,7 @@ const ParticipantTable = ({
                                 backgroundColor:
                                   value === "Participated" ||
                                   value === "Registered" ||
-                                  value === "Submitted" // TODO: Make it : hasParticipated
+                                  value === "Submitted"
                                     ? "#69DE91"
                                     : value === "Invited"
                                     ? "#ffff99"
@@ -368,7 +366,9 @@ const ParticipantTable = ({
                         return (
                           <StyledTableCell key={column.id} align="center">
                             {value}
-                            {column.id === "studentClass" && ` ${row.section}`}
+                            {column.id === "studentClass" &&
+                              row.section &&
+                              ` ${row.section}`}
                           </StyledTableCell>
                         );
                       }

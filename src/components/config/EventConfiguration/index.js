@@ -2,10 +2,12 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import Dropdown from "../../common/Dropdown";
 import useStyles from "./style";
+import { Button } from "@material-ui/core";
 
 const EventConfiguration = ({
   value,
-  handleChange,
+  handleFilter,
+  handleFilterReset,
   classes: customClasses = {},
 }) => {
   const classes = useStyles();
@@ -24,10 +26,14 @@ const EventConfiguration = ({
     "Class 3",
   ];
 
+  const classKeys = ["all", 12, 11, 10, 9, 8, 7, 6, 5, 4, 3];
+
   const userItems = ["Student", "Teacher"];
 
+  const userKeys = ["Student", "Teacher"];
+
   const categoryItems = {
-    0: [
+    Student: [
       "Category",
       "Competitions",
       "Workshops",
@@ -35,19 +41,58 @@ const EventConfiguration = ({
       "Virtual Tours",
       "Theater Shows",
     ],
-    1: ["Category", "Workshops", "Courses"],
+    Teacher: ["Category", "Workshops", "Courses"],
+  };
+
+  const categoryKeys = {
+    Student: [
+      "all",
+      "competitive",
+      "workshop",
+      "course",
+      "virtualTour",
+      "theaterShow",
+    ],
+    Teacher: ["all", "workshop", "course"],
+  };
+
+  const getIndex = (arr, value) => {
+    return arr.findIndex((val) => val === value);
+  };
+
+  const handleChange = (event) => {
+    const { name, value: selectedValue } = event.target;
+    let key;
+
+    switch (name) {
+      case "class":
+        key = classKeys[selectedValue];
+        break;
+
+      case "user":
+        key = userKeys[selectedValue];
+        break;
+      case "category":
+        key = categoryKeys[value.user][selectedValue];
+        break;
+      default:
+        key = classKeys[selectedValue];
+    }
+
+    handleFilter(name, key);
   };
 
   return (
     <Box
       display="flex"
       justifyContent="flex-end"
+      alignItems="center"
       flexWrap="wrap"
       className={`${classes.root} ${customClasses.root}`}
     >
       <Dropdown
         name="class"
-        value={value.class}
+        value={getIndex(classKeys, value.class)}
         colored
         items={classItems}
         handleChange={handleChange}
@@ -55,7 +100,7 @@ const EventConfiguration = ({
       />
       <Dropdown
         name="user"
-        value={value.user}
+        value={getIndex(userKeys, value.user)}
         colored
         items={userItems}
         handleChange={handleChange}
@@ -63,12 +108,19 @@ const EventConfiguration = ({
       />
       <Dropdown
         name="category"
-        value={value.category}
+        value={getIndex(categoryKeys[value.user], value.category)}
         colored
         items={categoryItems[value.user]}
         handleChange={handleChange}
         classes={{ select: classes.selectCategory }}
       />
+      <Button
+        color="primary"
+        className={classes.resetButton}
+        onClick={handleFilterReset}
+      >
+        Reset
+      </Button>
     </Box>
   );
 };

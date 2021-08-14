@@ -12,17 +12,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectClass: {
-    minWidth: '3.125rem',
+    minWidth: "3.125rem",
   },
   selectUser: {
-    minWidth: '3.125rem',
+    minWidth: "3.125rem",
   },
   selectCategory: {
-    minWidth: '5.625rem',
+    minWidth: "5.625rem",
     [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",
     },
+  },
+  resetButton: {
+    width: "5rem",
   },
 }));
 

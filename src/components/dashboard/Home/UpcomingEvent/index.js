@@ -5,10 +5,8 @@ import Title from "../../../common/Title";
 import EventsTable from "../../../table/EventsTable";
 import ParticipantListDialog from "../../../dialog/ParticipantListDialog";
 import EventConfiguration from "../../../config/EventConfiguration";
-import useStyles from "./style";
-// import { getEvents } from "../../../../data";
-// import { format, isAfter } from "date-fns";
 import { useGetUpcomingEventsQuery } from "../../../../app/api/schoolEvent";
+import useStyles from "./style";
 
 const columns = [
   {
@@ -40,34 +38,19 @@ const columns = [
   },
 ];
 
-// function createData(eventId, title, date, classes, registrations, list) {
-//   return { eventId, title, date, classes, registrations, list };
-// }
-
-// const today = new Date();
-// today.setHours(0, 0, 0, 0);
-
-// const upcomingEventList = getEvents()
-//   .filter((event) => isAfter(event.startDate, today) && event.isRegistered)
-//   .map((event) => {
-//     return {
-//       title: event.title,
-//       eventId: event.eventId,
-//       date: format(event.startDate, "PP"),
-//       classes: `${event.forClass.from} - ${event.forClass.to}`,
-//       registrations: 17,
-//     };
-//   });
-
 const UpcomingEvent = () => {
   const classes = useStyles();
   const { data } = useGetUpcomingEventsQuery();
+  const initialFilter = {
+    class: "all",
+    user: "Student",
+    category: "all",
+  };
 
   const [open, setOpen] = useState(false);
   const [eventId, setEventId] = useState(null);
 
   const [upcomingEvents, setUpcomingEvents] = useState([]);
-  console.log(upcomingEvents);
 
   useEffect(() => {
     if (data) {
@@ -75,8 +58,8 @@ const UpcomingEvent = () => {
     }
   }, [data]);
 
-  const handleClickOpen = (slug) => {
-    setEventId(slug);
+  const handleClickOpen = (id) => {
+    setEventId(id);
     setOpen(true);
   };
 
@@ -85,12 +68,55 @@ const UpcomingEvent = () => {
     setOpen(false);
   };
 
-  const [option, setOption] = useState({ class: 0, user: 0, category: 0 });
+  const [option, setOption] = useState(initialFilter);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const classFilter = (updatedOptions, availableClasses) => {
+    return (
+      updatedOptions.class === "all" ||
+      (updatedOptions.class >= availableClasses.from &&
+        updatedOptions.class <= availableClasses.to)
+    );
+  };
 
-    setOption({ ...option, [name]: value });
+  const userFilter = (updatedOptions, user) => {
+    return user === updatedOptions.user;
+  };
+
+  const categoryFilter = (updatedOptions, category) => {
+    return (
+      updatedOptions.category === "all" || category === updatedOptions.category
+    );
+  };
+
+  const handleFilter = (name, key) => {
+    const updatedOptions =
+      name === "user"
+        ? { ...option, user: key, category: "all" }
+        : { ...option, [name]: key };
+
+    setOption(updatedOptions);
+
+    setUpcomingEvents(
+      data.filter(
+        (event) =>
+          classFilter(updatedOptions, event.availableClasses) &&
+          userFilter(updatedOptions, event.eventFor) &&
+          categoryFilter(updatedOptions, event.eventType)
+      )
+    );
+  };
+
+  const handleFilterReset = () => {
+    setOption(initialFilter);
+
+    setUpcomingEvents(
+      data.filter(
+        (event) =>
+          classFilter(initialFilter, event.availableClasses) &&
+          userFilter(initialFilter, event.eventFor) &&
+          categoryFilter(initialFilter, event.eventType)
+      )
+    );
   };
 
   return (
@@ -103,7 +129,11 @@ const UpcomingEvent = () => {
             </Title>
           </Grid>
           <Grid item className={classes.selectorGrid}>
-            <EventConfiguration value={option} handleChange={handleChange} />
+            <EventConfiguration
+              value={option}
+              handleFilter={handleFilter}
+              handleFilterReset={handleFilterReset}
+            />
           </Grid>
         </Grid>
       </Box>

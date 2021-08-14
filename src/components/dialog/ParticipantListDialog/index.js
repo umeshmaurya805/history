@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import ParticipantTable from "../../table/ParticipantTable";
 import useStyles from "./style";
 import { useGetUpcomingEventsQuery } from "../../../app/api/schoolEvent";
+import { format } from "date-fns";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -15,6 +16,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const ParticipantListDialog = ({ eventId = "", open, onClose }) => {
   const classes = useStyles();
+
   const { data = {} } = useGetUpcomingEventsQuery(undefined, {
     selectFromResult: ({ data }) => ({
       data: data?.find((event) => eventId === event._id),
@@ -42,12 +44,26 @@ const ParticipantListDialog = ({ eventId = "", open, onClose }) => {
   if (hasThemes)
     columns.push({ id: "theme", label: "Theme", fixedWidth: "10.5rem" });
 
-    if (isTeamEvent)
+  if (isTeamEvent)
     columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
 
   if (hasSubmissions)
     columns.push({ id: "status", label: "Status", fixedWidth: "8rem" });
-console.log('participants',participants)
+
+  const generateCSVData = () => {
+    return participants.map((participant) => {
+      return {
+        Name: participant.name,
+        Class: participant.studentClass,
+        Section: participant.section,
+        "Submission Date": format(new Date(participant.submissionDate), "PP"),
+        Team: participant.team,
+        Theme: participant.theme,
+        Status: participant.status,
+      };
+    });
+  };
+
   return (
     <Dialog
       scroll="body"
@@ -68,7 +84,12 @@ console.log('participants',participants)
             <CancelIcon fontSize="large" color="error" />
           </IconButton>
         </Box>
-        <ParticipantTable rows={participants} columns={columns} />
+        <ParticipantTable
+          rows={participants}
+          columns={columns}
+          filename="Registration List"
+          generateCSVData={generateCSVData}
+        />
       </DialogContent>
     </Dialog>
   );
