@@ -1,88 +1,79 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import ResultCard from "../../../card/ResultCard";
-import avatar from "../../../../assets/svg/avatar-man.svg";
 import Title from "../../../common/Title/index";
 import Dropdown from "../../../common/Dropdown";
+import { useGetEventResultsQuery } from "../../../../app/api/events";
 import useStyles from "./style";
+import TeamResultCard from "../../../card/TeamResultCard";
 
 const EventResult = () => {
   const classes = useStyles();
+  const { data = [] } = useGetEventResultsQuery();
 
-  const initialState = { theme: 0, event: 0 };
-  const [option, setOption] = useState(initialState);
+  const [selectedEvent, setSelectedEvent] = useState(0);
+  const [selectedTheme, setSelectedTheme] = useState(0);
+  const [isTeamEvent, setIsTeamEvent] = useState(false);
+  const [hasThemes, setHasThemes] = useState(false);
 
-  const handleChange = (event, key) => {
-    setOption({ ...option, [key]: event.target.value });
+  const handleEventChange = (e) => {
+    const { value } = e.target;
+    setSelectedEvent(value);
+    setSelectedTheme(0);
+    setHasThemes(data[value].hasThemes);
+    setIsTeamEvent(data[value].isTeamEvent);
   };
 
-  const data = [
-    {
-      name: "Abc Surname",
-      position: 1,
-      avatar,
-      studentClass: "9 A",
-      schoolName: "ABC Public School",
-    },
-    {
-      name: "Lmn Surname",
-      position: 2,
-      avatar,
-      studentClass: "10 B",
-      schoolName: "ABC Public School",
-    },
-    {
-      name: "Xyz Surname",
-      position: 3,
-      avatar,
-      studentClass: "10 A",
-      schoolName: "ABC Public School",
-    },
-  ];
+  const showResult = (results) => {
+    if (isTeamEvent) {
+      return results?.map((teamData, index) => {
+        return (
+          <Grid key={index} item style={{ flexGrow: 1 }}>
+            <TeamResultCard info={teamData} />
+          </Grid>
+        );
+      });
+    } else {
+      return results?.map((studentData, index) => {
+        return (
+          <Grid key={index} item style={{ flexGrow: 1 }}>
+            <ResultCard info={studentData} />
+          </Grid>
+        );
+      });
+    }
+  };
 
-  const events = [
-    "QUIRIOSITY QUIZ COMPETITION",
-    "ESSAY WRITING COMPETITION",
-    "DANCING COMPETITION",
-    "TEACHER WORKSHOP",
-  ];
-
-  // const themes = ["Theme 1", "Theme 2", "Theme 3"];
-
-  return (
+  return data ? (
     <div className={classes.root}>
       <Grid container alignItems="center" justifyContent="space-between">
         <Grid item>
-          <Title tooltipText="Results of past 5 competitions">
-            Results
-          </Title>
+          <Title tooltipText="Results of past 5 competitions">Results</Title>
         </Grid>
         <Grid item className={classes.selector}>
-          {/* <Dropdown
-            value={option.theme}
-            items={themes}
-            handleChange={(e) => handleChange(e, "theme")}
-            classes={{ select: classes.selectTheme }}
-          /> */}
+          {hasThemes && (
+            <Dropdown
+              value={selectedTheme}
+              items={data[selectedEvent]?.themes.map(({ theme }) => theme)}
+              handleChange={(e) => setSelectedTheme(e.target.value)}
+              classes={{ select: classes.selectTheme }}
+            />
+          )}
           <Dropdown
-            value={option.event}
-            items={events}
-            handleChange={(e) => handleChange(e, "event")}
+            value={selectedEvent}
+            items={data.map(({ title }) => title)}
+            handleChange={handleEventChange}
             classes={{ select: classes.selectEvent }}
           />
         </Grid>
       </Grid>
       <Grid container spacing={3} className={classes.resultContainer}>
-        {data.map((studentInfo, index) => {
-          return (
-            <Grid key={index} item style={{ flexGrow: 1 }}>
-              <ResultCard info={studentInfo} />
-            </Grid>
-          );
-        })}
+        {hasThemes
+          ? showResult(data[selectedEvent]?.themes[selectedTheme]?.results)
+          : showResult(data[selectedEvent]?.results)}
       </Grid>
     </div>
-  );
+  ) : null;
 };
 
 export default EventResult;

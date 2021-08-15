@@ -40,14 +40,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '0.875rem',
     },
   },
-  pointsScored: {
-    fontFamily: "Roboto",
-    fontSize: '0.875rem',
-    fontWeight: 500,
-    "@media (max-width: 1500px)": {
-      fontSize: "0.75rem",
-    },
-  },
   extraInfo: {
     fontSize: '0.875rem',
     color: "#383838",

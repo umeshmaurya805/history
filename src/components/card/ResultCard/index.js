@@ -11,8 +11,18 @@ import useStyles from "./style";
 
 const ResultCard = ({ info }) => {
   const classes = useStyles();
-  const { position, name, avatar, points, studentClass, schoolName } = info;
-  const medals = [firstMedal, secondMedal, thirdMedal];
+  const {
+    position,
+    firstName,
+    lastName,
+    avatar,
+    studentClass,
+    section,
+    schoolName,
+    address,
+  } = info;
+
+  const medals = { first: firstMedal, second: secondMedal, third: thirdMedal };
 
   return (
     <Card className={classes.root}>
@@ -33,30 +43,20 @@ const ResultCard = ({ info }) => {
               className={classes.name}
               color="primary"
             >
-              {name}
+              {firstName} {lastName}
             </Typography>
-            {points && (
-              <Typography
-                variant="body2"
-                component="div"
-                className={classes.pointsScored}
-                color="primary"
-              >
-                Points Gained - {points}
-              </Typography>
-            )}
             <Typography className={classes.extraInfo} color="primary">
-              Class - {studentClass}
+              Class - {studentClass} {section}
             </Typography>
             <Typography className={classes.extraInfo} color="primary">
               {schoolName}
             </Typography>
             <Typography className={classes.extraInfo} color="primary">
-              Tagore Park, new Delhi
+              {address}
             </Typography>
           </Grid>
           <Grid item className={classes.position}>
-            <img src={medals[position - 1]} alt="" />
+            <img src={medals[position]} alt="" />
           </Grid>
         </Grid>
       </CardContent>
