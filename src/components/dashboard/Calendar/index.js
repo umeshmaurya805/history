@@ -5,8 +5,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { isAfter, isSameMonth } from "date-fns";
 import Layout from "../../common/Layout";
 import EventCalendar from "./EventCalendar";
-// import NextInLine from "./NextInLine";
-// import EventDetails from "./EventDetails";
+import NextInLine from "./NextInLine";
+import EventDetails from "./EventDetails";
 import { useGetEventsQuery } from "../../../app/api/events";
 import {
   setSelectedEventId,
@@ -40,42 +40,42 @@ const Calendar = () => {
     }
   }, [data, dispatch]);
 
-  // useEffect(() => {
-  //   if (events?.length > 0) {
-  //     let selectedEvent;
+  useEffect(() => {
+    if (!events) return;
 
-  //     if (id) {
-  //       selectedEvent = events.find(({ _id }) => _id === id);
-  //       if (!selectedEvent) {
-  //         history.push("/dashboard/calendar");
-  //         return null;
-  //       }
-  //     } else {
-  //       const today = new Date();
+    let selectedEvent;
 
-  //       const eventsThisMonth = events.filter(({ date }) =>
-  //         isSameMonth(new Date(date), today)
-  //       );
+    if (id) {
+      selectedEvent = events.find(({ _id }) => _id === id);
+      if (!selectedEvent) {
+        history.push("/dashboard/calendar");
+        return null;
+      }
+    } else {
+      const today = new Date();
 
-  //       if (eventsThisMonth.length === 0) {
-  //         setMonthHasEvent(false);
-  //         return;
-  //       }
+      const eventsThisMonth = events.filter(({ date }) =>
+        isSameMonth(new Date(date), today)
+      );
 
-  //       selectedEvent = eventsThisMonth.find(({ registrationDeadline }) =>
-  //         isAfter(new Date(registrationDeadline), today)
-  //       );
+      if (eventsThisMonth.length === 0) {
+        setMonthHasEvent(false);
+        return;
+      }
 
-  //       if (!selectedEvent) {
-  //         selectedEvent = eventsThisMonth[eventsThisMonth.length - 1];
-  //       }
-  //     }
+      selectedEvent = eventsThisMonth.find(({ registrationDeadline }) =>
+        isAfter(new Date(registrationDeadline), today)
+      );
 
-  //     setMonthHasEvent(true);
-  //     setVisibleDate(new Date(selectedEvent.date));
-  //     dispatch(setSelectedEventId(selectedEvent._id));
-  //   }
-  // }, [events, dispatch, id, history]);
+      if (!selectedEvent) {
+        selectedEvent = eventsThisMonth[eventsThisMonth.length - 1];
+      }
+    }
+
+    setMonthHasEvent(true);
+    setVisibleDate(new Date(selectedEvent.date));
+    dispatch(setSelectedEventId(selectedEvent._id));
+  }, [events, dispatch, id, history]);
 
   // const updateCalendar = () => {};
 
@@ -92,18 +92,18 @@ const Calendar = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6} md={12} className={classes.nextLine}>
-              {/* {monthHasEvent && <NextInLine visibleDate={visibleDate} />} */}
+              {monthHasEvent && <NextInLine visibleDate={visibleDate} />}
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} md={7} xl={7}>
-          {/* {monthHasEvent ? (
+          {monthHasEvent ? (
             <EventDetails />
           ) : (
             <div className={classes.noEvents}>
               Events not available for this month
             </div>
-          )} */}
+          )}
         </Grid>
       </Grid>
     </Layout>

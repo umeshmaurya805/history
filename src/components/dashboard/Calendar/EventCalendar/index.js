@@ -34,88 +34,38 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
   const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
-    if (events?.length > 0) {
-      const eventHash = new Map();
-      console.log("sghhj");
-      events.forEach((event) => {
-        const date = new Date(event.date);
-        date.setHours(0, 0, 0, 0, 0);
-        const dateString = date.toString();
+    if (!events) return;
 
-        if (eventHash.has(dateString)) {
-          const hashedData = eventHash.get(dateString);
-          hashedData.eventCount++;
-          hashedData.events.push(event);
-          eventHash.set(dateString, hashedData);
-        } else {
-          eventHash.set(dateString, {
-            year: date.getFullYear(),
-            month: date.getMonth() + 1,
-            day: date.getDate(),
-            eventCount: 1,
-            events: [event],
-            // className: `-selected ${
-            //   isSelected
-            //     ? isRegistrationDeadlineFinished
-            //       ? classes.selectedEventPast
-            //       : classes.selectedEvent
-            //     : isRegistrationDeadlineFinished && classes.pastEvent
-            // }`,
-          });
-        }
-      });
-      // const date = new Date(year, month - 1, day);
-      // const isSelected = isSameDay(visibleDate, date);
-      // let isRegistrationDeadlineFinished = true;
-      const today = new Date();
+    const eventHash = new Map();
 
-      // events?.forEach(({ registrationDeadline }) => {
-      //   if (isAfter(new Date(registrationDeadline), today)) {
-      //     isRegistrationDeadlineFinished = false;
-      //   }
-      // });
+    events.forEach((event) => {
+      const date = new Date(event.date);
+      date.setHours(0, 0, 0, 0, 0);
+      const dateString = date.toString();
 
-      const e = Array.from(eventHash, ([name, value]) => ({
+      if (eventHash.has(dateString)) {
+        const hashedData = eventHash.get(dateString);
+        hashedData.eventCount++;
+        hashedData.events.push(event);
+        eventHash.set(dateString, hashedData);
+      } else {
+        eventHash.set(dateString, {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate(),
+          eventCount: 1,
+          events: [event],
+        });
+      }
+    });
+
+    setCalendarEvents(
+      Array.from(eventHash, ([name, value]) => ({
         name,
         value,
-      })).map(({ value }) => value);
-
-      setCalendarEvents(e.map(
-          ({ year, month, day, events }) => {
-            const date = new Date(year, month - 1, day);
-            const isSelected = isSameDay(visibleDate, date);
-            let isRegistrationDeadlineFinished = true;
-      
-            events?.forEach(({ registrationDeadline }) => {
-              if (isAfter(new Date(registrationDeadline), today)) {
-                isRegistrationDeadlineFinished = false;
-              }
-            });
-      
-            return {
-              year,
-              month,
-              day,
-              className: `-selected ${
-                isSelected
-                  ? isRegistrationDeadlineFinished
-                    ? classes.selectedEventPast
-                    : classes.selectedEvent
-                  : isRegistrationDeadlineFinished && classes.pastEvent
-              }`,
-            };
-          }
-        )
-      );
-    }
-    // console.log("hi");
-  }, [
-    events,
-    visibleDate,
-    classes.pastEvent,
-    classes.selectedEvent,
-    classes.selectedEventPast,
-  ]);
+      })).map(({ value }) => value)
+    );
+  }, [events]);
 
   const handleClose = (id) => {
     setOpenDialog(false);
@@ -143,32 +93,34 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
     });
   };
 
-  // const displayEventDays = calendarEvents.map(
-  //   ({ year, month, day, events }) => {
-  //     const date = new Date(year, month - 1, day);
-  //     const isSelected = isSameDay(visibleDate, date);
-  //     let isRegistrationDeadlineFinished = true;
+  const today = new Date();
 
-  //     events?.forEach(({ registrationDeadline }) => {
-  //       if (isAfter(new Date(registrationDeadline), today)) {
-  //         isRegistrationDeadlineFinished = false;
-  //       }
-  //     });
+  const displayEventDays = calendarEvents.map(
+    ({ year, month, day, events }) => {
+      const date = new Date(year, month - 1, day);
+      const isSelected = isSameDay(visibleDate, date);
+      let isRegistrationDeadlineFinished = true;
 
-  //     return {
-  //       year,
-  //       month,
-  //       day,
-  //       className: `-selected ${
-  //         isSelected
-  //           ? isRegistrationDeadlineFinished
-  //             ? classes.selectedEventPast
-  //             : classes.selectedEvent
-  //           : isRegistrationDeadlineFinished && classes.pastEvent
-  //       }`,
-  //     };
-  //   }
-  // );
+      events?.forEach(({ registrationDeadline }) => {
+        if (isAfter(new Date(registrationDeadline), today)) {
+          isRegistrationDeadlineFinished = false;
+        }
+      });
+
+      return {
+        year,
+        month,
+        day,
+        className: `-selected ${
+          isSelected
+            ? isRegistrationDeadlineFinished
+              ? classes.selectedEventPast
+              : classes.selectedEvent
+            : isRegistrationDeadlineFinished && classes.pastEvent
+        }`,
+      };
+    }
+  );
 
   const handleDateChange = (activeDate) => {
     const selectedDate = new Date(
@@ -187,7 +139,7 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
     }
 
     let selectedEvent = eventsThisMonth.find(({ registrationDeadline }) =>
-      isAfter(new Date(registrationDeadline), new Date())
+      isAfter(new Date(registrationDeadline), today)
     );
 
     if (!selectedEvent) {
@@ -195,13 +147,13 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
     }
 
     setMonthHasEvent(true);
+    setVisibleDate(selectedDate);
     dispatch(setSelectedEventId(selectedEvent._id));
     history.push(`/dashboard/calendar/${selectedEvent._id}`);
   };
 
   const handleEventChange = (events) => {
     // setMonthHasEvent(event`)
-    console.log("eee", events);
     dispatch(setEventsData(events));
     history.push("/dashboard/calendar");
   };
@@ -225,7 +177,7 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
         colorPrimary="#007AFF"
         colorPrimaryLight="#D5EFFF"
         calendarTodayClassName={classes.today}
-        customDaysClassName={calendarEvents}
+        customDaysClassName={displayEventDays}
         onDateChange={handleDateChange}
       />
       <EventsOnDialog

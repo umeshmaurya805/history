@@ -38,7 +38,7 @@ const EventsOnDialog = ({ date, data, handleClose, ...props }) => {
       </DialogTitle>
       <DialogContent className={classes.content}>
         <List aria-label="upcoming-event-list">
-          {data.map((event, index) => {
+          {data?.map((event, index) => {
             return (
               <ListItem
                 key={index}
