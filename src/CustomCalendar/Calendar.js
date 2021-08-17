@@ -15,6 +15,7 @@ import { useLocaleUtils, useLocaleLanguage } from "./shared/hooks";
 import { Header, MonthSelector, YearSelector, DaysList } from "./components";
 
 const Calendar = ({
+  selectedMonth,
   value,
   onChange,
   onDisabledDayError,
@@ -46,6 +47,23 @@ const Calendar = ({
     isYearSelectorOpen: false,
   });
 
+  const { getToday } = useLocaleUtils(locale);
+  const { weekDays: weekDaysList, isRtl } = useLocaleLanguage(locale);
+  const today = getToday();
+
+  const getComputedActiveDate = () => {
+    const valueType = getValueType(value);
+    if (valueType === TYPE_MUTLI_DATE && value.length)
+      return shallowClone(value[0]);
+    if (valueType === TYPE_SINGLE_DATE && value) return shallowClone(value);
+    if (valueType === TYPE_RANGE && value.from) return shallowClone(value.from);
+    return shallowClone(today);
+  };
+
+  const activeDate = mainState.activeDate
+    ? shallowClone(mainState.activeDate)
+    : getComputedActiveDate();
+
   useEffect(() => {
     const calendarRef = calendarElement.current;
 
@@ -60,17 +78,19 @@ const Calendar = ({
       calendarElement.current.addEventListener("keyup", handleKeyUp, false);
     }
 
+    // Custom Code
+    setMainState({
+      ...mainState,
+      activeDate: { ...activeDate, month: selectedMonth },
+      monthChangeDirection: "",
+    });
+
     return () => {
-      /* istanbul ignore else */
       if (calendarRef !== null) {
         calendarRef.removeEventListener("keyup", handleKeyUp, false);
       }
     };
-  }, [calendarElement]);
-
-  const { getToday } = useLocaleUtils(locale);
-  const { weekDays: weekDaysList, isRtl } = useLocaleLanguage(locale);
-  const today = getToday();
+  }, [calendarElement, selectedMonth]);
 
   const createStateToggler = (property) => () => {
     setMainState({ ...mainState, [property]: !mainState[property] });
@@ -78,19 +98,6 @@ const Calendar = ({
 
   const toggleMonthSelector = createStateToggler("isMonthSelectorOpen");
   const toggleYearSelector = createStateToggler("isYearSelectorOpen");
-
-  const getComputedActiveDate = () => {
-    const valueType = getValueType(value);
-    if (valueType === TYPE_MUTLI_DATE && value.length)
-      return shallowClone(value[0]);
-    if (valueType === TYPE_SINGLE_DATE && value) return shallowClone(value);
-    if (valueType === TYPE_RANGE && value.from) return shallowClone(value.from);
-    return shallowClone(today);
-  };
-
-  const activeDate = mainState.activeDate
-    ? shallowClone(mainState.activeDate)
-    : getComputedActiveDate();
 
   const weekdays = weekDaysList.map((weekDay) => (
     <abbr key={weekDay.name} title={weekDay.name} className="Calendar__weekDay">
@@ -123,7 +130,7 @@ const Calendar = ({
   const selectMonth = (newMonthNumber) => {
     setMainState({
       ...mainState,
-      activeDate: { ...activeDate },
+      activeDate: { ...activeDate, month: newMonthNumber },
       isMonthSelectorOpen: false,
     });
 

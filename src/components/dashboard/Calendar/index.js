@@ -1,52 +1,81 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
+import { useHistory, useParams } from "react-router-dom";
+import { isAfter, isSameMonth } from "date-fns";
 import Layout from "../../common/Layout";
 import EventCalendar from "./EventCalendar";
 import NextInLine from "./NextInLine";
 import EventDetails from "./EventDetails";
+import { useGetEventsQuery } from "../../../app/api/events";
+import {
+  setSelectedEventId,
+  setEventsData,
+} from "../../../app/slices/eventSlice";
 import useStyles from "./style";
-import { useHistory, useParams } from "react-router-dom";
-import { isAfter } from "date-fns";
-import { toast } from "react-toastify";
-import { getSlugHash } from "../../../data";
 
 const Calendar = () => {
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [visibleDate, setVisibleDate] = useState(new Date());
+  const [monthHasEvent, setMonthHasEvent] = useState(false);
 
-  const { slug } = useParams();
+  const events = useSelector((state) => state.event.data);
 
-  const slugHash = getSlugHash();
+  const { data } = useGetEventsQuery();
 
-  if (!slug) {
-    const today = new Date();
+  const { id } = useParams();
 
-    const slugItem = slugHash.find((item) => {
-      return isAfter(item[2], today);
-    });
-
-    if (!slugItem) {
-      toast.info("No Events found", {
-        toastId: "NoEventFound",
-      });
-      return <div>No Events</div>;
+  useEffect(() => {
+    if (data?.length > 0) {
+      dispatch(
+        setEventsData(data.filter(({ eventFor }) => eventFor === "Student"))
+      );
+      // console.log("ss");
     }
-    // console.log("slugItem", slugItem);
-    history.push(`/dashboard/calendar/${slugItem[0]}`);
-    return null;
-  } else {
-    const slugItem = slugHash.find((item) => slug === item[0]);
-    if (!slugItem) {
-      history.push("/dashboard/calendar");
-      return null;
+  }, [data, dispatch]);
+
+  useEffect(() => {
+    if (events?.length > 0) {
+      let selectedEvent;
+
+      if (id) {
+        selectedEvent = events.find(({ _id }) => _id === id);
+        if (!selectedEvent) {
+          history.push("/dashboard/calendar");
+          return null;
+        }
+      } else {
+        const today = new Date();
+
+        const eventsThisMonth = events.filter(({  date }) =>
+          isSameMonth(new Date(date), today)
+        );
+
+        if (eventsThisMonth.length === 0) {
+          setMonthHasEvent(false);
+          return;
+        }
+
+        selectedEvent = eventsThisMonth.find(({ registrationDeadline }) =>
+          isAfter(new Date(registrationDeadline), today)
+        );
+
+        if (!selectedEvent) {
+          selectedEvent = eventsThisMonth[eventsThisMonth.length - 1];
+        }
+      }
+
+      setMonthHasEvent(true);
+      setVisibleDate(new Date(selectedEvent.date));
+      dispatch(setSelectedEventId(selectedEvent._id));
     }
-  }
+  }, [events, dispatch, id, history]);
 
   return (
     <Layout>
@@ -54,15 +83,25 @@ const Calendar = () => {
         <Grid item xs={12} md={5} xl={5} className={classes.itemLeft}>
           <Grid container justifyContent="center" spacing={3}>
             <Grid item xs={12} sm={6} md={12}>
-              <EventCalendar setVisibleDate={setVisibleDate} />
+              <EventCalendar
+                visibleDate={visibleDate}
+                setVisibleDate={setVisibleDate}
+                setMonthHasEvent={setMonthHasEvent}
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={12} className={classes.nextLine}>
-              <NextInLine visibleDate={visibleDate} />
+              {monthHasEvent && <NextInLine visibleDate={visibleDate} />}
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} md={7} xl={7}>
-          <EventDetails />
+          {monthHasEvent ? (
+            <EventDetails />
+          ) : (
+            <div className={classes.noEvents}>
+              Events not available for this month
+            </div>
+          )}
         </Grid>
       </Grid>
     </Layout>

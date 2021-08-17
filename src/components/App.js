@@ -12,8 +12,9 @@ import "./App.css";
 const App = () => {
   /*** DEVELOPER SIGNATURE ***/
   console.log("Developed by Divyansh Singh Thakur");
+  console.log("Professional Mobile & Web Developer");
   console.log("🔥🔥 https://github.com/DivyanshThakur 🔥🔥");
-  
+
   return (
     <Router>
       <CssBaseline />

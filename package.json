@@ -15,6 +15,7 @@
     "chart.js": "^3.4.1",
     "date-fns": "^2.22.1",
     "formik": "^2.2.9",
+    "js-file-downloader": "^1.1.20",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
     "react-csv-downloader": "^2.7.0",

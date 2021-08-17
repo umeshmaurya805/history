@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { hdApi } from "./api";
 import supportReducer from "./slices/supportSlice";
+import eventReducer from "./slices/eventSlice";
 // import logger from "redux-logger";
 
 const middleware = [...getDefaultMiddleware(), hdApi.middleware];
@@ -21,6 +22,7 @@ const store = configureStore({
   reducer: {
     [hdApi.reducerPath]: hdApi.reducer,
     support: supportReducer,
+    event: eventReducer
   },
   middleware: config.middleware,
   devTools: config.devTools,

@@ -14,7 +14,7 @@ const Dashboard = () => {
       <Route exact path={`${path}/home`} component={Home} />
       <Route
         exact
-        path={[`${path}/calendar/:slug`, `${path}/calendar`]}
+        path={[`${path}/calendar/:id`, `${path}/calendar`]}
         component={Calendar}
       />
       <Route exact path={`${path}/analytics`} component={Analytics} />

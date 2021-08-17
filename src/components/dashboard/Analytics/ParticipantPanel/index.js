@@ -1,21 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Line, defaults } from "react-chartjs-2";
 import format from "date-fns/format";
 import AnalyticsConfiguration from "../../../config/AnalyticsConfiguration";
+import { useGetEventAnalyticsQuery } from "../../../../app/api/school";
 import useStyles from "./style";
 
 const ParticipantPanel = () => {
   const classes = useStyles();
+  const { data = [] } = useGetEventAnalyticsQuery();
+  const [datasets, setDatasets] = useState([]);
+
+  const [events, setEvents] = useState(data);
+
+  useEffect(() => {
+    if (data) {
+      setEvents(data);
+    }
+  }, [data]);
+
+  const computeAnalytics = () => {};
+
   const [option, setOption] = useState({
+    category: "all",
     class: 0,
     user: 0,
-    category: 0,
     academicYear: 0,
     pastDays: 0,
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    const competitiveDataset = {
+      label: "Competitive Events",
+      data: [50, 90, 120, 136, 120, 120, 50],
+      backgroundColor: "blue",
+      borderColor: "blue",
+    };
+    const nonCompetitiveDataset = {
+      label: "Non-Competitive Events",
+      data: [60, 100, 80, 100, 140, 60, 40],
+      backgroundColor: "#F89503",
+      borderColor: "#F89503",
+    };
 
     setOption({ ...option, [name]: value });
   };
@@ -30,27 +57,13 @@ const ParticipantPanel = () => {
       format(new Date(2021, 6, 28), "PP"),
       format(new Date(2021, 6, 29), "PP"),
     ],
-    datasets: [
-      {
-        label: "Competitive Events",
-        data: [50, 90, 120, 136, 120, 120, 50],
-        backgroundColor: "blue",
-        borderColor: "blue",
-      },
-      {
-        label: "Non-Competitive Events",
-        data: [60, 100, 80, 100, 140, 60, 40],
-        backgroundColor: "#F89503",
-        borderColor: "#F89503",
-      },
-    ],
+    datasets,
   };
 
-  defaults.font.size =16;
+  defaults.font.size = 16;
 
   const chartOptions = {
     scales: {
-
       y: {
         display: true,
         title: {
@@ -58,11 +71,10 @@ const ParticipantPanel = () => {
           text: "No. of Participants",
           padding: { top: 0, left: 0, right: 0, bottom: 20 },
         },
-        min: 0,
       },
     },
     layout: {
-      padding: 20,
+      padding: 0,
     },
     plugins: {
       legend: {

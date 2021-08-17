@@ -56,6 +56,20 @@ export const schoolApi = hdApi.injectEndpoints({
           };
         }),
     }),
+    getEventAnalytics: build.query({
+      query: () => "schools/my-account?filter=events",
+      transformResponse: ({ data }) =>
+        data.participatedEvents.map((event) => {
+          return {
+            date: event.date,
+            eventType: event.eventType,
+            eventFor: event.eventFor,
+            classFrom:event.availableClasses.from,
+            classTo: event.availableClasses.to,
+            participantCount:event.participantCount,
+          };
+        }),
+    }),
   }),
 });
 
@@ -65,4 +79,5 @@ export const {
   useUploadLogoMutation,
   useGetSchoolStatsQuery,
   useGetSchoolWinnersQuery,
+  useGetEventAnalyticsQuery,
 } = schoolApi;

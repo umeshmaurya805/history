@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -24,6 +25,7 @@ import useStyles from "./style";
 const NavList = () => {
   const { url: parentUrl } = useRouteMatch();
   const classes = useStyles();
+  const selectedEventId = useSelector((state) => state.event.selectedEventId);
 
   const list = [
     {
@@ -34,7 +36,11 @@ const NavList = () => {
     {
       text: "Calendar",
       path: calendarSvgPath,
-      url: "/dashboard/calendar",
+      url: selectedEventId
+        ? `/dashboard/calendar/${selectedEventId}`
+        : parentUrl.includes("/dashboard/calendar")
+        ? parentUrl
+        : "/dashboard/calendar",
     },
     {
       text: "Analytics",
@@ -53,32 +59,42 @@ const NavList = () => {
     },
   ];
 
-  return list.map(({ text, Svg, path, url }, index) => {
-    const matches = parentUrl.includes(url);
-
+  const getNavListItem = ({ text, Svg, path, url }, matches, index) => {
     return (
-      <Link to={url} key={index} className={classes.link}>
-        <ListItem
-          className={classes.listItem}
-          classes={{ selected: classes.selected }}
-          button
-          selected={matches}
-        >
-          <ListItemIcon className={classes.listItemIcon}>
-            {url === "/dashboard/analytics" ? (
-              <Svg fill={parentUrl === url ? "#4A90E2" : "white"} />
-            ) : (
-              <SvgIcon
-                style={{
-                  color: matches ? "#4A90E2" : "white",
-                }}
-              >
-                {path}
-              </SvgIcon>
-            )}
-          </ListItemIcon>
-          <ListItemText className={classes.listItemText} primary={text} />
-        </ListItem>
+      <ListItem
+        key={index}
+        className={classes.listItem}
+        classes={{ selected: classes.selected }}
+        button
+        selected={matches}
+      >
+        <ListItemIcon className={classes.listItemIcon}>
+          {url === "/dashboard/analytics" ? (
+            <Svg fill={parentUrl === url ? "#4A90E2" : "white"} />
+          ) : (
+            <SvgIcon
+              style={{
+                color: matches ? "#4A90E2" : "white",
+              }}
+            >
+              {path}
+            </SvgIcon>
+          )}
+        </ListItemIcon>
+        <ListItemText className={classes.listItemText} primary={text} />
+      </ListItem>
+    );
+  };
+
+  return list.map((data, index) => {
+    const matches =
+      parentUrl.includes(data.url) || data.url.includes(parentUrl);
+
+    return matches ? (
+      getNavListItem(data, matches, index)
+    ) : (
+      <Link to={data.url} key={index} className={classes.link}>
+        {getNavListItem(data, matches)}
       </Link>
     );
   });

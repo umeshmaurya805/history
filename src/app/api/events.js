@@ -1,7 +1,20 @@
 import { hdApi } from ".";
+import { EVENT_DETAILS } from "./constants";
 
 export const eventApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
+    getEventDetails: build.query({
+      query: (id) =>
+        `events/${id}?fields=title,summary,registrationDeadline,bannerLarge,description,studentMessage,infoList,registeredSchools,eventFor,isTeamEvent,hasLimit,personDesignation,persons,media`,
+      transformResponse: ({ data }) => data,
+      providesTags: [EVENT_DETAILS],
+    }),
+    getEvents: build.query({
+      query: () =>
+        "events?sort=asc&fields=date,registrationDeadline,title,cardSummary,registeredSchools,availableClasses,eventType,eventFor",
+      transformResponse: ({ data }) => data,
+      providesTags: [EVENT_DETAILS],
+    }),
     getFeaturedEvents: build.query({
       query: () => "events/featured",
       transformResponse: ({ data }) => data,
@@ -475,4 +488,9 @@ export const eventApi = hdApi.injectEndpoints({
   }),
 });
 
-export const { useGetFeaturedEventsQuery, useGetEventResultsQuery } = eventApi;
+export const {
+  useGetEventDetailsQuery,
+  useGetEventsQuery,
+  useGetFeaturedEventsQuery,
+  useGetEventResultsQuery,
+} = eventApi;

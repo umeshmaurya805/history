@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import format from "date-fns/format";
 import { toast } from "react-toastify";
-import { getEvents } from "../../../../data";
+// import { getEvents } from "../../../../data";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
 import EventAnalyticsConfiguration from "./../../../config/EventAnalyticsConfiguration/index";
@@ -51,7 +51,7 @@ const columns = [
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
-const eventsList = getEvents().map((event) => {
+const eventsList = [].map((event) => {
   return {
     title: event.title,
     slug: event.slug,

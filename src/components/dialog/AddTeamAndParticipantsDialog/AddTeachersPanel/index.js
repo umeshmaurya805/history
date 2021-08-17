@@ -115,7 +115,6 @@ const AddTeachersPanel = () => {
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData) => {
       setIsFormActive(false);
-      console.log(formData);
       resetForm();
     }),
   });

@@ -6,8 +6,16 @@ import "../../../CustomCalendar/DatePicker.css";
 import ChoiceSelectButton from "../../button/ChoiceSelectButton";
 import useStyles from "./style";
 
-const AnalyticsConfiguration = ({ value, handleChange }) => {
+const AnalyticsConfiguration = ({ data, onChange }) => {
   const classes = useStyles();
+
+  const initialFilter = {
+    class: "all",
+    user: "Student",
+    category: "all",
+  };
+
+  const [option, setOption] = useState(initialFilter);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -17,7 +25,10 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
     "Non-Competitive Events",
   ];
 
+  const categoryKeys = ["all", "competitive", "nonCompetitive"];
+
   const userItems = ["Student", "Teacher"];
+  const userKeys = ["Student", "Teacher"];
 
   const classItems = [
     "Class",
@@ -32,6 +43,83 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
     "Class 4",
     "Class 3",
   ];
+
+  const classKeys = ["all", 12, 11, 10, 9, 8, 7, 6, 5, 4, 3];
+
+  const classFilter = (updatedOptions, availableClasses) => {
+    return (
+      updatedOptions.class === "all" ||
+      (updatedOptions.class >= availableClasses.from &&
+        updatedOptions.class <= availableClasses.to)
+    );
+  };
+
+  const userFilter = (updatedOptions, user) => {
+    return user === updatedOptions.user;
+  };
+
+  const categoryFilter = (updatedOptions, category) => {
+    return (
+      updatedOptions.category === "all" || category === updatedOptions.category
+    );
+  };
+
+  const handleFilter = (name, key) => {
+    const updatedOptions =
+      name === "user"
+        ? { ...option, user: key, category: "all" }
+        : { ...option, [name]: key };
+
+    setOption(updatedOptions);
+
+    onChange(
+      data.filter(
+        (event) =>
+          classFilter(updatedOptions, event.availableClasses) &&
+          userFilter(updatedOptions, event.eventFor) &&
+          categoryFilter(updatedOptions, event.eventType)
+      )
+    );
+  };
+
+  const handleFilterReset = () => {
+    setOption(initialFilter);
+
+    onChange(
+      data.filter(
+        (event) =>
+          classFilter(initialFilter, event.availableClasses) &&
+          userFilter(initialFilter, event.eventFor) &&
+          categoryFilter(initialFilter, event.eventType)
+      )
+    );
+  };
+
+  const getIndex = (arr, value) => {
+    return arr.findIndex((val) => val === value);
+  };
+
+  const handleChange = (event) => {
+    const { name, value: selectedValue } = event.target;
+    let key;
+
+    switch (name) {
+      case "class":
+        key = classKeys[selectedValue];
+        break;
+
+      case "user":
+        key = userKeys[selectedValue];
+        break;
+      case "category":
+        key = categoryKeys[option.user][selectedValue];
+        break;
+      default:
+        key = classKeys[selectedValue];
+    }
+
+    handleFilter(name, key);
+  };
 
   // const academicYearItems = [
   //   "DD/MM/YYYY - DD/MM/YYYY",
@@ -74,7 +162,7 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
       <Grid item xs={12} className={classes.gridItem}>
         <Dropdown
           name="category"
-          value={value.category}
+          value={option.category}
           colored
           items={categoryItems}
           handleChange={handleChange}
@@ -86,14 +174,14 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
           <Grid item xs={12} md={5} className={classes.gridItem}>
             <Dropdown
               name="class"
-              value={value.class}
+              value={option.class}
               items={classItems}
               handleChange={handleChange}
               classes={{ select: classes.class }}
             />
             <Dropdown
               name="user"
-              value={value.user}
+              value={option.user}
               items={userItems}
               handleChange={handleChange}
               classes={{ select: classes.user }}
@@ -108,7 +196,7 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
           >
             <Dropdown
               name="pastDays"
-              value={value.pastDays}
+              value={option.pastDays}
               items={pastDaysItems}
               handleChange={handleChange}
               classes={{ root: classes.yearSelector, select: classes.pastDays }}
@@ -123,7 +211,7 @@ const AnalyticsConfiguration = ({ value, handleChange }) => {
             />
             {/* <Dropdown
               name="academicYear"
-              value={value.academicYear}
+              value={option.academicYear}
               items={academicYearItems}
               handleChange={handleChange}
               classes={{

@@ -37,8 +37,6 @@ const UpdatePasswordDialog = ({ handleClose, ...props }) => {
     },
     validationSchema: validationSchema,
     onSubmit: protectedHandler(async (formData, actions) => {
-      console.log(formData);
-
       if (formData.newPassword !== formData.confirmNewPassword) {
         notify.error("UpdatePasswordDialog", "Password does not match");
         return;

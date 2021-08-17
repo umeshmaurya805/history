@@ -9,7 +9,6 @@ import LoadingIconButton from "../../../button/LoadingIconButton";
 import protectedHandler from "../../../../utils/protectedHandler";
 import useStyles from "./style";
 import ChoiceSelectButton from "../../../button/ChoiceSelectButton";
-import { supportTitles } from "../../../../data";
 import {
   setSupportIndex,
   setSupportTitle,
@@ -23,6 +22,13 @@ import { useCreateTicketMutation } from "../../../../app/api/support";
 const SupportPanel = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const supportTitles = [
+    "Technical",
+    "Event Related",
+    "Credit Related",
+    "Others",
+  ];
 
   const { schoolId } = useGetProfileQuery(undefined, {
     selectFromResult: ({ data }) => ({ schoolId: data?._id }),

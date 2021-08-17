@@ -8,17 +8,17 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import CancelIcon from "@material-ui/icons/Cancel";
-import  Avatar  from "@material-ui/core/Avatar";
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Avatar from "@material-ui/core/Avatar";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import useStyles from "./style";
 
-const ViewInstructorsDialog = ({ data, onClose, ...props }) => {
+const ViewInstructorsDialog = ({ title, data, onClose, ...props }) => {
   const classes = useStyles();
   return (
     <Dialog onClose={onClose} {...props}>
       <DialogTitle disableTypography className={classes.dialogTitle}>
         <Box display="flex" justifyContent="flex-end">
-          <Typography className={classes.title}>Instructors</Typography>
+          <Typography className={classes.title}>{title}s</Typography>
           <IconButton
             edge="start"
             size="small"
@@ -35,10 +35,7 @@ const ViewInstructorsDialog = ({ data, onClose, ...props }) => {
             return (
               <ListItem key={index} className={classes.listItem}>
                 <ListItemAvatar>
-                  <Avatar
-                    src={instructor.avatar}
-                    className={classes.avatar}
-                  />
+                  <Avatar src={instructor.avatar} className={classes.avatar} />
                 </ListItemAvatar>
                 <Box className={classes.eventBox}>
                   <Typography component="p" className={classes.eventName}>
