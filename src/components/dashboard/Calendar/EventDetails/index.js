@@ -18,7 +18,7 @@ import { isBefore } from "date-fns";
 
 const EventDetails = () => {
   const classes = useStyles();
-  const {selectedEventId} = useSelector((state) => state.event);
+  const { selectedEventId } = useSelector((state) => state.event);
 
   const { data = {} } = useGetEventDetailsQuery(selectedEventId);
   const {

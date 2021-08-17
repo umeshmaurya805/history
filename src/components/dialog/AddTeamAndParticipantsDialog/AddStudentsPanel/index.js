@@ -2,136 +2,73 @@ import React, { useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
+import protectedHandler from "../../../../utils/protectedHandler";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import avatarMan from "../../../../assets/svg/avatar-man.svg";
+// import avatarMan from "../../../../assets/svg/avatar-man.svg";
 import ParticipantTable from "../../../table/ParticipantTable";
+import {
+  useGetAvailableStudentsQuery,
+  useInviteStudentsMutation,
+  useViewInvitedStudentsQuery,
+} from "../../../../app/api/schoolEvent";
+import { useGetEventDetailsQuery } from "../../../../app/api/events";
+import { notify } from "../../../../utils";
 import SearchBar from "../../../common/Searchbar";
 import useStyles from "./style";
 
 const AddStudentsPanel = () => {
   const classes = useStyles();
+  const { selectedEventId } = useSelector((state) => state.event);
 
-  const isStudent = true;
-  // const hasTeam = true;
+  const { schoolEventId } = useGetEventDetailsQuery(selectedEventId, {
+    selectFromResult: ({ data }) => ({ schoolEventId: data.schoolEvent }),
+  });
 
-  const data = [
-    {
-      name: "Divyansh Singh Thakur",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Invited",
-    },
-    {
-      name: "Bhanupratap Singh Thakur",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Registered",
-    },
-    {
-      name: "CCC Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Registered",
-    },
-    {
-      name: "DDD Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Invited",
-    },
-    {
-      name: "ABC Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Invited",
-    },
-    {
-      name: "BBBB Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Registered",
-    },
-    {
-      name: "CCC Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Registered",
-    },
-    {
-      name: "DDD Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      email: "abc@example.com",
-      contact: "0123456789",
-      status: "Invited",
-    },
-  ];
+  const [inviteStudentToEvent] = useInviteStudentsMutation();
+
+  const { data = [] } = useViewInvitedStudentsQuery(schoolEventId);
+
+  const { data: students = [] } = useGetAvailableStudentsQuery(schoolEventId);
+  console.log("st", data);
 
   const columns = [
     {
       id: "name",
-      label: `${isStudent ? "Student" : "Teacher"} Name`,
+      label: "Student Name",
       fixedWidth: "10.5rem",
     },
     { id: "email", label: "Email", fixedWidth: "10.5rem" },
     { id: "studentClass", label: "Class", fixedWidth: "10.5rem" },
-    { id: "contact", label: "Contact", fixedWidth: "10.5rem" },
+    { id: "phone", label: "Contact", fixedWidth: "10.5rem" },
     { id: "status", label: "Status", fixedWidth: "10.5rem" },
   ];
 
-  // if (hasTeam) columns.push({ id: "team", label: "Team", fixedWidth: '10.5rem' });
-
-  const rows = data.map((participant) => {
-    const { name, avatar, studentClass, section, email, contact, status } =
-      participant;
-
-    return {
-      name,
-      avatar,
-      studentClass,
-      section,
-      email,
-      contact,
-      status,
-    };
-  });
   const [searchName, setSearchName] = useState("");
 
   const handleSearchName = (e) => {
     setSearchName(e.target.value);
   };
 
+  const inviteStudent = protectedHandler(async (student) => {
+    await inviteStudentToEvent({
+      schoolEventId,
+      studentId: student._id,
+    }).unwrap();
+
+    notify.success(student.name, `${student.name} invited`, 3000);
+  });
+
   const renderSearchList = () => {
-    const searchList = data.filter(({ name }) =>
+    const searchList = students.filter(({ name }) =>
       name.toLowerCase().includes(searchName.toLowerCase())
     );
+
     if (searchList.length === 0) {
       return (
         <ListItem>
@@ -154,16 +91,17 @@ const AddStudentsPanel = () => {
                 {student.name}
               </Typography>
               <Typography component="p" className={classes.eventSubHeading}>
-                {`Class: ${student.studentClass} - ${student.section}`}
+                Class: {student.studentClass} {student.section}
               </Typography>
             </Box>
             <Button
-              // onClick={() => handleClickOpen(row.slug)}
+              onClick={() => inviteStudent(student)}
               variant="outlined"
               color="primary"
               className={classes.inviteButton}
+              disabled={student.isInvited}
             >
-              Invite
+              {student.isInvited ? "Invited" : "Invite"}
             </Button>
           </ListItem>
           {currentList.length !== index + 1 && <Divider />}
@@ -193,7 +131,12 @@ const AddStudentsPanel = () => {
           className={classes.greyBackground}
           style={searchName !== "" ? { visibility: "visible", opacity: 1 } : {}}
         />
-        <ParticipantTable noHeader editable rows={rows} columns={columns} />
+
+        <ParticipantTable
+          noHeader
+          rows={data}
+          columns={columns}
+        />
       </div>
     </div>
   );

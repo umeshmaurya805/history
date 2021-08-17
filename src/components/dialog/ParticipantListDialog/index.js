@@ -24,7 +24,7 @@ const ParticipantListDialog = ({ eventId = "", open, onClose }) => {
   });
 
   const {
-    eventFor = "Teacher",
+    eventFor = "Student",
     isTeamEvent,
     hasThemes,
     hasSubmissions,
@@ -87,7 +87,7 @@ const ParticipantListDialog = ({ eventId = "", open, onClose }) => {
         <ParticipantTable
           rows={participants}
           columns={columns}
-          filename="Registration List"
+          filename="RegistrationList"
           generateCSVData={generateCSVData}
         />
       </DialogContent>

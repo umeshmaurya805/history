@@ -27,8 +27,6 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
   });
 
   const events = useSelector((state) => state.event.data);
-  console.log("e", events);
-  // const [events, setEvents] = useState(data);
   const [calendarEvents, setCalendarEvents] = useState(events);
   const [eventList, setEventList] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
@@ -153,7 +151,6 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
   };
 
   const handleEventChange = (events) => {
-    // setMonthHasEvent(event`)
     dispatch(setEventsData(events));
     history.push("/dashboard/calendar");
   };

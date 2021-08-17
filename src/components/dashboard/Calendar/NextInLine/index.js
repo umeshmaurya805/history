@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import { Box } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import Title from "../../../common/Title";
-// import { useGetEventsQuery } from "../../../../app/api/events";
 import useStyles from "./style";
 
 const NextInLine = ({ visibleDate }) => {

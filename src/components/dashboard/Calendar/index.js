@@ -77,8 +77,6 @@ const Calendar = () => {
     dispatch(setSelectedEventId(selectedEvent._id));
   }, [events, dispatch, id, history]);
 
-  // const updateCalendar = () => {};
-
   return (
     <Layout>
       <Grid container spacing={4}>
