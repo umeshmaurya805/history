@@ -36,7 +36,7 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
   useEffect(() => {
     if (events?.length > 0) {
       const eventHash = new Map();
-
+      console.log("sghhj");
       events.forEach((event) => {
         const date = new Date(event.date);
         date.setHours(0, 0, 0, 0, 0);
@@ -54,19 +54,68 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
             day: date.getDate(),
             eventCount: 1,
             events: [event],
+            // className: `-selected ${
+            //   isSelected
+            //     ? isRegistrationDeadlineFinished
+            //       ? classes.selectedEventPast
+            //       : classes.selectedEvent
+            //     : isRegistrationDeadlineFinished && classes.pastEvent
+            // }`,
           });
         }
       });
+      // const date = new Date(year, month - 1, day);
+      // const isSelected = isSameDay(visibleDate, date);
+      // let isRegistrationDeadlineFinished = true;
+      const today = new Date();
 
-      setCalendarEvents(
-        Array.from(eventHash, ([name, value]) => ({
-          name,
-          value,
-        })).map(({ value }) => value)
+      // events?.forEach(({ registrationDeadline }) => {
+      //   if (isAfter(new Date(registrationDeadline), today)) {
+      //     isRegistrationDeadlineFinished = false;
+      //   }
+      // });
+
+      const e = Array.from(eventHash, ([name, value]) => ({
+        name,
+        value,
+      })).map(({ value }) => value);
+
+      setCalendarEvents(e.map(
+          ({ year, month, day, events }) => {
+            const date = new Date(year, month - 1, day);
+            const isSelected = isSameDay(visibleDate, date);
+            let isRegistrationDeadlineFinished = true;
+      
+            events?.forEach(({ registrationDeadline }) => {
+              if (isAfter(new Date(registrationDeadline), today)) {
+                isRegistrationDeadlineFinished = false;
+              }
+            });
+      
+            return {
+              year,
+              month,
+              day,
+              className: `-selected ${
+                isSelected
+                  ? isRegistrationDeadlineFinished
+                    ? classes.selectedEventPast
+                    : classes.selectedEvent
+                  : isRegistrationDeadlineFinished && classes.pastEvent
+              }`,
+            };
+          }
+        )
       );
     }
-    console.log("hi");
-  }, [events]);
+    // console.log("hi");
+  }, [
+    events,
+    visibleDate,
+    classes.pastEvent,
+    classes.selectedEvent,
+    classes.selectedEventPast,
+  ]);
 
   const handleClose = (id) => {
     setOpenDialog(false);
@@ -94,7 +143,32 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
     });
   };
 
-  const today = new Date();
+  // const displayEventDays = calendarEvents.map(
+  //   ({ year, month, day, events }) => {
+  //     const date = new Date(year, month - 1, day);
+  //     const isSelected = isSameDay(visibleDate, date);
+  //     let isRegistrationDeadlineFinished = true;
+
+  //     events?.forEach(({ registrationDeadline }) => {
+  //       if (isAfter(new Date(registrationDeadline), today)) {
+  //         isRegistrationDeadlineFinished = false;
+  //       }
+  //     });
+
+  //     return {
+  //       year,
+  //       month,
+  //       day,
+  //       className: `-selected ${
+  //         isSelected
+  //           ? isRegistrationDeadlineFinished
+  //             ? classes.selectedEventPast
+  //             : classes.selectedEvent
+  //           : isRegistrationDeadlineFinished && classes.pastEvent
+  //       }`,
+  //     };
+  //   }
+  // );
 
   const handleDateChange = (activeDate) => {
     const selectedDate = new Date(
@@ -113,7 +187,7 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
     }
 
     let selectedEvent = eventsThisMonth.find(({ registrationDeadline }) =>
-      isAfter(new Date(registrationDeadline), today)
+      isAfter(new Date(registrationDeadline), new Date())
     );
 
     if (!selectedEvent) {
@@ -151,32 +225,7 @@ const EventCalendar = ({ visibleDate, setVisibleDate, setMonthHasEvent }) => {
         colorPrimary="#007AFF"
         colorPrimaryLight="#D5EFFF"
         calendarTodayClassName={classes.today}
-        customDaysClassName={calendarEvents.map(
-          ({ year, month, day, events }) => {
-            const date = new Date(year, month - 1, day);
-            const isSelected = isSameDay(visibleDate, date);
-            let isRegistrationDeadlineFinished = true;
-
-            events?.forEach(({ registrationDeadline }) => {
-              if (isAfter(new Date(registrationDeadline), today)) {
-                isRegistrationDeadlineFinished = false;
-              }
-            });
-
-            return {
-              year,
-              month,
-              day,
-              className: `-selected ${
-                isSelected
-                  ? isRegistrationDeadlineFinished
-                    ? classes.selectedEventPast
-                    : classes.selectedEvent
-                  : isRegistrationDeadlineFinished && classes.pastEvent
-              }`,
-            };
-          }
-        )}
+        customDaysClassName={calendarEvents}
         onDateChange={handleDateChange}
       />
       <EventsOnDialog
