@@ -1,31 +1,73 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import Dropdown from "../../common/Dropdown";
 import DatePicker from "../../../CustomCalendar";
 import "../../../CustomCalendar/DatePicker.css";
 import ChoiceSelectButton from "../../button/ChoiceSelectButton";
 import useStyles from "./style";
+import sub from "date-fns/sub";
+import format from "date-fns/format";
+import isAfter from "date-fns/isAfter";
+import { isBefore } from "date-fns";
 
-const AnalyticsConfiguration = ({ data, onChange }) => {
+const AnalyticsConfiguration = ({
+  option,
+  setOption,
+  groupBy,
+  setGroupBy,
+  data,
+  onChange,
+}) => {
   const classes = useStyles();
+
+  const today = new Date();
+
+  const pastSeventhDay = sub(today, {
+    days: 7,
+  });
+
+  const pastThirtyDay = sub(today, {
+    days: 30,
+  });
+
+  const pastNinetyDay = sub(today, {
+    days: 90,
+  });
+
+  const initialDayRange = {
+    from: {
+      year: pastSeventhDay.getFullYear(),
+      month: pastSeventhDay.getMonth() + 1,
+      day: pastSeventhDay.getDate(),
+    },
+    to: {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate(),
+    },
+  };
 
   const initialFilter = {
     class: "all",
     user: "Student",
     category: "all",
+    pastDays: "seven",
   };
 
-  const [option, setOption] = useState(initialFilter);
+  const categoryItems = {
+    Student: [
+      "Overall Performance",
+      "Competitive Events",
+      "Non-Competitive Events",
+    ],
+    Teacher: ["Non-Competitive Events"],
+  };
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const categoryItems = [
-    "Overall Performance",
-    "Competitive Events",
-    "Non-Competitive Events",
-  ];
-
-  const categoryKeys = ["all", "competitive", "nonCompetitive"];
+  const categoryKeys = {
+    Student: ["all", "competitive", "nonCompetitive"],
+    Teacher: ["nonCompetitive"],
+  };
 
   const userItems = ["Student", "Teacher"];
   const userKeys = ["Student", "Teacher"];
@@ -46,53 +88,152 @@ const AnalyticsConfiguration = ({ data, onChange }) => {
 
   const classKeys = ["all", 12, 11, 10, 9, 8, 7, 6, 5, 4, 3];
 
-  const classFilter = (updatedOptions, availableClasses) => {
+  const pastDaysItems = [
+    "Past 7 days",
+    "Past 30 days",
+    "Past 90 days",
+    "Custom Range",
+  ];
+
+  const pastDaysKeys = ["seven", "thirty", "ninety", "custom"];
+
+  const pastDaysFilter = (updatedPastDays, date) => {
+    switch (updatedPastDays) {
+      case "seven":
+        return isAfter(date, pastSeventhDay) && isBefore(date, today);
+
+      case "thirty":
+        return isAfter(date, pastThirtyDay) && isBefore(date, today);
+
+      case "ninety":
+        return isAfter(date, pastNinetyDay) && isBefore(date, today);
+
+      case "custom":
+      default:
+        return (
+          isAfter(
+            date,
+            new Date(
+              selectedDayRange.from?.year,
+              selectedDayRange.from?.month - 1,
+              selectedDayRange.from?.day
+            )
+          ) &&
+          isBefore(
+            date,
+            new Date(
+              selectedDayRange.to?.year,
+              selectedDayRange.to?.month - 1,
+              selectedDayRange.to?.day
+            )
+          )
+        );
+    }
+  };
+
+  const classFilter = (updatedClass, classFrom, classTo) => {
     return (
-      updatedOptions.class === "all" ||
-      (updatedOptions.class >= availableClasses.from &&
-        updatedOptions.class <= availableClasses.to)
+      updatedClass === "all" ||
+      (updatedClass >= classFrom && updatedClass <= classTo)
     );
   };
 
-  const userFilter = (updatedOptions, user) => {
-    return user === updatedOptions.user;
+  const userFilter = (updatedUser, user) => {
+    return user === updatedUser;
   };
 
-  const categoryFilter = (updatedOptions, category) => {
+  const categoryFilter = (updatedCategory, category) => {
     return (
-      updatedOptions.category === "all" || category === updatedOptions.category
+      updatedCategory === "all" ||
+      (category === "competitive" && updatedCategory === "competitive") ||
+      (updatedCategory === "nonCompetitive" && category !== "competitive")
     );
   };
 
   const handleFilter = (name, key) => {
     const updatedOptions =
       name === "user"
-        ? { ...option, user: key, category: "all" }
+        ? {
+            ...option,
+            user: key,
+            category: key === "student" ? "all" : "nonCompetitive",
+          }
         : { ...option, [name]: key };
+
+    if (name === "pastDays") {
+      const to = {
+        year: today.getFullYear(),
+        month: today.getMonth() + 1,
+        day: today.getDate(),
+      };
+
+      let from = {};
+
+      switch (key) {
+        case "seven":
+          from = {
+            year: pastSeventhDay.getFullYear(),
+            month: pastSeventhDay.getMonth() + 1,
+            day: pastSeventhDay.getDate(),
+          };
+          break;
+
+        case "thirty":
+          from = {
+            year: pastThirtyDay.getFullYear(),
+            month: pastThirtyDay.getMonth() + 1,
+            day: pastThirtyDay.getDate(),
+          };
+          break;
+
+        case "ninety":
+          from = {
+            year: pastNinetyDay.getFullYear(),
+            month: pastNinetyDay.getMonth() + 1,
+            day: pastNinetyDay.getDate(),
+          };
+          break;
+
+        case "custom":
+        default:
+          from = selectedDayRange.from;
+      }
+
+      setSelectedDayRange({ from, to });
+    }
 
     setOption(updatedOptions);
 
     onChange(
       data.filter(
         (event) =>
-          classFilter(updatedOptions, event.availableClasses) &&
-          userFilter(updatedOptions, event.eventFor) &&
-          categoryFilter(updatedOptions, event.eventType)
+          classFilter(updatedOptions.class, event.classFrom, event.classTo) &&
+          userFilter(updatedOptions.user, event.eventFor) &&
+          categoryFilter(updatedOptions.category, event.eventType) &&
+          pastDaysFilter(updatedOptions.pastDays, new Date(event.date))
       )
     );
   };
 
   const handleFilterReset = () => {
     setOption(initialFilter);
+    setSelectedDayRange(initialDayRange);
+    setGroupBy(0);
 
     onChange(
       data.filter(
         (event) =>
-          classFilter(initialFilter, event.availableClasses) &&
-          userFilter(initialFilter, event.eventFor) &&
-          categoryFilter(initialFilter, event.eventType)
+          classFilter(initialFilter.class, event.classFrom, event.classTo) &&
+          userFilter(initialFilter.user, event.eventFor) &&
+          categoryFilter(initialFilter.category, event.eventType) &&
+          pastDaysFilter(initialFilter.pastDays, new Date(event.date))
       )
     );
+  };
+
+  const handleDateRangeChange = (data) => {
+    handleFilter("pastDays", "custom");
+    setSelectedDayRange(data);
   };
 
   const getIndex = (arr, value) => {
@@ -111,9 +252,15 @@ const AnalyticsConfiguration = ({ data, onChange }) => {
       case "user":
         key = userKeys[selectedValue];
         break;
+
       case "category":
         key = categoryKeys[option.user][selectedValue];
         break;
+
+      case "pastDays":
+        key = pastDaysKeys[selectedValue];
+        break;
+
       default:
         key = classKeys[selectedValue];
     }
@@ -121,36 +268,33 @@ const AnalyticsConfiguration = ({ data, onChange }) => {
     handleFilter(name, key);
   };
 
-  // const academicYearItems = [
-  //   "DD/MM/YYYY - DD/MM/YYYY",
-  //   "2020-21",
-  //   "2019-20",
-  //   "2018-19",
-  // ];
-
-  const pastDaysItems = [
-    "Past 7 days",
-    "Past 30 days",
-    "Past 90 days",
-    "Custom Range",
-  ];
-
   const chartDateSelectorTypes = ["Weekly", "Monthly", "Yearly"];
 
-  const [selectedDayRange, setSelectedDayRange] = useState({
-    from: "",
-    to: "",
-  });
+  const [selectedDayRange, setSelectedDayRange] = useState(initialDayRange);
 
   // render regular HTML input element
   const renderCustomInput = ({ ref }) => (
     <input
       readOnly
       ref={ref} // necessary
-      placeholder="DD/MM/YYYY - DD/MM/YYYY"
+      placeholder="Please select a range"
       value={
         selectedDayRange.from && selectedDayRange.to
-          ? `${selectedDayRange.from.day}/${selectedDayRange.from.month}/${selectedDayRange.from.year} - ${selectedDayRange.to.day}/${selectedDayRange.to.month}/${selectedDayRange.to.year}`
+          ? `${format(
+              new Date(
+                selectedDayRange.from.year,
+                selectedDayRange.from.month - 1,
+                selectedDayRange.from.day
+              ),
+              "PP"
+            )} - ${format(
+              new Date(
+                selectedDayRange.to.year,
+                selectedDayRange.to.month - 1,
+                selectedDayRange.to.day
+              ),
+              "PP"
+            )}`
           : ""
       }
       className={classes.datePickerInput}
@@ -162,9 +306,9 @@ const AnalyticsConfiguration = ({ data, onChange }) => {
       <Grid item xs={12} className={classes.gridItem}>
         <Dropdown
           name="category"
-          value={option.category}
+          value={getIndex(categoryKeys[option.user], option.category)}
           colored
-          items={categoryItems}
+          items={categoryItems[option.user]}
           handleChange={handleChange}
           classes={{ select: classes.category }}
         />
@@ -174,18 +318,25 @@ const AnalyticsConfiguration = ({ data, onChange }) => {
           <Grid item xs={12} md={5} className={classes.gridItem}>
             <Dropdown
               name="class"
-              value={option.class}
+              value={getIndex(classKeys, option.class)}
               items={classItems}
               handleChange={handleChange}
               classes={{ select: classes.class }}
             />
             <Dropdown
               name="user"
-              value={option.user}
+              value={getIndex(userKeys, option.user)}
               items={userItems}
               handleChange={handleChange}
               classes={{ select: classes.user }}
             />
+            <Button
+              color="primary"
+              className={classes.resetButton}
+              onClick={handleFilterReset}
+            >
+              Reset
+            </Button>
           </Grid>
           <Grid
             item
@@ -196,7 +347,7 @@ const AnalyticsConfiguration = ({ data, onChange }) => {
           >
             <Dropdown
               name="pastDays"
-              value={option.pastDays}
+              value={getIndex(pastDaysKeys, option.pastDays)}
               items={pastDaysItems}
               handleChange={handleChange}
               classes={{ root: classes.yearSelector, select: classes.pastDays }}
@@ -204,29 +355,19 @@ const AnalyticsConfiguration = ({ data, onChange }) => {
             <DatePicker
               wrapperClassName={classes.datePicker}
               value={selectedDayRange}
-              onChange={setSelectedDayRange}
+              onChange={handleDateRangeChange}
               renderInput={renderCustomInput} // render a custom input
               colorPrimary="#007AFF"
               colorPrimaryLight="#D5EFFF"
             />
-            {/* <Dropdown
-              name="academicYear"
-              value={option.academicYear}
-              items={academicYearItems}
-              handleChange={handleChange}
-              classes={{
-                root: classes.yearSelector,
-                select: classes.academicYear,
-              }}
-            /> */}
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12}>
         <ChoiceSelectButton
           values={chartDateSelectorTypes}
-          selectedIndex={selectedIndex}
-          onClick={setSelectedIndex}
+          selectedIndex={groupBy}
+          onClick={setGroupBy}
           classes={{ root: classes.buttonContainer, button: classes.button }}
         />
       </Grid>

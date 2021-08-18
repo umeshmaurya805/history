@@ -37,7 +37,7 @@ const Calendar = ({
   shouldHighlightWeekends,
   renderFooter,
   customDaysClassName,
-  onDateChange,
+  onDateChange = () => {},
 }) => {
   const calendarElement = useRef(null);
   const [mainState, setMainState] = useState({
@@ -91,7 +91,9 @@ const Calendar = ({
 
       return {
         ...curState,
-        activeDate: { ...tempActiveDate, month: selectedMonth },
+        activeDate: selectedMonth
+          ? { ...tempActiveDate, month: selectedMonth }
+          : tempActiveDate,
         monthChangeDirection: "",
       };
     });

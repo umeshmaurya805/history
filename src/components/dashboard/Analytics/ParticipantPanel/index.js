@@ -14,12 +14,75 @@ const ParticipantPanel = () => {
     class: "all",
     user: "Student",
     category: "all",
+    pastDays: "seven",
   };
 
   const [option, setOption] = useState(initialFilter);
+  const [groupBy, setGroupBy] = useState(0);
 
   const [labels, datasets] = useMemo(() => {
-    const computeEventsData = (events) => {
+    const computeEventsData = () => {
+      const eventMap = new Map();
+
+      const events = [
+        {
+          date: "21/4/2000",
+          eventType: "competitive",
+          participantCount: 100,
+        },
+        {
+          date: "22/4/2000",
+          eventType: "competitive",
+          participantCount: 411,
+        },
+        {
+          date: "25/4/2000",
+          eventType: "competitive",
+          participantCount: 575,
+        },
+        {
+          date: "30/4/2000",
+          eventType: "competitive",
+          participantCount: 77,
+        },
+        {
+          date: "1/5/2000",
+          eventType: "competitive",
+          participantCount: 12,
+        },
+        {
+          date: "5/5/2000",
+          eventType: "competitive",
+          participantCount: 75,
+        },
+      ];
+
+      events.forEach(({ date, eventType, participantCount }) => {
+let group;
+
+switch(groupBy) {
+  case 0:
+    // group = 
+break;
+  default:
+}
+
+        if (eventMap.has(date)) {
+          const hashedData = eventMap.get(date);
+
+          if (eventType === "competitive") {
+            hashedData.competitive += participantCount;
+          } else {
+            hashedData.nonCompetitive += participantCount;
+          }
+        } else {
+          eventMap.set(date, {
+            competitive: eventType === "competitive" ? participantCount : 0,
+            nonCompetitive: eventType !== "competitive" ? participantCount : 0,
+          });
+        }
+      });
+      console.log(eventMap);
       const dates = [
         format(new Date(2021, 6, 23), "PP"),
         format(new Date(2021, 6, 24), "PP"),
@@ -69,13 +132,6 @@ const ParticipantPanel = () => {
       setEvents(data);
     }
   }, [data]);
-  console.log(data);
-  // const [option, setOption] = useState({
-  //   category: "all",
-  //   class: 0,
-  //   user: 0,
-  //   academicYear: 0,
-  // });
 
   const chartData = {
     labels,
@@ -106,6 +162,8 @@ const ParticipantPanel = () => {
       <AnalyticsConfiguration
         option={option}
         setOption={setOption}
+        groupBy={groupBy}
+        setGroupBy={setGroupBy}
         data={data}
         onChange={setEvents}
       />
