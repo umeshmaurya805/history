@@ -26,7 +26,7 @@ const NavList = () => {
   const { url: parentUrl } = useRouteMatch();
   const classes = useStyles();
   const selectedEventId = useSelector((state) => state.event.selectedEventId);
-
+  
   const list = [
     {
       text: "Home",

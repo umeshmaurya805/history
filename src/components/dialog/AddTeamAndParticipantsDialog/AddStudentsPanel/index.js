@@ -35,7 +35,6 @@ const AddStudentsPanel = () => {
   const { data = [] } = useViewInvitedStudentsQuery(schoolEventId);
 
   const { data: students = [] } = useGetAvailableStudentsQuery(schoolEventId);
-  console.log("st", data);
 
   const columns = [
     {

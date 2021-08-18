@@ -36,7 +36,6 @@ const Calendar = () => {
       dispatch(
         setEventsData(data.filter(({ eventFor }) => eventFor === "Student"))
       );
-      // console.log("ss");
     }
   }, [data, dispatch]);
 
@@ -47,6 +46,7 @@ const Calendar = () => {
 
     if (id) {
       selectedEvent = events.find(({ _id }) => _id === id);
+
       if (!selectedEvent) {
         history.push("/dashboard/calendar");
         return null;

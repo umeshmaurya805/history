@@ -2,6 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
+import Skeleton from "@material-ui/lab/Skeleton";
 import Typography from "@material-ui/core/Typography";
 import { useGetProfileQuery } from "../../../../app/api/school";
 import useStyles from "./style";
@@ -23,7 +24,11 @@ const WelcomeBanner = () => {
             Welcome,
           </Typography>
           <Typography color="primary" className={classes.heading}>
-            {data.name}
+            {data.name ? (
+              data.name
+            ) : (
+              <Skeleton animation="wave" width="15rem" />
+            )}
           </Typography>
         </Box>
       </Grid>

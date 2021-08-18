@@ -1,5 +1,5 @@
 import { hdApi } from ".";
-import { EVENT_DETAILS, EVENT_INVITATION } from "./constants";
+import { EVENT_DETAILS, EVENT_INVITATION, EVENT_TEAMS } from "./constants";
 
 export const schoolEventApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
@@ -35,8 +35,22 @@ export const schoolEventApi = hdApi.injectEndpoints({
       }),
       invalidatesTags: [EVENT_INVITATION],
     }),
+    getTeams: build.query({
+      query: (schoolEventId) => `school-event/${schoolEventId}/teams`,
+      transformResponse: ({ data }) => data,
+      providesTags: [EVENT_TEAMS],
+    }),
+    addTeam: build.mutation({
+      query: ({ schoolEventId, ...body }) => ({
+        url: `school-event/${schoolEventId}/teams`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [EVENT_TEAMS],
+    }),
     getUpcomingEvents: build.query({
       query: () => "school-event/upcoming",
+      providesTags: [EVENT_DETAILS],
       transformResponse: ({ data }) => {
         return data.map((event) => ({
           ...event,
@@ -68,4 +82,6 @@ export const {
   useGetAvailableStudentsQuery,
   useInviteStudentsMutation,
   useGetUpcomingEventsQuery,
+  useGetTeamsQuery,
+  useAddTeamMutation,
 } = schoolEventApi;

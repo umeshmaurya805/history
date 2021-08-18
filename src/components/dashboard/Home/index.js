@@ -23,6 +23,7 @@ const Home = () => {
       studentCompetitiveEvents: 0,
       studentNonCompetitiveEvents: 0,
     },
+    isLoading,
   } = useGetStatsQuery();
 
   const data = [
@@ -59,7 +60,7 @@ const Home = () => {
   return (
     <Layout>
       <WelcomeBanner />
-      <EventStats data={data} />
+      <EventStats isLoading={isLoading} data={data} />
       <EventResult />
       <Grid container className={classes.container} spacing={2}>
         <Grid item lg={4}>

@@ -25,26 +25,25 @@ const ParticipantPanel = () => {
     class: 0,
     user: 0,
     academicYear: 0,
-    pastDays: 0,
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    const competitiveDataset = {
-      label: "Competitive Events",
-      data: [50, 90, 120, 136, 120, 120, 50],
-      backgroundColor: "blue",
-      borderColor: "blue",
-    };
-    const nonCompetitiveDataset = {
-      label: "Non-Competitive Events",
-      data: [60, 100, 80, 100, 140, 60, 40],
-      backgroundColor: "#F89503",
-      borderColor: "#F89503",
-    };
-
     setOption({ ...option, [name]: value });
+  };
+
+  const competitiveDataset = {
+    label: "Competitive Events",
+    data: [50, 90, 120, 136, 120, 120, 50],
+    backgroundColor: "blue",
+    borderColor: "blue",
+  };
+  const nonCompetitiveDataset = {
+    label: "Non-Competitive Events",
+    data: [60, 100, 80, 100, 140, 60, 40],
+    backgroundColor: "#F89503",
+    borderColor: "#F89503",
   };
 
   const chartData = {

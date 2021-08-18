@@ -80,7 +80,7 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
                               className={classes.titleColumn}
                             >
                               {clickableEvent ? (
-                                <Link to={`/dashboard/calendar/${row._id}`}>
+                                <Link to={`/dashboard/calendar/${row.eventId}`}>
                                   {value}
                                 </Link>
                               ) : (
@@ -164,7 +164,7 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
                 })
             ) : (
               <TableRow>
-                <StyledTableCell align="center" colSpan={6}>
+                <StyledTableCell align="center" colSpan={12}>
                   No data available
                 </StyledTableCell>
               </TableRow>

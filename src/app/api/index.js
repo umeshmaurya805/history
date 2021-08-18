@@ -4,6 +4,7 @@ import { baseQueryWithReauth } from "./baseQueryWithReauth";
 import {
   EVENT_DETAILS,
   EVENT_INVITATION,
+  EVENT_TEAMS,
   MAIN_COORDINATOR,
   SCHOOL_PROFILE,
 } from "./constants";
@@ -14,6 +15,6 @@ export const hdApi = createApi({
   refetchOnReconnect: true,
   reducerPath: "hdApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: [SCHOOL_PROFILE, MAIN_COORDINATOR, EVENT_DETAILS, EVENT_INVITATION],
+  tagTypes: [SCHOOL_PROFILE, MAIN_COORDINATOR, EVENT_DETAILS, EVENT_INVITATION,EVENT_TEAMS],
   endpoints: () => ({}),
 });

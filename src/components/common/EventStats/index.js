@@ -1,10 +1,11 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import StatsCard from "../../card/StatsCard";
-import useStyles from "./style";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import StatsCard from "../../card/StatsCard";
+import Skeleton from "@material-ui/lab/Skeleton";
+import useStyles from "./style";
 
-const EventStats = ({ data, ...props }) => {
+const EventStats = ({ data, isLoading, ...props }) => {
   const classes = useStyles();
   const enableFixedWidth = useMediaQuery("@media (min-width: 1000px)");
 
@@ -18,7 +19,15 @@ const EventStats = ({ data, ...props }) => {
             className={classes.cardContainer}
             style={enableFixedWidth ? { width: `${100 / data.length}%` } : {}}
           >
-            <StatsCard name={name} value={value} tooltipText={tooltipText} />
+            {isLoading ? (
+              <Skeleton
+                className={classes.skeleton}
+                animation="wave"
+                height="11rem"
+              />
+            ) : (
+              <StatsCard name={name} value={value} tooltipText={tooltipText} />
+            )}
           </Grid>
         );
       })}
