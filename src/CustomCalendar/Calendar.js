@@ -79,10 +79,21 @@ const Calendar = ({
     }
 
     // Custom Code
-    setMainState({
-      ...mainState,
-      activeDate: { ...activeDate, month: selectedMonth },
-      monthChangeDirection: "",
+    setMainState((curState) => {
+      const date = new Date();
+      const tempActiveDate = curState.activeDate
+        ? shallowClone(curState.activeDate)
+        : {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate(),
+          };
+
+      return {
+        ...curState,
+        activeDate: { ...tempActiveDate, month: selectedMonth },
+        monthChangeDirection: "",
+      };
     });
 
     return () => {

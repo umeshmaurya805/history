@@ -14,20 +14,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   class: {
-    minWidth: '3.125rem',
+    minWidth: "3.125rem",
   },
   user: {
-    minWidth: '3.125rem',
+    minWidth: "3.125rem",
   },
   category: {
-    minWidth: '10rem',
+    minWidth: "10rem",
     [theme.breakpoints.only("xs")]: {
       width: "100%",
       marginLeft: "unset",
     },
   },
   pastDays: {
-    minWidth: '5.625rem',
+    minWidth: "5.625rem",
     marginLeft: "0.5rem",
     [theme.breakpoints.only("xs")]: {
       width: "100%",
@@ -67,6 +67,11 @@ const useStyles = makeStyles((theme) => ({
     "&.MuiButton-outlined": {
       border: "0.0625rem solid #E5E5E5",
     },
+  },
+  resetButton: {
+    width: "5rem",
+    height: "fit-content",
+    margin: "auto 0",
   },
 }));
 

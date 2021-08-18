@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Line, defaults } from "react-chartjs-2";
 import format from "date-fns/format";
 import AnalyticsConfiguration from "../../../config/AnalyticsConfiguration";
@@ -8,54 +8,77 @@ import useStyles from "./style";
 const ParticipantPanel = () => {
   const classes = useStyles();
   const { data = [] } = useGetEventAnalyticsQuery();
-  const [datasets, setDatasets] = useState([]);
-
   const [events, setEvents] = useState(data);
+
+  const initialFilter = {
+    class: "all",
+    user: "Student",
+    category: "all",
+  };
+
+  const [option, setOption] = useState(initialFilter);
+
+  const [labels, datasets] = useMemo(() => {
+    const computeEventsData = (events) => {
+      const dates = [
+        format(new Date(2021, 6, 23), "PP"),
+        format(new Date(2021, 6, 24), "PP"),
+        format(new Date(2021, 6, 25), "PP"),
+        format(new Date(2021, 6, 26), "PP"),
+        format(new Date(2021, 6, 27), "PP"),
+        format(new Date(2021, 6, 28), "PP"),
+        format(new Date(2021, 6, 29), "PP"),
+      ];
+      let eventDataset = [];
+
+      const competitiveDataset = {
+        label: "Competitive Events",
+        // data: competitiveData,
+        backgroundColor: "blue",
+        borderColor: "blue",
+      };
+      const nonCompetitiveDataset = {
+        label: "Non-Competitive Events",
+        // data: nonCompetitiveData,
+        backgroundColor: "#F89503",
+        borderColor: "#F89503",
+      };
+
+      switch (option.category) {
+        case "competitive":
+          eventDataset.push(competitiveDataset);
+          break;
+
+        case "nonCompetitive":
+          eventDataset.push(nonCompetitiveDataset);
+          break;
+
+        default:
+          eventDataset.push(competitiveDataset, nonCompetitiveDataset);
+      }
+
+      return [dates, eventDataset];
+    };
+    return computeEventsData(events);
+  }, [events, option.category]);
+
+  // console.log(labels, datasets);
 
   useEffect(() => {
     if (data) {
       setEvents(data);
     }
   }, [data]);
-
-  const computeAnalytics = () => {};
-
-  const [option, setOption] = useState({
-    category: "all",
-    class: 0,
-    user: 0,
-    academicYear: 0,
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setOption({ ...option, [name]: value });
-  };
-
-  const competitiveDataset = {
-    label: "Competitive Events",
-    data: [50, 90, 120, 136, 120, 120, 50],
-    backgroundColor: "blue",
-    borderColor: "blue",
-  };
-  const nonCompetitiveDataset = {
-    label: "Non-Competitive Events",
-    data: [60, 100, 80, 100, 140, 60, 40],
-    backgroundColor: "#F89503",
-    borderColor: "#F89503",
-  };
+  console.log(data);
+  // const [option, setOption] = useState({
+  //   category: "all",
+  //   class: 0,
+  //   user: 0,
+  //   academicYear: 0,
+  // });
 
   const chartData = {
-    labels: [
-      format(new Date(2021, 6, 23), "PP"),
-      format(new Date(2021, 6, 24), "PP"),
-      format(new Date(2021, 6, 25), "PP"),
-      format(new Date(2021, 6, 26), "PP"),
-      format(new Date(2021, 6, 27), "PP"),
-      format(new Date(2021, 6, 28), "PP"),
-      format(new Date(2021, 6, 29), "PP"),
-    ],
+    labels,
     datasets,
   };
 
@@ -70,21 +93,22 @@ const ParticipantPanel = () => {
           text: "No. of Participants",
           padding: { top: 0, left: 0, right: 0, bottom: 20 },
         },
+        min: 0,
       },
     },
     layout: {
-      padding: 0,
-    },
-    plugins: {
-      legend: {
-        // position: "chartArea",
-      },
+      padding: 20,
     },
   };
 
   return (
     <div className={classes.root}>
-      <AnalyticsConfiguration value={option} handleChange={handleChange} />
+      <AnalyticsConfiguration
+        option={option}
+        setOption={setOption}
+        data={data}
+        onChange={setEvents}
+      />
       <Line
         className={classes.chart}
         height={100}

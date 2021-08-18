@@ -25,6 +25,7 @@ const Analytics = () => {
       totalNonCompetitiveEvents: 0,
       totalParticipation: 0,
     },
+    isLoading,
   } = useGetSchoolStatsQuery();
 
   const labelTop = ["Participation", "Competition Winners"];
@@ -69,7 +70,7 @@ const Analytics = () => {
       <Typography color="primary" className={classes.title}>
         School Performance
       </Typography>
-      <EventStats className={classes.stats} data={data} />
+      <EventStats className={classes.stats} isLoading={isLoading} data={data} />
 
       <TabLayout labels={labelTop} panels={panelTop} />
       <TabLayout
