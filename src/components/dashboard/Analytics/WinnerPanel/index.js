@@ -40,7 +40,7 @@ const WinnerPanel = () => {
         colored
         rows={data}
         columns={columns}
-        filename="Winners List"
+        filename="WinnersList"
         generateCSVData={generateCSVData}
       />
     </div>

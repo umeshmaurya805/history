@@ -2,6 +2,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "./baseQueryWithReauth";
 import {
+  DASHBOARD_CONFIG,
   EVENT_DETAILS,
   EVENT_INVITATION,
   EVENT_TEAMS,
@@ -15,6 +16,6 @@ export const hdApi = createApi({
   refetchOnReconnect: true,
   reducerPath: "hdApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: [SCHOOL_PROFILE, MAIN_COORDINATOR, EVENT_DETAILS, EVENT_INVITATION,EVENT_TEAMS],
+  tagTypes: [SCHOOL_PROFILE, MAIN_COORDINATOR, EVENT_DETAILS, EVENT_INVITATION,EVENT_TEAMS,DASHBOARD_CONFIG],
   endpoints: () => ({}),
 });

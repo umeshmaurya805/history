@@ -63,22 +63,19 @@ const EventConfiguration = ({
     Teacher: ["all", "workshop", "course"],
   };
 
-  const classFilter = (updatedOptions, availableClasses) => {
+  const classFilter = (updatedClass, classFrom, classTo) => {
     return (
-      updatedOptions.class === "all" ||
-      (updatedOptions.class >= availableClasses.from &&
-        updatedOptions.class <= availableClasses.to)
+      updatedClass === "all" ||
+      (updatedClass >= classFrom && updatedClass <= classTo)
     );
   };
 
-  const userFilter = (updatedOptions, user) => {
-    return user === updatedOptions.user;
+  const userFilter = (updatedUser, user) => {
+    return user === updatedUser;
   };
 
-  const categoryFilter = (updatedOptions, category) => {
-    return (
-      updatedOptions.category === "all" || category === updatedOptions.category
-    );
+  const categoryFilter = (updatedCategory, category) => {
+    return updatedCategory === "all" || category === updatedCategory;
   };
 
   const handleFilter = (name, key) => {
@@ -92,9 +89,13 @@ const EventConfiguration = ({
     onChange(
       data.filter(
         (event) =>
-          classFilter(updatedOptions, event.availableClasses) &&
-          userFilter(updatedOptions, event.eventFor) &&
-          categoryFilter(updatedOptions, event.eventType)
+          classFilter(
+            updatedOptions.class,
+            event.availableClasses.from,
+            event.availableClasses.to
+          ) &&
+          userFilter(updatedOptions.user, event.eventFor) &&
+          categoryFilter(updatedOptions.category, event.eventType)
       )
     );
   };
@@ -105,9 +106,13 @@ const EventConfiguration = ({
     onChange(
       data.filter(
         (event) =>
-          classFilter(initialFilter, event.availableClasses) &&
-          userFilter(initialFilter, event.eventFor) &&
-          categoryFilter(initialFilter, event.eventType)
+          classFilter(
+            initialFilter.class,
+            event.availableClasses.from,
+            event.availableClasses.to
+          ) &&
+          userFilter(initialFilter.user, event.eventFor) &&
+          categoryFilter(initialFilter.category, event.eventType)
       )
     );
   };

@@ -171,7 +171,7 @@ const EventsTable = ({ rows, columns, clickableEvent, handleClickOpen }) => {
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: `${3.9625 * emptyRows}rem` }}>
-                <StyledTableCell colSpan={6} />
+                <StyledTableCell colSpan={12} />
               </TableRow>
             )}
           </TableBody>

@@ -65,7 +65,7 @@ const AddStudentsPanel = () => {
 
   const renderSearchList = () => {
     const searchList = students.filter(({ name }) =>
-      name.toLowerCase().includes(searchName.toLowerCase())
+      name.trim().toLowerCase().includes(searchName.trim().toLowerCase())
     );
 
     if (searchList.length === 0) {
@@ -131,11 +131,7 @@ const AddStudentsPanel = () => {
           style={searchName !== "" ? { visibility: "visible", opacity: 1 } : {}}
         />
 
-        <ParticipantTable
-          noHeader
-          rows={data}
-          columns={columns}
-        />
+        <ParticipantTable noHeader rows={data} columns={columns} />
       </div>
     </div>
   );

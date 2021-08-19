@@ -128,8 +128,6 @@ const ParticipantPanel = () => {
     return computeEventsData(events);
   }, [events, option.category, groupBy]);
 
-  console.log(labels, datasets);
-
   useEffect(() => {
     if (data) {
       const today = new Date();

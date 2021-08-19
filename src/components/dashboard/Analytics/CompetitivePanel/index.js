@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import format from "date-fns/format";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-// import { getEvents } from "../../../../data";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
 import EventAnalyticsConfiguration from "./../../../config/EventAnalyticsConfiguration/index";
+import { useGetCompetitiveEventsQuery } from "../../../../app/api/events";
+import { format } from "date-fns";
 
 const columns = [
   {
@@ -48,51 +48,39 @@ const columns = [
   },
 ];
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-
-const eventsList = [].map((event) => {
-  return {
-    title: event.title,
-    slug: event.slug,
-    date: format(event.startDate, "PP"),
-    classes: `${event.forClass.from} - ${event.forClass.to}`,
-    schoolParticipation: 200,
-    participation: 2000,
-    status: event.isRegistered ? "Participated" : "Not Participated",
-  };
-});
-
 const CompetitivePanel = () => {
   const [open, setOpen] = useState(false);
-  const [slug, setSlug] = useState(null);
+  const [id, setId] = useState(null);
 
-  const handleClickOpen = (slug) => {
-    setSlug(slug);
+  const { data } = useGetCompetitiveEventsQuery();
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setEvents(data);
+    }
+  }, [data]);
+
+  const handleClickOpen = (id) => {
+    setId(id);
     setOpen(true);
   };
 
   const handleClose = () => {
-    setSlug(null);
+    setId(null);
     setOpen(false);
   };
 
-  const [option, setOption] = useState({
-    status: 0,
-    month: 0,
-    year: 0,
-    class: 0,
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setOption({ ...option, [name]: value });
-  };
-
-  const handleDownloadList = () => {
-    toast.success("Events List Downloaded", {
-      toastId: "downloadEventList",
+  const generateCSVData = () => {
+    return events.map((event) => {
+      return {
+        Title: event.title,
+        Date: format(new Date(event.date), "PP"),
+        Classes: event.classes,
+        Schools: event.schoolParticipation,
+        Participants: event.totalParticipation,
+        Status: event.status,
+      };
     });
   };
 
@@ -100,18 +88,19 @@ const CompetitivePanel = () => {
     <div>
       <EventAnalyticsConfiguration
         competitive
-        value={option}
-        handleChange={handleChange}
-        handleDownloadList={handleDownloadList}
+        data={data}
+        onChange={setEvents}
+        filename="CompetitiveEventsList"
+        generateCSVData={generateCSVData}
       />
       <EventsTable
-        rows={eventsList}
+        rows={events}
         columns={columns}
         handleClickOpen={handleClickOpen}
       />
       <EventAnalyticsDialog
         competitive
-        slug={slug}
+        id={id}
         open={open}
         onClose={handleClose}
       />

@@ -1,4 +1,5 @@
 import { hdApi } from ".";
+import { DASHBOARD_CONFIG } from "./constants";
 
 export const leaderboardApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
@@ -20,7 +21,32 @@ export const leaderboardApi = hdApi.injectEndpoints({
         };
       },
     }),
+    getAcademicYear: build.query({
+      query: () => "school-leaderboard/academic-year",
+      providesTags: [DASHBOARD_CONFIG],
+      transformResponse: ({ data }) => {
+        const academicYears = data.map(
+          ({ startDate }) =>
+            `Academic Year: ${startDate.getFullYear()}-${(
+              startDate.getFullYear() + 1
+            )
+              .toString()
+              .substr(-2)}`
+        );
+
+        const ranges = data.map(({ startDate, endDate }) => ({
+          startDate,
+          endDate,
+        }));
+
+        return {
+          academicYears,
+          ranges,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetSchoolLeaderboardQuery } = leaderboardApi;
+export const { useGetSchoolLeaderboardQuery, useGetAcademicYearQuery } =
+  leaderboardApi;
