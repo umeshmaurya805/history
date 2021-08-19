@@ -86,36 +86,49 @@ const ParticipantPanel = () => {
 
       let eventDataset = [];
 
+      const competitiveData = eventList.map(({ data }) => data.competitive);
+      const nonCompetitiveData = eventList.map(
+        ({ data }) => data.nonCompetitive
+      );
+
       const competitiveDataset = {
         label: "Competitive Events",
-        data: eventList.map(({ data }) => data.competitive),
+        data: competitiveData,
         backgroundColor: "blue",
         borderColor: "blue",
       };
       const nonCompetitiveDataset = {
         label: "Non-Competitive Events",
-        data: eventList.map(({ data }) => data.nonCompetitive),
+        data: nonCompetitiveData,
         backgroundColor: "#F89503",
         borderColor: "#F89503",
       };
 
       switch (option.category) {
         case "competitive":
-          eventDataset.push(competitiveDataset);
+          if (competitiveData?.length > 0) {
+            eventDataset.push(competitiveDataset);
+          }
           break;
 
         case "nonCompetitive":
-          eventDataset.push(nonCompetitiveDataset);
+          if (nonCompetitiveData?.length > 0) {
+            eventDataset.push(nonCompetitiveDataset);
+          }
           break;
 
         default:
-          eventDataset.push(competitiveDataset, nonCompetitiveDataset);
+          if (competitiveData?.length > 0 && nonCompetitiveData?.length > 0) {
+            eventDataset.push(competitiveDataset, nonCompetitiveDataset);
+          }
       }
 
       return [dates, eventDataset];
     };
     return computeEventsData(events);
   }, [events, option.category, groupBy]);
+
+  console.log(labels, datasets);
 
   useEffect(() => {
     if (data) {
@@ -125,10 +138,7 @@ const ParticipantPanel = () => {
       const pastThirtyDay = sub(today, {
         days: 30,
       });
-      console.log(
-        "fil",
-        data.filter(({ date }) => date >= pastThirtyDay && date <= today)
-      );
+
       setEvents(
         data.filter((event) => {
           const date = new Date(event.date);
@@ -162,6 +172,26 @@ const ParticipantPanel = () => {
     },
   };
 
+  const chartPlugins = [
+    {
+      afterDraw: function (chart) {
+        if (chart.data.datasets.length === 0) {
+          // No data is present
+          var ctx = chart.ctx;
+          var width = chart.width;
+          var height = chart.height;
+          chart.clear();
+
+          ctx.save();
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("No data to display", width / 2, height / 2);
+          ctx.restore();
+        }
+      },
+    },
+  ];
+
   return (
     <div className={classes.root}>
       <AnalyticsConfiguration
@@ -177,6 +207,7 @@ const ParticipantPanel = () => {
         height={100}
         data={chartData}
         options={chartOptions}
+        plugins={chartPlugins}
       />
     </div>
   );

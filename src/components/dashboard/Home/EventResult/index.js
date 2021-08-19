@@ -44,7 +44,7 @@ const EventResult = () => {
     }
   };
 
-  return data ? (
+  return data?.length > 0 ? (
     <div className={classes.root}>
       <Grid container alignItems="center" justifyContent="space-between">
         <Grid item>
