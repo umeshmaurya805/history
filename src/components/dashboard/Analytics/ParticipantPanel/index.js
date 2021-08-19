@@ -11,57 +11,8 @@ import sub from "date-fns/sub";
 
 const ParticipantPanel = () => {
   const classes = useStyles();
-  // const { data = [] } = useGetEventAnalyticsQuery();
-  const [data] = useState([
-    {
-      date: "07/05/2021",
-      eventType: "nonCompetitive",
-      participantCount: 12,
-      classFrom: 7,
-      classTo: 10,
-      eventFor: "Student",
-    },
-    {
-      date: "07/25/2021",
-      eventType: "competitive",
-      participantCount: 75,
-      classFrom: 7,
-      classTo: 10,
-      eventFor: "Student",
-    },
-    {
-      date: "08/1/2021",
-      eventType: "competitive",
-      participantCount: 100,
-      classFrom: 7,
-      classTo: 10,
-      eventFor: "Student",
-    },
-    {
-      date: "08/10/2021",
-      eventType: "competitive",
-      participantCount: 411,
-      classFrom: 7,
-      classTo: 10,
-      eventFor: "Student",
-    },
-    {
-      date: "08/12/2021",
-      eventType: "nonCompetitive",
-      participantCount: 575,
-      classFrom: 3,
-      classTo: 8,
-      eventFor: "Student",
-    },
-    {
-      date: "08/15/2021",
-      eventType: "nonCompetitive",
-      participantCount: 77,
-      classFrom: 2,
-      classTo: 5,
-      eventFor: "Teacher",
-    },
-  ]);
+  const { data = [] } = useGetEventAnalyticsQuery();
+
   const [events, setEvents] = useState(data);
 
   const initialFilter = {
