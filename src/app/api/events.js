@@ -21,7 +21,7 @@ export const eventApi = hdApi.injectEndpoints({
     }),
     getEventResults: build.query({
       query: () => "events/results",
-      transformResponse: () => {
+      transformResponse: ({ data }) => {
         const generateThemes = (resultData) => {
           const themeHash = new Map();
 
