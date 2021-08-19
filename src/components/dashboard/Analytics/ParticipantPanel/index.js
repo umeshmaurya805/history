@@ -4,71 +4,104 @@ import format from "date-fns/format";
 import AnalyticsConfiguration from "../../../config/AnalyticsConfiguration";
 import { useGetEventAnalyticsQuery } from "../../../../app/api/school";
 import useStyles from "./style";
+import startOfWeek from "date-fns/startOfWeek";
+import { startOfDay, startOfMonth } from "date-fns";
+import startOfYear from "date-fns/startOfYear";
+import sub from "date-fns/sub";
 
 const ParticipantPanel = () => {
   const classes = useStyles();
-  const { data = [] } = useGetEventAnalyticsQuery();
+  // const { data = [] } = useGetEventAnalyticsQuery();
+  const [data] = useState([
+    {
+      date: "07/05/2021",
+      eventType: "nonCompetitive",
+      participantCount: 12,
+      classFrom: 7,
+      classTo: 10,
+      eventFor: "Student",
+    },
+    {
+      date: "07/25/2021",
+      eventType: "competitive",
+      participantCount: 75,
+      classFrom: 7,
+      classTo: 10,
+      eventFor: "Student",
+    },
+    {
+      date: "08/1/2021",
+      eventType: "competitive",
+      participantCount: 100,
+      classFrom: 7,
+      classTo: 10,
+      eventFor: "Student",
+    },
+    {
+      date: "08/10/2021",
+      eventType: "competitive",
+      participantCount: 411,
+      classFrom: 7,
+      classTo: 10,
+      eventFor: "Student",
+    },
+    {
+      date: "08/12/2021",
+      eventType: "nonCompetitive",
+      participantCount: 575,
+      classFrom: 3,
+      classTo: 8,
+      eventFor: "Student",
+    },
+    {
+      date: "08/15/2021",
+      eventType: "nonCompetitive",
+      participantCount: 77,
+      classFrom: 2,
+      classTo: 5,
+      eventFor: "Teacher",
+    },
+  ]);
   const [events, setEvents] = useState(data);
 
   const initialFilter = {
     class: "all",
     user: "Student",
     category: "all",
-    pastDays: "seven",
+    pastDays: "thirty",
   };
 
   const [option, setOption] = useState(initialFilter);
   const [groupBy, setGroupBy] = useState(0);
 
   const [labels, datasets] = useMemo(() => {
-    const computeEventsData = () => {
+    const computeEventsData = (events) => {
       const eventMap = new Map();
 
-      const events = [
-        {
-          date: "21/4/2000",
-          eventType: "competitive",
-          participantCount: 100,
-        },
-        {
-          date: "22/4/2000",
-          eventType: "competitive",
-          participantCount: 411,
-        },
-        {
-          date: "25/4/2000",
-          eventType: "competitive",
-          participantCount: 575,
-        },
-        {
-          date: "30/4/2000",
-          eventType: "competitive",
-          participantCount: 77,
-        },
-        {
-          date: "1/5/2000",
-          eventType: "competitive",
-          participantCount: 12,
-        },
-        {
-          date: "5/5/2000",
-          eventType: "competitive",
-          participantCount: 75,
-        },
-      ];
-
       events.forEach(({ date, eventType, participantCount }) => {
-let group;
+        let group;
 
-switch(groupBy) {
-  case 0:
-    // group = 
-break;
-  default:
-}
+        switch (groupBy) {
+          case 0:
+            group = format(startOfDay(new Date(date)), "PP");
+            break;
 
-        if (eventMap.has(date)) {
-          const hashedData = eventMap.get(date);
+          case 1:
+            group = format(startOfWeek(new Date(date)), "PP");
+            break;
+
+          case 2:
+            group = format(startOfMonth(new Date(date)), "LLL, yyyy");
+            break;
+
+          case 3:
+            group = format(startOfYear(new Date(date)), "yyyy");
+            break;
+          default:
+        }
+
+        if (eventMap.has(group)) {
+          const hashedData = eventMap.get(group);
 
           if (eventType === "competitive") {
             hashedData.competitive += participantCount;
@@ -76,33 +109,41 @@ break;
             hashedData.nonCompetitive += participantCount;
           }
         } else {
-          eventMap.set(date, {
+          eventMap.set(group, {
             competitive: eventType === "competitive" ? participantCount : 0,
             nonCompetitive: eventType !== "competitive" ? participantCount : 0,
           });
         }
       });
-      console.log(eventMap);
-      const dates = [
-        format(new Date(2021, 6, 23), "PP"),
-        format(new Date(2021, 6, 24), "PP"),
-        format(new Date(2021, 6, 25), "PP"),
-        format(new Date(2021, 6, 26), "PP"),
-        format(new Date(2021, 6, 27), "PP"),
-        format(new Date(2021, 6, 28), "PP"),
-        format(new Date(2021, 6, 29), "PP"),
-      ];
+
+      const eventList = Array.from(eventMap, ([date, data]) => ({
+        date,
+        data,
+      }));
+
+      if (eventList.length === 1) {
+        eventList.unshift({
+          date: format(sub(new Date(eventList[0].date), { days: 1 }), "PP"),
+          data: {
+            competitive: 0,
+            nonCompetitive: 0,
+          },
+        });
+      }
+
+      const dates = eventList.map(({ date }) => date);
+
       let eventDataset = [];
 
       const competitiveDataset = {
         label: "Competitive Events",
-        // data: competitiveData,
+        data: eventList.map(({ data }) => data.competitive),
         backgroundColor: "blue",
         borderColor: "blue",
       };
       const nonCompetitiveDataset = {
         label: "Non-Competitive Events",
-        // data: nonCompetitiveData,
+        data: eventList.map(({ data }) => data.nonCompetitive),
         backgroundColor: "#F89503",
         borderColor: "#F89503",
       };
@@ -123,13 +164,26 @@ break;
       return [dates, eventDataset];
     };
     return computeEventsData(events);
-  }, [events, option.category]);
-
-  // console.log(labels, datasets);
+  }, [events, option.category, groupBy]);
 
   useEffect(() => {
     if (data) {
-      setEvents(data);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0, 0);
+
+      const pastThirtyDay = sub(today, {
+        days: 30,
+      });
+      console.log(
+        "fil",
+        data.filter(({ date }) => date >= pastThirtyDay && date <= today)
+      );
+      setEvents(
+        data.filter((event) => {
+          const date = new Date(event.date);
+          return date >= pastThirtyDay && date <= today;
+        })
+      );
     }
   }, [data]);
 

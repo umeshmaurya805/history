@@ -1,15 +1,14 @@
 import React, { useState } from "react";
+import sub from "date-fns/sub";
+import format from "date-fns/format";
 import Grid from "@material-ui/core/Grid";
+import { intervalToDuration } from "date-fns";
 import Button from "@material-ui/core/Button";
 import Dropdown from "../../common/Dropdown";
 import DatePicker from "../../../CustomCalendar";
 import "../../../CustomCalendar/DatePicker.css";
 import ChoiceSelectButton from "../../button/ChoiceSelectButton";
 import useStyles from "./style";
-import sub from "date-fns/sub";
-import format from "date-fns/format";
-import isAfter from "date-fns/isAfter";
-import { isBefore } from "date-fns";
 
 const AnalyticsConfiguration = ({
   option,
@@ -20,8 +19,10 @@ const AnalyticsConfiguration = ({
   onChange,
 }) => {
   const classes = useStyles();
+  const [disableButtonFrom, setDisableButtonFrom] = useState(2);
 
   const today = new Date();
+  today.setHours(0, 0, 0, 0, 0);
 
   const pastSeventhDay = sub(today, {
     days: 7,
@@ -37,9 +38,9 @@ const AnalyticsConfiguration = ({
 
   const initialDayRange = {
     from: {
-      year: pastSeventhDay.getFullYear(),
-      month: pastSeventhDay.getMonth() + 1,
-      day: pastSeventhDay.getDate(),
+      year: pastThirtyDay.getFullYear(),
+      month: pastThirtyDay.getMonth() + 1,
+      day: pastThirtyDay.getDate(),
     },
     to: {
       year: today.getFullYear(),
@@ -52,7 +53,7 @@ const AnalyticsConfiguration = ({
     class: "all",
     user: "Student",
     category: "all",
-    pastDays: "seven",
+    pastDays: "thirty",
   };
 
   const categoryItems = {
@@ -97,36 +98,34 @@ const AnalyticsConfiguration = ({
 
   const pastDaysKeys = ["seven", "thirty", "ninety", "custom"];
 
-  const pastDaysFilter = (updatedPastDays, date) => {
+  const pastDaysFilter = (updatedPastDays, updatedDayRange, date) => {
     switch (updatedPastDays) {
       case "seven":
-        return isAfter(date, pastSeventhDay) && isBefore(date, today);
+        return date >= pastSeventhDay && date <= today;
 
       case "thirty":
-        return isAfter(date, pastThirtyDay) && isBefore(date, today);
+        return date >= pastThirtyDay && date <= today;
 
       case "ninety":
-        return isAfter(date, pastNinetyDay) && isBefore(date, today);
+        return date >= pastNinetyDay && date <= today;
 
       case "custom":
       default:
         return (
-          isAfter(
-            date,
+          updatedDayRange.from &&
+          updatedDayRange.to &&
+          date >=
             new Date(
-              selectedDayRange.from?.year,
-              selectedDayRange.from?.month - 1,
-              selectedDayRange.from?.day
-            )
-          ) &&
-          isBefore(
-            date,
+              updatedDayRange.from.year,
+              updatedDayRange.from.month - 1,
+              updatedDayRange.from.day
+            ) &&
+          date <=
             new Date(
-              selectedDayRange.to?.year,
-              selectedDayRange.to?.month - 1,
-              selectedDayRange.to?.day
+              updatedDayRange.to.year,
+              updatedDayRange.to.month - 1,
+              updatedDayRange.to.day
             )
-          )
         );
     }
   };
@@ -160,6 +159,8 @@ const AnalyticsConfiguration = ({
           }
         : { ...option, [name]: key };
 
+    let updatedSelectedDayRange = selectedDayRange;
+
     if (name === "pastDays") {
       const to = {
         year: today.getFullYear(),
@@ -176,6 +177,12 @@ const AnalyticsConfiguration = ({
             month: pastSeventhDay.getMonth() + 1,
             day: pastSeventhDay.getDate(),
           };
+
+          if (groupBy > 0) {
+            setGroupBy(0);
+          }
+
+          setDisableButtonFrom(1);
           break;
 
         case "thirty":
@@ -184,6 +191,12 @@ const AnalyticsConfiguration = ({
             month: pastThirtyDay.getMonth() + 1,
             day: pastThirtyDay.getDate(),
           };
+
+          if (groupBy > 1) {
+            setGroupBy(1);
+          }
+
+          setDisableButtonFrom(2);
           break;
 
         case "ninety":
@@ -192,14 +205,48 @@ const AnalyticsConfiguration = ({
             month: pastNinetyDay.getMonth() + 1,
             day: pastNinetyDay.getDate(),
           };
+
+          if (groupBy > 2) {
+            setGroupBy(2);
+          }
+
+          setDisableButtonFrom(3);
           break;
 
-        case "custom":
         default:
           from = selectedDayRange.from;
+
+          const duration = intervalToDuration({
+            start: new Date(from.year, from.month - 1, from.day),
+            end: new Date(to.year, to.month - 1, to.day),
+          });
+
+          if (duration.years > 0) {
+            setDisableButtonFrom(4);
+          } else if (duration.months > 0) {
+            if (groupBy > 2) {
+              setGroupBy(2);
+            }
+
+            setDisableButtonFrom(3);
+          } else if (duration.days > 7) {
+            if (groupBy > 1) {
+              setGroupBy(1);
+            }
+
+            setDisableButtonFrom(2);
+          } else {
+            if (groupBy > 0) {
+              setGroupBy(0);
+            }
+
+            setDisableButtonFrom(1);
+          }
       }
 
-      setSelectedDayRange({ from, to });
+      updatedSelectedDayRange = { from, to };
+
+      setSelectedDayRange(updatedSelectedDayRange);
     }
 
     setOption(updatedOptions);
@@ -210,7 +257,11 @@ const AnalyticsConfiguration = ({
           classFilter(updatedOptions.class, event.classFrom, event.classTo) &&
           userFilter(updatedOptions.user, event.eventFor) &&
           categoryFilter(updatedOptions.category, event.eventType) &&
-          pastDaysFilter(updatedOptions.pastDays, new Date(event.date))
+          pastDaysFilter(
+            updatedOptions.pastDays,
+            updatedSelectedDayRange,
+            new Date(event.date)
+          )
       )
     );
   };
@@ -219,6 +270,7 @@ const AnalyticsConfiguration = ({
     setOption(initialFilter);
     setSelectedDayRange(initialDayRange);
     setGroupBy(0);
+    setDisableButtonFrom(2);
 
     onChange(
       data.filter(
@@ -226,14 +278,75 @@ const AnalyticsConfiguration = ({
           classFilter(initialFilter.class, event.classFrom, event.classTo) &&
           userFilter(initialFilter.user, event.eventFor) &&
           categoryFilter(initialFilter.category, event.eventType) &&
-          pastDaysFilter(initialFilter.pastDays, new Date(event.date))
+          pastDaysFilter(
+            initialFilter.pastDays,
+            initialDayRange,
+            new Date(event.date)
+          )
       )
     );
   };
 
-  const handleDateRangeChange = (data) => {
-    handleFilter("pastDays", "custom");
-    setSelectedDayRange(data);
+  const handleDateRangeChange = (dateRange) => {
+    setSelectedDayRange(dateRange);
+
+    const updatedOptions = { ...option, pastDays: "custom" };
+
+    setOption(updatedOptions);
+
+    const { from, to } = dateRange;
+
+    if (from && to) {
+      const duration = intervalToDuration({
+        start: new Date(from.year, from.month - 1, from.day),
+        end: new Date(to.year, to.month - 1, to.day),
+      });
+
+      if (duration.years > 0) {
+        setDisableButtonFrom(4);
+      } else if (duration.months > 0) {
+        if (groupBy > 2) {
+          setGroupBy(2);
+        }
+
+        setDisableButtonFrom(3);
+      } else if (duration.days > 7) {
+        if (groupBy > 1) {
+          setGroupBy(1);
+        }
+
+        setDisableButtonFrom(2);
+      } else {
+        if (groupBy > 0) {
+          setGroupBy(0);
+        }
+
+        setDisableButtonFrom(1);
+      }
+    }
+
+    onChange(
+      data.filter(
+        (event) =>
+          classFilter(updatedOptions.class, event.classFrom, event.classTo) &&
+          userFilter(updatedOptions.user, event.eventFor) &&
+          categoryFilter(updatedOptions.category, event.eventType) &&
+          dateRange.from &&
+          dateRange.to &&
+          new Date(event.date) >=
+            new Date(
+              dateRange.from.year,
+              dateRange.from.month - 1,
+              dateRange.from.day
+            ) &&
+          new Date(event.date) <=
+            new Date(
+              dateRange.to.year,
+              dateRange.to.month - 1,
+              dateRange.to.day
+            )
+      )
+    );
   };
 
   const getIndex = (arr, value) => {
@@ -268,7 +381,7 @@ const AnalyticsConfiguration = ({
     handleFilter(name, key);
   };
 
-  const chartDateSelectorTypes = ["Weekly", "Monthly", "Yearly"];
+  const chartDateSelectorTypes = ["Daily", "Weekly", "Monthly", "Yearly"];
 
   const [selectedDayRange, setSelectedDayRange] = useState(initialDayRange);
 
@@ -366,6 +479,7 @@ const AnalyticsConfiguration = ({
       <Grid item xs={12}>
         <ChoiceSelectButton
           values={chartDateSelectorTypes}
+          disableFrom={disableButtonFrom}
           selectedIndex={groupBy}
           onClick={setGroupBy}
           classes={{ root: classes.buttonContainer, button: classes.button }}
