@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { format } from "date-fns";
 import Grid from "@material-ui/core/Grid";
 import CsvDownloader from "react-csv-downloader";
 import Button from "@material-ui/core/Button";
@@ -17,12 +18,10 @@ const EventAnalyticsConfiguration = ({
 }) => {
   const classes = useStyles();
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0, 0);
-
   const {
     data: yearList = {
       academicYears: [],
+      ranges: [],
     },
   } = useGetAcademicYearQuery();
 
@@ -39,13 +38,13 @@ const EventAnalyticsConfiguration = ({
 
   const [searchEventName, setSearchEventName] = useState("");
 
-  const handleOnSearchChange = (e) => {
-    setSearchEventName(e.target.value);
+  const handleOnSearchChange = (value) => {
+    setSearchEventName(value);
 
     onChange(
       data.filter(
         (event) =>
-          titleFilter(e.target.value, event.title) &&
+          titleFilter(value, event.title) &&
           classFilter(
             option.class,
             event.availableClasses?.from,
@@ -53,9 +52,9 @@ const EventAnalyticsConfiguration = ({
           ) &&
           userFilter(option.user, event.eventFor) &&
           categoryFilter(option.category, event.eventType) &&
-          statusFilter(option.status, event.eventType) &&
-          monthFilter(option.month, event.eventType) &&
-          yearFilter(option.year, event.eventType)
+          statusFilter(option.status, event.status) &&
+          monthFilter(option.month, event.date) &&
+          yearFilter(option.year, event.date)
       )
     );
   };
@@ -97,7 +96,7 @@ const EventAnalyticsConfiguration = ({
   };
 
   const statusItems = ["Status", "Participated", "Not Participated"];
-  const statusKeys = ["all", "participated", "notParticipated"];
+  const statusKeys = ["all", "Participated", "Not Participated"];
 
   const monthItems = [
     "Month",
@@ -117,23 +116,28 @@ const EventAnalyticsConfiguration = ({
 
   const monthKeys = [
     "all",
-    "jan",
-    "feb",
-    "mar",
-    "apr",
-    "may",
-    "jun",
-    "jul",
-    "aug",
-    "sep",
-    "oct",
-    "nov",
-    "dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   const yearItems = ["Year", ...yearList.academicYears];
 
-  const yearKeys = ["all"];
+  const yearKeys = [
+    "all",
+    ...yearList.ranges.map(
+      ({ startDate, endDate }) => `${startDate}|${endDate}`
+    ),
+  ];
 
   const classFilter = (updatedClass, classFrom, classTo) => {
     return (
@@ -154,12 +158,19 @@ const EventAnalyticsConfiguration = ({
     return updatedStatus === "all" || status === updatedStatus;
   };
 
-  const monthFilter = (updatedMonth, month) => {
-    return updatedMonth === "all" || month === updatedMonth;
+  const monthFilter = (updatedMonth, date) => {
+    return (
+      updatedMonth === "all" || format(new Date(date), "MMM") === updatedMonth
+    );
   };
 
-  const yearFilter = (updatedYear, year) => {
-    return updatedYear === "all" || year === updatedYear;
+  const yearFilter = (updatedYear, eventDate) => {
+    const date = new Date(eventDate);
+    const range = updatedYear.split("|");
+    const startDate = new Date(range[0]);
+    const endDate = new Date(range[1]);
+
+    return updatedYear === "all" || (startDate <= date && date <= endDate);
   };
 
   const titleFilter = (updatedEventTitle, title) => {
@@ -188,9 +199,9 @@ const EventAnalyticsConfiguration = ({
           ) &&
           userFilter(updatedOptions.user, event.eventFor) &&
           categoryFilter(updatedOptions.category, event.eventType) &&
-          statusFilter(updatedOptions.status, event.eventType) &&
-          monthFilter(updatedOptions.month, event.eventType) &&
-          yearFilter(updatedOptions.year, event.eventType)
+          statusFilter(updatedOptions.status, event.status) &&
+          monthFilter(updatedOptions.month, event.date) &&
+          yearFilter(updatedOptions.year, event.date)
       )
     );
   };
@@ -209,9 +220,9 @@ const EventAnalyticsConfiguration = ({
           ) &&
           userFilter(initialFilter.user, event.eventFor) &&
           categoryFilter(initialFilter.category, event.eventType) &&
-          statusFilter(initialFilter.status, event.eventType) &&
-          monthFilter(initialFilter.month, event.eventType) &&
-          yearFilter(initialFilter.year, event.eventType)
+          statusFilter(initialFilter.status, event.status) &&
+          monthFilter(initialFilter.month, event.date) &&
+          yearFilter(initialFilter.year, event.date)
       )
     );
   };
@@ -270,8 +281,8 @@ const EventAnalyticsConfiguration = ({
             <SearchBar
               placeholder="Search for the event"
               value={searchEventName}
-              onChange={handleOnSearchChange}
-              onCancel={() => setSearchEventName("")}
+              onChange={(e) => handleOnSearchChange(e.target.value)}
+              onCancel={() => handleOnSearchChange("")}
             />
           </Grid>
           <Grid

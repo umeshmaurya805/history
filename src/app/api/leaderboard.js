@@ -25,14 +25,15 @@ export const leaderboardApi = hdApi.injectEndpoints({
       query: () => "school-leaderboard/academic-year",
       providesTags: [DASHBOARD_CONFIG],
       transformResponse: ({ data }) => {
-        const academicYears = data.map(
-          ({ startDate }) =>
-            `Academic Year: ${startDate.getFullYear()}-${(
-              startDate.getFullYear() + 1
-            )
-              .toString()
-              .substr(-2)}`
-        );
+        const academicYears = data.map(({ startDate }) => {
+          const date = new Date(startDate);
+
+          return `Academic Year: ${date.getFullYear()}-${(
+            date.getFullYear() + 1
+          )
+            .toString()
+            .substr(-2)}`;
+        });
 
         const ranges = data.map(({ startDate, endDate }) => ({
           startDate,

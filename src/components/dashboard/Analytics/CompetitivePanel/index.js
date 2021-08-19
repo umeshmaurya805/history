@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
 import EventAnalyticsConfiguration from "./../../../config/EventAnalyticsConfiguration/index";

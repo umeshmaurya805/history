@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React, {  useEffect, useState } from "react";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
 import EventAnalyticsConfiguration from "../../../config/EventAnalyticsConfiguration";
-import { useGetEventAnalyticsQuery } from "../../../../app/api/school";
 import { useGetNonCompetitiveEventsQuery } from "../../../../app/api/events";
 import format from "date-fns/format";
 
@@ -49,34 +47,18 @@ const columns = [
   },
 ];
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-
-// const eventsList = [].map((event) => {
-//   return {
-//     title: event.title,
-//     id: event._id,
-//     date: format(event.startDate, "PP"),
-//     classes: `${event.forClass.from} - ${event.forClass.to}`,
-//     schoolParticipation: 200,
-//     participation: 2000,
-//     status: event.isRegistered ? "Participated" : "Not Participated",
-//   };
-// });
-
 const NonCompetitivePanel = () => {
   const [open, setOpen] = useState(false);
   const [id, setId] = useState(null);
-  const { data = [] } = useGetNonCompetitiveEventsQuery();
+ 
+  const { data } = useGetNonCompetitiveEventsQuery();
+  const [events, setEvents] = useState([]);
 
-  const [events, setEvents] = useState(data);
-  console.log("events data ", data);
-
-  // useEffect(() => {
-  //   if (data) {
-  //     setEvents(data);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      setEvents(data);
+    }
+  }, [data]);
 
   const handleClickOpen = (id) => {
     setId(id);
@@ -86,21 +68,6 @@ const NonCompetitivePanel = () => {
   const handleClose = () => {
     setId(null);
     setOpen(false);
-  };
-
-  const [option, setOption] = useState({
-    status: 0,
-    month: 0,
-    year: 0,
-    class: 0,
-    user: 0,
-    category: 0,
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setOption({ ...option, [name]: value });
   };
 
   const generateCSVData = () => {

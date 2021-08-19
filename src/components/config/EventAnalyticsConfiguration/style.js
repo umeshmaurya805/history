@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "5rem",
   },
   year: {
-    minWidth: "5rem",
+    minWidth: "7rem",
   },
   class: {
     minWidth: "3.125rem",
