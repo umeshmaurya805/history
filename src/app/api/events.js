@@ -5,7 +5,7 @@ export const eventApi = hdApi.injectEndpoints({
   endpoints: (build) => ({
     getEventDetails: build.query({
       query: (id) =>
-        `events/${id}?fields=title,summary,registrationDeadline,bannerLarge,description,studentMessage,infoList,registeredSchools,eventFor,isTeamEvent,hasLimit,personDesignation,persons,media`,
+        `events/${id}?fields=title,summary,registrationDeadline,bannerLarge,description,studentMessage,infoList,registeredSchools,eventFor,isTeamEvent,hasLimit,personDesignation,persons,media.poster,media.aboutEventPDF`,
       transformResponse: ({ data }) => data,
       providesTags: [EVENT_DETAILS],
     }),
@@ -15,9 +15,37 @@ export const eventApi = hdApi.injectEndpoints({
       transformResponse: ({ data }) => data,
       providesTags: [EVENT_DETAILS],
     }),
+    getConductedEventDetails: build.query({
+      async queryFn(id, _queryApi, _extraOptions, fetchWithBQ) {
+        if (!id) {
+          return;
+        }
+
+        const response = await fetchWithBQ(
+          `/events/${id}?fields=title,date,availableClasses,totalSchoolsParticipated,registeredSchools,totalParticipation,media.eventDetails`
+        );
+
+        if (response.error) throw response.error;
+
+        const event = response.data.data;
+
+        const result = await fetchWithBQ(
+          `/school-event/${event.schoolEvent}?fields=eventType,pointsGained`
+        );
+
+        if (result.error) return { error: result.error };
+
+        const { data } = result.data;
+        if (data.eventType === "competitive") {
+          return { data: { ...event, pointsGained: data.pointsGained } };
+        } else {
+          return { data: event };
+        }
+      },
+    }),
     getCompetitiveEvents: build.query({
       query: () =>
-        "events?status=conducted&eventType=competitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
+        "events?status=d&eventType=competitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
       transformResponse: ({ data }) =>
         data.map((event) => ({
           ...event,
@@ -30,7 +58,7 @@ export const eventApi = hdApi.injectEndpoints({
     }),
     getNonCompetitiveEvents: build.query({
       query: () =>
-        "events?status=conducted&eventType=nonCompetitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
+        "events?status=d&eventType=nonCompetitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
       transformResponse: ({ data }) =>
         data.map((event) => ({
           ...event,
@@ -128,6 +156,7 @@ export const eventApi = hdApi.injectEndpoints({
 export const {
   useGetEventDetailsQuery,
   useGetEventsQuery,
+  useGetConductedEventDetailsQuery,
   useGetCompetitiveEventsQuery,
   useGetNonCompetitiveEventsQuery,
   useGetFeaturedEventsQuery,

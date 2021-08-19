@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import JsFileDownloader from "js-file-downloader";
+
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import  CancelIcon from '@material-ui/icons/Cancel';
+import CancelIcon from "@material-ui/icons/Cancel";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-import { toast } from "react-toastify";
 import format from "date-fns/format";
 import InfoChip from "../../common/InfoChip";
 import TabLayout from "../../common/TabLayout";
@@ -17,13 +18,15 @@ import SchoolParticipantPanel from "./SchoolParticipantPanel";
 import EventWinnerPanel from "./EventWinnerPanel";
 import EventMediaPanel from "./EventMediaPanel";
 import useStyles from "./style";
+import { useGetConductedEventDetailsQuery } from "../../../app/api/events";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
+const EventAnalyticsDialog = ({ id, open, onClose, competitive = false }) => {
   const classes = useStyles();
+  const { data } = useGetConductedEventDetailsQuery(id);
 
   const labels = ["School Participants"];
   const panels = [SchoolParticipantPanel];
@@ -36,19 +39,39 @@ const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
     panels.push(EventMediaPanel);
   }
 
-  const title = "If You were (Monologue competition)";
-
   const handlePdfDownload = () => {
-    toast.success("PDF Downloaded", { toastId: "pdf" });
+    new JsFileDownloader({
+      url: data?.media?.eventDetails,
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
-  const list = [
-    ["Conducted On: ", format(new Date(), "PP")],
-    ["Classes: ", "9 - 12"],
-    ["Points Gained: ", 30],
-    ["Students Participated: ", 1221],
-    ["Schools Participated: ", 101],
-  ];
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      const eventList = [];
+      eventList.push(
+        ["Conducted On: ", format(new Date(data.date), "PP")],
+        [
+          "Classes: ",
+          `${data.availableClasses.from} - ${data.availableClasses.to}`,
+        ]
+      );
+
+      if (competitive) {
+        eventList.push(["Points Gained: ", data.pointsGained]);
+      }
+
+      eventList.push(
+        ["Students Participated: ", data.totalParticipation],
+        ["Schools Participated: ", data.totalSchoolsParticipated]
+      );
+
+      setList(eventList);
+    }
+  }, [competitive, data]);
 
   return (
     <Dialog
@@ -65,7 +88,7 @@ const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
             color="primary"
             className={classes.eventName}
           >
-            {title}
+            {data?.title}
           </Typography>
           <IconButton
             edge="start"

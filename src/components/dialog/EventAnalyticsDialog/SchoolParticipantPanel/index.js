@@ -202,12 +202,6 @@ const SchoolParticipantPanel = () => {
     };
   });
 
-  // const handleDownloadList = () => {
-  //   toast.success("Events List Downloaded", {
-  //     toastId: "downloadEventList",
-  //   });
-  // };
-
   return (
     <div>
       <Box
