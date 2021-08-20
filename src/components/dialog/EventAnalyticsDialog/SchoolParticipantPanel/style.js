@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0.75rem",
     height: "3.125rem",
   },
+  csvDownloader: {
+    margin: "auto 0.5rem",
+  },
 }));
 
 export default useStyles;

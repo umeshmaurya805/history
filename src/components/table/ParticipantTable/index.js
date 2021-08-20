@@ -4,6 +4,8 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
+import { format } from "date-fns";
+import JsFileDownloader from "js-file-downloader";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Avatar from "@material-ui/core/Avatar";
@@ -18,12 +20,19 @@ import IconButton from "@material-ui/core/IconButton";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { toast } from "react-toastify";
+import { notify } from "../../../utils";
 import firstMedal from "../../../assets/svg/first.svg";
 import secondMedal from "../../../assets/svg/second.svg";
 import thirdMedal from "../../../assets/svg/third.svg";
 import useStyles, { StyledTableCell, BlueStyledTableCell } from "./style";
-import { format } from "date-fns";
+
+const handleCertificateDownload = (certificate) => {
+  new JsFileDownloader({
+    url: certificate,
+  }).catch((err) => {
+    notify.error(err);
+  });
+};
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -58,6 +67,7 @@ const EnhancedTableHead = (props) => {
     order,
     orderBy,
     onRequestSort,
+    certificate,
     isCertificatesAvailable,
     editable,
     colored,
@@ -127,7 +137,7 @@ const EnhancedTableHead = (props) => {
                   aria-label="download-certificate"
                   color="primary"
                   disabled={!isCertificatesAvailable}
-                  // onClick={() => handleCertificateDownload(row.slug)}
+                  onClick={() => handleCertificateDownload(certificate)}
                 >
                   <GetAppIcon fontSize="small" />
                 </IconButton>
@@ -196,22 +206,19 @@ const ParticipantTable = ({
   noHeader = false,
   filename = "Participants List",
   generateCSVData,
+  certificate,
+  areCertificatesAvailable = false,
 }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  let isCertificatesAvailable = false;
   const medals = {
     first: firstMedal,
     second: secondMedal,
     third: thirdMedal,
   };
-
-  rows.forEach((row) => {
-    if (row.isCertificateReceived) isCertificatesAvailable = true;
-  });
 
   const emptyRows =
     rows.length <= rowsPerPage
@@ -233,22 +240,8 @@ const ParticipantTable = ({
     setPage(0);
   };
 
-  const handleParticipantDelete = (slug) => {
-    toast.success("Participant removed from the event", {
-      toastId: "ParticipantDelete",
-    });
-  };
-
-  const handleCertificateView = (slug) => {
-    toast.success("Preview Certificate", {
-      toastId: "Preview Certificate",
-    });
-  };
-
-  const handleCertificateDownload = (slug) => {
-    toast.success("Certificate download", {
-      toastId: "CertificateDownload",
-    });
+  const handleParticipantDelete = (id) => {
+    // Remove Participant from event.
   };
 
   return (
@@ -259,7 +252,12 @@ const ParticipantTable = ({
             <Typography variant="h6" color="primary" className={classes.title}>
               {title}
             </Typography>
-            <CsvDownloader suffix filename={filename} datas={generateCSVData()}>
+            <CsvDownloader
+              suffix
+              wrapColumnChar="'"
+              filename={filename}
+              datas={generateCSVData()}
+            >
               <Button
                 color="primary"
                 className={classes.downloadButton}
@@ -279,7 +277,8 @@ const ParticipantTable = ({
             order={order}
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
-            isCertificatesAvailable={isCertificatesAvailable}
+            isCertificatesAvailable={areCertificatesAvailable}
+            certificate={certificate}
           />
 
           <TableBody>
@@ -310,10 +309,11 @@ const ParticipantTable = ({
                           return (
                             <StyledTableCell key={column.id} align="center">
                               <Button
-                                onClick={() => handleCertificateView(row.slug)}
                                 color="primary"
                                 className={classes.viewButton}
-                                disabled={!row.hasParticipated}
+                                disabled={!row.isCertificateReceived}
+                                target="_blank"
+                                href={row.certificate}
                               >
                                 View
                               </Button>
@@ -321,9 +321,9 @@ const ParticipantTable = ({
                                 className={classes.downloadCertificate}
                                 aria-label="download-certificate"
                                 color="primary"
-                                disabled={!row.hasParticipated}
+                                disabled={!row.isCertificateReceived}
                                 onClick={() =>
-                                  handleCertificateDownload(row.slug)
+                                  handleCertificateDownload(row.certificate)
                                 }
                               >
                                 <GetAppIcon fontSize="small" />
@@ -382,7 +382,9 @@ const ParticipantTable = ({
                         <StyledTableCell align="right">
                           <IconButton
                             className={classes.deleteButton}
-                            onClick={() => handleParticipantDelete(row.slug)}
+                            onClick={() =>
+                              handleParticipantDelete(row.participant)
+                            }
                           >
                             <DeleteOutlineIcon fontSize="small" />
                           </IconButton>
@@ -400,7 +402,7 @@ const ParticipantTable = ({
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: `${4.5625 * emptyRows}rem` }}>
-                <StyledTableCell colSpan={6} />
+                <StyledTableCell colSpan={12} />
               </TableRow>
             )}
           </TableBody>

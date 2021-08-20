@@ -19,14 +19,16 @@ import EventWinnerPanel from "./EventWinnerPanel";
 import EventMediaPanel from "./EventMediaPanel";
 import useStyles from "./style";
 import { useGetConductedEventDetailsQuery } from "../../../app/api/events";
+import { useSelector } from "react-redux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const EventAnalyticsDialog = ({ id, open, onClose, competitive = false }) => {
+const EventAnalyticsDialog = ({ open, onClose, competitive = false }) => {
   const classes = useStyles();
-  const { data } = useGetConductedEventDetailsQuery(id);
+  const { eventId } = useSelector((state) => state.eventAnalytics);
+  const { data } = useGetConductedEventDetailsQuery(eventId);
 
   const labels = ["School Participants"];
   const panels = [SchoolParticipantPanel];
@@ -63,7 +65,6 @@ const EventAnalyticsDialog = ({ id, open, onClose, competitive = false }) => {
       if (competitive) {
         eventList.push(["Points Gained: ", data.pointsGained]);
       }
-
       eventList.push(
         ["Students Participated: ", data.totalParticipation],
         ["Schools Participated: ", data.totalSchoolsParticipated]
@@ -105,11 +106,9 @@ const EventAnalyticsDialog = ({ id, open, onClose, competitive = false }) => {
           <Grid container className={classes.chips}>
             {list.map((item, index) => {
               return (
-                (competitive || index !== 2) && (
-                  <Grid key={index} item className={classes.chipItems}>
-                    <InfoChip name={item[0]} value={item[1]} />
-                  </Grid>
-                )
+                <Grid key={index} item className={classes.chipItems}>
+                  <InfoChip name={item[0]} value={item[1]} />
+                </Grid>
               );
             })}
           </Grid>

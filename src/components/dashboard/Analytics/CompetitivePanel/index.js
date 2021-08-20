@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { format } from "date-fns";
+import { useDispatch } from "react-redux";
 import EventAnalyticsDialog from "../../../dialog/EventAnalyticsDialog";
 import EventsTable from "../../../table/EventsTable";
 import EventAnalyticsConfiguration from "./../../../config/EventAnalyticsConfiguration/index";
 import { useGetCompetitiveEventsQuery } from "../../../../app/api/events";
-import { format } from "date-fns";
+import { setAnalyticsEventId } from "../../../../app/slices/eventAnalyticsSlice";
 
 const columns = [
   {
@@ -49,7 +51,7 @@ const columns = [
 
 const CompetitivePanel = () => {
   const [open, setOpen] = useState(false);
-  const [id, setId] = useState(null);
+  const dispatch = useDispatch();
 
   const { data } = useGetCompetitiveEventsQuery();
   const [events, setEvents] = useState([]);
@@ -61,12 +63,11 @@ const CompetitivePanel = () => {
   }, [data]);
 
   const handleClickOpen = (id) => {
-    setId(id);
+    dispatch(setAnalyticsEventId(id));
     setOpen(true);
   };
 
   const handleClose = () => {
-    setId(null);
     setOpen(false);
   };
 
@@ -77,7 +78,7 @@ const CompetitivePanel = () => {
         Date: format(new Date(event.date), "PP"),
         Classes: event.classes,
         Schools: event.schoolParticipation,
-        Participants: event.totalParticipation,
+        Participants: event.participation,
         Status: event.status,
       };
     });
@@ -97,12 +98,7 @@ const CompetitivePanel = () => {
         columns={columns}
         handleClickOpen={handleClickOpen}
       />
-      <EventAnalyticsDialog
-        competitive
-        id={id}
-        open={open}
-        onClose={handleClose}
-      />
+      <EventAnalyticsDialog competitive open={open} onClose={handleClose} />
     </div>
   );
 };

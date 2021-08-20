@@ -48,6 +48,22 @@ export const schoolEventApi = hdApi.injectEndpoints({
       }),
       invalidatesTags: [EVENT_TEAMS],
     }),
+    getEventParticipant: build.query({
+      query: (schoolEventId) => `school-event/${schoolEventId}/participants`,
+      transformResponse: ({ data }) => {
+        return {
+          ...data,
+          participants: data.participants.map((event) => ({
+            ...event,
+            name: `${event.firstName} ${event.lastName}`,
+            status:
+              event.status === "participated"
+                ? "Participated"
+                : "Not Participated",
+          })),
+        };
+      },
+    }),
     getUpcomingEvents: build.query({
       query: () => "school-event/upcoming",
       providesTags: [EVENT_DETAILS],
@@ -84,4 +100,5 @@ export const {
   useGetUpcomingEventsQuery,
   useGetTeamsQuery,
   useAddTeamMutation,
+  useGetEventParticipantQuery,
 } = schoolEventApi;

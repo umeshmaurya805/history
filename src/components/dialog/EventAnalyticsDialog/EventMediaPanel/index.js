@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
+import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import playImage from "../../../../assets/svg/play.svg";
-import mediaImage from "../../../../assets/svg/media-image.svg";
+import { useGetEventMediaQuery } from "../../../../app/api/events";
 import useStyles from "./style";
 
 const EventMediaCard = ({ data, hasVideo }) => {
@@ -23,7 +24,7 @@ const EventMediaCard = ({ data, hasVideo }) => {
         image={data.image}
       />
       <CardContent className={classes.cardContent}>
-      <Typography className={classes.categoryName} component="p">
+        <Typography className={classes.categoryName} component="p">
           {data.category}
         </Typography>
         <Typography className={classes.description} component="p">
@@ -35,8 +36,8 @@ const EventMediaCard = ({ data, hasVideo }) => {
           size="small"
           color="primary"
           variant="outlined"
-          // target="_blank"
-          // href={data.url}
+          target="_blank"
+          href={data.url}
         >
           Click here to access
         </Button>
@@ -47,28 +48,27 @@ const EventMediaCard = ({ data, hasVideo }) => {
 
 const EventMediaPanel = () => {
   const classes = useStyles();
+  const { eventId } = useSelector((state) => state.eventAnalytics);
+  const { data } = useGetEventMediaQuery(eventId);
 
   const list = [
     {
       category: "Video",
-      description:
-        "Media description here Media description here Media description here Media description here.",
-      image: mediaImage,
-      url: "https://youtube.com",
+      description: data?.video?.description,
+      image: data?.video?.banner,
+      url: data?.video?.url,
     },
     {
       category: "Resources",
-      description:
-        "Resource description here Resource description here Resource description here Resource description here.",
-      image: mediaImage,
-      url: "https://youtube.com",
+      description: data?.resource?.description,
+      image: data?.resource?.banner,
+      url: data?.resource?.url,
     },
     {
       category: "Session Takeaway",
-      description:
-        "Session Takeaway description here Session Takeaway description here Session Takeaway description here Session Takeaway description here.",
-      image: mediaImage,
-      url: "https://youtube.com",
+      description: data?.sessionTakeaway?.description,
+      image: data?.sessionTakeaway?.banner,
+      url: data?.sessionTakeaway?.url,
     },
   ];
   return (

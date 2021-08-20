@@ -58,7 +58,7 @@ export const eventApi = hdApi.injectEndpoints({
     }),
     getNonCompetitiveEvents: build.query({
       query: () =>
-        "events?status=d&eventType=nonCompetitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
+        "events?status=d&eventType=competitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
       transformResponse: ({ data }) =>
         data.map((event) => ({
           ...event,
@@ -69,9 +69,28 @@ export const eventApi = hdApi.injectEndpoints({
         })),
       providesTags: [EVENT_DETAILS],
     }),
+    getEventMedia: build.query({
+      query: (id) =>
+        `events/${id}?fields=media.video,media.resource,media.sessionTakeaway`,
+      transformResponse: ({ data }) => ({ ...data.media }),
+    }),
     getFeaturedEvents: build.query({
       query: () => "events/featured",
       transformResponse: ({ data }) => data,
+    }),
+    getEventResultById: build.query({
+      query: (id) => `events/${id}/results`,
+      transformResponse: ({ data }) => ({
+        ...data,
+        rounds: data.rounds.map((round) => {
+          return round.results.map((result) => {
+            return {
+              ...result,
+              name: `${result.firstName} ${result.lastName}`,
+            };
+          });
+        }),
+      }),
     }),
     getEventResults: build.query({
       query: () => "events/results",
@@ -159,6 +178,8 @@ export const {
   useGetConductedEventDetailsQuery,
   useGetCompetitiveEventsQuery,
   useGetNonCompetitiveEventsQuery,
+  useGetEventMediaQuery,
   useGetFeaturedEventsQuery,
+  useGetEventResultByIdQuery,
   useGetEventResultsQuery,
 } = eventApi;

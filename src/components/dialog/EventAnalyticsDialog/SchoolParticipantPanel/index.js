@@ -1,206 +1,72 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
+import { useSelector } from "react-redux";
+import CsvDownloader from "react-csv-downloader";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import Button from "@material-ui/core/Button";
 import ParticipantTable from "../../../table/ParticipantTable";
-import avatarMan from "../../../../assets/svg/avatar-man.svg";
+import { useGetEventDetailsQuery } from "../../../../app/api/events";
+import { useGetEventParticipantQuery } from "../../../../app/api/schoolEvent";
 import useStyles from "./style";
 
 const SchoolParticipantPanel = () => {
   const classes = useStyles();
+  const { eventId } = useSelector((state) => state.eventAnalytics);
 
-  const isStudent = true;
-  const hasTeam = true;
+  const { schoolEventId } = useGetEventDetailsQuery(eventId, {
+    selectFromResult: ({ data }) => ({ schoolEventId: data?.schoolEvent }),
+  });
 
-  const data = [
-    {
-      firstName: "ABC",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: true,
-      certificate: "/certificates/1",
-      theme: "Theme 1",
-      team: "Team A",
-    },
-    {
-      firstName: "BBBB",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: false,
-      // certificate: "/certificates/1",
-      theme: "Theme 2",
-      team: "Team B",
-    },
-    {
-      firstName: "CCC",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: false,
-      theme: "Theme 1",
-      team: "Team A",
-      // certificate: "/certificates/1",
-    },
-    {
-      firstName: "DDD",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: false,
-      theme: "Theme 1",
-      team: "Team A",
-      // certificate: "/certificates/1",
-    },
-    {
-      firstName: "GGG",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: true,
-      theme: "Theme 1",
-      team: "Team A",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "QQQ",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: true,
-      theme: "Theme 2",
-      team: "Team B",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "EEE",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: true,
-      theme: "Theme 1",
-      team: "Team A",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "WWW",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: false,
-      theme: "Theme 1",
-      team: "Team A",
-      // certificate: "/certificates/1",
-    },
-    {
-      firstName: "HHH",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 4,
-      section: "A",
-      hasParticipated: true,
-      theme: "Theme 1",
-      team: "Team A",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "LHJ",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      hasParticipated: true,
-      theme: "Theme 3",
-      team: "Team C",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "GJHGGHJ",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 3,
-      section: "A",
-      hasParticipated: true,
-      theme: "Theme 2",
-      team: "Team B",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "YYY",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 7,
-      section: "A",
-      hasParticipated: true,
-      theme: "Theme 1",
-      team: "Team A",
-      certificate: "/certificates/1",
-    },
-  ];
+  const { data: eventData = {} } = useGetEventParticipantQuery(schoolEventId);
+
+  const {
+    participants = [],
+    isTeamEvent,
+    hasThemes,
+    eventFor,
+    areCertificatesAvailable,
+    certificatesZip,
+  } = eventData;
 
   const columns = [
     {
       id: "name",
-      label: `${isStudent ? "Student" : "Teacher"} Name`,
-      fixedWidth: "11.25rem",
+      label: `${eventFor} Name`,
+      fixedWidth: "14rem",
     },
     { id: "studentClass", label: "Class", fixedWidth: "10.5rem" },
-    { id: "theme", label: "Theme", fixedWidth: "10.5rem" },
   ];
 
-  if (hasTeam)
+  if (hasThemes) {
+    columns.push({ id: "theme", label: "Theme", fixedWidth: "10.5rem" });
+  }
+
+  if (isTeamEvent) {
     columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
+  }
 
-  columns.push({ id: "status", label: "Status", fixedWidth: "10.5rem" });
-  columns.push({
-    id: "certificate",
-    label: "E-Certificates",
-    fixedWidth: "12.5rem",
-  });
-
-  const rows = data.map((participant) => {
-    const {
-      firstName,
-      lastName,
-      avatar,
-      studentClass,
-      section,
-      hasParticipated,
-      theme,
-      team,
-      certificate,
-    } = participant;
-
-    let status = "Not Participated";
-
-    if (hasParticipated) {
-      status = "Participated";
+  columns.push(
+    { id: "status", label: "Status", fixedWidth: "10.5rem" },
+    {
+      id: "certificate",
+      label: "E-Certificates",
+      fixedWidth: "12.5rem",
     }
+  );
 
-    const isCertificateReceived = hasParticipated;
-
-    return {
-      name: `${firstName} ${lastName}`,
-      avatar,
-      studentClass,
-      section,
-      theme,
-      team,
-      status,
-      hasParticipated,
-      isCertificateReceived,
-      certificate,
-    };
-  });
+  const generateCSVData = () => {
+    return participants.map((participant) => {
+      return {
+        Name: participant.name,
+        Class: participant.studentClass,
+        Section: participant.section,
+        Theme: participant.theme,
+        Team: participant.team,
+        Status: participant.status,
+        Certificate: participant.certificate,
+      };
+    });
+  };
 
   return (
     <div>
@@ -210,16 +76,30 @@ const SchoolParticipantPanel = () => {
         alignItems="center"
         justifyContent="flex-end"
       >
-        <Button
-          color="primary"
-          className={classes.button}
-          endIcon={<GetAppIcon />}
-          // onClick={handleDownloadList}
+        <CsvDownloader
+          suffix
+          wrapColumnChar="'"
+          filename="SchoolParticipantList"
+          datas={generateCSVData()}
+          className={classes.csvDownloader}
         >
-          Download List
-        </Button>
+          <Button
+            color="primary"
+            className={classes.button}
+            endIcon={<GetAppIcon />}
+          >
+            Download List
+          </Button>
+        </CsvDownloader>
       </Box>
-      <ParticipantTable noHeader colored rows={rows} columns={columns} />
+      <ParticipantTable
+        noHeader
+        colored
+        rows={participants}
+        columns={columns}
+        certificate={certificatesZip}
+        areCertificatesAvailable={areCertificatesAvailable}
+      />
     </div>
   );
 };

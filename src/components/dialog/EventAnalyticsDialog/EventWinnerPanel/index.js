@@ -1,208 +1,87 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Box from "@material-ui/core/Box";
+import CsvDownloader from "react-csv-downloader";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import Button from "@material-ui/core/Button";
 import ParticipantTable from "../../../table/ParticipantTable";
-import avatarMan from "../../../../assets/svg/avatar-man.svg";
+import { useGetEventResultByIdQuery } from "../../../../app/api/events";
 import Dropdown from "../../../common/Dropdown";
 import useStyles from "./style";
 
 const EventWinnerPanel = () => {
   const classes = useStyles();
-  const [roundValue, setRoundValue] = useState(0);
+  const { eventId } = useSelector((state) => state.eventAnalytics);
+  const { data = {} } = useGetEventResultByIdQuery(eventId);
 
-  const isStudent = true;
-  const hasTeam = true;
+  const {
+    isTeamEvent,
+    hasThemes,
+    noOfRounds = 1,
+    activeRoundIndex = 0,
+    rounds = [],
+  } = data;
 
-  const data = [
-    {
-      firstName: "ABC",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "ABC Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 1",
-      team: "Team A",
-      position: 1,
-    },
-    {
-      firstName: "BBBB",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "XYZ Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 1",
-      team: "Team A",
-      position: 1,
-    },
-    {
-      firstName: "CCC",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "ABC Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 1",
-      team: "Team A",
-      position: 1,
-    },
-    {
-      firstName: "DDD",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "IPL Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 2",
-      team: "Team B",
-      position: 2,
-    },
-    {
-      firstName: "GGG",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "ABC Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 2",
-      team: "Team B",
-      position: 2,
-    },
-    {
-      firstName: "QQQ",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "ABC Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 3",
-      team: "Team C",
-      position: 3,
-    },
-    {
-      firstName: "EEE",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "BHARTIA Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 3",
-      team: "Team C",
-      position: 3,
-    },
-    {
-      firstName: "WWW",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "BHARTIA Public School",
-      certificate: "/certificates/1",
-      theme: "Theme 3",
-      team: "Team C",
-      position: 3,
-    },
-    {
-      firstName: "HHH",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 4,
-      section: "A",
-      schoolName: "ABC Public School",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "LHJ",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 10,
-      section: "A",
-      schoolName: "ABC Public School",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "GJHGGHJ",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 3,
-      section: "A",
-      schoolName: "XYZ Public School",
-      certificate: "/certificates/1",
-    },
-    {
-      firstName: "YYY",
-      lastName: "Surname",
-      avatar: avatarMan,
-      studentClass: 7,
-      section: "A",
-      schoolName: "BHARTIA Public School",
-      certificate: "/certificates/1",
-    },
-  ];
+  const [roundValue, setRoundValue] = useState(activeRoundIndex);
 
   const columns = [
     {
       id: "name",
-      label: `${isStudent ? "Student" : "Teacher"} Name`,
-      fixedWidth: "11.25rem",
+      label: "Student Name",
+      fixedWidth: "14rem",
     },
+    { id: "studentClass", label: "Class", fixedWidth: "10.5rem" },
     {
       id: "schoolName",
       label: "School Name",
-      fixedWidth: "11.25rem",
+      fixedWidth: "12rem",
     },
-    { id: "studentClass", label: "Class", fixedWidth: "10.5rem" },
-    { id: "theme", label: "Theme", fixedWidth: "10.5rem" },
+    {
+      id: "address",
+      label: "School Address",
+      fixedWidth: "12rem",
+    },
   ];
 
-  if (hasTeam)
+  if (isTeamEvent)
     columns.push({ id: "team", label: "Team", fixedWidth: "10.5rem" });
 
-  if (roundValue === 2)
+  if (hasThemes)
+    columns.push({ id: "theme", label: "Theme", fixedWidth: "10.5rem" });
+
+  if (roundValue === noOfRounds - 1)
     columns.push({ id: "position", label: "Position", fixedWidth: "10.5rem" });
 
-  let rows = data.map((participant) => {
-    const {
-      firstName,
-      lastName,
-      avatar,
-      studentClass,
-      section,
-      schoolName,
-      theme,
-      team,
-      position,
-    } = participant;
+  const roundItems = [];
 
-    return {
-      name: `${firstName} ${lastName}`,
-      avatar,
-      studentClass,
-      section,
-      schoolName,
-      theme,
-      team,
-      position,
-    };
-  });
-
-  if (roundValue === 2) {
-    rows = rows.filter((row, index) => index <= 7);
+  for (var i = 0; i <= activeRoundIndex; i++) {
+    roundItems.push(`Round ${i + 1}`);
   }
-
-  const roundItems = ["Round 1", "Round 2", "Round 3"];
 
   const handleChange = (event) => {
     setRoundValue(event.target.value);
+  };
+
+  const generateCSVData = () => {
+    return rounds[roundValue]
+      ? rounds[roundValue].map((participant) => {
+          const data = {
+            Name: participant.name,
+            Class: participant.studentClass,
+            Section: participant.section,
+            Theme: participant.theme,
+            Team: participant.team,
+            "School Name": participant.schoolName,
+            "School Address": participant.address,
+          };
+
+          if (roundValue === noOfRounds - 1) {
+            data.Position = participant.position;
+          }
+
+          return data;
+        })
+      : [];
   };
 
   return (
@@ -221,20 +100,28 @@ const EventWinnerPanel = () => {
           handleChange={handleChange}
           classes={{ select: classes.select }}
         />
-        <Button
-          color="primary"
-          className={classes.button}
-          endIcon={<GetAppIcon />}
-          // onClick={handleDownloadList}
+        <CsvDownloader
+          suffix
+          wrapColumnChar="'"
+          filename="EventWinnersList"
+          datas={generateCSVData()}
+          className={classes.csvDownloader}
         >
-          Download List
-        </Button>
+          <Button
+            color="primary"
+            className={classes.button}
+            endIcon={<GetAppIcon />}
+          >
+            Download List
+          </Button>
+        </CsvDownloader>
       </Box>
+
       <ParticipantTable
         noHeader
         title="Winners List"
         colored
-        rows={rows}
+        rows={rounds[roundValue] ? rounds[roundValue] : []}
         columns={columns}
       />
     </div>

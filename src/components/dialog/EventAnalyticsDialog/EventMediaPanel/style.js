@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: "0.75rem",
     borderTopRightRadius: "0.75rem",
     backgroundColor: "#F89503",
-    width: "300px",
-    height: "240px",
+    width: "18.75rem",
+    height: "15rem",
   },
   cardContent: {
     flexGrow: 1,
