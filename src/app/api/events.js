@@ -45,7 +45,7 @@ export const eventApi = hdApi.injectEndpoints({
     }),
     getCompetitiveEvents: build.query({
       query: () =>
-        "events?status=d&eventType=competitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
+        "events?status=conducted&eventType=competitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
       transformResponse: ({ data }) =>
         data.map((event) => ({
           ...event,
@@ -58,7 +58,7 @@ export const eventApi = hdApi.injectEndpoints({
     }),
     getNonCompetitiveEvents: build.query({
       query: () =>
-        "events?status=d&eventType=competitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
+        "events?status=conducted&eventType=nonCompetitive&fields=date,title,registeredSchools,availableClasses,eventType,eventFor,totalSchoolsParticipated,totalParticipation",
       transformResponse: ({ data }) =>
         data.map((event) => ({
           ...event,
