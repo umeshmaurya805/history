@@ -48,8 +48,14 @@ const Login = () => {
         variant="subtitle1"
         className={classes.subTitle}
       >
-        Login with the data provided during your registration. (Hint: username:
-        coordinator, password: coordinator@21)
+        Login with the data provided during your registration.
+      </Typography>{" "}
+      <Typography
+        component="p"
+        variant="subtitle1"
+        className={classes.subTitle}
+      >
+        (Hint: username: coordinator, password: coordinator@21)
       </Typography>
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <TextField
