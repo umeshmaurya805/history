@@ -11,9 +11,7 @@ import protectedHandler from "../../../utils/protectedHandler";
 import useStyles from "./style";
 
 const validationSchema = yup.object({
-  username: yup
-    .string("Enter your username")
-    .required("Username is required"),
+  username: yup.string("Enter your username").required("Username is required"),
   password: yup
     .string("Enter your password")
     .min(6, "Password should be of minimum 6 characters length")
@@ -50,7 +48,8 @@ const Login = () => {
         variant="subtitle1"
         className={classes.subTitle}
       >
-        Login with the data provided during your registration.
+        Login with the data provided during your registration. (Hint: username:
+        coordinator, password: coordinator@21)
       </Typography>
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <TextField
